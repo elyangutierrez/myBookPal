@@ -29,25 +29,30 @@ struct AddView: View {
     
     @State private var alertConfimation = false
     
+    let nextDay = Date.now.addingTimeInterval(86400)
+    
     var body: some View {
         NavigationStack {
             Form {
-                Section("Details") {
+                Section("Book Details") {
                     TextField("Book Name", text: $name)
                     TextField("Book Author", text: $author)
-                    
+                }
+                
+                Section("Genre") {
                     Picker("Book Genre", selection: $genre) {
                         ForEach(genres, id: \.self) {
                             Text($0)
                         }
                     }
-                    
+                }
+                
+                Section("Page Number") {
                     TextField("Book Page", value: $page, format: .number)
-                    
                 }
                 
                 Section("Date/Time Read") {
-                    DatePicker("Datetime", selection: $dateSelection, in: ...Date.distantFuture)
+                    DatePicker("Datetime", selection: $dateSelection, in: Date.now...nextDay)
                 }
                 
                 Button(action: {

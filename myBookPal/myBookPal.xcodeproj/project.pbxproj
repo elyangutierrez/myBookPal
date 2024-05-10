@@ -16,6 +16,7 @@
 		724070F02BED774C00E1E07C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070EF2BED774C00E1E07C /* MainView.swift */; };
 		724070F42BED7A6000E1E07C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070F32BED7A6000E1E07C /* SettingsView.swift */; };
 		724070FA2BEDDE5600E1E07C /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070F92BEDDE5600E1E07C /* Book.swift */; };
+		724070FE2BEE7ABC00E1E07C /* EmptyCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070FD2BEE7ABC00E1E07C /* EmptyCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		724070EF2BED774C00E1E07C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		724070F32BED7A6000E1E07C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		724070F92BEDDE5600E1E07C /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
+		724070FD2BEE7ABC00E1E07C /* EmptyCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 			isa = PBXGroup;
 			children = (
 				724070D92BEC6AAF00E1E07C /* ContentView.swift */,
+				724070FD2BEE7ABC00E1E07C /* EmptyCollectionView.swift */,
 				724070F32BED7A6000E1E07C /* SettingsView.swift */,
 				724070EB2BED76CA00E1E07C /* AddView.swift */,
 				724070ED2BED76CE00E1E07C /* DetailView.swift */,
@@ -170,6 +173,7 @@
 			files = (
 				724070EC2BED76CA00E1E07C /* AddView.swift in Sources */,
 				724070DA2BEC6AAF00E1E07C /* ContentView.swift in Sources */,
+				724070FE2BEE7ABC00E1E07C /* EmptyCollectionView.swift in Sources */,
 				724070FA2BEDDE5600E1E07C /* Book.swift in Sources */,
 				724070EE2BED76CE00E1E07C /* DetailView.swift in Sources */,
 				724070F42BED7A6000E1E07C /* SettingsView.swift in Sources */,
