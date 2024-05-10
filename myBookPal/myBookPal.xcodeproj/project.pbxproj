@@ -11,6 +11,11 @@
 		724070DA2BEC6AAF00E1E07C /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070D92BEC6AAF00E1E07C /* ContentView.swift */; };
 		724070DC2BEC6AAF00E1E07C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DB2BEC6AAF00E1E07C /* Assets.xcassets */; };
 		724070DF2BEC6AAF00E1E07C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DE2BEC6AAF00E1E07C /* Preview Assets.xcassets */; };
+		724070EC2BED76CA00E1E07C /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070EB2BED76CA00E1E07C /* AddView.swift */; };
+		724070EE2BED76CE00E1E07C /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070ED2BED76CE00E1E07C /* DetailView.swift */; };
+		724070F02BED774C00E1E07C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070EF2BED774C00E1E07C /* MainView.swift */; };
+		724070F42BED7A6000E1E07C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070F32BED7A6000E1E07C /* SettingsView.swift */; };
+		724070FA2BEDDE5600E1E07C /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070F92BEDDE5600E1E07C /* Book.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +24,11 @@
 		724070D92BEC6AAF00E1E07C /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		724070DB2BEC6AAF00E1E07C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		724070DE2BEC6AAF00E1E07C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		724070EB2BED76CA00E1E07C /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
+		724070ED2BED76CE00E1E07C /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		724070EF2BED774C00E1E07C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		724070F32BED7A6000E1E07C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		724070F92BEDDE5600E1E07C /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +62,9 @@
 			isa = PBXGroup;
 			children = (
 				724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */,
-				724070D92BEC6AAF00E1E07C /* ContentView.swift */,
+				724070EF2BED774C00E1E07C /* MainView.swift */,
+				724070F82BEDDE4300E1E07C /* Models */,
+				724070F52BED7A6900E1E07C /* Views */,
 				724070DB2BEC6AAF00E1E07C /* Assets.xcassets */,
 				724070DD2BEC6AAF00E1E07C /* Preview Content */,
 			);
@@ -65,6 +77,25 @@
 				724070DE2BEC6AAF00E1E07C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		724070F52BED7A6900E1E07C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				724070D92BEC6AAF00E1E07C /* ContentView.swift */,
+				724070F32BED7A6000E1E07C /* SettingsView.swift */,
+				724070EB2BED76CA00E1E07C /* AddView.swift */,
+				724070ED2BED76CE00E1E07C /* DetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		724070F82BEDDE4300E1E07C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				724070F92BEDDE5600E1E07C /* Book.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,7 +168,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				724070EC2BED76CA00E1E07C /* AddView.swift in Sources */,
 				724070DA2BEC6AAF00E1E07C /* ContentView.swift in Sources */,
+				724070FA2BEDDE5600E1E07C /* Book.swift in Sources */,
+				724070EE2BED76CE00E1E07C /* DetailView.swift in Sources */,
+				724070F42BED7A6000E1E07C /* SettingsView.swift in Sources */,
+				724070F02BED774C00E1E07C /* MainView.swift in Sources */,
 				724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
