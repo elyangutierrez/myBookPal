@@ -13,7 +13,9 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                Text("This is the settings view!")
+                Form {
+                    Text("This is the settings view!")
+                }
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
