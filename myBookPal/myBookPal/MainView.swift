@@ -16,10 +16,10 @@ struct MainView: View {
                     Image(systemName: "books.vertical")
                     Text("Collection")
                 }
-            AddView()
+            SearchView()
                 .tabItem {
-                    Image(systemName: "house")
-                    Text("Add Book")
+                    Image(systemName: "magnifyingglass")
+                    Text("Search Book")
                 }
         }
         .tint(.black)
