@@ -14,5 +14,6 @@ struct myBookPalApp: App {
         WindowGroup {
             MainView()
         }
+        .modelContainer(for: Book.self)
     }
 }

@@ -8,63 +8,58 @@
 import SwiftUI
 
 struct AddView: View {
+    @Environment(\.modelContext) var modelContext
     var book: VolumeInfo
 
     @State private var showAlert = false
+    
+    let authorText = Color(red: 0.3, green: 0.3, blue: 0.3)
     
     var body: some View {
         NavigationStack {
             ScrollView {
                 VStack {
                     Spacer()
-                        .frame(height: 15)
+                        .frame(height: 50)
                     BookCoverView(bookImage: book.imageLinks?.secureThumbnailURL ?? "")
                         .frame(width: 250, height: 310)
-                    RectangleLineView()
+                        .shadow(radius: 10)
+//                    RectangleLineView()
+//                        .padding()
+                    Text(book.title)
+                        .font(.title2.bold())
                         .padding()
+                    Text(book.getAuthor)
+                        .font(.custom("Author", fixedSize: 19))
+                        .foregroundStyle(authorText)
+                        .padding(-12)
+                    HStack {
+                        Text(book.getPageCount)
+                            .font(.headline)
+                        Image("open-book-2")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }
+                    .padding()
+                    
+                    Button(action: {
+                        addBookToCollection()
+                    }) {
+                        Capsule()
+                            .fill(.gray.opacity(0.30))
+                            .frame(width: 200, height: 35)
+                            .overlay {
+                                Capsule()
+                                    .stroke(authorText, lineWidth: 1)
+                                Text("Add To Collection")
+                                    .foregroundStyle(.black)
+                                    .fontWeight(.semibold)
+                            }
+                        
+                    }
+                    .offset(x: 2)
+                    .padding(-8)
                 }
-                
-                VStack(alignment: .leading) {
-                    Section {
-                        Text(book.title)
-                            .fixedSize(horizontal: true, vertical: false)
-                            .font(.title.bold())
-                            .padding(.bottom, 5)
-                    }
-                    Spacer()
-                    
-                    Section {
-                        Text("by: \(book.getAuthor)")
-                            .padding(.bottom, 5)
-                    }
-                    Spacer()
-                    
-                    Section {
-                        HStack {
-                            Image("open-book-2")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                            Text("\(book.getPageCount) pages")
-                        }
-                        .padding(.bottom, 5)
-                    }
-                    Spacer()
-                    
-                    Section {
-                        Button(action: {
-                            addBookToCollection()
-                        }) {
-                            Capsule()
-                                .fill(.gray.opacity(0.30))
-                                .frame(width: 150, height: 35)
-                                .overlay {
-                                    Text("Add To Collection")
-                                        .foregroundStyle(.black)
-                                }
-                        }
-                    }
-                }
-                .padding(5)
             }
             .navigationTitle("Add Book")
             .navigationBarTitleDisplayMode(.inline)
@@ -77,7 +72,9 @@ struct AddView: View {
     }
     
     func addBookToCollection() {
-        showAlert.toggle()
+        let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, pages: book.getPageCount)
+        modelContext.insert(newBook)
+        showAlert = true
     }
 }
 

@@ -23,6 +23,7 @@ struct MainView: View {
                 }
         }
         .tint(.black)
+        .preferredColorScheme(.light)
     }
 }
 
