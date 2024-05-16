@@ -54,7 +54,14 @@ struct ContentView: View {
                             }
                             VStack(alignment: .leading) {
                                 Text(book.title)
-                                    .fontWeight(.bold)
+                                    .font(.headline.bold())
+                                if book.isFullyRead {
+                                    Text("Completed")
+                                        .font(.footnote)
+                                } else {
+                                    Text("In Progress")
+                                        .font(.footnote)
+                                }
                             }
                         }
                     }

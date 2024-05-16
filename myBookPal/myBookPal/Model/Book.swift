@@ -16,6 +16,18 @@ class Book: Identifiable {
     let pages: String
     var logs: [Log]?
     
+    var totalPagesRead: Int {
+        guard let logs = logs else {
+            return 0
+        }
+        return logs.reduce(0) {$0 + $1.totalPagesRead}
+        // starts with initial value of 0 and $0 represents the sum. $1.totalPagesRead is then added to the sum.
+    }
+    
+    var isFullyRead: Bool {
+        return totalPagesRead == Int(pages)
+    }
+    
     func addLogEntry(_ log: Log) {
         if logs == nil {
             logs = [log]
