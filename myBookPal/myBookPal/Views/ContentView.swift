@@ -17,23 +17,31 @@ struct ContentView: View {
     let options = ["Ascending", "Descending"]
     @State private var selectedChoice = ""
     
-    var sortArray: [Book] {
-        var sortedBooks = books
-        switch selectedChoice {
-        case "Ascending":
-            sortedBooks.sort { $0.title < $1.title }
-        case "Descending":
-            sortedBooks.sort { $0.title > $1.title}
-        default:
-            break
+//    var sortArray: [Book] {
+//        var sortedBooks = books
+//        switch selectedChoice {
+//        case "Ascending":
+//            sortedBooks.sort { $0.title < $1.title }
+//        case "Descending":
+//            sortedBooks.sort { $0.title > $1.title}
+//        default:
+//            break
+//        }
+//        return sortedBooks
+//    }
+    
+    var searchResults: [Book] {
+        if searchText.isEmpty {
+            return books
+        } else {
+            return books.filter { $0.title.contains(searchText) }
         }
-        return sortedBooks
     }
     
     var body: some View {
         NavigationStack {
             List {
-                ForEach(sortArray, id: \.self) { book in
+                ForEach(searchResults, id: \.self) { book in
                     NavigationLink(destination: LogView(book: book)) {
                         HStack {
                             AsyncImage(url: URL(string: book.coverImage)) { phase in
@@ -80,18 +88,18 @@ struct ContentView: View {
                             .foregroundStyle(.black)
                     }
                 }
-                ToolbarItem(placement: .topBarTrailing) {
-                    Menu {
-                        Picker("", selection: $selectedChoice) {
-                            ForEach(options, id: \.self) { option in
-                                Text(option)
-                            }
-                        }
-                    } label: {
-                        Image(systemName: "line.3.horizontal.decrease.circle")
-                            .foregroundStyle(.black)
-                    }
-                }
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    Menu {
+//                        Picker("", selection: $selectedChoice) {
+//                            ForEach(options, id: \.self) { option in
+//                                Text(option)
+//                            }
+//                        }
+//                    } label: {
+//                        Image(systemName: "line.3.horizontal.decrease.circle")
+//                            .foregroundStyle(.black)
+//                    }
+//                }
             }
             .fullScreenCover(isPresented: $activateSheet) {
                 SettingsView()
@@ -101,7 +109,7 @@ struct ContentView: View {
     
     func deleteRows(at offsets: IndexSet) {
         for offset in offsets {
-            let selection = sortArray[offset]
+            let selection = books[offset]
             modelContext.delete(selection)
         }
     }

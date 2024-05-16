@@ -10,8 +10,8 @@ import SwiftUI
 struct RectangleLineView: View {
     var body: some View {
         Rectangle()
-            .fill(.gray.opacity(0.25))
-            .frame(width: 400, height: 5)
+            .fill(.gray)
+            .frame(width: 2, height: 30)
     }
 }
 

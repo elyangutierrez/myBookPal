@@ -13,6 +13,7 @@ class Book: Identifiable {
     let coverImage: String
     let title: String
     let author: String
+    let catagory: String
     let pages: String
     var logs: [Log]?
     
@@ -36,10 +37,11 @@ class Book: Identifiable {
         }
     }
     
-    init(coverImage: String, title: String, author: String, pages: String) {
+    init(coverImage: String, title: String, author: String, catagory: String, pages: String) {
         self.coverImage = coverImage
         self.title = title
         self.author = author
+        self.catagory = catagory
         self.pages = pages
         self.logs = nil
     }
