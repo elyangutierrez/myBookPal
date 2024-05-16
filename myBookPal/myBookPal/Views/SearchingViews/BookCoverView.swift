@@ -24,6 +24,11 @@ struct BookCoverView: View {
                 Color.red
             case .empty:
                 Rectangle()
+                    .fill(.clear)
+                    .border(Color.black.opacity(0.50), width: 2)
+                    .overlay {
+                        Text("N/A")
+                    }
             @unknown default:
                 fatalError()
             }

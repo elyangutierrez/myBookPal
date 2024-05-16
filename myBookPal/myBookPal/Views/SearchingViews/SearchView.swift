@@ -28,7 +28,7 @@ struct SearchView: View {
                                     let _ = print("Image error", error)
                                     Color.red
                                 case .empty:
-                                    Rectangle()
+                                    EmptyBookCoverView(book: book)
                                 @unknown default:
                                     fatalError()
                                 }

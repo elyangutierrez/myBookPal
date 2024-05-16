@@ -2,23 +2,38 @@
 //  ContentView.swift
 //  myBookPal
 //
-//  Created by Elyan Gutierrez on 5/8/24.
+//  Created by Elyan Gutierrez on 5/14/24.
 //
 
 import SwiftData
 import SwiftUI
 
 struct ContentView: View {
-    @State private var searchText = ""
-    @State private var toggleSettingsView = false
-    
     @Environment(\.modelContext) var modelContext
-    @Query var collection: [Book]
-
+    @State private var searchText = ""
+    @Query var books: [Book]
+    @State private var activateSheet = false
+    
+    let options = ["Ascending", "Descending"]
+    @State private var selectedChoice = ""
+    
+    var sortArray: [Book] {
+        var sortedBooks = books
+        switch selectedChoice {
+        case "Ascending":
+            sortedBooks.sort { $0.title < $1.title }
+        case "Descending":
+            sortedBooks.sort { $0.title > $1.title}
+        default:
+            break
+        }
+        return sortedBooks
+    }
+    
     var body: some View {
         NavigationStack {
             List {
-                ForEach(collection, id: \.self) { book in
+                ForEach(sortArray, id: \.self) { book in
                     NavigationLink(destination: LogView(book: book)) {
                         HStack {
                             AsyncImage(url: URL(string: book.coverImage)) { phase in
@@ -39,36 +54,48 @@ struct ContentView: View {
                             }
                             VStack(alignment: .leading) {
                                 Text(book.title)
+                                    .fontWeight(.bold)
                             }
-                            
                         }
                     }
                 }
-                .onDelete(perform: deleteBook)
+                .onDelete(perform: deleteRows)
             }
             .navigationTitle("myBookPal")
-            .searchable(text: $searchText)
             .navigationBarTitleDisplayMode(.inline)
+            .searchable(text: $searchText)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
-                        toggleSettingsView.toggle()
+                        activateSheet.toggle()
                     }) {
                         Image(systemName: "gearshape")
-                            .tint(.black)
+                            .foregroundStyle(.black)
+                    }
+                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Picker("", selection: $selectedChoice) {
+                            ForEach(options, id: \.self) { option in
+                                Text(option)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "line.3.horizontal.decrease.circle")
+                            .foregroundStyle(.black)
                     }
                 }
             }
-            .fullScreenCover(isPresented: $toggleSettingsView) {
+            .fullScreenCover(isPresented: $activateSheet) {
                 SettingsView()
             }
         }
     }
     
-    func deleteBook(at offsets: IndexSet) {
+    func deleteRows(at offsets: IndexSet) {
         for offset in offsets {
-            let book = collection[offset]
-            modelContext.delete(book)
+            let selection = sortArray[offset]
+            modelContext.delete(selection)
         }
     }
 }

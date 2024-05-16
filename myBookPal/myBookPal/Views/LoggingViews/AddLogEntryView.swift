@@ -23,6 +23,8 @@ struct AddLogEntryView: View {
     
     var book: Book
     
+    @State private var invalidPageCount = false
+    
     var body: some View {
         NavigationStack {
             Form {
@@ -49,16 +51,29 @@ struct AddLogEntryView: View {
                 }
             }
         }
+        .alert("Exceeded Page Count", isPresented: $invalidPageCount) {
+            Button("Ok", action: resetFields)
+        } message: {
+            Text("Please re-enter your current page number.")
+        }
     }
     
     func addEntry() {
-        let entry = Log(currentPage: page, dateLogged: date)
-        book.addLogEntry(entry)
-        
-        print("The entry was added to: \(book.title)")
-        print("The amount of logs in \(book.title) is \(book.logs)")
-        page = ""
-        dismiss()
+        if page > book.pages {
+            invalidPageCount = true
+        } else {
+            let entry = Log(currentPage: page, dateLogged: date)
+            book.addLogEntry(entry)
+            
+            print("The entry was added to: \(book.title)")
+            print("The amount of logs in \(book.title) is \(book.logs)")
+            page = ""
+            dismiss()
+        }
+    }
+    
+    func resetFields() {
+        invalidPageCount = false
     }
 }
 

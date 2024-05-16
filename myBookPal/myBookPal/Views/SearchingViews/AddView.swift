@@ -21,11 +21,14 @@ struct AddView: View {
                 VStack {
                     Spacer()
                         .frame(height: 50)
-                    BookCoverView(bookImage: book.imageLinks?.secureThumbnailURL ?? "")
-                        .frame(width: 250, height: 310)
-                        .shadow(radius: 10)
-//                    RectangleLineView()
-//                        .padding()
+                    if book.imageLinks?.secureThumbnailURL == "" {
+                        EmptyBookCoverView(book: book)
+                            .shadow(radius: 10)
+                    } else {
+                        BookCoverView(bookImage: book.imageLinks?.secureThumbnailURL ?? "")
+                            .frame(width: 250, height: 310)
+                            .shadow(radius: 10)
+                    }
                     Text(book.title)
                         .font(.title2.bold())
                         .padding()
@@ -34,11 +37,19 @@ struct AddView: View {
                         .foregroundStyle(authorText)
                         .padding(-12)
                     HStack {
-                        Text(book.getPageCount)
-                            .font(.headline)
-                        Image("open-book-2")
-                            .resizable()
-                            .frame(width: 30, height: 30)
+                        if book.getPageCount == "0" {
+                            Text("N/A")
+                                .font(.headline)
+                            Image("open-book-2")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        } else {
+                            Text(book.getPageCount)
+                                .font(.headline)
+                            Image("open-book-2")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        }
                     }
                     .padding()
                     
@@ -50,7 +61,7 @@ struct AddView: View {
                             .frame(width: 200, height: 35)
                             .overlay {
                                 Capsule()
-                                    .stroke(authorText, lineWidth: 1)
+                                    .stroke(authorText.opacity(0.35), lineWidth: 1)
                                 Text("Add To Collection")
                                     .foregroundStyle(.black)
                                     .fontWeight(.semibold)
