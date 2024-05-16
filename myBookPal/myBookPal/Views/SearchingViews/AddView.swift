@@ -15,6 +15,10 @@ struct AddView: View {
     
     let authorText = Color(red: 0.3, green: 0.3, blue: 0.3)
     
+    @State private var enterPageCountBool = false
+    
+    @State private var manualBookCount = ""
+    
     var body: some View {
         NavigationStack {
             ScrollView {
@@ -53,6 +57,26 @@ struct AddView: View {
                     }
                     .padding()
                     
+                    if book.getPageCount == "0" {
+                        Button(action: {
+                            enterPageCountBool.toggle()
+                        }) {
+                            Capsule()
+                                .fill(.gray.opacity(0.30))
+                                .frame(width: 230, height: 35)
+                                .overlay {
+                                    Capsule()
+                                        .stroke(authorText.opacity(0.35), lineWidth: 1)
+                                    Text("Manually Enter Page Count")
+                                        .foregroundStyle(.black)
+                                        .fontWeight(.semibold)
+                                }
+                        }
+                        .padding()
+                        .offset(y: -10)
+                    }
+                    
+                    
                     Button(action: {
                         addBookToCollection()
                     }) {
@@ -80,10 +104,23 @@ struct AddView: View {
         } message: {
             Text("\(book.title) has been added to your collection.")
         }
+        
+        .alert("Enter Page Count", isPresented: $enterPageCountBool) {
+            Button("Submit", action: secondaryBookInsertion)
+            TextField("Enter Total Page Count", text: $manualBookCount)
+        } message: {
+            Text("Please enter the total amount of pages in \(book.title).")
+        }
     }
     
     func addBookToCollection() {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, pages: book.getPageCount)
+        modelContext.insert(newBook)
+        showAlert = true
+    }
+    
+    func secondaryBookInsertion() {
+        let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, pages: manualBookCount)
         modelContext.insert(newBook)
         showAlert = true
     }
