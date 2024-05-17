@@ -70,6 +70,13 @@ struct ContentView: View {
                                     Text("In Progress")
                                         .font(.footnote)
                                 }
+                                HStack {
+                                    ProgressView(value: book.completionStatus)
+                                        .tint(book.completionStatus == 1 ? .green : .blue)
+                                    let formatted = String(format: "%.1f", book.completionStatus * 100)
+                                    Text("\(formatted)%")
+                                        .font(.subheadline)
+                                }
                             }
                         }
                     }

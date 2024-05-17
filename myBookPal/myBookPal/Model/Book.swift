@@ -29,6 +29,19 @@ class Book: Identifiable {
         return totalPagesRead == Int(pages)
     }
     
+    var currentPage: Int {
+        guard let logs = logs else {
+            return 0
+        }
+        return logs.last?.totalPagesRead ?? 0
+    }
+    
+    var completionStatus: Double {
+        guard let totalPages = Double(pages) else { return 0 }
+        let status = Double(currentPage) / totalPages
+        return status
+    }
+    
     func addLogEntry(_ log: Log) {
         if logs == nil {
             logs = [log]
