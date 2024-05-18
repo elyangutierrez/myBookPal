@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LogView: View {
     @State private var showSheet = false
+    @State private var activateReviewSheet = false
     
     var book: Book
 
@@ -21,12 +22,6 @@ struct LogView: View {
                         VStack(alignment: .leading) {
                             Text(log.formattedDate)
                                 .font(.headline.bold())
-//                            HStack {
-//                                Text(log.currentPage)
-//                                Image("open-book-2")
-//                                    .resizable()
-//                                    .frame(width: 20, height: 20)
-//                            }
                             HStack {
                                 Image(systemName: "book.circle")
                                 Text("\(log.totalPagesRead) / \(book.pages)")
@@ -53,6 +48,14 @@ struct LogView: View {
     }
 }
 
-//#Preview {
-//    LogView(book)
-//}
+#Preview {
+    do {
+        let config = ModelConfiguration(isStoredInMemoryOnly: true)
+        let container = try ModelContainer(for: Book.self, configurations: config)
+        let example = Book(coverImage: "AAAA", title: "Dune", author: "Frank Herbert", catagory: "Fiction", pages: "706")
+        return LogView(book: example)
+            .modelContainer(container)
+    } catch {
+        return Text("Sorry, couldn't preview.")
+    }
+}

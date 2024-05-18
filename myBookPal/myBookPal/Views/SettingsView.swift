@@ -12,10 +12,14 @@ struct SettingsView: View {
     @Environment(\.modelContext) var modelContext
     
     @State private var deletedBooksAlert = false
+    @Binding var setBookTotal: Int
     
     var body: some View {
         NavigationStack {
             Form {
+                Section("Set Book Goal") {
+                    TextField("Enter Goal", value: $setBookTotal, format: .number)
+                }
                 Button(action: {
                     deleteAllBooks()
                 }) {
@@ -56,5 +60,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView()
+    SettingsView(setBookTotal: .constant(15))
 }

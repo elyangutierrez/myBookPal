@@ -16,19 +16,7 @@ struct ContentView: View {
     
     let options = ["Ascending", "Descending"]
     @State private var selectedChoice = ""
-    
-//    var sortArray: [Book] {
-//        var sortedBooks = books
-//        switch selectedChoice {
-//        case "Ascending":
-//            sortedBooks.sort { $0.title < $1.title }
-//        case "Descending":
-//            sortedBooks.sort { $0.title > $1.title}
-//        default:
-//            break
-//        }
-//        return sortedBooks
-//    }
+    @AppStorage("setBookTotal") var setBookTotal = 10
     
     var searchResults: [Book] {
         if searchText.isEmpty {
@@ -109,7 +97,7 @@ struct ContentView: View {
 //                }
             }
             .fullScreenCover(isPresented: $activateSheet) {
-                SettingsView()
+                SettingsView(setBookTotal: $setBookTotal)
             }
         }
     }
