@@ -16,7 +16,10 @@ struct ContentView: View {
     
     let options = ["Ascending", "Descending"]
     @State private var selectedChoice = ""
+    
     @AppStorage("setBookTotal") var setBookTotal = 10
+    
+    @AppStorage("getBookTotal") var getBookTotal = 0
     
     var searchResults: [Book] {
         if searchText.isEmpty {
@@ -26,9 +29,18 @@ struct ContentView: View {
         }
     }
     
+
+    
     var body: some View {
         NavigationStack {
             List {
+                NavigationLink(destination: InProgressView(books: books)) {
+                    Text("In Progress Only")
+                }
+                NavigationLink(destination: CompletedView(books: books)) {
+                    Text("Completed Only")
+                }
+                
                 ForEach(searchResults, id: \.self) { book in
                     NavigationLink(destination: LogView(book: book)) {
                         HStack {
@@ -44,8 +56,8 @@ struct ContentView: View {
                                     Color.red
                                 case .empty:
                                     Rectangle()
-                                @unknown default:
-                                    fatalError()
+                                default:
+                                    Rectangle()
                                 }
                             }
                             VStack(alignment: .leading) {
@@ -70,6 +82,9 @@ struct ContentView: View {
                     }
                 }
                 .onDelete(perform: deleteRows)
+                .onAppear {
+                    getTotalBookCount(books: books)
+                }
             }
             .navigationTitle("myBookPal")
             .navigationBarTitleDisplayMode(.inline)
@@ -97,7 +112,7 @@ struct ContentView: View {
 //                }
             }
             .fullScreenCover(isPresented: $activateSheet) {
-                SettingsView(setBookTotal: $setBookTotal)
+                SettingsView(setBookTotal: $setBookTotal, getBookTotal: $getBookTotal)
             }
         }
     }
@@ -107,6 +122,11 @@ struct ContentView: View {
             let selection = books[offset]
             modelContext.delete(selection)
         }
+    }
+    
+    func getTotalBookCount(books: [Book]) {
+        getBookTotal = books.count
+        print(getBookTotal)
     }
 }
 

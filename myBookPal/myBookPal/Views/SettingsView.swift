@@ -11,15 +11,56 @@ struct SettingsView: View {
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
     
+    let numbersArray = Array(1...80)
+    
+    var getNumbers: [Int] {
+        var numbersHolder = [Int]()
+        for number in numbersArray {
+            if number % 5 == 0 {
+                numbersHolder.append(number)
+            }
+        }
+        return numbersHolder
+    }
+    
     @State private var deletedBooksAlert = false
     @Binding var setBookTotal: Int
+    
+    @Binding var getBookTotal: Int
     
     var body: some View {
         NavigationStack {
             Form {
-                Section("Set Book Goal") {
-                    TextField("Enter Goal", value: $setBookTotal, format: .number)
+//                Section("Set Book Goal") {
+//                    TextField("Enter Goal", value: $setBookTotal, format: .number)
+//                }
+                Section {
+                    Picker("Annual Book Goal", selection: $setBookTotal) {
+                        ForEach(getNumbers, id: \.self) { number in
+                            Text("\(number)")
+                        }
+                    }
+                    HStack {
+                        let percentage = Double(getBookTotal) / Double(setBookTotal)
+                        
+                        let formattedPercentage = Int(percentage * 100)
+                        
+                        ProgressView(value: percentage)
+                            .tint(getBookTotal >= setBookTotal ? .green : .blue)
+                        if formattedPercentage <= 100 {
+                            Text("\(formattedPercentage)%")
+                                .font(.subheadline)
+                                .foregroundStyle(.black)
+                        } else {
+                            Text("100%")
+                                .font(.subheadline)
+                                .foregroundStyle(.black)
+                        }
+                    }
+                    .padding(.bottom, 10)
                 }
+                .listRowSeparator(.hidden)
+                
                 Button(action: {
                     deleteAllBooks()
                 }) {
@@ -60,5 +101,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(setBookTotal: .constant(15))
+    SettingsView(setBookTotal: .constant(10), getBookTotal: .constant(15))
 }
