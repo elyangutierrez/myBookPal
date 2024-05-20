@@ -11,7 +11,7 @@ import SwiftUI
 struct MonthlyGoalsView: View {
     var books: [Book]
     
-    @AppStorage("setBooks") private var setBooks = 10
+    @AppStorage("setMonthlyBooks") private var setMonthlyBooks = 2
     
     @State private var showAlert = false
     
@@ -23,7 +23,7 @@ struct MonthlyGoalsView: View {
         let getBooks = goals.checkCompletionStatus(books)
         let _ = print(getBooks)
         
-        let percentage = Double(getBooks) / Double(setBooks)
+        let percentage = Double(getBooks) / Double(setMonthlyBooks)
         
         VStack {
             CircularProgressView(progress: CGFloat(min(percentage, 1.0)))
@@ -46,9 +46,9 @@ struct MonthlyGoalsView: View {
                     .overlay {
                         Capsule()
                             .stroke(.gray.opacity(0.3), lineWidth: 2)
-                        TextField("Books", value: $setBooks, format: .number)
+                        TextField("Books", value: $setMonthlyBooks, format: .number)
                             .offset(x: 10)
-                            .onReceive(Just(setBooks)) { _ in limitTextField(bookCountLimit)}
+                            .onReceive(Just(setMonthlyBooks)) { _ in limitTextField(bookCountLimit)}
                     }
             }
         }
@@ -62,7 +62,7 @@ struct MonthlyGoalsView: View {
     }
     
     func limitTextField(_ upper: Int) {
-        if String(setBooks).count > upper {
+        if String(setMonthlyBooks).count > upper {
             showAlert = true
         }
     }
