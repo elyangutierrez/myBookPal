@@ -25,12 +25,15 @@ struct AddLogEntryView: View {
     
     @State private var invalidPageCount = false
     
+    let today = Date.now
+    let endOfToday = Date.now
+    
     var body: some View {
         NavigationStack {
             Form {
                 TextField("Enter Current Page", text: $page)
                 
-                DatePicker("Datetime", selection: $date)
+                DatePicker("Datetime", selection: $date, in: today...endOfToday)
                 
                 Button(action: {
                     addEntry()
@@ -59,16 +62,20 @@ struct AddLogEntryView: View {
     }
     
     func addEntry() {
-        if page > book.pages {
-            invalidPageCount = true
+        if let intPage = Int(page), let intBookPages = Int(book.pages) {
+            if intPage > intBookPages {
+                invalidPageCount = true
+            } else {
+                let entry = Log(currentPage: page, dateLogged: date)
+                book.addLogEntry(entry)
+                
+                //            print("The entry was added to: \(book.title)")
+                //            print("The amount of logs in \(book.title) is \(book.logs)")
+                page = ""
+                dismiss()
+            }
         } else {
-            let entry = Log(currentPage: page, dateLogged: date)
-            book.addLogEntry(entry)
-            
-//            print("The entry was added to: \(book.title)")
-//            print("The amount of logs in \(book.title) is \(book.logs)")
-            page = ""
-            dismiss()
+            invalidPageCount = true
         }
     }
     

@@ -13,9 +13,10 @@ struct EmptyBookCoverView: View {
     var body: some View {
         Rectangle()
             .fill(.clear)
-            .border(Color.black.opacity(0.50), width: 2)
+            .border(Color.black.opacity(0.20), width: 2)
             .overlay {
                 Text("N/A")
+                    .foregroundStyle(.black.opacity(0.50))
             }
     }
 }

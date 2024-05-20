@@ -17,14 +17,22 @@ struct LogView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                List {
-                    ForEach(book.logs ?? [Log](), id: \.self) { log in
-                        VStack(alignment: .leading) {
-                            Text(log.formattedDate)
-                                .font(.headline.bold())
-                            HStack {
-                                Image(systemName: "book.circle")
-                                Text("\(log.totalPagesRead) / \(book.pages)")
+//                let _ = print(book.getLogCount)
+                if book.getLogCount == nil {
+                    Text("There are current no log entries for this book.")
+                        .font(.subheadline)
+                        .foregroundStyle(.gray)
+                    
+                } else {
+                    List {
+                        ForEach(book.logs ?? [Log](), id: \.self) { log in
+                            VStack(alignment: .leading) {
+                                Text(log.formattedDate)
+                                    .font(.headline.bold())
+                                HStack {
+                                    Image(systemName: "book.circle")
+                                    Text("\(log.totalPagesRead) / \(book.pages)")
+                                }
                             }
                         }
                     }

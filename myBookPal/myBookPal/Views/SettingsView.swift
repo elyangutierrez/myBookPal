@@ -47,12 +47,12 @@ struct SettingsView: View {
                         
                         ProgressView(value: percentage)
                             .tint(getBookTotal >= setBookTotal ? .green : .blue)
-                        if formattedPercentage <= 100 {
-                            Text("\(formattedPercentage)%")
+                        if getBookTotal >= setBookTotal {
+                            Text("100%")
                                 .font(.subheadline)
                                 .foregroundStyle(.black)
                         } else {
-                            Text("100%")
+                            Text("\(formattedPercentage)")
                                 .font(.subheadline)
                                 .foregroundStyle(.black)
                         }

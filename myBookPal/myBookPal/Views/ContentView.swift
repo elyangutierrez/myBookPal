@@ -11,7 +11,8 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @State private var searchText = ""
-    @Query var books: [Book]
+//    @Query var books: [Book]
+    var books: [Book]
     @State private var activateSheet = false
     
     let options = ["Ascending", "Descending"]
@@ -130,6 +131,6 @@ struct ContentView: View {
     }
 }
 
-#Preview {
-    ContentView()
-}
+//#Preview {
+//    ContentView(books)
+//}

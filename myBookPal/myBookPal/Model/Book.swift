@@ -42,6 +42,13 @@ class Book: Identifiable {
         return status
     }
     
+    var getLogCount: Int? {
+        guard let logs = logs else {
+            return nil
+        }
+        return logs.count
+    }
+    
     func addLogEntry(_ log: Log) {
         if logs == nil {
             logs = [log]
