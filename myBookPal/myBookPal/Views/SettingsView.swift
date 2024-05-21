@@ -33,34 +33,7 @@ struct SettingsView: View {
             Form {
 //                Section("Set Book Goal") {
 //                    TextField("Enter Goal", value: $setBookTotal, format: .number)
-//                }
-                Section {
-                    Picker("Annual Book Goal", selection: $setBookTotal) {
-                        ForEach(getNumbers, id: \.self) { number in
-                            Text("\(number)")
-                        }
-                    }
-                    HStack {
-                        let percentage = Double(getBookTotal) / Double(setBookTotal)
-                        
-                        let formattedPercentage = Int(percentage * 100)
-                        
-                        ProgressView(value: percentage)
-                            .tint(getBookTotal >= setBookTotal ? .green : .blue)
-                        if getBookTotal >= setBookTotal {
-                            Text("100%")
-                                .font(.subheadline)
-                                .foregroundStyle(.black)
-                        } else {
-                            Text("\(formattedPercentage)")
-                                .font(.subheadline)
-                                .foregroundStyle(.black)
-                        }
-                    }
-                    .padding(.bottom, 10)
-                }
-                .listRowSeparator(.hidden)
-                
+//                }                
                 Button(action: {
                     deleteAllBooks()
                 }) {

@@ -13,6 +13,10 @@
 		724070EC2BED76CA00E1E07C /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070EB2BED76CA00E1E07C /* AddView.swift */; };
 		724070F02BED774C00E1E07C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070EF2BED774C00E1E07C /* MainView.swift */; };
 		724070F42BED7A6000E1E07C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070F32BED7A6000E1E07C /* SettingsView.swift */; };
+		7259CAAE2BFD38460039D778 /* MonthlyReadingGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7259CAAD2BFD38460039D778 /* MonthlyReadingGoals.swift */; };
+		7259CAB02BFD384F0039D778 /* YearlyReadingGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7259CAAF2BFD384F0039D778 /* YearlyReadingGoals.swift */; };
+		7259CAB32BFD3EF50039D778 /* MonthlyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7259CAB22BFD3EF50039D778 /* MonthlyTimer.swift */; };
+		7259CAB72BFD3F080039D778 /* YearlyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7259CAB62BFD3F080039D778 /* YearlyTimer.swift */; };
 		725D05452BF4FCB8001557A4 /* EmptyBookCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D05442BF4FCB8001557A4 /* EmptyBookCoverView.swift */; };
 		725D054B2BF971E1001557A4 /* CompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D054A2BF971E1001557A4 /* CompletedView.swift */; };
 		725D054D2BF971E7001557A4 /* InProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D054C2BF971E7001557A4 /* InProgressView.swift */; };
@@ -45,6 +49,10 @@
 		724070EB2BED76CA00E1E07C /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		724070EF2BED774C00E1E07C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		724070F32BED7A6000E1E07C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7259CAAD2BFD38460039D778 /* MonthlyReadingGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyReadingGoals.swift; sourceTree = "<group>"; };
+		7259CAAF2BFD384F0039D778 /* YearlyReadingGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlyReadingGoals.swift; sourceTree = "<group>"; };
+		7259CAB22BFD3EF50039D778 /* MonthlyTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTimer.swift; sourceTree = "<group>"; };
+		7259CAB62BFD3F080039D778 /* YearlyTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlyTimer.swift; sourceTree = "<group>"; };
 		725D05442BF4FCB8001557A4 /* EmptyBookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBookCoverView.swift; sourceTree = "<group>"; };
 		725D054A2BF971E1001557A4 /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
 		725D054C2BF971E7001557A4 /* InProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressView.swift; sourceTree = "<group>"; };
@@ -103,6 +111,7 @@
 				724070EF2BED774C00E1E07C /* MainView.swift */,
 				72D098102BF1692D0021819E /* BookAPIType */,
 				72D098072BF168CB0021819E /* Model */,
+				7259CAB12BFD3ED90039D778 /* Timers */,
 				724070F52BED7A6900E1E07C /* Views */,
 				724070DB2BEC6AAF00E1E07C /* Assets.xcassets */,
 				724070DD2BEC6AAF00E1E07C /* Preview Content */,
@@ -128,6 +137,15 @@
 				7266C68B2BF45CF800022057 /* LoggingViews */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		7259CAB12BFD3ED90039D778 /* Timers */ = {
+			isa = PBXGroup;
+			children = (
+				7259CAB22BFD3EF50039D778 /* MonthlyTimer.swift */,
+				7259CAB62BFD3F080039D778 /* YearlyTimer.swift */,
+			);
+			path = Timers;
 			sourceTree = "<group>";
 		};
 		725D05502BFA429D001557A4 /* GoalViews */ = {
@@ -171,6 +189,8 @@
 				72BBD34F2BF2A64C006BC431 /* Log.swift */,
 				725D054E2BF97FDB001557A4 /* Library.swift */,
 				725D05592BFA49C2001557A4 /* Goals.swift */,
+				7259CAAD2BFD38460039D778 /* MonthlyReadingGoals.swift */,
+				7259CAAF2BFD384F0039D778 /* YearlyReadingGoals.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -264,6 +284,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				72D097F82BF160D40021819E /* LogView.swift in Sources */,
+				7259CAAE2BFD38460039D778 /* MonthlyReadingGoals.swift in Sources */,
+				7259CAB72BFD3F080039D778 /* YearlyTimer.swift in Sources */,
 				725D05582BFA4511001557A4 /* GoalNavigationView.swift in Sources */,
 				724070EC2BED76CA00E1E07C /* AddView.swift in Sources */,
 				72D098122BF1692D0021819E /* BookItem.swift in Sources */,
@@ -277,7 +299,9 @@
 				7266C68A2BF45B6200022057 /* ContentView.swift in Sources */,
 				725D054B2BF971E1001557A4 /* CompletedView.swift in Sources */,
 				725D05562BFA4318001557A4 /* YearlyGoalsView.swift in Sources */,
+				7259CAB02BFD384F0039D778 /* YearlyReadingGoals.swift in Sources */,
 				72BBD3502BF2A64C006BC431 /* Log.swift in Sources */,
+				7259CAB32BFD3EF50039D778 /* MonthlyTimer.swift in Sources */,
 				72BBD34C2BF29EB2006BC431 /* AddLogEntryView.swift in Sources */,
 				725D054D2BF971E7001557A4 /* InProgressView.swift in Sources */,
 				72D098092BF168D50021819E /* Book.swift in Sources */,

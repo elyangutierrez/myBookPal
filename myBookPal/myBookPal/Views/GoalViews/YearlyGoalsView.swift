@@ -17,6 +17,9 @@ struct YearlyGoalsView: View {
     
     @State private var bookCountLimit = 3
     
+    @State private var timeRemaining2: TimeInterval = timeRemainingInYear()
+    @State private var timerSubscription2: AnyCancellable?
+    
     var body: some View {
         let goals = Goals(books: books)
         //        let getBooks = goals.getTotalBookCount(books)
@@ -26,16 +29,34 @@ struct YearlyGoalsView: View {
         let percentage = Double(getBooks) / Double(setYearlyBooks)
         
         VStack {
+            
+            Text("Next Year Starts In")
+                .font(.title3.bold())
+            
+            Spacer()
+                .frame(height: 10)
+            
+            Text(timeString(from: timeRemaining2))
+            
+            Spacer()
+                .frame(height: 80)
+            
             CircularProgressView(progress: CGFloat(min(percentage, 1.0)))
             
             Spacer()
-                .frame(height: 75)
+                .frame(height: 65)
             
             let formattedPercentage = min(percentage * 100, 100.0)
             Text("\(formattedPercentage, specifier: "%.2f")%")
                 .font(.title.bold())
                 .foregroundStyle(.black)
-                .offset(x: 4, y: -190)
+                .offset(x: 4, y: -180)
+        }
+        .onAppear {
+            startTimer()
+        }
+        .onDisappear {
+            timerSubscription2?.cancel()
         }
         
         VStack {
@@ -48,6 +69,7 @@ struct YearlyGoalsView: View {
                             .stroke(.gray.opacity(0.3), lineWidth: 2)
                         TextField("Books", value: $setYearlyBooks, format: .number)
                             .offset(x: 10)
+                            .keyboardType(.decimalPad)
                             .onReceive(Just(setYearlyBooks)) { _ in limitTextField(bookCountLimit)}
                     }
             }
@@ -64,6 +86,23 @@ struct YearlyGoalsView: View {
         if String(setYearlyBooks).count > upper {
             showAlert = true
         }
+    }
+    
+    func startTimer() {
+        timerSubscription2 = Timer.publish(every: 1, on: .main, in: .common)
+            .autoconnect()
+            .sink { _ in
+                timeRemaining2 = timeRemainingInYear()
+            }
+    }
+    
+    func timeString(from timeInterval: TimeInterval) -> String {
+        let seconds = Int(timeInterval) % 60
+        let minutes = (Int(timeInterval) / 60) % 60
+        let hours = (Int(timeInterval) / 3600) % 24
+        let days = (Int(timeInterval) / 86400)
+        
+        return String(format: "%02d Days %02d:%02d:%02d", days, hours, minutes, seconds)
     }
 }
 
