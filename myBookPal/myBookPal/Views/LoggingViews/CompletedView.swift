@@ -56,8 +56,8 @@ struct CompletedView: View {
                     }
                 }
             }
-            .navigationTitle("In Progress")
-            .navigationBarTitleDisplayMode(.inline)
+//            .navigationTitle("In Progress")
+//            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

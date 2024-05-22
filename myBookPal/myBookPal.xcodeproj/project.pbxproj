@@ -17,6 +17,7 @@
 		7259CAB02BFD384F0039D778 /* YearlyReadingGoals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7259CAAF2BFD384F0039D778 /* YearlyReadingGoals.swift */; };
 		7259CAB32BFD3EF50039D778 /* MonthlyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7259CAB22BFD3EF50039D778 /* MonthlyTimer.swift */; };
 		7259CAB72BFD3F080039D778 /* YearlyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7259CAB62BFD3F080039D778 /* YearlyTimer.swift */; };
+		7259CABF2BFE45BD0039D778 /* CatagoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7259CABE2BFE45BD0039D778 /* CatagoryView.swift */; };
 		725D05452BF4FCB8001557A4 /* EmptyBookCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D05442BF4FCB8001557A4 /* EmptyBookCoverView.swift */; };
 		725D054B2BF971E1001557A4 /* CompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D054A2BF971E1001557A4 /* CompletedView.swift */; };
 		725D054D2BF971E7001557A4 /* InProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D054C2BF971E7001557A4 /* InProgressView.swift */; };
@@ -53,6 +54,7 @@
 		7259CAAF2BFD384F0039D778 /* YearlyReadingGoals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlyReadingGoals.swift; sourceTree = "<group>"; };
 		7259CAB22BFD3EF50039D778 /* MonthlyTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MonthlyTimer.swift; sourceTree = "<group>"; };
 		7259CAB62BFD3F080039D778 /* YearlyTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YearlyTimer.swift; sourceTree = "<group>"; };
+		7259CABE2BFE45BD0039D778 /* CatagoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatagoryView.swift; sourceTree = "<group>"; };
 		725D05442BF4FCB8001557A4 /* EmptyBookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBookCoverView.swift; sourceTree = "<group>"; };
 		725D054A2BF971E1001557A4 /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
 		725D054C2BF971E7001557A4 /* InProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressView.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		724070F52BED7A6900E1E07C /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				7259CABE2BFE45BD0039D778 /* CatagoryView.swift */,
 				7266C6892BF45B6200022057 /* ContentView.swift */,
 				724070F32BED7A6000E1E07C /* SettingsView.swift */,
 				725D05502BFA429D001557A4 /* GoalViews */,
@@ -309,6 +312,7 @@
 				724070F02BED774C00E1E07C /* MainView.swift in Sources */,
 				724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */,
 				72D098132BF1692D0021819E /* BookResponse.swift in Sources */,
+				7259CABF2BFE45BD0039D778 /* CatagoryView.swift in Sources */,
 				72D098152BF1692D0021819E /* ImageLinks.swift in Sources */,
 				725D055E2BFA4DD0001557A4 /* CircularProgressView.swift in Sources */,
 				72D0981A2BF174CB0021819E /* RectangleLineView.swift in Sources */,

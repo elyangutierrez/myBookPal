@@ -8,32 +8,13 @@
 import SwiftUI
 
 struct SettingsView: View {
-    @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
-    
-    let numbersArray = Array(1...80)
-    
-    var getNumbers: [Int] {
-        var numbersHolder = [Int]()
-        for number in numbersArray {
-            if number % 5 == 0 {
-                numbersHolder.append(number)
-            }
-        }
-        return numbersHolder
-    }
-    
+
     @State private var deletedBooksAlert = false
-    @Binding var setBookTotal: Int
-    
-    @Binding var getBookTotal: Int
     
     var body: some View {
         NavigationStack {
-            Form {
-//                Section("Set Book Goal") {
-//                    TextField("Enter Goal", value: $setBookTotal, format: .number)
-//                }                
+            Form {               
                 Button(action: {
                     deleteAllBooks()
                 }) {
@@ -43,16 +24,6 @@ struct SettingsView: View {
             }
             .navigationTitle("Settings")
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }) {
-                        Text("Exit")
-                            .foregroundStyle(.black)
-                    }
-                }
-            }
         }
         .alert(isPresented: $deletedBooksAlert) {
             Alert(title: Text("Are you sure you want to delete all books?"), message: Text("Once deleted, you can't get your books and logs back."), primaryButton: .destructive(Text("Delete")), secondaryButton: .cancel())
@@ -74,5 +45,5 @@ struct SettingsView: View {
 }
 
 #Preview {
-    SettingsView(setBookTotal: .constant(10), getBookTotal: .constant(15))
+    SettingsView()
 }

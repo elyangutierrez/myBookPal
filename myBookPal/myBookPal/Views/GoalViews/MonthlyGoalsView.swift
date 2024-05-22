@@ -28,7 +28,6 @@ struct MonthlyGoalsView: View {
         
         VStack {
             
-            
             Text("Next Month Starts In")
                 .font(.title3.bold())
             
@@ -76,6 +75,7 @@ struct MonthlyGoalsView: View {
             }
         }
         Spacer()
+            .frame(height: 80)
         
         .alert("Book Count Exceeded.", isPresented: $showAlert) {
             Button("Ok", role: .cancel) { }

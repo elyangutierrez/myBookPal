@@ -5,6 +5,7 @@
 //  Created by Elyan Gutierrez on 5/14/24.
 //
 
+import SlidingTabView
 import SwiftData
 import SwiftUI
 
@@ -18,9 +19,9 @@ struct ContentView: View {
     let options = ["Ascending", "Descending"]
     @State private var selectedChoice = ""
     
-    @AppStorage("setBookTotal") var setBookTotal = 10
-    
-    @AppStorage("getBookTotal") var getBookTotal = 0
+//    @AppStorage("setBookTotal") var setBookTotal = 10
+//    
+//    @AppStorage("getBookTotal") var getBookTotal = 0
     
     var searchResults: [Book] {
         if searchText.isEmpty {
@@ -30,18 +31,18 @@ struct ContentView: View {
         }
     }
     
-
+    @State private var selectedView = 0
     
     var body: some View {
         NavigationStack {
+//            SlidingTabView(selection: $selectedView, tabs: ["In Progress", "Completed"])
+//            
+//            if selectedView == 0 {
+//                InProgressView(books: books)
+//            } else {
+//                CompletedView(books: books)
+//            }
             List {
-                NavigationLink(destination: InProgressView(books: books)) {
-                    Text("In Progress Only")
-                }
-                NavigationLink(destination: CompletedView(books: books)) {
-                    Text("Completed Only")
-                }
-                
                 ForEach(searchResults, id: \.self) { book in
                     NavigationLink(destination: LogView(book: book)) {
                         HStack {
@@ -83,38 +84,10 @@ struct ContentView: View {
                     }
                 }
                 .onDelete(perform: deleteRows)
-                .onAppear {
-                    getTotalBookCount(books: books)
-                }
             }
             .navigationTitle("myBookPal")
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText)
-            .toolbar {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        activateSheet.toggle()
-                    }) {
-                        Image(systemName: "gearshape")
-                            .foregroundStyle(.black)
-                    }
-                }
-//                ToolbarItem(placement: .topBarTrailing) {
-//                    Menu {
-//                        Picker("", selection: $selectedChoice) {
-//                            ForEach(options, id: \.self) { option in
-//                                Text(option)
-//                            }
-//                        }
-//                    } label: {
-//                        Image(systemName: "line.3.horizontal.decrease.circle")
-//                            .foregroundStyle(.black)
-//                    }
-//                }
-            }
-            .fullScreenCover(isPresented: $activateSheet) {
-                SettingsView(setBookTotal: $setBookTotal, getBookTotal: $getBookTotal)
-            }
         }
     }
     
@@ -123,11 +96,6 @@ struct ContentView: View {
             let selection = books[offset]
             modelContext.delete(selection)
         }
-    }
-    
-    func getTotalBookCount(books: [Book]) {
-        getBookTotal = books.count
-        print(getBookTotal)
     }
 }
 

@@ -22,10 +22,8 @@ struct YearlyGoalsView: View {
     
     var body: some View {
         let goals = Goals(books: books)
-        //        let getBooks = goals.getTotalBookCount(books)
         let getBooks = goals.checkCompletionStatus(books)
         let _ = print(getBooks)
-        
         let percentage = Double(getBooks) / Double(setYearlyBooks)
         
         VStack {
@@ -75,11 +73,12 @@ struct YearlyGoalsView: View {
             }
         }
         Spacer()
-            .alert("Book Count Exceeded.", isPresented: $showAlert) {
-                Button("Ok", role: .cancel) { }
-            } message: {
-                Text("Please enter a valid book count.")
-            }
+            .frame(height: 80)
+        .alert("Book Count Exceeded.", isPresented: $showAlert) {
+            Button("Ok", role: .cancel) { }
+        } message: {
+            Text("Please enter a valid book count.")
+        }
     }
     
     func limitTextField(_ upper: Int) {
