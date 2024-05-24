@@ -26,6 +26,10 @@ struct MonthlyGoalsView: View {
         let _ = print(getBooks)
         let percentage = Double(getBooks) / Double(setMonthlyBooks)
         
+        let dateString = timeString(from: timeRemaining)
+        
+        let formattedDateString = dateString.removeIfZero(dateString)
+        
         VStack {
             
             Text("Next Month Starts In")
@@ -34,7 +38,7 @@ struct MonthlyGoalsView: View {
             Spacer()
                 .frame(height: 10)
             
-            Text(timeString(from: timeRemaining))
+            Text(formattedDateString)
             
             Spacer()
                 .frame(height: 80)

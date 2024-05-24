@@ -26,6 +26,10 @@ struct YearlyGoalsView: View {
         let _ = print(getBooks)
         let percentage = Double(getBooks) / Double(setYearlyBooks)
         
+        let dateString = timeString(from: timeRemaining2)
+        
+        let formattedDateString = dateString.removeIfZero(dateString)
+        
         VStack {
             
             Text("Next Year Starts In")
@@ -34,7 +38,7 @@ struct YearlyGoalsView: View {
             Spacer()
                 .frame(height: 10)
             
-            Text(timeString(from: timeRemaining2))
+            Text(formattedDateString)
             
             Spacer()
                 .frame(height: 80)

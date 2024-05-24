@@ -20,3 +20,13 @@ func timeRemainingInMonth() -> TimeInterval {
     
     return endOfMonth.timeIntervalSince(now)
 }
+
+extension String {
+    func removeIfZero(_ x: String) -> String {
+        let first = x.first
+        if first == "0" {
+            return String(x.dropFirst())
+        }
+        return x
+    }
+}

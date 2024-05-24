@@ -111,7 +111,7 @@
 			children = (
 				724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */,
 				724070EF2BED774C00E1E07C /* MainView.swift */,
-				72D098102BF1692D0021819E /* BookAPIType */,
+				72D098102BF1692D0021819E /* API */,
 				72D098072BF168CB0021819E /* Model */,
 				7259CAB12BFD3ED90039D778 /* Timers */,
 				724070F52BED7A6900E1E07C /* Views */,
@@ -198,7 +198,7 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		72D098102BF1692D0021819E /* BookAPIType */ = {
+		72D098102BF1692D0021819E /* API */ = {
 			isa = PBXGroup;
 			children = (
 				72D0980B2BF1692D0021819E /* BookItem.swift */,
@@ -206,8 +206,8 @@
 				72D0980E2BF1692D0021819E /* ImageLinks.swift */,
 				72D0980F2BF1692D0021819E /* VolumeInfo.swift */,
 			);
-			name = BookAPIType;
-			path = myBookPal/BookAPIType;
+			name = API;
+			path = myBookPal/API;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
