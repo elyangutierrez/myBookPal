@@ -9,7 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct MainView: View {
-    @Query var books: [Book]
+    @Query(sort: \Book.title) var books: [Book]
     @State private var selectedTab = 0
     
     @AppStorage("setBookTotal") var setBookTotal = 10

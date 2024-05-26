@@ -12,16 +12,11 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @State private var searchText = ""
-//    @Query var books: [Book]
     var books: [Book]
     @State private var activateSheet = false
     
     let options = ["Ascending", "Descending"]
     @State private var selectedChoice = ""
-    
-//    @AppStorage("setBookTotal") var setBookTotal = 10
-//    
-//    @AppStorage("getBookTotal") var getBookTotal = 0
     
     var searchResults: [Book] {
         if searchText.isEmpty {
@@ -35,13 +30,6 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-//            SlidingTabView(selection: $selectedView, tabs: ["In Progress", "Completed"])
-//            
-//            if selectedView == 0 {
-//                InProgressView(books: books)
-//            } else {
-//                CompletedView(books: books)
-//            }
             List {
                 ForEach(searchResults, id: \.self) { book in
                     NavigationLink(destination: LogView(book: book)) {
@@ -65,19 +53,27 @@ struct ContentView: View {
                             VStack(alignment: .leading) {
                                 Text(book.title)
                                     .font(.headline.bold())
-                                if book.isFullyRead {
+                                
+                                if book.completionStatus.isNaN {
+                                    Text("N/A")
+                                        .font(.footnote)
+                                        .foregroundStyle(.gray.opacity(0.50))
+                                } else if book.isFullyRead {
                                     Text("Completed")
                                         .font(.footnote)
                                 } else {
                                     Text("In Progress")
                                         .font(.footnote)
                                 }
+                                
                                 HStack {
-                                    ProgressView(value: book.completionStatus)
-                                        .tint(book.completionStatus == 1 ? .green : .blue)
-                                    let formatted = String(format: "%.1f", book.completionStatus * 100)
-                                    Text("\(formatted)%")
-                                        .font(.subheadline)
+                                    if !book.completionStatus.isNaN {
+                                        ProgressView(value: book.completionStatus)
+                                            .tint(book.completionStatus == 1 ? .green : .blue)
+                                        let formatted = String(format: "%.1f", book.completionStatus * 100)
+                                        Text("\(formatted)%")
+                                            .font(.subheadline)
+                                    }
                                 }
                             }
                         }
