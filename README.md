@@ -15,10 +15,10 @@ A IOS book logging app that allows users to search books and log of what they re
 To log a book, you must search your book by clicking on the search icon in the bottom bar. Here is an example of searching and logging pages for Dune.
 
 <div style="display: flex; justify-content: space-around;">
-    <img src="preview-images/searching-dune.jpg" alt="Searching" style="width: 190">
-    <img src="preview-images/add-dune.jpg" alt="Adding Book" style="width: 190">
-    <img src="preview-images/viewing-book.png" alt="Viewing" style="width: 190">
-    <img src="preview-images/adding-log.png" alt="Adding Log" style="width: 190">
+    <img src="preview-images/searching-dune.jpg" alt="Searching" style="width: 150">
+    <img src="preview-images/add-dune.jpg" alt="Adding Book" style="width: 150">
+    <img src="preview-images/viewing-book.png" alt="Viewing" style="width: 150">
+    <img src="preview-images/adding-log.png" alt="Adding Log" style="width: 150">
 </div>
 
 ## Collection 
@@ -26,8 +26,8 @@ To log a book, you must search your book by clicking on the search icon in the b
 Every book that a user adds will appear in the collection view as well as the category view.
 
 <div style="display: flex; justify-content: space-around;">
-    <img src="preview-images/viewing-collection-view.png" alt="Searching" style="width: 250">
-    <img src="preview-images/using-searchable.png" alt="Adding Book" style="width: 250">
+    <img src="preview-images/viewing-collection-view.png" alt="Searching" style="width: 150">
+    <img src="preview-images/using-searchable.png" alt="Adding Book" style="width: 150">
 </div>
 
 ## Categories
@@ -35,8 +35,8 @@ Every book that a user adds will appear in the collection view as well as the ca
 Users can see what books are currently in progress or completed by view the catagories tab.
 
 <div style="display: flex; justify-content: space-around;">
-    <img src="preview-images/in-progress-category.png" alt="Searching" style="width: 250">
-    <img src="preview-images/completed-category.png" alt="Adding Book" style="width: 250">
+    <img src="preview-images/in-progress-category.png" alt="Searching" style="width: 150">
+    <img src="preview-images/completed-category.png" alt="Adding Book" style="width: 150">
 </div>
 
 ## Search
@@ -44,7 +44,7 @@ Users can see what books are currently in progress or completed by view the cata
 In order to start logging, users must search their book online using the Google Books API. Some books may or may not have authors or page counts in which users have the option to manually enter that info.
 
 <div style="display: flex; justify-content: space-around;">
-    <img src="preview-images/search-view.png" alt="Searching" style="width: 250">
+    <img src="preview-images/search-view.png" alt="Searching" style="width: 150">
 </div>
 
 ## Goals
@@ -52,8 +52,8 @@ In order to start logging, users must search their book online using the Google 
 To keep users goal oriented, users can set goals based on the amount of books that they want to read monthly and yearly. 
 
 <div style="display: flex; justify-content: space-around;">
-    <img src="preview-images/monthly-goals.png" alt="Searching" style="width: 250">
-    <img src="preview-images/yearly-goals.png" alt="Adding Book" style="width: 250">
+    <img src="preview-images/monthly-goals.png" alt="Searching" style="width: 150">
+    <img src="preview-images/yearly-goals.png" alt="Adding Book" style="width: 150">
 </div>
 
 ## Settings
@@ -61,7 +61,7 @@ To keep users goal oriented, users can set goals based on the amount of books th
 Users also have the ability to delete all books if they want to.
 
 <div style="display: flex; justify-content: space-around;">
-    <img src="preview-images/settings-view.png" alt="Searching" style="width: 250">
+    <img src="preview-images/settings-view.png" alt="Searching" style="width: 150">
 </div>
 
 
