@@ -7,7 +7,6 @@ A IOS book logging app that allows users to search books and log of what they re
 * Collection: All books can be found and searched in the collection tab
 * Catagories: Books are categorized by the state of their books status which is either 'In Progress' or 'Completed'
 * Search: Books can be searched online using the search tab
-* Goals: Users can set monthly and yearly goals based on the amount of books that they want to read
 * Settings: If necessary, users also have the ability to delete all books
 
 ## How do I log a book?
@@ -45,15 +44,6 @@ In order to start logging, users must search their book online using the Google 
 
 <div style="display: flex; justify-content: space-around;">
     <img src="preview-images/search-view.png" alt="Searching" style="width: 150">
-</div>
-
-## Goals
-
-To keep users goal oriented, users can set goals based on the amount of books that they want to read monthly and yearly. 
-
-<div style="display: flex; justify-content: space-around;">
-    <img src="preview-images/monthly-goals.png" alt="Searching" style="width: 150">
-    <img src="preview-images/yearly-goals.png" alt="Adding Book" style="width: 150">
 </div>
 
 ## Settings
