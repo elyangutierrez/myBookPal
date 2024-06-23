@@ -5,6 +5,7 @@
 //  Created by Elyan Gutierrez on 5/9/24.
 //
 
+import StoreKit
 import SwiftUI
 
 struct AddView: View {
@@ -16,14 +17,13 @@ struct AddView: View {
     let authorText = Color(red: 0.3, green: 0.3, blue: 0.3)
     
     @State private var enterPageCountBool = false
-    
     @State private var manualBookCount = ""
-    
     @State private var enterGenreBool = false
-    
     @State private var enterGenre = ""
-    
     @State private var enterBothBool = false
+    
+    @Environment(\.requestReview) var requestReview
+    @AppStorage("bookCompletionCount") var bookCompletionCount = 0
     
     var body: some View {
         NavigationStack {
@@ -149,7 +149,7 @@ struct AddView: View {
             .navigationBarTitleDisplayMode(.inline)
         }
         .alert("Book Added", isPresented: $showAlert) {
-            Button("Ok") { }
+            Button("Ok", action: showReview)
         } message: {
             Text("\(book.title) has been added to your collection.")
         }
@@ -184,25 +184,46 @@ struct AddView: View {
     func addBookToCollection() {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: book.getCatagory, pages: book.getPageCount)
         modelContext.insert(newBook)
+        
+        bookCompletionCount += 1
+        
         showAlert = true
     }
     
     func secondaryBookInsertion() {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: book.getCatagory, pages: manualBookCount)
         modelContext.insert(newBook)
+        
+        bookCompletionCount += 1
+        
         showAlert = true
     }
     
     func genreBookInsertion() {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: enterGenre, pages: book.getPageCount)
         modelContext.insert(newBook)
+        
+        bookCompletionCount += 1
+        
         showAlert = true
     }
     
     func twoEmptyFieldsInsertion() {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: enterGenre, pages: manualBookCount)
         modelContext.insert(newBook)
+        
+        bookCompletionCount += 1
+        
         showAlert = true
+    }
+    
+    @MainActor func showReview() {
+        
+        print(bookCompletionCount)
+        
+        if bookCompletionCount == 5 {
+            requestReview()
+        }
     }
 }
 

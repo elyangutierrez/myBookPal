@@ -68,9 +68,6 @@ struct AddLogEntryView: View {
             } else {
                 let entry = Log(currentPage: page, dateLogged: date)
                 book.addLogEntry(entry)
-                
-                //            print("The entry was added to: \(book.title)")
-                //            print("The amount of logs in \(book.title) is \(book.logs)")
                 page = ""
                 dismiss()
             }

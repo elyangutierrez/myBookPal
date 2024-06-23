@@ -38,12 +38,6 @@ struct MainView: View {
                     Text("Search")
                 }
             
-            GoalNavigationView(books: books)
-                .tabItem {
-                    Image(systemName: "target")
-                    Text("Goals")
-                }
-            
             SettingsView()
                 .tabItem {
                     Image(systemName: "gearshape")

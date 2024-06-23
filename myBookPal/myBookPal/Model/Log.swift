@@ -8,7 +8,8 @@
 import SwiftData
 import Foundation
 
-struct Log: Hashable, Codable {
+struct Log: Hashable, Codable, Identifiable {
+    var id = UUID()
     let currentPage: String
     let dateLogged: Date
     

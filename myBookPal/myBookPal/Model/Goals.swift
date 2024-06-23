@@ -9,6 +9,15 @@ import Foundation
 
 struct Goals {
     var books: [Book]
+    var booksCompleted: [Book] = []
+    
+    mutating func addCompletedBooksToArray(_ books: [Book]) -> Int {
+        let completed = books.filter { $0.isFullyRead }
+        booksCompleted.append(contentsOf: completed)
+        
+        return booksCompleted.count
+        
+    }
     
     func checkCompletionStatus(_ books: [Book]) -> Int {
         var count = 0
