@@ -16,6 +16,7 @@ struct BookCoverView: View {
             switch phase {
             case .success(let image):
                 image
+                    .interpolation(.none)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200)

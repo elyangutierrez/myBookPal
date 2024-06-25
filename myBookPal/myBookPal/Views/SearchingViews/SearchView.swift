@@ -48,6 +48,7 @@ struct SearchView: View {
             .navigationTitle("Find Book")
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText, prompt: "Enter Book Title")
+            
             .onChange(of: searchText) {
                 if searchText.isEmpty {
                     books.removeAll()
@@ -56,7 +57,15 @@ struct SearchView: View {
             .onSubmit(of: .search) {
                 fetchBookInfo()
             }
-            
+            .overlay {
+                if searchText.isEmpty {
+                    ContentUnavailableView {
+                        Label("Empty Search", systemImage: "magnifyingglass")
+                    } description: {
+                        Text("Enter a book title to begin searching!")
+                    }
+                }
+            }
         }
     }
     

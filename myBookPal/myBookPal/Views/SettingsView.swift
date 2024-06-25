@@ -14,12 +14,14 @@ struct SettingsView: View {
     
     var body: some View {
         NavigationStack {
-            Form {               
-                Button(action: {
-                    deleteAllBooks()
-                }) {
-                    Text("Delete All Books")
-                        .foregroundStyle(.red)
+            Form {
+                Section("Reset to Factory Settings") {
+                    Button(action: {
+                        deleteAllBooks()
+                    }) {
+                        Text("Delete All Books")
+                            .foregroundStyle(.red)
+                    }
                 }
             }
             .navigationTitle("Settings")

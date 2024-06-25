@@ -30,6 +30,17 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
+//            Spacer()
+//            
+//            if searchResults.isEmpty {
+//                ContentUnavailableView {
+//                    Label("Empty Collection", systemImage: "books.vertical")
+//                } description: {
+//                    Text("There are currently no books in your collection.")
+//                }
+//            }
+            
+            
             List {
                 ForEach(searchResults, id: \.self) { book in
                     NavigationLink(destination: LogView(book: book)) {
@@ -84,6 +95,15 @@ struct ContentView: View {
             .navigationTitle("myBookPal")
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText)
+            .overlay {
+                if searchResults.isEmpty {
+                    ContentUnavailableView {
+                        Label("Empty Collection", systemImage: "books.vertical")
+                    } description: {
+                        Text("There are currently no books in your collection.")
+                    }
+                }
+            }
         }
     }
     
