@@ -60,7 +60,7 @@ struct SearchView: View {
             .overlay {
                 if searchText.isEmpty {
                     ContentUnavailableView {
-                        Label("Empty Search", systemImage: "magnifyingglass")
+                        Label("No Result Found", systemImage: "magnifyingglass")
                     } description: {
                         Text("Enter a book title to begin searching!")
                     }
