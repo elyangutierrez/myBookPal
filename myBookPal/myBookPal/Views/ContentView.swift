@@ -27,6 +27,7 @@ struct ContentView: View {
     }
     
     @State private var selectedView = 0
+    @State private var showBookInfomation = false
     
     var body: some View {
         NavigationStack {
@@ -88,6 +89,21 @@ struct ContentView: View {
                                 }
                             }
                         }
+                    }
+                    .swipeActions(edge: .leading) {
+                        Button(action: {
+                            showBookInfomation.toggle()
+                        }) {
+                            Label("Info", systemImage: "info.circle")
+                                .tint(.gray)
+                        }
+                    }
+                    .popover(isPresented: $showBookInfomation, arrowEdge: .top) {
+                        Text("Author: \(book.author)")
+                            .padding(2)
+                        Text("Catagory: \(book.catagory)")
+                            .padding(2)
+                            .presentationCompactAdaptation(.popover)
                     }
                 }
                 .onDelete(perform: deleteRows)
