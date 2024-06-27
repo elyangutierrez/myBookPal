@@ -99,11 +99,17 @@ struct ContentView: View {
                         }
                     }
                     .popover(isPresented: $showBookInfomation, arrowEdge: .top) {
-                        Text("Author: \(book.author)")
-                            .padding(2)
-                        Text("Catagory: \(book.catagory)")
-                            .padding(2)
-                            .presentationCompactAdaptation(.popover)
+                        VStack(alignment: .leading) {
+                            Text("Author: \(book.author)")
+                                .font(.subheadline)
+                                .foregroundStyle(.black.opacity(0.80))
+                                .padding(2)
+                            Text("Catagory: \(book.catagory)")
+                                .font(.subheadline)
+                                .foregroundStyle(.black.opacity(0.80))
+                                .padding(2)
+                                .presentationCompactAdaptation(.popover)
+                        }
                     }
                 }
                 .onDelete(perform: deleteRows)

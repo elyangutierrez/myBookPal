@@ -82,6 +82,8 @@ struct SettingsView: View {
                 UNUserNotificationCenter.current().add(request)
             } else if let error {
                 print(error.localizedDescription)
+            } else {
+                print("Check if there is an error.")
             }
         }
     }
