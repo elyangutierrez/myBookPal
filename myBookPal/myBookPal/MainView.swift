@@ -12,37 +12,34 @@ struct MainView: View {
     @Query(sort: \Book.title) var books: [Book]
     @State private var selectedTab = 0
     
-    @AppStorage("setBookTotal") var setBookTotal = 10
-    
-    @AppStorage("getBookTotal") var getBookTotal = 0
-    
-    
     var body: some View {
-        
         TabView {
-            ContentView(books: books)
-                .tabItem {
-                    Image(systemName: "books.vertical")
-                    Text("Collection")
-                }
-            
-            CatagoryView(books: books)
-                .tabItem {
-                    Image(systemName: "checklist")
-                    Text("Catagories")
-                }
-            
-            SearchView()
-                .tabItem {
-                    Image(systemName: "magnifyingglass")
-                    Text("Search")
-                }
-            
-            SettingsView()
-                .tabItem {
-                    Image(systemName: "gearshape")
-                    Text("Settings")
-                }
+            Group {
+                ContentView(books: books)
+                    .tabItem {
+                        Image(systemName: "books.vertical")
+                        Text("Collection")
+                    }
+                
+                CatagoryView(books: books)
+                    .tabItem {
+                        Image(systemName: "checklist")
+                        Text("Catagories")
+                    }
+                
+                SearchView()
+                    .tabItem {
+                        Image(systemName: "magnifyingglass")
+                        Text("Search")
+                    }
+                
+                SettingsView(books: books)
+                    .tabItem {
+                        Image(systemName: "gearshape")
+                        Text("Settings")
+                    }
+            }
+            .toolbarBackground(.visible, for: .tabBar)
         }
         .tint(.black)
         .preferredColorScheme(.light)

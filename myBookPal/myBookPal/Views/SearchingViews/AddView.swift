@@ -147,6 +147,7 @@ struct AddView: View {
             }
             .navigationTitle("Add Book")
             .navigationBarTitleDisplayMode(.inline)
+            .preferredColorScheme(.light)
         }
         .alert("Book Added", isPresented: $showAlert) {
             Button("Ok", action: showReview)

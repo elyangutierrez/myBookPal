@@ -13,6 +13,7 @@
 		724070EC2BED76CA00E1E07C /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070EB2BED76CA00E1E07C /* AddView.swift */; };
 		724070F02BED774C00E1E07C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070EF2BED774C00E1E07C /* MainView.swift */; };
 		724070F42BED7A6000E1E07C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070F32BED7A6000E1E07C /* SettingsView.swift */; };
+		7249626C2C2E380600F6411B /* SettingsRectangleLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */; };
 		7259CABF2BFE45BD0039D778 /* CatagoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7259CABE2BFE45BD0039D778 /* CatagoryView.swift */; };
 		725D05452BF4FCB8001557A4 /* EmptyBookCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D05442BF4FCB8001557A4 /* EmptyBookCoverView.swift */; };
 		725D054B2BF971E1001557A4 /* CompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D054A2BF971E1001557A4 /* CompletedView.swift */; };
@@ -41,6 +42,7 @@
 		724070EB2BED76CA00E1E07C /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
 		724070EF2BED774C00E1E07C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		724070F32BED7A6000E1E07C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRectangleLineView.swift; sourceTree = "<group>"; };
 		7259CABE2BFE45BD0039D778 /* CatagoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatagoryView.swift; sourceTree = "<group>"; };
 		725D05442BF4FCB8001557A4 /* EmptyBookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBookCoverView.swift; sourceTree = "<group>"; };
 		725D054A2BF971E1001557A4 /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 				724070F32BED7A6000E1E07C /* SettingsView.swift */,
 				7266C68C2BF45D1500022057 /* SearchingViews */,
 				7266C68B2BF45CF800022057 /* LoggingViews */,
+				7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -260,6 +263,7 @@
 				72D098182BF16DE80021819E /* BookCoverView.swift in Sources */,
 				724070F02BED774C00E1E07C /* MainView.swift in Sources */,
 				724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */,
+				7249626C2C2E380600F6411B /* SettingsRectangleLineView.swift in Sources */,
 				72D098132BF1692D0021819E /* BookResponse.swift in Sources */,
 				7259CABF2BFE45BD0039D778 /* CatagoryView.swift in Sources */,
 				72D098152BF1692D0021819E /* ImageLinks.swift in Sources */,
