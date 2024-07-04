@@ -117,10 +117,10 @@
 			children = (
 				7259CABE2BFE45BD0039D778 /* CatagoryView.swift */,
 				7266C6892BF45B6200022057 /* ContentView.swift */,
+				7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */,
 				724070F32BED7A6000E1E07C /* SettingsView.swift */,
 				7266C68C2BF45D1500022057 /* SearchingViews */,
 				7266C68B2BF45CF800022057 /* LoggingViews */,
-				7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

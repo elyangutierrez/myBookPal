@@ -9,12 +9,13 @@ import SwiftData
 import Foundation
 
 @Model
-class Book: Identifiable {
+class Book: Identifiable, Equatable {
     let coverImage: String
     let title: String
     let author: String
     let catagory: String
     let pages: String
+    let dateAdded: Date
     var logs: [Log]?
     
     var totalPagesRead: Int {
@@ -57,12 +58,13 @@ class Book: Identifiable {
         }
     }
     
-    init(coverImage: String, title: String, author: String, catagory: String, pages: String) {
+    init(coverImage: String, title: String, author: String, catagory: String, pages: String, dateAdded: Date = Date()) {
         self.coverImage = coverImage
         self.title = title
         self.author = author
         self.catagory = catagory
         self.pages = pages
+        self.dateAdded = dateAdded
         self.logs = nil
     }
 }

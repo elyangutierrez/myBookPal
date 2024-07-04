@@ -17,4 +17,8 @@ struct Library {
     var getCompletedOnly: [Book] {
         return books.filter { $0.completionStatus == 1}
     }
+    
+    var getMostRecentBook: Book? {
+        return books.sorted(by: { $0.dateAdded > $1.dateAdded}).first
+    }
 }
