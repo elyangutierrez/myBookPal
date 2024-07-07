@@ -40,6 +40,7 @@ struct AddView: View {
                 
                 VStack {
                     Rectangle()
+                        .fill(.clear)
                         .frame(width: 200, height: 255)
                         .padding(.vertical, 60)
                         .overlay {
@@ -53,33 +54,99 @@ struct AddView: View {
                         .frame(width: 250, alignment: .center)
                         .padding(.vertical, -10)
                     
-                    Text(book.getAuthor)
-                        .font(.system(size: 17))
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.vertical, 25)
-                    
                     HStack {
-                        Image(.openBook2)
-                            .resizable()
-                            .frame(width: 30, height: 30)
-                        Text(book.getPageCount)
-                            .font(.system(size: 17))
+                        Text(book.getAuthor)
+                            .font(.subheadline)
+                        
+                        RectangleLineView()
+                        
+                        Text(book.getCatagory)
+                            .font(.subheadline)
+                        
+                        RectangleLineView()
+                        
+                        if book.getPageCount == "0" {
+                            Text("N/A")
+                                .font(.subheadline)
+                            Image("open-book-2")
+                                .resizable()
+                                .frame(width: 30, height: 30)
+                        } else {
+                            Text(book.getPageCount)
+                                .font(.subheadline)
+                            Image("open-book-2")
+                                .resizable()
+                                .frame(width: 20, height: 20)
+                        }
                     }
-                    .padding(.vertical, -10)
+                    .padding()
+                    
+                    if book.getPageCount == "0" && book.getCatagory == "N/A" {
+                        Button(action: {
+                            enterBothBool.toggle()
+                        }) {
+                            Capsule()
+                                .fill(.gray.opacity(0.30))
+                                .frame(width: 230, height: 35)
+                                .overlay {
+                                    Capsule()
+                                        .stroke(authorText.opacity(0.35), lineWidth: 1)
+                                    Text("Manually Page And Genre")
+                                        .foregroundStyle(.black)
+                                        .fontWeight(.semibold)
+                                }
+                        }
+                        .padding()
+                    } else if book.getPageCount == "0" {
+                        Button(action: {
+                            enterPageCountBool.toggle()
+                        }) {
+                            Capsule()
+                                .fill(.gray.opacity(0.30))
+                                .frame(width: 230, height: 35)
+                                .overlay {
+                                    Capsule()
+                                        .stroke(authorText.opacity(0.35), lineWidth: 1)
+                                    Text("Manually Enter Page Count")
+                                        .foregroundStyle(.black)
+                                        .fontWeight(.semibold)
+                                }
+                        }
+                        .padding()
+                    } else if book.getCatagory == "N/A" {
+                        Button(action: {
+                            enterGenreBool.toggle()
+                        }) {
+                            Capsule()
+                                .fill(.gray.opacity(0.30))
+                                .frame(width: 230, height: 35)
+                                .overlay {
+                                    Capsule()
+                                        .stroke(authorText.opacity(0.35), lineWidth: 1)
+                                    Text("Manually Enter Genre")
+                                        .foregroundStyle(.black)
+                                        .fontWeight(.semibold)
+                                }
+                        }
+                        .padding()
+                    }
                     
                     Button(action: {
-                        //
+                        addBookToCollection()
                     }) {
-                        RoundedRectangle(cornerRadius: 20.0)
-                            .fill(.gray)
-                            .frame(width: 200, height: 50)
-                            .padding(.vertical, 25)
+                        Capsule()
+                            .fill(.gray.opacity(0.30))
+                            .frame(width: 200, height: 35)
                             .overlay {
+                                Capsule()
+                                    .stroke(authorText.opacity(0.35), lineWidth: 1)
                                 Text("Add To Collection")
-                                    .fontWeight(.bold)
-                                    .foregroundStyle(.white)
+                                    .foregroundStyle(.black)
+                                    .fontWeight(.semibold)
                             }
+                        
                     }
+                    .padding()
                 }
             }
             .navigationTitle("Add Book")
@@ -166,7 +233,7 @@ struct AddView: View {
 }
 
 #Preview {
-    let example = VolumeInfo(title: "Dune", authors: ["Frank Herbert"], pageCount: 345, categories: ["N/A"])
+    let example = VolumeInfo(title: "Dune", authors: ["Frank Herbert"], pageCount: 0, categories: ["N/A"])
     
     return AddView(book: example)
 }
