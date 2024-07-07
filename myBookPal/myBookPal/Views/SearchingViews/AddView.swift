@@ -28,121 +28,58 @@ struct AddView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
+                ZStack {
+//                    Color.red
+//                        .frame(width: 450, height: 475)
+                    BackgroundBookCoverView(bookImage: book.imageLinks?.secureThumbnailURL ?? "")
+                        .opacity(0.7)
+                        .brightness(-0.4)
+                        .padding(.vertical, -270)
+                }
+                .ignoresSafeArea()
+                
                 VStack {
-                    Spacer()
-                        .frame(height: 50)
-                    if book.imageLinks?.secureThumbnailURL == "" {
-                        EmptyBookCoverView(book: book)
-                            .shadow(radius: 10)
-                    } else {
-                        BookCoverView(bookImage: book.imageLinks?.secureThumbnailURL ?? "")
-                            .frame(width: 250, height: 310)
-                            .shadow(radius: 10)
-                    }
+                    Rectangle()
+                        .frame(width: 200, height: 255)
+                        .padding(.vertical, 60)
+                        .overlay {
+                            BookCoverView(bookImage: book.imageLinks?.secureThumbnailURL ?? "")
+                        }
+                }
+                
+                VStack {
                     Text(book.title)
-                        .font(.title2.bold())
-                        .padding()
-//                    Text(book.getAuthor)
-//                        .font(.custom("Author", fixedSize: 19))
-//                        .foregroundStyle(authorText)
-//                        .padding(-12)
-                    HStack {
-                        Text(book.getAuthor)
-                            .font(.subheadline)
-                        
-                        RectangleLineView()
-                        
-                        Text(book.getCatagory)
-                            .font(.subheadline)
-                        
-                        RectangleLineView()
-                        
-                        if book.getPageCount == "0" {
-                            Text("N/A")
-                                .font(.subheadline)
-                            Image("open-book-2")
-                                .resizable()
-                                .frame(width: 30, height: 30)
-                        } else {
-                            Text(book.getPageCount)
-                                .font(.subheadline)
-                            Image("open-book-2")
-                                .resizable()
-                                .frame(width: 20, height: 20)
-                        }
-                    }
-                    .padding(.bottom, 25)
+                        .font(.system(size: 21).bold())
+                        .frame(width: 250, alignment: .center)
+                        .padding(.vertical, -10)
                     
-                    if book.getPageCount == "0" && book.getCatagory == "N/A" {
-                        Button(action: {
-                            enterBothBool.toggle()
-                        }) {
-                            Capsule()
-                                .fill(.gray.opacity(0.30))
-                                .frame(width: 230, height: 35)
-                                .overlay {
-                                    Capsule()
-                                        .stroke(authorText.opacity(0.35), lineWidth: 1)
-                                    Text("Manually Page And Genre")
-                                        .foregroundStyle(.black)
-                                        .fontWeight(.semibold)
-                                }
-                        }
-                        .padding()
-                        .offset(y: -10)
-                    } else if book.getPageCount == "0" {
-                        Button(action: {
-                            enterPageCountBool.toggle()
-                        }) {
-                            Capsule()
-                                .fill(.gray.opacity(0.30))
-                                .frame(width: 230, height: 35)
-                                .overlay {
-                                    Capsule()
-                                        .stroke(authorText.opacity(0.35), lineWidth: 1)
-                                    Text("Manually Enter Page Count")
-                                        .foregroundStyle(.black)
-                                        .fontWeight(.semibold)
-                                }
-                        }
-                        .padding()
-                        .offset(y: -10)
-                    } else if book.getCatagory == "N/A" {
-                        Button(action: {
-                            enterGenreBool.toggle()
-                        }) {
-                            Capsule()
-                                .fill(.gray.opacity(0.30))
-                                .frame(width: 230, height: 35)
-                                .overlay {
-                                    Capsule()
-                                        .stroke(authorText.opacity(0.35), lineWidth: 1)
-                                    Text("Manually Enter Genre")
-                                        .foregroundStyle(.black)
-                                        .fontWeight(.semibold)
-                                }
-                        }
-                        .padding()
-                        .offset(y: -10)
+                    Text(book.getAuthor)
+                        .font(.system(size: 17))
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.vertical, 25)
+                    
+                    HStack {
+                        Image(.openBook2)
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                        Text(book.getPageCount)
+                            .font(.system(size: 17))
                     }
+                    .padding(.vertical, -10)
                     
                     Button(action: {
-                        addBookToCollection()
+                        //
                     }) {
-                        Capsule()
-                            .fill(.gray.opacity(0.30))
-                            .frame(width: 200, height: 35)
+                        RoundedRectangle(cornerRadius: 20.0)
+                            .fill(.gray)
+                            .frame(width: 200, height: 50)
+                            .padding(.vertical, 25)
                             .overlay {
-                                Capsule()
-                                    .stroke(authorText.opacity(0.35), lineWidth: 1)
                                 Text("Add To Collection")
-                                    .foregroundStyle(.black)
-                                    .fontWeight(.semibold)
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.white)
                             }
-                        
                     }
-                    .offset(x: 2)
-                    .padding(-8)
                 }
             }
             .navigationTitle("Add Book")

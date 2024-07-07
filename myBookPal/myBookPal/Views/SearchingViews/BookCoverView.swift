@@ -18,6 +18,7 @@ struct BookCoverView: View {
                 image
                     .interpolation(.none)
                     .resizable()
+                    .clipShape(RoundedRectangle(cornerRadius: 20.0))
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200)
             case .failure(let error):
@@ -38,5 +39,5 @@ struct BookCoverView: View {
 }
 
 #Preview {
-    BookCoverView(bookImage: "https://books.google.com/books/content?id=UAhAEAAAQBAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api")
+    BookCoverView(bookImage: "https://books.google.com/books/content?id=UAhAEAAAQBAJ&printsec=frontcover&img=1&zoom=1l&source=gbs_api")
 }
