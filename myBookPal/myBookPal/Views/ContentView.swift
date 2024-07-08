@@ -12,7 +12,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @State private var searchText = ""
-    var books: [Book]
+    var books: Set<Book> = []
     @State private var activateSheet = false
     
     let options = ["Ascending", "Descending"]
@@ -20,7 +20,7 @@ struct ContentView: View {
     
     var searchResults: [Book] {
         if searchText.isEmpty {
-            return books
+            return Array(books)
         } else {
             return books.filter { $0.title.contains(searchText) }
         }
@@ -45,7 +45,7 @@ struct ContentView: View {
                                            description: Text("Add one to get started!"))
                 } else {
                     let testBook = Book(coverImage: "", title: "N/A", author: "N/A", catagory: "N/A", pages: "N/A")
-                    let library = Library(books: books)
+                    let library = Library(books: Array(books))
                     let mostRecent = library.getMostRecentBook
                     
                     VStack(alignment: .leading) {

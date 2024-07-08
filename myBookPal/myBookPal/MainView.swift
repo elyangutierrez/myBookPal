@@ -15,7 +15,7 @@ struct MainView: View {
     var body: some View {
         TabView {
             Group {
-                ContentView(books: books)
+                ContentView(books: Set(books))
                     .tabItem {
                         Image(systemName: "books.vertical")
                         Text("Collection")
@@ -27,7 +27,7 @@ struct MainView: View {
                         Text("Catagories")
                     }
                 
-                SearchView()
+                SearchView(collectionBooks: books)
                     .tabItem {
                         Image(systemName: "magnifyingglass")
                         Text("Search")

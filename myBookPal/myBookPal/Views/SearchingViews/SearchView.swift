@@ -10,12 +10,13 @@ import SwiftUI
 struct SearchView: View {
     @State private var searchText = ""
     @State var books: [VolumeInfo] = []
+    var collectionBooks: [Book]
     
     var body: some View {
         NavigationStack {
             List {
                 ForEach(books, id: \.self) { book in
-                    NavigationLink(destination: AddView(book: book)) {
+                    NavigationLink(destination: AddView(book: book, books: collectionBooks)) {
                         HStack {
                             AsyncImage(url: URL(string: book.imageLinks?.secureThumbnailURL ?? "")) { phase in
                                 switch phase {
@@ -102,5 +103,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView()
+    SearchView(collectionBooks: [Book]())
 }

@@ -58,6 +58,10 @@ class Book: Identifiable, Equatable {
         }
     }
     
+    static func == (lhs: Book, rhs: Book) -> Bool {
+        return lhs.title == rhs.title && lhs.author == rhs.author && lhs.catagory == rhs.catagory && lhs.pages == rhs.pages
+    }
+    
     init(coverImage: String, title: String, author: String, catagory: String, pages: String, dateAdded: Date = Date()) {
         self.coverImage = coverImage
         self.title = title

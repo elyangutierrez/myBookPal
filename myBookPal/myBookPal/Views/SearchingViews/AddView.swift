@@ -11,6 +11,7 @@ import SwiftUI
 struct AddView: View {
     @Environment(\.modelContext) var modelContext
     var book: VolumeInfo
+    var books: [Book]
 
     @State private var showAlert = false
     
@@ -24,6 +25,8 @@ struct AddView: View {
     
     @Environment(\.requestReview) var requestReview
     @AppStorage("bookCompletionCount") var bookCompletionCount = 0
+    
+    @State private var bookIsInCollection = false
     
     var body: some View {
         NavigationStack {
@@ -184,42 +187,57 @@ struct AddView: View {
             Text("Please enter the genre of \(book.title).")
         }
         
+        .alert("Already in Collection", isPresented: $bookIsInCollection) {
+            Button("Ok", role: .cancel) { }
+        } message: {
+            Text("This book is already in the collection.")
+        }
+        
     }
     
     func addBookToCollection() {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: book.getCatagory, pages: book.getPageCount)
-        modelContext.insert(newBook)
         
-        bookCompletionCount += 1
-        
-        showAlert = true
+        if books.contains(newBook) {
+            bookIsInCollection.toggle()
+        } else {
+            modelContext.insert(newBook)
+            bookCompletionCount += 1
+            showAlert = true
+        }
     }
     
     func secondaryBookInsertion() {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: book.getCatagory, pages: manualBookCount)
-        modelContext.insert(newBook)
-        
-        bookCompletionCount += 1
-        
-        showAlert = true
+        if books.contains(newBook) {
+            bookIsInCollection.toggle()
+        } else {
+            modelContext.insert(newBook)
+            bookCompletionCount += 1
+            showAlert = true
+        }
     }
     
     func genreBookInsertion() {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: enterGenre, pages: book.getPageCount)
-        modelContext.insert(newBook)
-        
-        bookCompletionCount += 1
-        
-        showAlert = true
+        if books.contains(newBook) {
+            bookIsInCollection.toggle()
+        } else {
+            modelContext.insert(newBook)
+            bookCompletionCount += 1
+            showAlert = true
+        }
     }
     
     func twoEmptyFieldsInsertion() {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: enterGenre, pages: manualBookCount)
-        modelContext.insert(newBook)
-        
-        bookCompletionCount += 1
-        
-        showAlert = true
+        if books.contains(newBook) {
+            bookIsInCollection.toggle()
+        } else {
+            modelContext.insert(newBook)
+            bookCompletionCount += 1
+            showAlert = true
+        }
     }
     
     @MainActor func showReview() {
@@ -235,5 +253,5 @@ struct AddView: View {
 #Preview {
     let example = VolumeInfo(title: "Dune", authors: ["Frank Herbert"], pageCount: 0, categories: ["N/A"])
     
-    return AddView(book: example)
+    return AddView(book: example, books: [Book]())
 }
