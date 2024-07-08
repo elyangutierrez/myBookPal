@@ -19,9 +19,9 @@ struct LogView: View {
             VStack {
 //                let _ = print(book.getLogCount)
                 if book.getLogCount == nil {
-                    Text("There are current no log entries for this book.")
-                        .font(.subheadline)
-                        .foregroundStyle(.gray)
+                    ContentUnavailableView("No Logs Avaliable", 
+                                           systemImage: "book.pages",
+                                           description: Text("Add a log to get started!"))
                     
                 } else {
                     List {
