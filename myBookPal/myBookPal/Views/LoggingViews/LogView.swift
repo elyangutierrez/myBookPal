@@ -21,7 +21,7 @@ struct LogView: View {
                 if book.getLogCount == nil {
                     ContentUnavailableView("No Logs Avaliable", 
                                            systemImage: "book.pages",
-                                           description: Text("Add a log to get started!"))
+                                           description: Text("Click the '+' to add a log!"))
                     
                 } else {
                     List {
@@ -45,7 +45,7 @@ struct LogView: View {
                     Button(action: {
                         showSheet.toggle()
                     }) {
-                        Text("Add Log")
+                        Image(systemName: "plus")
                     }
                 }
             }
