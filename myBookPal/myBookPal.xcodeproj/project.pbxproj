@@ -23,6 +23,7 @@
 		7266C68A2BF45B6200022057 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7266C6892BF45B6200022057 /* ContentView.swift */; };
 		728E7BA42BF0A37700A1D11B /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 728E7BA32BF0A37700A1D11B /* SearchView.swift */; };
 		72A8893E2C3A23520032A56C /* BackgroundBookCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A8893D2C3A23520032A56C /* BackgroundBookCoverView.swift */; };
+		72A889402C3F6FFE0032A56C /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72A8893F2C3F6FFE0032A56C /* NetworkMonitor.swift */; };
 		72BBD34C2BF29EB2006BC431 /* AddLogEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BBD34B2BF29EB2006BC431 /* AddLogEntryView.swift */; };
 		72BBD3502BF2A64C006BC431 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BBD34F2BF2A64C006BC431 /* Log.swift */; };
 		72D097F82BF160D40021819E /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D097F72BF160D40021819E /* LogView.swift */; };
@@ -52,6 +53,7 @@
 		7266C6892BF45B6200022057 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		728E7BA32BF0A37700A1D11B /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		72A8893D2C3A23520032A56C /* BackgroundBookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundBookCoverView.swift; sourceTree = "<group>"; };
+		72A8893F2C3F6FFE0032A56C /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
 		72BBD34B2BF29EB2006BC431 /* AddLogEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogEntryView.swift; sourceTree = "<group>"; };
 		72BBD34F2BF2A64C006BC431 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		72D097F72BF160D40021819E /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
@@ -157,6 +159,7 @@
 				72D098082BF168D50021819E /* Book.swift */,
 				72BBD34F2BF2A64C006BC431 /* Log.swift */,
 				725D054E2BF97FDB001557A4 /* Library.swift */,
+				72A8893F2C3F6FFE0032A56C /* NetworkMonitor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -250,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72D097F82BF160D40021819E /* LogView.swift in Sources */,
+				72A889402C3F6FFE0032A56C /* NetworkMonitor.swift in Sources */,
 				724070EC2BED76CA00E1E07C /* AddView.swift in Sources */,
 				72D098122BF1692D0021819E /* BookItem.swift in Sources */,
 				724070F42BED7A6000E1E07C /* SettingsView.swift in Sources */,

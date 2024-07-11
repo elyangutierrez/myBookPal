@@ -10,9 +10,12 @@ import SwiftUI
 
 @main
 struct myBookPalApp: App {
+    @State private var networkMonitor = NetworkMonitor()
+    
     var body: some Scene {
         WindowGroup {
             MainView()
+                .environment(networkMonitor)
         }
         .modelContainer(for: Book.self)
     }

@@ -11,6 +11,8 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
+    @Environment(NetworkMonitor.self) private var networkMonitor
+    
     @State private var searchText = ""
     var books: Set<Book> = []
     @State private var activateSheet = false
@@ -36,9 +38,18 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                if books.isEmpty {
+                
+                if !networkMonitor.isConnected {
                     Spacer()
-                        .frame(height: 220)
+                        .frame(height: 250)
+                    
+                    ContentUnavailableView("No WiFi Connection", systemImage: "wifi.slash", description: Text("Please check your WiFi connection."))
+
+                    
+
+                } else if books.isEmpty {
+                    Spacer()
+                        .frame(height: 245)
                     
                     ContentUnavailableView("No Books Avaliable",
                                            systemImage: "books.vertical",
