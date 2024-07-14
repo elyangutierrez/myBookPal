@@ -21,6 +21,11 @@ struct BookCoverView: View {
                     .clipShape(RoundedRectangle(cornerRadius: 20.0))
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 200)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 20.0)
+                            .fill(.clear)
+                            .stroke(.black.opacity(0.60), lineWidth: 2)
+                    }
             case .failure(let error):
                 let _ = print("Image error", error)
                 Color.red
