@@ -7,6 +7,7 @@
 
 import Foundation
 import Network
+import Observation
 
 @Observable
 final class NetworkMonitor {
