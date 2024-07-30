@@ -23,18 +23,18 @@ myBookPal is a minimalistic book tracking application that allows users to searc
 
 * When you first open the app, you will have a empty collection page. To add a book, go to the search tab. Once you are at the search tab, enter your book in the search bar and it will show up. Click on it and add it to your collection.
 
-<img src = "empty_collection.png" alt = "Empty Collection" width="200" height = "400">
+<img src = "preview-images/empty_collection.png" alt = "Empty Collection" width="200" height = "400">
 
-<img src = "book_search_view.png" alt = "Book Search" width = "200" height = "400" >
+<img src = "preview-images/book_search_view.png" alt = "Book Search" width = "200" height = "400" >
 
-<img src = "add_book.png" alt = "Add Book" width = "200" height = "400" >
+<img src = "preview-images/add_book.png" alt = "Add Book" width = "200" height = "400" >
 
 * Once you have added your book to your collection, go back to the collection tab and you will see your book there. Click on it and add a log to get started!
 
-<img src = "book_in_collection.png" alt = "Book In Collection" width = "200" height = "400" >
+<img src = "preview-images/book_in_collection.png" alt = "Book In Collection" width = "200" height = "400" >
 
-<img src = "empty_logs.png" alt = "Empty Logs" width = "200" height = "400" >
+<img src = "preview-images/empty_logs.png" alt = "Empty Logs" width = "200" height = "400" >
 
-<img src = "add_log.png" alt = "Add Log" width = "200" height = "400" >
+<img src = "preview-images/add_log.png" alt = "Add Log" width = "200" height = "400" >
 
 * Once the log is added, you will see the change in the completion bar and in the logs page.
