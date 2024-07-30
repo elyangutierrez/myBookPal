@@ -160,17 +160,6 @@ struct ContentView: View {
                             .fontDesign(.serif)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal, 20)
-                        Button(action: {
-                            isEditing.toggle()
-                        }) {
-                            HStack {
-                                Image(systemName: "pencil")
-                                Text("Edit")
-                            }
-                        }
-                        .frame(maxHeight: .infinity, alignment: .bottom)
-                        .padding(.horizontal, 20)
-                        
                     }
                     
                     ScrollView(.horizontal) {
@@ -178,18 +167,6 @@ struct ContentView: View {
                             ForEach(searchResults, id: \.self) { book in
                                 NavigationLink(destination: LogView(book: book)) {
                                     VStack {
-                                        if isEditing {
-                                            Button(action: {
-                                                deletedBookTitle = book.title
-                                                activateBookDeletionAlert.toggle()
-                                            }) {
-                                                Image(systemName: "trash")
-                                                    .font(.system(size: 18))
-                                                    .foregroundStyle(.red)
-                                                    .padding(5)
-                                            }
-                                        }
-                                        
                                         
                                         AsyncImage(url: URL(string: book.coverImage)) { phase in
                                             switch phase {
