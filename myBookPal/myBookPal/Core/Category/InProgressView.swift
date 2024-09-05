@@ -5,6 +5,7 @@
 //  Created by Elyan Gutierrez on 5/18/24.
 //
 
+import SDWebImageSwiftUI
 import SwiftData
 import SwiftUI
 
@@ -18,21 +19,29 @@ struct InProgressView: View {
                 ForEach(library.getInProgressOnly, id: \.self) { book in
                     NavigationLink(destination: LogView(book: book)) {
                         HStack {
-                            AsyncImage(url: URL(string: book.coverImage)) { phase in
-                                switch phase {
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 80, height: 90)
-                                case .failure(let error):
-                                    let _ = print("Image error", error)
-                                    Color.red
-                                case .empty:
-                                    Rectangle()
-                                default:
-                                    Rectangle()
-                                }
+//                            AsyncImage(url: URL(string: book.coverImage)) { phase in
+//                                switch phase {
+//                                case .success(let image):
+//                                    image
+//                                        .resizable()
+//                                        .aspectRatio(contentMode: .fit)
+//                                        .frame(width: 80, height: 90)
+//                                case .failure(let error):
+//                                    let _ = print("Image error", error)
+//                                    Color.red
+//                                case .empty:
+//                                    Rectangle()
+//                                default:
+//                                    Rectangle()
+//                                }
+//                            }
+                            WebImage(url: URL(string: book.coverImage)) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 80, height: 80)
+                            } placeholder: {
+                                Rectangle()
                             }
                             VStack(alignment: .leading) {
                                 Text(book.title)

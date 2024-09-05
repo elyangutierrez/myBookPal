@@ -71,13 +71,13 @@ struct AddView: View {
                         if book.getPageCount == "0" {
                             Text("N/A")
                                 .font(.subheadline)
-                            Image("open-book-2")
+                            Image(systemName: "book.pages")
                                 .resizable()
-                                .frame(width: 30, height: 30)
+                                .frame(width: 20, height: 25)
                         } else {
                             Text(book.getPageCount)
                                 .font(.subheadline)
-                            Image("open-book-2")
+                            Image(systemName: "book.pages")
                                 .resizable()
                                 .frame(width: 20, height: 20)
                         }
@@ -89,6 +89,7 @@ struct AddView: View {
                             enterBothBool.toggle()
                         }) {
                             Capsule()
+//                                .fill(.thickMaterial)
                                 .fill(.gray.opacity(0.30))
                                 .frame(width: 230, height: 35)
                                 .overlay {

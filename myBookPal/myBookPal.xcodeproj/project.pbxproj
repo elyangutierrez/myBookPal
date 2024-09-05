@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		722662962C8956EA0071162D /* CrimsonText-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */; };
+		722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662912C894ED70071162D /* CrimsonText-Regular.ttf */; };
+		722662992C8957C40071162D /* CrimsonText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662982C8957C40071162D /* CrimsonText-Bold.ttf */; };
+		7226629C2C895AF50071162D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7226629B2C895AF50071162D /* SDWebImageSwiftUI */; };
 		724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */; };
 		724070DC2BEC6AAF00E1E07C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DB2BEC6AAF00E1E07C /* Assets.xcassets */; };
 		724070DF2BEC6AAF00E1E07C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DE2BEC6AAF00E1E07C /* Preview Assets.xcassets */; };
@@ -37,6 +41,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		722662912C894ED70071162D /* CrimsonText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Regular.ttf"; sourceTree = "<group>"; };
+		722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-SemiBold.ttf"; sourceTree = "<group>"; };
+		722662982C8957C40071162D /* CrimsonText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Bold.ttf"; sourceTree = "<group>"; };
 		724070D42BEC6AAF00E1E07C /* myBookPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myBookPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myBookPalApp.swift; sourceTree = "<group>"; };
 		724070DB2BEC6AAF00E1E07C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7226629C2C895AF50071162D /* SDWebImageSwiftUI in Frameworks */,
 				725D05612BFBA841001557A4 /* SlidingTabView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -78,6 +86,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7226628F2C894A950071162D /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		722662902C894CCD0071162D /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */,
+				722662912C894ED70071162D /* CrimsonText-Regular.ttf */,
+				722662982C8957C40071162D /* CrimsonText-Bold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 		724070CB2BEC6AAF00E1E07C = {
 			isa = PBXGroup;
 			children = (
@@ -97,11 +122,12 @@
 		724070D62BEC6AAF00E1E07C /* myBookPal */ = {
 			isa = PBXGroup;
 			children = (
-				724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */,
-				724070EF2BED774C00E1E07C /* MainView.swift */,
-				72D098102BF1692D0021819E /* API */,
+				722662902C894CCD0071162D /* Fonts */,
+				7226628F2C894A950071162D /* Extensions */,
+				728B62F22C89464800A12046 /* Core */,
+				728B62EB2C89459E00A12046 /* Main */,
+				728B62EA2C89459700A12046 /* App */,
 				72D098072BF168CB0021819E /* Model */,
-				724070F52BED7A6900E1E07C /* Views */,
 				724070DB2BEC6AAF00E1E07C /* Assets.xcassets */,
 				724070DD2BEC6AAF00E1E07C /* Preview Content */,
 			);
@@ -116,31 +142,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		724070F52BED7A6900E1E07C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				7259CABE2BFE45BD0039D778 /* CatagoryView.swift */,
-				7266C6892BF45B6200022057 /* ContentView.swift */,
-				7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */,
-				724070F32BED7A6000E1E07C /* SettingsView.swift */,
-				7266C68C2BF45D1500022057 /* SearchingViews */,
-				7266C68B2BF45CF800022057 /* LoggingViews */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		7266C68B2BF45CF800022057 /* LoggingViews */ = {
+		7266C68B2BF45CF800022057 /* Log */ = {
 			isa = PBXGroup;
 			children = (
 				72D097F72BF160D40021819E /* LogView.swift */,
-				725D054A2BF971E1001557A4 /* CompletedView.swift */,
-				725D054C2BF971E7001557A4 /* InProgressView.swift */,
 				72BBD34B2BF29EB2006BC431 /* AddLogEntryView.swift */,
 			);
-			path = LoggingViews;
+			path = Log;
 			sourceTree = "<group>";
 		};
-		7266C68C2BF45D1500022057 /* SearchingViews */ = {
+		7266C68C2BF45D1500022057 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				728E7BA32BF0A37700A1D11B /* SearchView.swift */,
@@ -150,16 +161,88 @@
 				72D098192BF174CB0021819E /* RectangleLineView.swift */,
 				725D05442BF4FCB8001557A4 /* EmptyBookCoverView.swift */,
 			);
-			path = SearchingViews;
+			path = Search;
 			sourceTree = "<group>";
 		};
-		72D098072BF168CB0021819E /* Model */ = {
+		728B62EA2C89459700A12046 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		728B62EB2C89459E00A12046 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				724070EF2BED774C00E1E07C /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		728B62EC2C8945B600A12046 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				72A8893F2C3F6FFE0032A56C /* NetworkMonitor.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		728B62ED2C8945CB00A12046 /* Book */ = {
 			isa = PBXGroup;
 			children = (
 				72D098082BF168D50021819E /* Book.swift */,
 				72BBD34F2BF2A64C006BC431 /* Log.swift */,
 				725D054E2BF97FDB001557A4 /* Library.swift */,
-				72A8893F2C3F6FFE0032A56C /* NetworkMonitor.swift */,
+			);
+			path = Book;
+			sourceTree = "<group>";
+		};
+		728B62EF2C89461E00A12046 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */,
+				724070F32BED7A6000E1E07C /* SettingsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		728B62F02C89462B00A12046 /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				725D054A2BF971E1001557A4 /* CompletedView.swift */,
+				725D054C2BF971E7001557A4 /* InProgressView.swift */,
+				7259CABE2BFE45BD0039D778 /* CatagoryView.swift */,
+			);
+			path = Category;
+			sourceTree = "<group>";
+		};
+		728B62F12C89463200A12046 /* Launch */ = {
+			isa = PBXGroup;
+			children = (
+				7266C6892BF45B6200022057 /* ContentView.swift */,
+			);
+			path = Launch;
+			sourceTree = "<group>";
+		};
+		728B62F22C89464800A12046 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				7266C68B2BF45CF800022057 /* Log */,
+				7266C68C2BF45D1500022057 /* Search */,
+				728B62EF2C89461E00A12046 /* Settings */,
+				728B62F02C89462B00A12046 /* Category */,
+				728B62F12C89463200A12046 /* Launch */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		72D098072BF168CB0021819E /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				72D098102BF1692D0021819E /* API */,
+				728B62ED2C8945CB00A12046 /* Book */,
+				728B62EC2C8945B600A12046 /* Network */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -173,7 +256,7 @@
 				72D0980F2BF1692D0021819E /* VolumeInfo.swift */,
 			);
 			name = API;
-			path = myBookPal/API;
+			path = myBookPal/Model/API;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -194,6 +277,7 @@
 			name = myBookPal;
 			packageProductDependencies = (
 				725D05602BFBA841001557A4 /* SlidingTabView */,
+				7226629B2C895AF50071162D /* SDWebImageSwiftUI */,
 			);
 			productName = myBookPal;
 			productReference = 724070D42BEC6AAF00E1E07C /* myBookPal.app */;
@@ -225,6 +309,7 @@
 			mainGroup = 724070CB2BEC6AAF00E1E07C;
 			packageReferences = (
 				725D055F2BFBA841001557A4 /* XCRemoteSwiftPackageReference "SlidingTabView" */,
+				7226629A2C895AF50071162D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 724070D52BEC6AAF00E1E07C /* Products */;
 			projectDirPath = "";
@@ -240,8 +325,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				722662962C8956EA0071162D /* CrimsonText-SemiBold.ttf in Resources */,
 				724070DF2BEC6AAF00E1E07C /* Preview Assets.xcassets in Resources */,
+				722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */,
 				724070DC2BEC6AAF00E1E07C /* Assets.xcassets in Resources */,
+				722662992C8957C40071162D /* CrimsonText-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +500,7 @@
 				DEVELOPMENT_TEAM = 52Q4M7N2WD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = myBookPal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -441,6 +530,7 @@
 				DEVELOPMENT_TEAM = 52Q4M7N2WD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = myBookPal/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -483,6 +573,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7226629A2C895AF50071162D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.2;
+			};
+		};
 		725D055F2BFBA841001557A4 /* XCRemoteSwiftPackageReference "SlidingTabView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/QuynhNguyen/SlidingTabView.git";
@@ -494,6 +592,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7226629B2C895AF50071162D /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7226629A2C895AF50071162D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
 		725D05602BFBA841001557A4 /* SlidingTabView */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 725D055F2BFBA841001557A4 /* XCRemoteSwiftPackageReference "SlidingTabView" */;

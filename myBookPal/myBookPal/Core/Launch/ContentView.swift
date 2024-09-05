@@ -5,6 +5,7 @@
 //  Created by Elyan Gutierrez on 5/14/24.
 //
 
+import SDWebImageSwiftUI
 import SlidingTabView
 import SwiftData
 import SwiftUI
@@ -14,7 +15,7 @@ struct ContentView: View {
     @Environment(NetworkMonitor.self) private var networkMonitor
     
     @State private var searchText = ""
-    var books: Set<Book> = []
+    var books: Set<Book>
     @State private var activateSheet = false
     
     let options = ["Ascending", "Descending"]
@@ -34,6 +35,16 @@ struct ContentView: View {
     @State private var selectedBooks = Set<Book>()
     @State private var activateBookDeletionAlert = false
     @State private var deletedBookTitle = ""
+    
+//    init() {
+//        for familyName in UIFont.familyNames {
+//            print(familyName)
+//            
+//            for fontName in UIFont.fontNames(forFamilyName: familyName) {
+//                print("-- \(fontName)")
+//            }
+//        }
+//    }
     
     var body: some View {
         NavigationStack {
@@ -67,31 +78,46 @@ struct ContentView: View {
                             NavigationLink(destination: LogView(book: mostRecent ?? testBook)) {
                                 VStack {
                                     HStack {
-                                        AsyncImage(url: URL(string: mostRecent?.coverImage ?? "N/A")) { phase in
-                                            switch phase {
-                                            case .success(let image):
-                                                image
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .shadow(radius: 15)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                    .frame(width: 180, height: 210)
-                                            case .failure(let error):
-                                                let _ = print("Image error", error)
-                                                // Empty
-                                            case .empty:
-                                                Rectangle()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .shadow(radius: 15)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                    .frame(width: 180, height: 210)
-                                            default:
-                                                Rectangle()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .shadow(radius: 15)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                    .frame(width: 180, height: 210)
-                                            }
+//                                        AsyncImage(url: URL(string: mostRecent?.coverImage ?? "N/A")) { phase in
+//                                            switch phase {
+//                                            case .success(let image):
+//                                                image
+//                                                    .resizable()
+//                                                    .aspectRatio(contentMode: .fit)
+//                                                    .shadow(radius: 15)
+//                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
+//                                                    .frame(width: 180, height: 210)
+//                                            case .failure(let error):
+//                                                let _ = print("Image error", error)
+//                                                // Empty
+//                                            case .empty:
+//                                                Rectangle()
+//                                                    .aspectRatio(contentMode: .fit)
+//                                                    .shadow(radius: 15)
+//                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
+//                                                    .frame(width: 180, height: 210)
+//                                            default:
+//                                                Rectangle()
+//                                                    .aspectRatio(contentMode: .fit)
+//                                                    .shadow(radius: 15)
+//                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
+//                                                    .frame(width: 180, height: 210)
+//                                            }
+//                                        }
+                                        
+                                        WebImage(url: URL(string: mostRecent?.coverImage ?? "N/A")) { image in
+                                            image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .shadow(radius: 15)
+                                                .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                                .frame(width: 180, height: 210)
+                                        } placeholder: {
+                                            Rectangle()
+                                                .aspectRatio(contentMode: .fit)
+                                                .shadow(radius: 15)
+                                                .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                                .frame(width: 180, height: 210)
                                         }
                                         
                                         VStack(alignment: .leading) {
@@ -168,23 +194,34 @@ struct ContentView: View {
                                 NavigationLink(destination: LogView(book: book)) {
                                     VStack {
                                         
-                                        AsyncImage(url: URL(string: book.coverImage)) { phase in
-                                            switch phase {
-                                            case .success(let image):
-                                                image
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .shadow(radius: 15)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                    .frame(width: 100, height: 150)
-                                            case .failure(let error):
-                                                let _ = print("Image error", error)
-                                                Color.red
-                                            case .empty:
-                                                Rectangle()
-                                            default:
-                                                Rectangle()
-                                            }
+//                                        AsyncImage(url: URL(string: book.coverImage)) { phase in
+//                                            switch phase {
+//                                            case .success(let image):
+//                                                image
+//                                                    .resizable()
+//                                                    .aspectRatio(contentMode: .fit)
+//                                                    .shadow(radius: 15)
+//                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
+//                                                    .frame(width: 100, height: 150)
+//                                            case .failure(let error):
+//                                                let _ = print("Image error", error)
+//                                                Color.red
+//                                            case .empty:
+//                                                Rectangle()
+//                                            default:
+//                                                Rectangle()
+//                                            }
+//                                        }
+                                        
+                                        WebImage(url: URL(string: book.coverImage)) { image in
+                                            image
+                                                .resizable()
+                                                .aspectRatio(contentMode: .fit)
+                                                .shadow(radius: 15)
+                                                .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                                .frame(width: 100, height: 150)
+                                        } placeholder: {
+                                            Rectangle()
                                         }
                 
                                         HStack {
@@ -205,11 +242,16 @@ struct ContentView: View {
                     .padding(.horizontal, 20)
                 }
             }
-            .navigationTitle("myBookPal")
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText)
             .scrollContentBackground(.hidden)
             .listStyle(.grouped)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("myBookPal")
+                        .font(Font.custom("CrimsonText-SemiBold", size: 20))
+                }
+            }
         }
         .alert("Book Deleted", isPresented: $activateBookDeletionAlert) {
             Button("Ok", role: .cancel) { }

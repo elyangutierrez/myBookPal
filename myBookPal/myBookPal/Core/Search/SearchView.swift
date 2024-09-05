@@ -35,6 +35,7 @@ struct SearchView: View {
                                 }
                             }
                             .frame(width: 50, height: 70)
+                            
                             Spacer()
                                 .frame(width: 50)
                             VStack(alignment: .leading) {
