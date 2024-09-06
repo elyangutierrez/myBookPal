@@ -60,7 +60,7 @@ struct ContentView: View {
 
                 } else if books.isEmpty {
                     Spacer()
-                        .frame(height: 245)
+                        .frame(height: 220)
                     
                     ContentUnavailableView("No Books Avaliable",
                                            systemImage: "books.vertical",
@@ -112,6 +112,7 @@ struct ContentView: View {
                                                 .shadow(radius: 15)
                                                 .clipShape(RoundedRectangle(cornerRadius: 10.0))
                                                 .frame(width: 180, height: 210)
+                                                .padding(.horizontal, 5)
                                         } placeholder: {
                                             Rectangle()
                                                 .aspectRatio(contentMode: .fit)

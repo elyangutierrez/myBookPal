@@ -15,7 +15,7 @@ struct myBookPalApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView()
+            ContainerView()
                 .environment(networkMonitor)
         }
         .modelContainer(for: Book.self)

@@ -11,6 +11,8 @@
 		722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662912C894ED70071162D /* CrimsonText-Regular.ttf */; };
 		722662992C8957C40071162D /* CrimsonText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662982C8957C40071162D /* CrimsonText-Bold.ttf */; };
 		7226629C2C895AF50071162D /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7226629B2C895AF50071162D /* SDWebImageSwiftUI */; };
+		7226629E2C8A9D680071162D /* ContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7226629D2C8A9D680071162D /* ContainerView.swift */; };
+		722662A02C8A9D790071162D /* SplashScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7226629F2C8A9D790071162D /* SplashScreenView.swift */; };
 		724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */; };
 		724070DC2BEC6AAF00E1E07C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DB2BEC6AAF00E1E07C /* Assets.xcassets */; };
 		724070DF2BEC6AAF00E1E07C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DE2BEC6AAF00E1E07C /* Preview Assets.xcassets */; };
@@ -44,6 +46,8 @@
 		722662912C894ED70071162D /* CrimsonText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Regular.ttf"; sourceTree = "<group>"; };
 		722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-SemiBold.ttf"; sourceTree = "<group>"; };
 		722662982C8957C40071162D /* CrimsonText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Bold.ttf"; sourceTree = "<group>"; };
+		7226629D2C8A9D680071162D /* ContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerView.swift; sourceTree = "<group>"; };
+		7226629F2C8A9D790071162D /* SplashScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreenView.swift; sourceTree = "<group>"; };
 		724070D42BEC6AAF00E1E07C /* myBookPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myBookPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myBookPalApp.swift; sourceTree = "<group>"; };
 		724070DB2BEC6AAF00E1E07C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -175,7 +179,7 @@
 		728B62EB2C89459E00A12046 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				724070EF2BED774C00E1E07C /* MainView.swift */,
+				7226629D2C8A9D680071162D /* ContainerView.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -221,6 +225,8 @@
 			isa = PBXGroup;
 			children = (
 				7266C6892BF45B6200022057 /* ContentView.swift */,
+				7226629F2C8A9D790071162D /* SplashScreenView.swift */,
+				724070EF2BED774C00E1E07C /* MainView.swift */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				72D097F82BF160D40021819E /* LogView.swift in Sources */,
+				722662A02C8A9D790071162D /* SplashScreenView.swift in Sources */,
 				72A889402C3F6FFE0032A56C /* NetworkMonitor.swift in Sources */,
 				724070EC2BED76CA00E1E07C /* AddView.swift in Sources */,
 				72D098122BF1692D0021819E /* BookItem.swift in Sources */,
@@ -360,6 +367,7 @@
 				724070F02BED774C00E1E07C /* MainView.swift in Sources */,
 				724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */,
 				7249626C2C2E380600F6411B /* SettingsRectangleLineView.swift in Sources */,
+				7226629E2C8A9D680071162D /* ContainerView.swift in Sources */,
 				72D098132BF1692D0021819E /* BookResponse.swift in Sources */,
 				7259CABF2BFE45BD0039D778 /* CatagoryView.swift in Sources */,
 				72D098152BF1692D0021819E /* ImageLinks.swift in Sources */,
