@@ -11,6 +11,8 @@ import SwiftUI
 struct LogView: View {
     @State private var showSheet = false
     @State private var activateReviewSheet = false
+    @State private var isStarRatingAlertOn = false
+    @State private var inputRating: Double?
     
     var book: Book
 
@@ -38,10 +40,32 @@ struct LogView: View {
                     }
                 }
             }
+            .preferredColorScheme(.dark)
             .navigationTitle("Logs")
             .navigationBarTitleDisplayMode(.inline)
+            .onChange(of: book.logs) {
+                if book.isFullyRead {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        isStarRatingAlertOn = true
+                    }
+                }
+            }
             .toolbar {
+                
+                if book.getLogCount != nil {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        
+                        Button(action: {
+                            isStarRatingAlertOn.toggle()
+                        }) {
+                            Image(systemName: "star")
+                        }
+                        .padding(.horizontal, -10)
+                    }
+                }
+                
                 ToolbarItem(placement: .topBarTrailing) {
+                    
                     Button(action: {
                         showSheet.toggle()
                     }) {
@@ -52,7 +76,24 @@ struct LogView: View {
             .sheet(isPresented: $showSheet) {
                 AddLogEntryView(book: book)
             }
+            .alert("Rate Book", isPresented: $isStarRatingAlertOn) {
+                TextField("Enter Rating", value: $inputRating, format: .number)
+                Button("Add", action: addRatingToBook)
+                Button("Cancel", role: .cancel) { }
+            } message: {
+                Text("Enter a rating from 0 to 5.")
+            }
         }
+    }
+    
+    func addRatingToBook() {
+        
+        // TODO: Find way to get book rating to match input rating..
+        
+        isStarRatingAlertOn = false
+        
+        let starRating = StarRating(rating: inputRating ?? 0.0)
+        book.starRatingSystem = starRating
     }
 }
 

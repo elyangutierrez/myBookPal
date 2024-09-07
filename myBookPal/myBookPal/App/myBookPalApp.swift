@@ -13,6 +13,10 @@ import Observation
 struct myBookPalApp: App {
     @State private var networkMonitor = NetworkMonitor()
     
+    init() {
+        UIView.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = .black
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContainerView()

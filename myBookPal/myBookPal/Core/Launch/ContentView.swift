@@ -52,7 +52,7 @@ struct ContentView: View {
                 
                 if !networkMonitor.isConnected {
                     Spacer()
-                        .frame(height: 250)
+                        .frame(height: 220)
                     
                     ContentUnavailableView("No WiFi Connection", systemImage: "wifi.slash", description: Text("Please check your WiFi connection."))
 
@@ -78,40 +78,13 @@ struct ContentView: View {
                             NavigationLink(destination: LogView(book: mostRecent ?? testBook)) {
                                 VStack {
                                     HStack {
-//                                        AsyncImage(url: URL(string: mostRecent?.coverImage ?? "N/A")) { phase in
-//                                            switch phase {
-//                                            case .success(let image):
-//                                                image
-//                                                    .resizable()
-//                                                    .aspectRatio(contentMode: .fit)
-//                                                    .shadow(radius: 15)
-//                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-//                                                    .frame(width: 180, height: 210)
-//                                            case .failure(let error):
-//                                                let _ = print("Image error", error)
-//                                                // Empty
-//                                            case .empty:
-//                                                Rectangle()
-//                                                    .aspectRatio(contentMode: .fit)
-//                                                    .shadow(radius: 15)
-//                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-//                                                    .frame(width: 180, height: 210)
-//                                            default:
-//                                                Rectangle()
-//                                                    .aspectRatio(contentMode: .fit)
-//                                                    .shadow(radius: 15)
-//                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-//                                                    .frame(width: 180, height: 210)
-//                                            }
-//                                        }
-                                        
                                         WebImage(url: URL(string: mostRecent?.coverImage ?? "N/A")) { image in
                                             image
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
-                                                .shadow(radius: 15)
                                                 .clipShape(RoundedRectangle(cornerRadius: 10.0))
                                                 .frame(width: 180, height: 210)
+                                                .shadow(color: .black.opacity(0.30), radius: 5)
                                                 .padding(.horizontal, 5)
                                         } placeholder: {
                                             Rectangle()
@@ -150,9 +123,13 @@ struct ContentView: View {
                                                     .font(.footnote)
                                             }
                                             
+                                            StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
+                                                .font(.headline)
+                                                .offset(y: 10)
+                                            
                                             VStack {
                                                 Circle()
-                                                    .fill(mostRecent?.isFullyRead ?? false ? .green : .blue)
+                                                    .fill(mostRecent?.completionStatus == 1 ? .green : .blue)
                                                     .frame(width: 30, height: 30)
                                                     .overlay {
                                                         Text("\(mostRecent?.getLogCount ?? 0)")
@@ -218,7 +195,6 @@ struct ContentView: View {
                                             image
                                                 .resizable()
                                                 .aspectRatio(contentMode: .fit)
-                                                .shadow(radius: 15)
                                                 .clipShape(RoundedRectangle(cornerRadius: 10.0))
                                                 .frame(width: 100, height: 150)
                                         } placeholder: {

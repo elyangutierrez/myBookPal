@@ -17,6 +17,7 @@ class Book: Identifiable, Equatable {
     let pages: String
     let dateAdded: Date
     var logs: [Log]?
+    var starRatingSystem: StarRating?
     
     var totalPagesRead: Int {
         guard let logs = logs else {
@@ -70,5 +71,6 @@ class Book: Identifiable, Equatable {
         self.pages = pages
         self.dateAdded = dateAdded
         self.logs = nil
+        self.starRatingSystem = nil
     }
 }
