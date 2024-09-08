@@ -21,4 +21,8 @@ struct Library {
     var getMostRecentBook: Book? {
         return books.sorted(by: { $0.dateAdded > $1.dateAdded}).first
     }
+    
+    var getRecentlyViewedBook: Book? {
+        return books.first(where: { $0.isMostRecentlyViewed == true })
+    }
 }

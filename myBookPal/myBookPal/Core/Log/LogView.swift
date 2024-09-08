@@ -19,7 +19,6 @@ struct LogView: View {
     var body: some View {
         NavigationStack {
             VStack {
-//                let _ = print(book.getLogCount)
                 if book.getLogCount == nil {
                     ContentUnavailableView("No Logs Avaliable", 
                                            systemImage: "book.pages",
