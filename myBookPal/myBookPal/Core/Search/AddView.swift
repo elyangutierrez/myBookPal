@@ -32,11 +32,8 @@ struct AddView: View {
         NavigationStack {
             ScrollView {
                 ZStack {
-//                    Color.red
-//                        .frame(width: 450, height: 475)
                     BackgroundBookCoverView(bookImage: book.imageLinks?.secureThumbnailURL ?? "")
-                        .opacity(0.7)
-                        .brightness(-0.4)
+                        .blur(radius: 5.0, opaque: true)
                         .padding(.vertical, -270)
                 }
                 .ignoresSafeArea()

@@ -151,10 +151,6 @@ struct ContentView: View {
                         .foregroundStyle(.gray.opacity(0.30))
                     
                     if recentlyViewedBook != nil {
-                        
-                        let library = Library(books: Array(books))
-                        let mostRecentlyViewedBook = library.getRecentlyViewedBook
-                        
                         VStack(alignment: .leading) {
                             Text("Recently Viewed")
                                 .font(.title.bold())
@@ -293,6 +289,10 @@ struct ContentView: View {
                                 .buttonStyle(PlainButtonStyle())
                             }
                         }
+                        
+                        Rectangle()
+                            .fill(.clear)
+                            .frame(width: 400, height: 60)
                     }
                     .scrollIndicators(.hidden)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -333,22 +333,6 @@ struct ContentView: View {
             }
         }
     }
-    
-    func saveRecentlyViewedBook(_ book: RecentlyViewedBook) {
-        if let encodedBook = try? JSONEncoder().encode(book) {
-            UserDefaults.standard.setValue(encodedBook, forKey: "recentlyViewedBook")
-        }
-    }
-    
-    func loadRecentlyViewedBook() -> RecentlyViewedBook? {
-        if let savedBookData = UserDefaults.standard.data(forKey: "recentlyViewedBook") {
-            if let savedBook = try? JSONDecoder().decode(RecentlyViewedBook.self, from: savedBookData) {
-                return savedBook
-            }
-        }
-        return nil
-    }
-
 }
 
 //#Preview {

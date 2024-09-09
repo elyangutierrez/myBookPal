@@ -18,9 +18,8 @@ struct BookCoverView: View {
                 image
                     .interpolation(.none)
                     .resizable()
+                    .frame(width: 200, height: 310)
                     .clipShape(RoundedRectangle(cornerRadius: 20.0))
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 200)
                     .overlay {
                         RoundedRectangle(cornerRadius: 20.0)
                             .fill(.clear)
@@ -33,6 +32,7 @@ struct BookCoverView: View {
                 Rectangle()
                     .fill(.clear)
                     .border(Color.black.opacity(0.20), width: 2)
+                    .frame(width: 200, height: 310)
                     .overlay {
                         Text("N/A")
                     }

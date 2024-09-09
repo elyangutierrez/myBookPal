@@ -10,45 +10,82 @@ import SwiftUI
 struct SearchView: View {
     @State private var searchText = ""
     @State var books: [VolumeInfo] = []
+    @State private var currentBook: VolumeInfo?
     var collectionBooks: [Book]
+    
+    private let adaptiveColumn = [
+        GridItem(.adaptive(minimum: 165), spacing: -15)
+    ]
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(books, id: \.self) { book in
-                    NavigationLink(destination: AddView(book: book, books: collectionBooks)) {
-                        HStack {
-                            AsyncImage(url: URL(string: book.imageLinks?.secureThumbnailURL ?? "")) { phase in
-                                switch phase {
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 80, height: 90)
-                                case .failure(let error):
-                                    let _ = print("Image error", error)
-                                    Color.red
-                                case .empty:
-                                    EmptyBookCoverView(book: book)
-                                @unknown default:
-                                    fatalError()
+            ScrollView(.vertical, showsIndicators: false) {
+                Spacer()
+                    .frame(height: 30)
+                LazyVGrid(columns: adaptiveColumn, spacing: 10) {
+                    ForEach(books, id: \.self) { book in
+                        Rectangle()
+                            .fill(.searchBackground)
+                            .frame(width: 165, height: 350)
+                            .overlay {
+                                VStack {
+                                    AsyncImage(url: URL(string: book.imageLinks?.secureThumbnailURL ?? "")) { phase in
+                                        switch phase {
+                                        case .empty:
+                                            VStack {
+                                                ProgressView()
+                                                
+                                                Spacer()
+                                                    .frame(height: 70)
+                                            }
+                                        case .success(let image):
+                                            image
+                                                .resizable()
+                                                .frame(width: 165, height: 245)
+                                                .offset(y: -50)
+                                        case .failure(let error):
+                                            Color.red
+                                            let _ = print(error)
+                                        @unknown default:
+                                            fatalError()
+                                        }
+                                    }
                                 }
+                                
+                                VStack(alignment: .leading) {
+                                    Spacer()
+                                        .frame(height: 220)
+                                    
+                                    Text(book.getAuthor)
+                                        .font(.footnote)
+//                                        .offset(y: -3)
+                                        .lineLimit(1)
+                                    
+                                    Spacer()
+                                        .frame(height: 5)
+                                    
+                                    Text(book.title)
+                                        .font(.system(size: 12))
+                                        .fontWeight(.bold)
+                                        .lineLimit(3)
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 10)
                             }
-                            .frame(width: 50, height: 70)
-                            
-                            Spacer()
-                                .frame(width: 50)
-                            VStack(alignment: .leading) {
-                                Text(book.title)
-                                    .fontWeight(.bold)
-                                Text(book.getAuthor)
+                            .onTapGesture {
+                                currentBook = book
+                                print("Tapped")
+                                print("Value of book: \(currentBook?.title ?? "N/A")")
                             }
-                        }
                     }
                 }
             }
             .navigationTitle("Find Book")
             .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(item: $currentBook) { book in
+                let _ = print("Going to destination.")
+                AddView(book: book, books: collectionBooks)
+            }
             .searchable(text: $searchText, prompt: "Enter Book Title")
             
             .onChange(of: searchText) {
