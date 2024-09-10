@@ -86,8 +86,7 @@ struct AddView: View {
                             enterBothBool.toggle()
                         }) {
                             Capsule()
-//                                .fill(.thickMaterial)
-                                .fill(.gray.opacity(0.30))
+                                .fill(.buttonGray)
                                 .frame(width: 230, height: 35)
                                 .overlay {
                                     Capsule()
@@ -103,7 +102,7 @@ struct AddView: View {
                             enterPageCountBool.toggle()
                         }) {
                             Capsule()
-                                .fill(.gray.opacity(0.30))
+                                .fill(.buttonGray)
                                 .frame(width: 230, height: 35)
                                 .overlay {
                                     Capsule()
@@ -119,7 +118,7 @@ struct AddView: View {
                             enterGenreBool.toggle()
                         }) {
                             Capsule()
-                                .fill(.gray.opacity(0.30))
+                                .fill(.buttonGray)
                                 .frame(width: 230, height: 35)
                                 .overlay {
                                     Capsule()
@@ -136,7 +135,7 @@ struct AddView: View {
                         addBookToCollection()
                     }) {
                         Capsule()
-                            .fill(.gray.opacity(0.30))
+                            .fill(.buttonGray)
                             .frame(width: 200, height: 35)
                             .overlay {
                                 Capsule()

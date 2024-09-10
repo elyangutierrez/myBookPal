@@ -258,9 +258,8 @@ struct ContentView: View {
                                         WebImage(url: URL(string: book.coverImage)) { image in
                                             image
                                                 .resizable()
-                                                .aspectRatio(contentMode: .fit)
                                                 .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                .frame(width: 100, height: 150)
+                                                .frame(width: 90, height: 150)
                                         } placeholder: {
                                             Rectangle()
                                         }
@@ -290,9 +289,9 @@ struct ContentView: View {
                             }
                         }
                         
-                        Rectangle()
-                            .fill(.clear)
-                            .frame(width: 400, height: 60)
+//                        Rectangle()
+//                            .fill(.clear)
+//                            .frame(width: 400, height: 60)
                     }
                     .scrollIndicators(.hidden)
                     .frame(maxWidth: .infinity, alignment: .leading)

@@ -8,7 +8,7 @@
 import SwiftData
 import SwiftUI
 
-struct MainView: View {
+struct TabsView: View {
     @Query(sort: \Book.title) var books: [Book]
     @State private var selectedTab = 0
     
@@ -47,5 +47,5 @@ struct MainView: View {
 }
 
 #Preview {
-    MainView()
+    TabsView()
 }

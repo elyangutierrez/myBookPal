@@ -13,7 +13,7 @@ struct ContainerView: View {
     
     var body: some View {
         if !showSplashScreen {
-            MainView()
+            TabsView()
         } else {
             SplashScreenView(isSplashScreenShowing: $showSplashScreen)
         }

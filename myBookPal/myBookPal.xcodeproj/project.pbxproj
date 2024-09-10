@@ -16,11 +16,12 @@
 		722662A42C8CAB4A0071162D /* StarRating.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662A32C8CAB4A0071162D /* StarRating.swift */; };
 		722662A62C8CAE030071162D /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662A52C8CAE030071162D /* StarRatingView.swift */; };
 		722662A82C8D42B40071162D /* RecentlyViewedBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662A72C8D42B40071162D /* RecentlyViewedBook.swift */; };
+		722662AA2C8E87370071162D /* DMSans_18pt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662A92C8E87370071162D /* DMSans_18pt-Regular.ttf */; };
 		724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */; };
 		724070DC2BEC6AAF00E1E07C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DB2BEC6AAF00E1E07C /* Assets.xcassets */; };
 		724070DF2BEC6AAF00E1E07C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DE2BEC6AAF00E1E07C /* Preview Assets.xcassets */; };
 		724070EC2BED76CA00E1E07C /* AddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070EB2BED76CA00E1E07C /* AddView.swift */; };
-		724070F02BED774C00E1E07C /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070EF2BED774C00E1E07C /* MainView.swift */; };
+		724070F02BED774C00E1E07C /* TabsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070EF2BED774C00E1E07C /* TabsView.swift */; };
 		724070F42BED7A6000E1E07C /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070F32BED7A6000E1E07C /* SettingsView.swift */; };
 		7249626C2C2E380600F6411B /* SettingsRectangleLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */; };
 		7259CABF2BFE45BD0039D778 /* CatagoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7259CABE2BFE45BD0039D778 /* CatagoryView.swift */; };
@@ -54,12 +55,13 @@
 		722662A32C8CAB4A0071162D /* StarRating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRating.swift; sourceTree = "<group>"; };
 		722662A52C8CAE030071162D /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		722662A72C8D42B40071162D /* RecentlyViewedBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyViewedBook.swift; sourceTree = "<group>"; };
+		722662A92C8E87370071162D /* DMSans_18pt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans_18pt-Regular.ttf"; sourceTree = "<group>"; };
 		724070D42BEC6AAF00E1E07C /* myBookPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myBookPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myBookPalApp.swift; sourceTree = "<group>"; };
 		724070DB2BEC6AAF00E1E07C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		724070DE2BEC6AAF00E1E07C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		724070EB2BED76CA00E1E07C /* AddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddView.swift; sourceTree = "<group>"; };
-		724070EF2BED774C00E1E07C /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		724070EF2BED774C00E1E07C /* TabsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsView.swift; sourceTree = "<group>"; };
 		724070F32BED7A6000E1E07C /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRectangleLineView.swift; sourceTree = "<group>"; };
 		7259CABE2BFE45BD0039D778 /* CatagoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatagoryView.swift; sourceTree = "<group>"; };
@@ -108,9 +110,102 @@
 			children = (
 				722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */,
 				722662912C894ED70071162D /* CrimsonText-Regular.ttf */,
+				722662A92C8E87370071162D /* DMSans_18pt-Regular.ttf */,
 				722662982C8957C40071162D /* CrimsonText-Bold.ttf */,
 			);
 			path = Fonts;
+			sourceTree = "<group>";
+		};
+		722662B12C8FBE950071162D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				722662902C894CCD0071162D /* Fonts */,
+				724070DB2BEC6AAF00E1E07C /* Assets.xcassets */,
+				724070DD2BEC6AAF00E1E07C /* Preview Content */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		722662B22C8FC0680071162D /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				722662B32C8FC06F0071162D /* Services */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		722662B32C8FC06F0071162D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				728B62EC2C8945B600A12046 /* Network */,
+				72D098102BF1692D0021819E /* API */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		722662B42C8FC1D70071162D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				728E7BA32BF0A37700A1D11B /* SearchView.swift */,
+				724070EB2BED76CA00E1E07C /* AddView.swift */,
+				72A8893D2C3A23520032A56C /* BackgroundBookCoverView.swift */,
+				72D098172BF16DE80021819E /* BookCoverView.swift */,
+				72D098192BF174CB0021819E /* RectangleLineView.swift */,
+				725D05442BF4FCB8001557A4 /* EmptyBookCoverView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		722662B52C8FC1DE0071162D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */,
+				724070F32BED7A6000E1E07C /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		722662B62C8FC1E60071162D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				725D054A2BF971E1001557A4 /* CompletedView.swift */,
+				725D054C2BF971E7001557A4 /* InProgressView.swift */,
+				7259CABE2BFE45BD0039D778 /* CatagoryView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		722662B72C8FC24B0071162D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7226629F2C8A9D790071162D /* SplashScreenView.swift */,
+				724070EF2BED774C00E1E07C /* TabsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		722662B82C8FC2600071162D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7226629D2C8A9D680071162D /* ContainerView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		722662B92C8FC2AF0071162D /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				722662BA2C8FC2B50071162D /* Views */,
+			);
+			path = Collection;
+			sourceTree = "<group>";
+		};
+		722662BA2C8FC2B50071162D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				7266C6892BF45B6200022057 /* ContentView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		724070CB2BEC6AAF00E1E07C = {
@@ -132,14 +227,11 @@
 		724070D62BEC6AAF00E1E07C /* myBookPal */ = {
 			isa = PBXGroup;
 			children = (
-				722662902C894CCD0071162D /* Fonts */,
-				7226628F2C894A950071162D /* Extensions */,
-				728B62F22C89464800A12046 /* Core */,
-				728B62EB2C89459E00A12046 /* Main */,
 				728B62EA2C89459700A12046 /* App */,
-				72D098072BF168CB0021819E /* Model */,
-				724070DB2BEC6AAF00E1E07C /* Assets.xcassets */,
-				724070DD2BEC6AAF00E1E07C /* Preview Content */,
+				728B62F22C89464800A12046 /* Core */,
+				7226628F2C894A950071162D /* Extensions */,
+				722662B22C8FC0680071162D /* Networking */,
+				722662B12C8FBE950071162D /* Resources */,
 			);
 			path = myBookPal;
 			sourceTree = "<group>";
@@ -165,12 +257,7 @@
 		7266C68C2BF45D1500022057 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				728E7BA32BF0A37700A1D11B /* SearchView.swift */,
-				724070EB2BED76CA00E1E07C /* AddView.swift */,
-				72A8893D2C3A23520032A56C /* BackgroundBookCoverView.swift */,
-				72D098172BF16DE80021819E /* BookCoverView.swift */,
-				72D098192BF174CB0021819E /* RectangleLineView.swift */,
-				725D05442BF4FCB8001557A4 /* EmptyBookCoverView.swift */,
+				722662B42C8FC1D70071162D /* Views */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -186,7 +273,8 @@
 		728B62EB2C89459E00A12046 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				7226629D2C8A9D680071162D /* ContainerView.swift */,
+				722662B82C8FC2600071162D /* Views */,
+				72D098072BF168CB0021819E /* Model */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -214,8 +302,7 @@
 		728B62EF2C89461E00A12046 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */,
-				724070F32BED7A6000E1E07C /* SettingsView.swift */,
+				722662B52C8FC1DE0071162D /* Views */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -223,9 +310,7 @@
 		728B62F02C89462B00A12046 /* Category */ = {
 			isa = PBXGroup;
 			children = (
-				725D054A2BF971E1001557A4 /* CompletedView.swift */,
-				725D054C2BF971E7001557A4 /* InProgressView.swift */,
-				7259CABE2BFE45BD0039D778 /* CatagoryView.swift */,
+				722662B62C8FC1E60071162D /* Views */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -233,9 +318,7 @@
 		728B62F12C89463200A12046 /* Launch */ = {
 			isa = PBXGroup;
 			children = (
-				7266C6892BF45B6200022057 /* ContentView.swift */,
-				7226629F2C8A9D790071162D /* SplashScreenView.swift */,
-				724070EF2BED774C00E1E07C /* MainView.swift */,
+				722662B72C8FC24B0071162D /* Views */,
 			);
 			path = Launch;
 			sourceTree = "<group>";
@@ -243,6 +326,8 @@
 		728B62F22C89464800A12046 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				722662B92C8FC2AF0071162D /* Collection */,
+				728B62EB2C89459E00A12046 /* Main */,
 				7266C68B2BF45CF800022057 /* Log */,
 				7266C68C2BF45D1500022057 /* Search */,
 				728B62EF2C89461E00A12046 /* Settings */,
@@ -255,9 +340,7 @@
 		72D098072BF168CB0021819E /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				72D098102BF1692D0021819E /* API */,
 				728B62ED2C8945CB00A12046 /* Book */,
-				728B62EC2C8945B600A12046 /* Network */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -271,7 +354,7 @@
 				72D0980F2BF1692D0021819E /* VolumeInfo.swift */,
 			);
 			name = API;
-			path = myBookPal/Model/API;
+			path = myBookPal/Networking/Services/API;
 			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
@@ -340,6 +423,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				722662AA2C8E87370071162D /* DMSans_18pt-Regular.ttf in Resources */,
 				722662962C8956EA0071162D /* CrimsonText-SemiBold.ttf in Resources */,
 				724070DF2BEC6AAF00E1E07C /* Preview Assets.xcassets in Resources */,
 				722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */,
@@ -375,7 +459,7 @@
 				725D054D2BF971E7001557A4 /* InProgressView.swift in Sources */,
 				72D098092BF168D50021819E /* Book.swift in Sources */,
 				72D098182BF16DE80021819E /* BookCoverView.swift in Sources */,
-				724070F02BED774C00E1E07C /* MainView.swift in Sources */,
+				724070F02BED774C00E1E07C /* TabsView.swift in Sources */,
 				724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */,
 				7249626C2C2E380600F6411B /* SettingsRectangleLineView.swift in Sources */,
 				7226629E2C8A9D680071162D /* ContainerView.swift in Sources */,
@@ -516,7 +600,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"myBookPal/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"myBookPal/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 52Q4M7N2WD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -524,8 +608,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -547,7 +631,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"myBookPal/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"myBookPal/Resources/Preview Content\"";
 				DEVELOPMENT_TEAM = 52Q4M7N2WD;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -555,8 +639,8 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
