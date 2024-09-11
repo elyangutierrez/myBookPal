@@ -77,8 +77,8 @@ struct LogView: View {
             }
             .alert("Rate Book", isPresented: $isStarRatingAlertOn) {
                 TextField("Enter Rating", value: $inputRating, format: .number)
-                Button("Add", action: addRatingToBook)
-                Button("Cancel", role: .cancel) { }
+                Button("Add", role: .cancel, action: addRatingToBook)
+                Button("Cancel") { }
             } message: {
                 Text("Enter a rating from 0 to 5.")
             }

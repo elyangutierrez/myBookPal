@@ -86,13 +86,13 @@ struct AddView: View {
                             enterBothBool.toggle()
                         }) {
                             Capsule()
-                                .fill(.buttonGray)
-                                .frame(width: 230, height: 35)
+                                .fill(Color.complement)
+                                .frame(width: 170, height: 35)
                                 .overlay {
                                     Capsule()
                                         .stroke(authorText.opacity(0.35), lineWidth: 1)
-                                    Text("Manually Page And Genre")
-                                        .foregroundStyle(.black)
+                                    Text("Manual Entry")
+                                        .foregroundStyle(.white)
                                         .fontWeight(.semibold)
                                 }
                         }
@@ -102,13 +102,13 @@ struct AddView: View {
                             enterPageCountBool.toggle()
                         }) {
                             Capsule()
-                                .fill(.buttonGray)
+                                .fill(Color.complement)
                                 .frame(width: 230, height: 35)
                                 .overlay {
                                     Capsule()
                                         .stroke(authorText.opacity(0.35), lineWidth: 1)
                                     Text("Manually Enter Page Count")
-                                        .foregroundStyle(.black)
+                                        .foregroundStyle(.white)
                                         .fontWeight(.semibold)
                                 }
                         }
@@ -118,13 +118,13 @@ struct AddView: View {
                             enterGenreBool.toggle()
                         }) {
                             Capsule()
-                                .fill(.buttonGray)
+                                .fill(Color.complement)
                                 .frame(width: 230, height: 35)
                                 .overlay {
                                     Capsule()
                                         .stroke(authorText.opacity(0.35), lineWidth: 1)
                                     Text("Manually Enter Genre")
-                                        .foregroundStyle(.black)
+                                        .foregroundStyle(.white)
                                         .fontWeight(.semibold)
                                 }
                         }
@@ -135,13 +135,13 @@ struct AddView: View {
                         addBookToCollection()
                     }) {
                         Capsule()
-                            .fill(.buttonGray)
+                            .fill(Color.accent)
                             .frame(width: 200, height: 35)
                             .overlay {
                                 Capsule()
                                     .stroke(authorText.opacity(0.35), lineWidth: 1)
                                 Text("Add To Collection")
-                                    .foregroundStyle(.black)
+                                    .foregroundStyle(.white)
                                     .fontWeight(.semibold)
                             }
                         

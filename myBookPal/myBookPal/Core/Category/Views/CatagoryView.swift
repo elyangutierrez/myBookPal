@@ -15,7 +15,7 @@ struct CatagoryView: View {
     
     var body: some View {
         NavigationStack {
-            SlidingTabView(selection: $selectedView, tabs: ["In Progress", "Completed"], selectionBarColor: .black)
+            SlidingTabView(selection: $selectedView, tabs: ["In Progress", "Completed"], selectionBarColor: Color.complement)
             
             if selectedView == 0 {
                 InProgressView(books: books)
@@ -23,7 +23,7 @@ struct CatagoryView: View {
                 CompletedView(books: books)
             }
         }
-        .tint(.black)
+        .tint(Color.complement)
         .preferredColorScheme(.light)
     }
 }

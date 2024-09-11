@@ -41,7 +41,7 @@ struct TabsView: View {
             }
             .toolbarBackground(.visible, for: .tabBar)
         }
-        .tint(.black)
+        .tint(Color.accent)
         .preferredColorScheme(.light)
     }
 }

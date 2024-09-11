@@ -45,9 +45,9 @@ struct ContentView: View {
                         .frame(height: 220)
                     
                     ContentUnavailableView("No WiFi Connection", systemImage: "wifi.slash", description: Text("Please check your WiFi connection."))
-
                     
-
+                    
+                    
                 } else if books.isEmpty {
                     Spacer()
                         .frame(height: 220)
@@ -262,7 +262,7 @@ struct ContentView: View {
                                         } placeholder: {
                                             Rectangle()
                                         }
-                
+                                        
                                         HStack {
                                             ProgressView(value: book.completionStatus)
                                                 .frame(width: 40)
@@ -272,13 +272,13 @@ struct ContentView: View {
                                                 .font(.footnote)
                                         }
                                     }
-                
+                                    
                                 }
                                 .simultaneousGesture(
                                     TapGesture().onEnded {
                                         if book != mostRecent {
                                             recentlyViewedBook = book
-
+                                            
                                             print("")
                                             book.isMostRecentlyViewed = true
                                         }
@@ -288,9 +288,9 @@ struct ContentView: View {
                             }
                         }
                         
-//                        Rectangle()
-//                            .fill(.clear)
-//                            .frame(width: 400, height: 60)
+                        //                        Rectangle()
+                        //                            .fill(.clear)
+                        //                            .frame(width: 400, height: 60)
                     }
                     .scrollIndicators(.hidden)
                     .frame(maxWidth: .infinity, alignment: .leading)

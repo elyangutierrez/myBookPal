@@ -17,6 +17,7 @@
 		722662A62C8CAE030071162D /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662A52C8CAE030071162D /* StarRatingView.swift */; };
 		722662A82C8D42B40071162D /* RecentlyViewedBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662A72C8D42B40071162D /* RecentlyViewedBook.swift */; };
 		722662AA2C8E87370071162D /* DMSans_18pt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662A92C8E87370071162D /* DMSans_18pt-Regular.ttf */; };
+		722662C62C913CC40071162D /* GlobalBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662C52C913CC40071162D /* GlobalBackgroundModifier.swift */; };
 		724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */; };
 		724070DC2BEC6AAF00E1E07C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DB2BEC6AAF00E1E07C /* Assets.xcassets */; };
 		724070DF2BEC6AAF00E1E07C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DE2BEC6AAF00E1E07C /* Preview Assets.xcassets */; };
@@ -56,6 +57,7 @@
 		722662A52C8CAE030071162D /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		722662A72C8D42B40071162D /* RecentlyViewedBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyViewedBook.swift; sourceTree = "<group>"; };
 		722662A92C8E87370071162D /* DMSans_18pt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans_18pt-Regular.ttf"; sourceTree = "<group>"; };
+		722662C52C913CC40071162D /* GlobalBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalBackgroundModifier.swift; sourceTree = "<group>"; };
 		724070D42BEC6AAF00E1E07C /* myBookPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myBookPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myBookPalApp.swift; sourceTree = "<group>"; };
 		724070DB2BEC6AAF00E1E07C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			children = (
 				724070DB2BEC6AAF00E1E07C /* Assets.xcassets */,
 				722662902C894CCD0071162D /* Fonts */,
+				722662C42C913CB50071162D /* Modifiers */,
 				724070DD2BEC6AAF00E1E07C /* Preview Content */,
 			);
 			path = Resources;
@@ -208,6 +211,24 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		722662C12C9127000071162D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				72D097F72BF160D40021819E /* LogView.swift */,
+				72BBD34B2BF29EB2006BC431 /* AddLogEntryView.swift */,
+				722662A52C8CAE030071162D /* StarRatingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		722662C42C913CB50071162D /* Modifiers */ = {
+			isa = PBXGroup;
+			children = (
+				722662C52C913CC40071162D /* GlobalBackgroundModifier.swift */,
+			);
+			path = Modifiers;
+			sourceTree = "<group>";
+		};
 		724070CB2BEC6AAF00E1E07C = {
 			isa = PBXGroup;
 			children = (
@@ -247,9 +268,7 @@
 		7266C68B2BF45CF800022057 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				72D097F72BF160D40021819E /* LogView.swift */,
-				72BBD34B2BF29EB2006BC431 /* AddLogEntryView.swift */,
-				722662A52C8CAE030071162D /* StarRatingView.swift */,
+				722662C12C9127000071162D /* Views */,
 			);
 			path = Log;
 			sourceTree = "<group>";
@@ -455,6 +474,7 @@
 				72A8893E2C3A23520032A56C /* BackgroundBookCoverView.swift in Sources */,
 				722662A42C8CAB4A0071162D /* StarRating.swift in Sources */,
 				722662A82C8D42B40071162D /* RecentlyViewedBook.swift in Sources */,
+				722662C62C913CC40071162D /* GlobalBackgroundModifier.swift in Sources */,
 				72BBD34C2BF29EB2006BC431 /* AddLogEntryView.swift in Sources */,
 				725D054D2BF971E7001557A4 /* InProgressView.swift in Sources */,
 				72D098092BF168D50021819E /* Book.swift in Sources */,
