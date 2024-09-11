@@ -86,9 +86,6 @@ struct LogView: View {
     }
     
     func addRatingToBook() {
-        
-        // TODO: Find way to get book rating to match input rating..
-        
         isStarRatingAlertOn = false
         
         let starRating = StarRating(rating: inputRating ?? 0.0)

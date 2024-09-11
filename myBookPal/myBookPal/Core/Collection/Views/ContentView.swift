@@ -40,7 +40,6 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ScrollView {
-                
                 if !networkMonitor.isConnected {
                     Spacer()
                         .frame(height: 220)
@@ -298,6 +297,7 @@ struct ContentView: View {
                     .padding(.horizontal, 20)
                 }
             }
+            .padding(.bottom, 30)
             .navigationBarTitleDisplayMode(.inline)
             .searchable(text: $searchText)
             .scrollContentBackground(.hidden)
@@ -306,6 +306,11 @@ struct ContentView: View {
                 ToolbarItem(placement: .principal) {
                     Text("myBookPal")
                         .font(Font.custom("CrimsonText-SemiBold", size: 20))
+                }
+            }
+            .onChange(of: books) {
+                if books.isEmpty {
+                    recentlyViewedBook = nil
                 }
             }
         }

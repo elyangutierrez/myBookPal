@@ -33,7 +33,7 @@ struct AddView: View {
             ScrollView {
                 ZStack {
                     BackgroundBookCoverView(bookImage: book.imageLinks?.secureThumbnailURL ?? "")
-                        .blur(radius: 5.0, opaque: true)
+                        .blur(radius: 10.0, opaque: true)
                         .padding(.vertical, -270)
                 }
                 .ignoresSafeArea()

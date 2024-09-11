@@ -119,8 +119,8 @@
 		722662B12C8FBE950071162D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				722662902C894CCD0071162D /* Fonts */,
 				724070DB2BEC6AAF00E1E07C /* Assets.xcassets */,
+				722662902C894CCD0071162D /* Fonts */,
 				724070DD2BEC6AAF00E1E07C /* Preview Content */,
 			);
 			path = Resources;
@@ -137,8 +137,8 @@
 		722662B32C8FC06F0071162D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				728B62EC2C8945B600A12046 /* Network */,
 				72D098102BF1692D0021819E /* API */,
+				728B62EC2C8945B600A12046 /* Network */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -326,13 +326,13 @@
 		728B62F22C89464800A12046 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				728B62F02C89462B00A12046 /* Category */,
 				722662B92C8FC2AF0071162D /* Collection */,
-				728B62EB2C89459E00A12046 /* Main */,
+				728B62F12C89463200A12046 /* Launch */,
 				7266C68B2BF45CF800022057 /* Log */,
+				728B62EB2C89459E00A12046 /* Main */,
 				7266C68C2BF45D1500022057 /* Search */,
 				728B62EF2C89461E00A12046 /* Settings */,
-				728B62F02C89462B00A12046 /* Category */,
-				728B62F12C89463200A12046 /* Launch */,
 			);
 			path = Core;
 			sourceTree = "<group>";
