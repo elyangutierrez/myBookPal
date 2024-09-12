@@ -5,59 +5,77 @@
 //  Created by Elyan Gutierrez on 5/18/24.
 //
 
+import SDWebImageSwiftUI
 import SwiftData
 import SwiftUI
 
 struct CompletedView: View {
+    @State private var selectedBook: Book?
     var books: [Book]
+    
+    var adaptiveColumn = [
+        GridItem(.adaptive(minimum: 150), spacing: -15)
+    ]
+    
+    var getCompletedOnly: [Book] {
+        let library = Library(books: books)
+        return library.getCompletedOnly
+    }
     
     var body: some View {
         NavigationStack {
-            List {
-                let library = Library(books: books)
-                ForEach(library.getCompletedOnly, id: \.self) { book in
-                    NavigationLink(destination: LogView(book: book)) {
-                        HStack {
-                            AsyncImage(url: URL(string: book.coverImage)) { phase in
-                                switch phase {
-                                case .success(let image):
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fit)
-                                        .frame(width: 80, height: 90)
-                                case .failure(let error):
-                                    let _ = print("Image error", error)
-                                    Color.red
-                                case .empty:
-                                    Rectangle()
-                                default:
-                                    Rectangle()
+            ScrollView {
+                Spacer()
+                    .frame(height: 30)
+                LazyVGrid(columns: adaptiveColumn, spacing: 5) {
+                    ForEach(getCompletedOnly, id: \.self) { book in
+                        Rectangle()
+                            .fill(.white)
+                            .frame(width: 150, height: 350)
+                            .overlay {
+                                VStack {
+                                    WebImage(url: URL(string: book.coverImage)) { image in
+                                        image
+                                            .CategoryImageExtension()
+                                    } placeholder: {
+                                        VStack {
+                                            ProgressView()
+                                            
+                                            Spacer()
+                                                .frame(height: 70)
+                                        }
+                                    }
                                 }
+                                
+                                VStack(alignment: .leading) {
+                                    Spacer()
+                                        .frame(height: 220)
+                                    Text(book.title)
+                                        .font(.system(size: 13))
+                                        .fontWeight(.bold)
+                                        .lineLimit(2)
+                                    Spacer()
+                                        .frame(height: 5)
+                                    HStack {
+                                        ProgressView(value: book.completionStatus)
+                                            .tint(book.completionStatus == 1 ? .green : .blue)
+                                        let formatted = String(format: "%.1f", book.completionStatus * 100)
+                                        Text("\(formatted)%")
+                                            .font(.subheadline)
+                                    }
+                                }
+                                .frame(maxWidth: .infinity, maxHeight: 180, alignment: .leading)
+                                .padding(.horizontal, 5)
                             }
-                            VStack(alignment: .leading) {
-                                Text(book.title)
-                                    .font(.headline.bold())
-                                if book.isFullyRead {
-                                    Text("Completed")
-                                        .font(.footnote)
-                                } else {
-                                    Text("In Progress")
-                                        .font(.footnote)
-                                }
-                                HStack {
-                                    ProgressView(value: book.completionStatus)
-                                        .tint(book.completionStatus == 1 ? .green : .blue)
-                                    let formatted = String(format: "%.1f", book.completionStatus * 100)
-                                    Text("\(formatted)%")
-                                        .font(.subheadline)
-                                }
+                            .onTapGesture {
+                                selectedBook = book
                             }
-                        }
                     }
                 }
             }
-//            .navigationTitle("In Progress")
-//            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(item: $selectedBook) { book in
+                LogView(book: book)
+            }
         }
     }
 }

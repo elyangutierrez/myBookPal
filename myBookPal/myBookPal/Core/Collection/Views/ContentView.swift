@@ -263,10 +263,6 @@ struct ContentView: View {
                                 .buttonStyle(PlainButtonStyle())
                             }
                         }
-                        
-                        //                        Rectangle()
-                        //                            .fill(.clear)
-                        //                            .frame(width: 400, height: 60)
                     }
                     .scrollIndicators(.hidden)
                     .frame(maxWidth: .infinity, alignment: .leading)

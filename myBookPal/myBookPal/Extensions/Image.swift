@@ -41,4 +41,12 @@ extension Image {
             .frame(width: 200, height: 310)
             .clipShape(RoundedRectangle(cornerRadius: 20.0))
     }
+    
+    func CategoryImageExtension() -> some View {
+        self
+            .resizable()
+            .frame(width: 150, height: 245)
+            .clipShape(RoundedRectangle(cornerRadius: 15.0))
+            .offset(y: -50)
+    }
 }
