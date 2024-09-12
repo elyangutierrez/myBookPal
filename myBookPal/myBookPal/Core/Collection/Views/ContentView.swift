@@ -71,29 +71,17 @@ struct ContentView: View {
                                         VStack(alignment: .leading) {
                                             WebImage(url: URL(string: mostRecent?.coverImage ?? "N/A")) { image in
                                                 image
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                    .frame(width: 180, height: 210)
-                                                    .shadow(color: .black.opacity(0.30), radius: 5)
-                                                    .padding(.horizontal, 10)
+                                                    .ContentViewImageExtension()
                                             } placeholder: {
                                                 Rectangle()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .shadow(radius: 15)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                    .frame(width: 180, height: 210)
+                                                    .placeHolderModifier()
                                             }
                                         }
                                         
                                         VStack(alignment: .leading) {
                                             
                                             Text(mostRecent?.title ?? testBook.title)
-                                                .frame(maxWidth: 215, alignment: .leading)
-                                                .fixedSize(horizontal: false, vertical: true)
-                                                .multilineTextAlignment(.leading)
-                                                .font(.system(size: 17).bold())
-                                                .padding(.vertical, 2)
+                                                .titleModifier()
                                             
                                             
                                             Text(mostRecent?.author ?? testBook.author)
@@ -163,30 +151,17 @@ struct ContentView: View {
                                             VStack(alignment: .leading) {
                                                 WebImage(url: URL(string: recentlyViewedBook?.coverImage ?? "N/A")) { image in
                                                     image
-                                                        .resizable()
-                                                        .aspectRatio(contentMode: .fit)
-                                                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                        .frame(width: 180, height: 210)
-                                                        .shadow(color: .black.opacity(0.30), radius: 5)
-                                                        .padding(.horizontal, 10)
+                                                        .ContentViewImageExtension()
                                                 } placeholder: {
                                                     Rectangle()
-                                                        .aspectRatio(contentMode: .fit)
-                                                        .shadow(radius: 15)
-                                                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                        .frame(width: 180, height: 210)
+                                                        .placeHolderModifier()
                                                 }
                                             }
                                             
                                             VStack(alignment: .leading) {
                                                 
                                                 Text(recentlyViewedBook?.title ?? testBook.title)
-                                                    .frame(maxWidth: 215, alignment: .leading)
-                                                    .fixedSize(horizontal: false, vertical: true)
-                                                    .multilineTextAlignment(.leading)
-                                                    .font(.system(size: 17).bold())
-                                                    .padding(.vertical, 2)
-                                                
+                                                    .titleModifier()
                                                 
                                                 Text(recentlyViewedBook?.author ?? testBook.author)
                                                     .font(.system(size: 15))
@@ -247,10 +222,7 @@ struct ContentView: View {
                     
                     HStack {
                         Text("Collection")
-                            .font(.title2.bold())
-                            .fontDesign(.serif)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 20)
+                            .collectionTextModifier()
                     }
                     
                     ScrollView(.horizontal) {

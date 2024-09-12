@@ -40,10 +40,7 @@ struct SearchView: View {
                                             }
                                         case .success(let image):
                                             image
-                                                .resizable()
-                                                .frame(width: 165, height: 245)
-                                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                                .offset(y: -50)
+                                                .SearchImageBookExtension()
                                         case .failure(let error):
                                             Color.red
                                             let _ = print(error)

@@ -17,10 +17,7 @@ struct SplashScreenView: View {
         ZStack {
             ZStack {
                 Image(.appLogo)
-                    .resizable()
-                    .frame(width: 120, height: 120)
-                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                    .shadow(color: .black.opacity(0.70), radius: 10)
+                    .AppLogoImageExtension()
             }
         }
         .scaleEffect(scale)

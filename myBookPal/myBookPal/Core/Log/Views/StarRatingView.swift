@@ -15,10 +15,7 @@ struct StarRatingView: View {
             .overlay{
                 GeometryReader { proxy in
                     Rectangle()
-                        .foregroundStyle(.starYellow)
-                        .frame(width: CGFloat(rating) / 5 * proxy.size.width)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .mask(stars)
+                        .StarRatingExtension(rating: rating, proxy: proxy, stars: stars)
                 }
             }
     }
