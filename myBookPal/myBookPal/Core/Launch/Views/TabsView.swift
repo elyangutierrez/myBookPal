@@ -35,8 +35,8 @@ struct TabsView: View {
                 
                 SettingsView(books: books)
                     .tabItem {
-                        Image(systemName: "gearshape")
-                        Text("Settings")
+                        Image(systemName: "list.bullet")
+                        Text("More")
                     }
             }
             .toolbarBackground(.visible, for: .tabBar)

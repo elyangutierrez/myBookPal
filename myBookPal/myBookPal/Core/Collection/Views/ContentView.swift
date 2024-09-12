@@ -68,20 +68,22 @@ struct ContentView: View {
                             NavigationLink(destination: LogView(book: mostRecent ?? testBook)) {
                                 VStack {
                                     HStack {
-                                        WebImage(url: URL(string: mostRecent?.coverImage ?? "N/A")) { image in
-                                            image
-                                                .resizable()
-                                                .aspectRatio(contentMode: .fit)
-                                                .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                .frame(width: 180, height: 210)
-                                                .shadow(color: .black.opacity(0.30), radius: 5)
-                                                .padding(.horizontal, 10)
-                                        } placeholder: {
-                                            Rectangle()
-                                                .aspectRatio(contentMode: .fit)
-                                                .shadow(radius: 15)
-                                                .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                .frame(width: 180, height: 210)
+                                        VStack(alignment: .leading) {
+                                            WebImage(url: URL(string: mostRecent?.coverImage ?? "N/A")) { image in
+                                                image
+                                                    .resizable()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                                    .frame(width: 180, height: 210)
+                                                    .shadow(color: .black.opacity(0.30), radius: 5)
+                                                    .padding(.horizontal, 10)
+                                            } placeholder: {
+                                                Rectangle()
+                                                    .aspectRatio(contentMode: .fit)
+                                                    .shadow(radius: 15)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                                    .frame(width: 180, height: 210)
+                                            }
                                         }
                                         
                                         VStack(alignment: .leading) {
@@ -158,20 +160,22 @@ struct ContentView: View {
                                 NavigationLink(destination: LogView(book: recentlyViewedBook!)) {
                                     VStack {
                                         HStack {
-                                            WebImage(url: URL(string: recentlyViewedBook?.coverImage ?? "N/A")) { image in
-                                                image
-                                                    .resizable()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                    .frame(width: 180, height: 210)
-                                                    .shadow(color: .black.opacity(0.30), radius: 5)
-                                                    .padding(.horizontal, 10)
-                                            } placeholder: {
-                                                Rectangle()
-                                                    .aspectRatio(contentMode: .fit)
-                                                    .shadow(radius: 15)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                                    .frame(width: 180, height: 210)
+                                            VStack(alignment: .leading) {
+                                                WebImage(url: URL(string: recentlyViewedBook?.coverImage ?? "N/A")) { image in
+                                                    image
+                                                        .resizable()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                                        .frame(width: 180, height: 210)
+                                                        .shadow(color: .black.opacity(0.30), radius: 5)
+                                                        .padding(.horizontal, 10)
+                                                } placeholder: {
+                                                    Rectangle()
+                                                        .aspectRatio(contentMode: .fit)
+                                                        .shadow(radius: 15)
+                                                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                                        .frame(width: 180, height: 210)
+                                                }
                                             }
                                             
                                             VStack(alignment: .leading) {

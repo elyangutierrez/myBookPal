@@ -18,6 +18,10 @@ struct Library {
         return books.filter { $0.completionStatus == 1}
     }
     
+    var getTotalBookCount: Int {
+        return books.count
+    }
+    
     var getMostRecentBook: Book? {
         return books.sorted(by: { $0.dateAdded > $1.dateAdded}).first
     }

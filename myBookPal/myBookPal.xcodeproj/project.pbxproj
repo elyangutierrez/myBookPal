@@ -17,7 +17,8 @@
 		722662A62C8CAE030071162D /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662A52C8CAE030071162D /* StarRatingView.swift */; };
 		722662A82C8D42B40071162D /* RecentlyViewedBook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662A72C8D42B40071162D /* RecentlyViewedBook.swift */; };
 		722662AA2C8E87370071162D /* DMSans_18pt-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662A92C8E87370071162D /* DMSans_18pt-Regular.ttf */; };
-		722662C62C913CC40071162D /* GlobalBackgroundModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662C52C913CC40071162D /* GlobalBackgroundModifier.swift */; };
+		722662CE2C9250EC0071162D /* DonutChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662CD2C9250EC0071162D /* DonutChartView.swift */; };
+		722662D12C92717A0071162D /* NotificationsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662D02C92717A0071162D /* NotificationsModel.swift */; };
 		724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */; };
 		724070DC2BEC6AAF00E1E07C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DB2BEC6AAF00E1E07C /* Assets.xcassets */; };
 		724070DF2BEC6AAF00E1E07C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DE2BEC6AAF00E1E07C /* Preview Assets.xcassets */; };
@@ -57,7 +58,8 @@
 		722662A52C8CAE030071162D /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
 		722662A72C8D42B40071162D /* RecentlyViewedBook.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentlyViewedBook.swift; sourceTree = "<group>"; };
 		722662A92C8E87370071162D /* DMSans_18pt-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "DMSans_18pt-Regular.ttf"; sourceTree = "<group>"; };
-		722662C52C913CC40071162D /* GlobalBackgroundModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalBackgroundModifier.swift; sourceTree = "<group>"; };
+		722662CD2C9250EC0071162D /* DonutChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChartView.swift; sourceTree = "<group>"; };
+		722662D02C92717A0071162D /* NotificationsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsModel.swift; sourceTree = "<group>"; };
 		724070D42BEC6AAF00E1E07C /* myBookPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myBookPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myBookPalApp.swift; sourceTree = "<group>"; };
 		724070DB2BEC6AAF00E1E07C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -123,7 +125,6 @@
 			children = (
 				724070DB2BEC6AAF00E1E07C /* Assets.xcassets */,
 				722662902C894CCD0071162D /* Fonts */,
-				722662C42C913CB50071162D /* Modifiers */,
 				724070DD2BEC6AAF00E1E07C /* Preview Content */,
 			);
 			path = Resources;
@@ -164,6 +165,7 @@
 			children = (
 				7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */,
 				724070F32BED7A6000E1E07C /* SettingsView.swift */,
+				722662CD2C9250EC0071162D /* DonutChartView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -221,12 +223,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		722662C42C913CB50071162D /* Modifiers */ = {
+		722662CF2C92716F0071162D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				722662C52C913CC40071162D /* GlobalBackgroundModifier.swift */,
+				722662D02C92717A0071162D /* NotificationsModel.swift */,
 			);
-			path = Modifiers;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		724070CB2BEC6AAF00E1E07C = {
@@ -321,6 +323,7 @@
 		728B62EF2C89461E00A12046 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				722662CF2C92716F0071162D /* Model */,
 				722662B52C8FC1DE0071162D /* Views */,
 			);
 			path = Settings;
@@ -474,14 +477,15 @@
 				72A8893E2C3A23520032A56C /* BackgroundBookCoverView.swift in Sources */,
 				722662A42C8CAB4A0071162D /* StarRating.swift in Sources */,
 				722662A82C8D42B40071162D /* RecentlyViewedBook.swift in Sources */,
-				722662C62C913CC40071162D /* GlobalBackgroundModifier.swift in Sources */,
 				72BBD34C2BF29EB2006BC431 /* AddLogEntryView.swift in Sources */,
 				725D054D2BF971E7001557A4 /* InProgressView.swift in Sources */,
 				72D098092BF168D50021819E /* Book.swift in Sources */,
 				72D098182BF16DE80021819E /* BookCoverView.swift in Sources */,
+				722662CE2C9250EC0071162D /* DonutChartView.swift in Sources */,
 				724070F02BED774C00E1E07C /* TabsView.swift in Sources */,
 				724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */,
 				7249626C2C2E380600F6411B /* SettingsRectangleLineView.swift in Sources */,
+				722662D12C92717A0071162D /* NotificationsModel.swift in Sources */,
 				7226629E2C8A9D680071162D /* ContainerView.swift in Sources */,
 				72D098132BF1692D0021819E /* BookResponse.swift in Sources */,
 				7259CABF2BFE45BD0039D778 /* CatagoryView.swift in Sources */,
@@ -625,6 +629,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = myBookPal/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -656,6 +661,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = myBookPal/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
