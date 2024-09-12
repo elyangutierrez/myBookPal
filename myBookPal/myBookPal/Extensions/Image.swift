@@ -16,7 +16,6 @@ extension Image {
             .clipShape(RoundedRectangle(cornerRadius: 10.0))
             .frame(width: 180, height: 210)
             .shadow(color: .black.opacity(0.30), radius: 5)
-            .padding(.horizontal, 10)
     }
     
     func AppLogoImageExtension() -> some View {
