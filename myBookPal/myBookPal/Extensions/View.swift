@@ -20,4 +20,12 @@ extension View {
     func collectionTextModifier() -> some View {
         return self.modifier(CollectionTextModifier())
     }
+    
+    func lightTagViewModifier() -> some View {
+        return self.modifier(LightTagViewModifier())
+    }
+    
+    func darkerTagViewModifier() -> some View {
+        return self.modifier(DarkerTagViewModifier())
+    }
 }

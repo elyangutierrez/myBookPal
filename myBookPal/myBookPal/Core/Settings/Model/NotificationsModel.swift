@@ -12,7 +12,11 @@ import UserNotifications
 @Observable
 class NotificationsModel {
     
-    func userNotifications() {
+    var isNotifAuthGiven: Bool = UserDefaults.standard.bool(forKey: "isNotifAuthGiven")
+    var notificationsTime: Date = UserDefaults.standard.object(forKey: "notificationsTime") as? Date ?? Date()
+    var isNotificationsOn: Bool = UserDefaults.standard.bool(forKey: "isNotificationsOn")
+    
+    func enableNotifications() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {
                 self.scheduleNotifications()
@@ -27,9 +31,7 @@ class NotificationsModel {
         let randomNumber = Int.random(in: 0..<3)
         var date = DateComponents()
         
-        let hours = [8,12,17]
-        
-        date.hour = hours[randomNumber]
+        date.hour = 11
         date.minute = 30
         
         print("Notifications enabled.")
@@ -47,7 +49,7 @@ class NotificationsModel {
         
         let trigger = UNCalendarNotificationTrigger(dateMatching: date, repeats: true)
         
-        let nextDate = trigger.nextTriggerDate()
+//        let nextDate = trigger.nextTriggerDate()
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
@@ -56,8 +58,29 @@ class NotificationsModel {
                 print("Error sending request: \(error.localizedDescription)")
             } else {
                 print("Nofication Scheduled!")
-                print(nextDate!)
             }
         }
+        
+        self.saveNotifTime()
+        self.saveNotificationStatus()
+    }
+    
+    func removeDailyNotifications() {
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        self.saveNotifTime()
+        self.saveNotificationStatus()
+        
+        print("DEBUG: Notifications removed.")
+    }
+    
+    func saveNotificationStatus() {
+        UserDefaults.standard.set(isNotificationsOn, forKey: "isNotificationsOn")
+    }
+
+    func saveNotifAuthStatus() {
+        UserDefaults.standard.set(isNotifAuthGiven, forKey: "isNotifAuthGiven")
+    }
+    func saveNotifTime() {
+        UserDefaults.standard.set(notificationsTime, forKey: "notificationsTime")
     }
 }

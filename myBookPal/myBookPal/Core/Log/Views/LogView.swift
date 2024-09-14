@@ -34,6 +34,31 @@ struct LogView: View {
                                     Image(systemName: "book.circle")
                                     Text("\(log.totalPagesRead) / \(book.pages)")
                                 }
+                                Spacer()
+                                    .frame(height: 5)
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack {
+//                                        Spacer()
+//                                            .frame(width: 3)
+                                        ForEach(log.tags ?? [Tag](), id: \.self) { tag in
+                                            Text(tag.text)
+                                                .font(.system(size: 13))
+                                                .foregroundStyle(.white)
+                                                .fontWeight(.bold)
+                                                .padding(.horizontal, 7)
+                                                .padding(.vertical, 5)
+                                                .background {
+                                                    let convertedColor = convertStringToColor(tag: tag)
+                                                    Capsule()
+                                                        .fill(convertedColor)
+//                                                        .padding(.horizontal, -5)
+//                                                        .padding(.vertical, -2)
+                                                }
+                                            Spacer()
+                                                .frame(width: 7)
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -90,6 +115,17 @@ struct LogView: View {
         
         let starRating = StarRating(rating: inputRating ?? 0.0)
         book.starRatingSystem = starRating
+    }
+    
+    func convertStringToColor(tag: Tag) -> Color {
+        switch tag.color {
+        case ".complement":
+            return Color.complement
+        case ".accent":
+            return Color.accent
+        default:
+            return Color.black
+        }
     }
 }
 

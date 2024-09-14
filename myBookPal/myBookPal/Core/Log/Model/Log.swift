@@ -12,6 +12,7 @@ struct Log: Hashable, Codable, Identifiable {
     var id = UUID()
     let currentPage: String
     let dateLogged: Date
+    var tags: [Tag]?
     
     var totalPagesRead: Int {
         return Int(currentPage) ?? 0

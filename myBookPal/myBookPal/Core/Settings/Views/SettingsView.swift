@@ -16,8 +16,6 @@ struct SettingsView: View {
     @State private var activateNotificationsBool = false
     @State var notificationsModel = NotificationsModel()
     
-    @AppStorage("isNotificationsActive") var isNotificationsActive: Bool = false
-    
     var totalBooksCount = 4
     var inProgressCount = 2
     var completed = 2
@@ -95,6 +93,7 @@ struct SettingsView: View {
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.horizontal, 15)
                                     }
+                                    .frame(maxWidth: .infinity, alignment: .center)
                             }
                             
                             Section("Notifications") {
@@ -102,9 +101,11 @@ struct SettingsView: View {
                                     .fill(.white)
                                     .frame(width: 350, height: 35)
                                     .overlay {
-                                        Toggle("Enable Notifications", isOn: $isNotificationsActive)
+                                        Toggle("Enable Notifications", isOn: $notificationsModel.isNotificationsOn)
                                             .padding(.horizontal, 15)
+                                        
                                     }
+                                    .frame(maxWidth: .infinity, alignment: .center)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -115,10 +116,14 @@ struct SettingsView: View {
                 }
                 .navigationTitle("More")
                 .navigationBarTitleDisplayMode(.inline)
-                .onChange(of: isNotificationsActive) {
-                    if isNotificationsActive {
-                        notificationsModel.userNotifications()
+                .onAppear {
+                    print(notificationsModel.notificationsTime)
+                }
+                .onChange(of: notificationsModel.isNotificationsOn) {
+                    if notificationsModel.isNotificationsOn {
+                        notificationsModel.enableNotifications()
                     } else {
+                        notificationsModel.removeDailyNotifications()
                         print("User notifications are off.")
                     }
                 }
