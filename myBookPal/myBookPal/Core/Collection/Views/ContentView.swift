@@ -15,11 +15,18 @@ struct ContentView: View {
     @Environment(NetworkMonitor.self) private var networkMonitor
     
     @State private var searchText = ""
-    var books: Set<Book>
+    @State private var selectedView = 0
+    @State private var showBookInfomation = false
+    @State private var activateBookDeletionAlert = false
+    @State private var deletedBookTitle = ""
+    @State private var recentlyViewedBook: Book?
     @State private var activateSheet = false
+    @State private var isEditing = false
+    @State private var selectedChoice = ""
+    @State private var selectedDeletionBook: Book?
+    var books: [Book]
     
     let options = ["Ascending", "Descending"]
-    @State private var selectedChoice = ""
     
     var searchResults: [Book] {
         if searchText.isEmpty {
@@ -28,14 +35,6 @@ struct ContentView: View {
             return books.filter { $0.title.contains(searchText) }
         }
     }
-    
-    @State private var selectedView = 0
-    @State private var showBookInfomation = false
-    @State private var isEditing = false
-    @State private var selectedBooks = Set<Book>()
-    @State private var activateBookDeletionAlert = false
-    @State private var deletedBookTitle = ""
-    @State private var recentlyViewedBook: Book?
     
     var body: some View {
         NavigationStack {
@@ -139,7 +138,7 @@ struct ContentView: View {
                         .frame(width: 350, height: 2)
                         .foregroundStyle(.gray.opacity(0.30))
                     
-                    if recentlyViewedBook != nil {
+                    if recentlyViewedBook != nil && books.contains(recentlyViewedBook!) {
                         VStack(alignment: .leading) {
                             Text("Recently Viewed")
                                 .font(.title.bold())
@@ -223,6 +222,19 @@ struct ContentView: View {
                     HStack {
                         Text("Collection")
                             .collectionTextModifier()
+                        
+                        Button(action: {
+                            withAnimation(.spring(duration: 0.2, bounce: 0.1)) {
+                                isEditing.toggle()
+                            }
+                        }) {
+                            Text("Edit")
+                                .fontDesign(.serif)
+                                .fontWeight(.semibold)
+                            Image(systemName: "pencil")
+                        }
+                        .padding(.horizontal, 20)
+                        
                     }
                     
                     ScrollView(.horizontal) {
@@ -230,6 +242,23 @@ struct ContentView: View {
                             ForEach(searchResults, id: \.self) { book in
                                 NavigationLink(destination: LogView(book: book)) {
                                     VStack {
+                                        if isEditing {
+                                            Circle()
+                                                .fill(.gray.opacity(0.2))
+                                                .frame(width: 30)
+                                                .overlay {
+                                                    Button(action: {
+                                                        deleteBookFromCollection(book)
+                                                    }) {
+                                                        Image(systemName: "trash")
+                                                            .foregroundStyle(.red)
+                                                    }
+                                                }
+                                            
+                                            Spacer()
+                                                .frame(height: 20)
+                                        }
+                                        
                                         WebImage(url: URL(string: book.coverImage)) { image in
                                             image
                                                 .resizable()
@@ -278,6 +307,7 @@ struct ContentView: View {
                 ToolbarItem(placement: .principal) {
                     Text("myBookPal")
                         .font(Font.custom("CrimsonText-SemiBold", size: 20))
+                        .foregroundStyle(.accent)
                 }
             }
             .onChange(of: books) {
@@ -285,29 +315,35 @@ struct ContentView: View {
                     recentlyViewedBook = nil
                 }
             }
-        }
-        .alert("Book Deleted", isPresented: $activateBookDeletionAlert) {
-            Button("Ok", role: .cancel) { }
-        } message: {
-            Text("\(deletedBookTitle) was removed from your collection.")
-        }
-    }
-    
-    private func toggleSelected(of book: Book) {
-        if selectedBooks.contains(book) {
-            selectedBooks.remove(book)
-        } else {
-            selectedBooks.insert(book)
-        }
-    }
-    
-    private mutating func deletedSelectedBooks() {
-        for book in selectedBooks {
-            if let index = books.firstIndex(of: book) {
-                modelContext.delete(books[index])
-                books.remove(at: index)
+            .onAppear {
+                print("DEBUG: \(books)")
             }
         }
+        .alert("Book Deleted", isPresented: $activateBookDeletionAlert) {
+            Button("Ok", role: .cancel, action: reset)
+        } message: {
+            Text("\(deletedBookTitle) has been removed.")
+        }
+    }
+    
+    func activateDeleteAlert() {
+        activateBookDeletionAlert = true
+    }
+    
+    func deleteBookFromCollection(_ bookToDelete: Book) {
+        print("Called the function and book name is: \(bookToDelete.title)")
+        let index = books.firstIndex(of: bookToDelete) ?? nil
+        
+        if index != nil {
+            modelContext.delete(bookToDelete)
+            
+            deletedBookTitle = bookToDelete.title.uppercased()
+            activateDeleteAlert()
+        }
+    }
+    
+    func reset() {
+        activateBookDeletionAlert = false
     }
 }
 

@@ -86,7 +86,7 @@ struct AddView: View {
                             enterBothBool.toggle()
                         }) {
                             Capsule()
-                                .fill(Color.complement)
+                                .fill(Color.accent)
                                 .frame(width: 170, height: 35)
                                 .overlay {
                                     Capsule()
@@ -102,7 +102,7 @@ struct AddView: View {
                             enterPageCountBool.toggle()
                         }) {
                             Capsule()
-                                .fill(Color.complement)
+                                .fill(Color.accent)
                                 .frame(width: 230, height: 35)
                                 .overlay {
                                     Capsule()
@@ -118,7 +118,7 @@ struct AddView: View {
                             enterGenreBool.toggle()
                         }) {
                             Capsule()
-                                .fill(Color.complement)
+                                .fill(Color.accent)
                                 .frame(width: 230, height: 35)
                                 .overlay {
                                     Capsule()
@@ -129,24 +129,24 @@ struct AddView: View {
                                 }
                         }
                         .padding()
+                    } else {
+                        Button(action: {
+                            addBookToCollection()
+                        }) {
+                            Capsule()
+                                .fill(Color.accent)
+                                .frame(width: 200, height: 35)
+                                .overlay {
+                                    Capsule()
+                                        .stroke(authorText.opacity(0.35), lineWidth: 1)
+                                    Text("Add To Collection")
+                                        .foregroundStyle(.white)
+                                        .fontWeight(.semibold)
+                                }
+                            
+                        }
+                        .padding()
                     }
-                    
-                    Button(action: {
-                        addBookToCollection()
-                    }) {
-                        Capsule()
-                            .fill(Color.accent)
-                            .frame(width: 200, height: 35)
-                            .overlay {
-                                Capsule()
-                                    .stroke(authorText.opacity(0.35), lineWidth: 1)
-                                Text("Add To Collection")
-                                    .foregroundStyle(.white)
-                                    .fontWeight(.semibold)
-                            }
-                        
-                    }
-                    .padding()
                 }
             }
             .navigationTitle("Add Book")
