@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import Observation
 
 @Observable
-class FetchBookInfoViewModel {
+class FetchBookInfoViewModel: @unchecked Sendable {
     var books: [VolumeInfo] = []
     var searchText = ""
     

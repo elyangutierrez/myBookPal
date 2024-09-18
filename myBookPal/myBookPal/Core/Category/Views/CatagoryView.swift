@@ -23,7 +23,7 @@ struct CatagoryView: View {
                 CompletedView(books: books)
             }
         }
-        .tint(Color.complement)
+        .tint(Color.accent)
         .preferredColorScheme(.light)
     }
 }

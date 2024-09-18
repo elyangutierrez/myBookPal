@@ -10,15 +10,17 @@ import Foundation
 
 @Model
 class Book: Identifiable, Equatable {
-    let coverImage: String
-    let title: String
-    let author: String
-    let catagory: String
-    let pages: String
-    let dateAdded: Date
+    var coverImage: String
+    var title: String
+    var author: String
+    var catagory: String
+    var pages: String
+    var dateAdded: Date
     var logs: [Log]?
     var starRatingSystem: StarRating?
     var isMostRecentlyViewed: Bool?
+    var quickNotes: [String]?
+    var noteIsInEditMode: Bool?
     
     var totalPagesRead: Int {
         guard let logs = logs else {
@@ -50,6 +52,14 @@ class Book: Identifiable, Equatable {
             return nil
         }
         return logs.count
+    }
+    
+    var getLogCreationDate: String {
+        guard let logs = logs else {
+            return ""
+        }
+        
+        return logs.first?.getFullDate ?? "No Date Avaliable"
     }
     
     func addLogEntry(_ log: Log) {

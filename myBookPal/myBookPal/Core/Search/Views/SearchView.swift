@@ -75,7 +75,7 @@ struct SearchView: View {
                     }
                 }
             }
-            .navigationTitle("Find Book")
+//            .navigationTitle("Find Book")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(item: $currentBook) { book in
                 let _ = print("Going to destination.")
@@ -98,6 +98,13 @@ struct SearchView: View {
                     } description: {
                         Text("Enter a book title to begin searching!")
                     }
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Find Book")
+                        .fontWeight(.semibold)
+                        .foregroundStyle(.accent)
                 }
             }
         }

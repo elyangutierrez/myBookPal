@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct BookItem: Codable, Hashable {
+struct BookItem: Codable, Hashable, Sendable {
     let volumeInfo: VolumeInfo
 }

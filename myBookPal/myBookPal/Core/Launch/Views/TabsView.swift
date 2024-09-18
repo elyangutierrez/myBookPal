@@ -21,36 +21,36 @@ struct TabsView: View {
                         Image(systemName: "books.vertical")
                         Text("Collection")
                     }
-//                    .onAppear {
-//                        print("TAB DEBUG: \(books)")
-//                    }
+                    .onAppear {
+                        print("TAB DEBUG: \(books)")
+                    }
                 
                 CatagoryView(books: books)
                     .tabItem {
                         Image(systemName: "checklist")
                         Text("Catagories")
                     }
-//                    .onAppear {
-//                        print("TAB DEBUG: \(books)")
-//                    }
+                    .onAppear {
+                        print("TAB DEBUG: \(books)")
+                    }
                 
                 SearchView(collectionBooks: books)
                     .tabItem {
                         Image(systemName: "magnifyingglass")
                         Text("Search")
                     }
-//                    .onAppear {
-//                        print("TAB DEBUG: \(books)")
-//                    }
+                    .onAppear {
+                        print("TAB DEBUG: \(books)")
+                    }
                 
                 SettingsView(books: books)
                     .tabItem {
                         Image(systemName: "list.bullet")
                         Text("More")
                     }
-//                    .onAppear {
-//                        print("TAB DEBUG: \(books)")
-//                    }
+                    .onAppear {
+                        print("TAB DEBUG: \(books)")
+                    }
             }
             .toolbarBackground(.visible, for: .tabBar)
 //            .onAppear {

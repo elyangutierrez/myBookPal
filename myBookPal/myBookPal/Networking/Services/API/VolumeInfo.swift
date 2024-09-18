@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct VolumeInfo: Codable, Hashable {
+struct VolumeInfo: Codable, Hashable, Sendable {
     let title: String
     let authors: [String]?
     let pageCount: Int?

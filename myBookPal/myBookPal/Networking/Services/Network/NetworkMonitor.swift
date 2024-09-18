@@ -10,7 +10,7 @@ import Network
 import Observation
 
 @Observable
-final class NetworkMonitor {
+class NetworkMonitor: @unchecked Sendable {
     private let networkMonitor = NWPathMonitor() // tracks network path changes
     private let workerQueue = DispatchQueue(label: "Monitor") // handles network monitoring ops
     var isConnected = false

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct BookResponse: Codable, Hashable {
+struct BookResponse: Codable, Hashable, Sendable {
     let totalItems: Int
     let items: [BookItem]
 }

@@ -78,9 +78,6 @@ struct AddLogEntryView: View {
                                                                         tagsTextArray.remove(at: index)
                                                                     }
                                                                 }
-                                                                
-                                                                /* TODO: Add some type of animation when users delete the tag..*/
-                                                
                                                             }
                                                         
                                                         Circle()

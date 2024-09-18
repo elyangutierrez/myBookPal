@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ImageLinks: Codable, Hashable {
+struct ImageLinks: Codable, Hashable, Sendable {
     let smallThumbnail: String
     let thumbnail: String
     

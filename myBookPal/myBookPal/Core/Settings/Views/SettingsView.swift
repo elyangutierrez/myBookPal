@@ -114,7 +114,7 @@ struct SettingsView: View {
                         .padding(.vertical, 25)
                     }
                 }
-                .navigationTitle("More")
+//                .navigationTitle("More")
                 .navigationBarTitleDisplayMode(.inline)
                 .onAppear {
                     print(notificationsModel.notificationsTime)
@@ -135,6 +135,13 @@ struct SettingsView: View {
                     },
                           secondaryButton: .cancel())
                     
+                }
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text("More")
+                            .fontWeight(.semibold)
+                            .foregroundStyle(.accent)
+                    }
                 }
             }
         }

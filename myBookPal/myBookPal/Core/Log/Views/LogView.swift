@@ -13,6 +13,8 @@ struct LogView: View {
     @State private var activateReviewSheet = false
     @State private var isStarRatingAlertOn = false
     @State private var inputRating: Double?
+    @State private var currentNoteInEdit: Bool = false
+    @State private var dateTracker = DateTracker()
     
     var book: Book
 
@@ -23,44 +25,187 @@ struct LogView: View {
                     ContentUnavailableView("No Logs Avaliable", 
                                            systemImage: "book.pages",
                                            description: Text("Click the '+' to add a log!"))
-                    
                 } else {
-                    List {
-                        ForEach(book.logs ?? [Log](), id: \.self) { log in
-                            VStack(alignment: .leading) {
-                                Text(log.formattedDate)
-                                    .font(.headline.bold())
-                                HStack {
-                                    Image(systemName: "book.circle")
-                                    Text("\(log.totalPagesRead) / \(book.pages)")
+                    ScrollView(.vertical, showsIndicators: false) {
+                        Spacer()
+                            .frame(height: 20)
+                        VStack(alignment: .leading) {
+                            
+                            HStack {
+                                Circle()
+                                    .fill(.gray.opacity(0.20))
+                                    .frame(width: 25, height: 25)
+                                    .overlay {
+                                        Circle()
+                                            .fill(.black)
+                                            .frame(width: 12, height: 12)
+                                    }
+                                    .padding(.horizontal, 2.5)
+                                
+                                Text("Created on \(book.getLogCreationDate)")
+                                    .foregroundStyle(.longDate)
+                                    .fontWeight(.semibold)
+                                    .padding(.horizontal, 4)
+                            }
+                            
+                            Rectangle()
+                                .fill(.clear)
+                                .frame(width: 30, height: 30)
+                                .overlay {
+                                    VStack {
+                                        Rectangle()
+                                            .frame(width: 1, height: 20)
+                                    }
                                 }
-                                Spacer()
-                                    .frame(height: 5)
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack {
-//                                        Spacer()
-//                                            .frame(width: 3)
-                                        ForEach(log.tags ?? [Tag](), id: \.self) { tag in
-                                            Text(tag.text)
-                                                .font(.system(size: 13))
-                                                .foregroundStyle(.white)
-                                                .fontWeight(.bold)
-                                                .padding(.horizontal, 7)
-                                                .padding(.vertical, 5)
-                                                .background {
-                                                    let convertedColor = convertStringToColor(tag: tag)
-                                                    Capsule()
-                                                        .fill(convertedColor)
-//                                                        .padding(.horizontal, -5)
-//                                                        .padding(.vertical, -2)
+                                .padding(.vertical, -6)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 25)
+
+                        VStack(alignment: .leading) {
+                            ForEach(book.logs ?? [Log](), id: \.self) { log in
+                                HStack {
+                                    // Left most side of log
+                                    VStack {
+                                        Text(log.getTime)
+                                            .font(.system(size: 11))
+                                            .foregroundStyle(.time)
+                                            .fontWeight(.bold)
+                                        Circle()
+                                            .fill(.complement.opacity(0.70))
+                                            .frame(width: 50, height: 50)
+                                            .overlay {
+                                                Image(systemName: "book.pages.fill")
+                                                    .resizable()
+                                                    .frame(width: 25, height: 30)
+                                                    .foregroundStyle(.white)
+                                                    .offset(y: -1)
+                                            }
+                                        Rectangle()
+                                            .fill(.clear)
+                                            .frame(width: 30, height: 50)
+                                            .overlay {
+                                                VStack {
+                                                    Rectangle()
+                                                        .frame(width: 1, height: 35)
                                                 }
-                                            Spacer()
-                                                .frame(width: 7)
+                                            }
+                                            .padding(.vertical, -8)
+                                    }
+                                    
+                                    Spacer()
+                                        .frame(width: 15)
+                                    
+                                    // Date and Time
+                                    VStack(alignment: .leading) {
+                                        
+                                        Text(log.getMonthAndDay)
+                                            .font(.system(size: 13))
+                                            .fontWeight(.bold)
+                                        
+                                        Text(log.getYear)
+                                            .font(.title3)
+                                            .foregroundStyle(.gray)
+                                            .fontWeight(.bold)
+                                    }
+                                    .frame(maxHeight: .infinity, alignment: .top)
+                                    .padding(.vertical, 24)
+                                    
+                                    Spacer()
+                                        .frame(width: 15)
+                                    
+                                    if log.tags?.isEmpty == true {
+                                        // Show smaller rectangle
+                                        VStack {
+                                            RoundedRectangle(cornerRadius: 15.0)
+                                                .fill(.gray.opacity(0.10))
+                                                .frame(width: 240, height: 50)
+                                                .overlay {
+                                                    VStack(alignment: .leading) {
+                                                        Spacer()
+                                                            .frame(height: 15)
+                                                        VStack {
+                                                            HStack {
+                                                                Image(systemName: "book.circle")
+                                                                    .resizable()
+                                                                    .frame(width: 30, height: 30)
+                                                                
+                                                                Text("\(log.totalPagesRead) / \(book.pages)")
+                                                                    .fontWeight(.bold)
+                                                                
+                                                            }
+                                                        }
+                                                        .frame(maxHeight: .infinity, alignment: .top)
+                                                        .padding(.vertical, -5)
+                                                    }
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                    .padding(.horizontal, 15)
+                                                }
                                         }
+                                        .frame(maxHeight: .infinity, alignment: .top)
+                                        .padding(.vertical, 18)
+                                    } else {
+                                        // default box
+                                        VStack {
+                                            RoundedRectangle(cornerRadius: 15.0)
+                                                .fill(.gray.opacity(0.10))
+                                                .frame(width: 240, height: 100)
+                                                .overlay {
+                                                    VStack(alignment: .leading) {
+                                                        Spacer()
+                                                            .frame(height: 15)
+                                                        VStack {
+                                                            HStack {
+                                                                Image(systemName: "book.circle")
+                                                                    .resizable()
+                                                                    .frame(width: 30, height: 30)
+                                                                
+                                                                Text("\(log.totalPagesRead) / \(book.pages)")
+                                                                    .fontWeight(.bold)
+                                                                
+                                                            }
+                                                        }
+                                                        .frame(maxHeight: .infinity, alignment: .top)
+                                                        
+                                                        
+                                                        VStack {
+                                                            ScrollView(.horizontal) {
+                                                                HStack {
+                                                                    ForEach(log.tags ?? [Tag](), id: \.self) { tag in
+                                                                        Text(tag.text)
+                                                                            .font(.system(size: 14))
+                                                                            .foregroundStyle(.white)
+                                                                            .fontWeight(.bold)
+                                                                            .padding(.horizontal, 7)
+                                                                            .padding(.vertical, 5)
+                                                                            .background {
+                                                                                let convertedColor = convertStringToColor(tag: tag)
+                                                                                Capsule()
+                                                                                    .fill(convertedColor)
+                                                                            }
+                                                                    }
+                                                                }
+                                                            }
+                                                            .scrollIndicators(.hidden)
+                                                        }
+                                                        Spacer()
+                                                            .frame(height: 15)
+                                                    }
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                    .padding(.horizontal, 15)
+                                                }
+                                        }
+                                        .frame(maxHeight: .infinity, alignment: .top)
+                                        .padding(.vertical, -6)
                                     }
                                 }
                             }
+                            
+                            Spacer()
+                                .frame(height: 20)
                         }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 15)
                     }
                 }
             }
