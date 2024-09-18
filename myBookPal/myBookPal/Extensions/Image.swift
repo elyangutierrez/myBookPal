@@ -49,4 +49,12 @@ extension Image {
             .clipShape(RoundedRectangle(cornerRadius: 15.0))
             .offset(y: -50)
     }
+    
+    func BookPagesFillImageExtension() -> some View {
+        self
+            .resizable()
+            .frame(width: 25, height: 30)
+            .foregroundStyle(.white)
+            .offset(y: -1)
+    }
 }

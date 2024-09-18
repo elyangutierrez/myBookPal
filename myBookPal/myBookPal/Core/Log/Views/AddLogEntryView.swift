@@ -22,9 +22,11 @@ struct AddLogEntryView: View {
     @Environment(\.modelContext) var modelContext
     
     var book: Book
+    var lastPageNumber: Int?
     
     @State private var invalidPageCount = false
     @State private var tagsTextArray = [Tag]()
+    @State private var pageLessThanLastPage = false
     
     let today = Date.now
     let endOfToday = Date.now
@@ -181,12 +183,27 @@ struct AddLogEntryView: View {
         } message: {
             Text("Please re-enter your current page number.")
         }
+        .alert("Invalid Page Count", isPresented: $pageLessThanLastPage) {
+            Button("Ok", action: resetFields)
+        } message: {
+            Text("You can't enter a page that is less than the last page number.")
+        }
     }
     
     func addEntry() {
         if let intPage = Int(page), let intBookPages = Int(book.pages) {
+            
+            guard let lastPage = lastPageNumber else {
+                return
+            }
+            
+            print("DEBUG: value of intPage: \(intPage)")
+            print("DEBUG: value of lastPageNumber: \(lastPage)")
+            
             if intPage > intBookPages {
                 invalidPageCount = true
+            } else if intPage < lastPage {
+                pageLessThanLastPage = true
             } else {
                 let entry = Log(currentPage: page, dateLogged: date, tags: tagsTextArray)
                 book.addLogEntry(entry)

@@ -53,6 +53,7 @@
 		72BBD34C2BF29EB2006BC431 /* AddLogEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BBD34B2BF29EB2006BC431 /* AddLogEntryView.swift */; };
 		72BBD3502BF2A64C006BC431 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BBD34F2BF2A64C006BC431 /* Log.swift */; };
 		72C4CD3C2C9A7EF800730327 /* DateTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C4CD3B2C9A7EF800730327 /* DateTracker.swift */; };
+		72C4CD402C9B6F8300730327 /* TagTextViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C4CD3F2C9B6F8300730327 /* TagTextViewModifier.swift */; };
 		72D097F82BF160D40021819E /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D097F72BF160D40021819E /* LogView.swift */; };
 		72D098092BF168D50021819E /* Book.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D098082BF168D50021819E /* Book.swift */; };
 		72D098122BF1692D0021819E /* BookItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72D0980B2BF1692D0021819E /* BookItem.swift */; };
@@ -109,6 +110,7 @@
 		72BBD34B2BF29EB2006BC431 /* AddLogEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogEntryView.swift; sourceTree = "<group>"; };
 		72BBD34F2BF2A64C006BC431 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		72C4CD3B2C9A7EF800730327 /* DateTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTracker.swift; sourceTree = "<group>"; };
+		72C4CD3F2C9B6F8300730327 /* TagTextViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagTextViewModifier.swift; sourceTree = "<group>"; };
 		72D097F72BF160D40021819E /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
 		72D098082BF168D50021819E /* Book.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book.swift; sourceTree = "<group>"; };
 		72D0980B2BF1692D0021819E /* BookItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookItem.swift; sourceTree = "<group>"; };
@@ -432,6 +434,7 @@
 			children = (
 				72BB668E2C93F15A001F17BA /* LightTagViewModifier.swift */,
 				72BB66902C93F371001F17BA /* DarkerTagViewModifier.swift */,
+				72C4CD3F2C9B6F8300730327 /* TagTextViewModifier.swift */,
 			);
 			path = ViewModifier;
 			sourceTree = "<group>";
@@ -575,6 +578,7 @@
 				724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */,
 				722662E92C9360660071162D /* FetchBookInfoViewModel.swift in Sources */,
 				7249626C2C2E380600F6411B /* SettingsRectangleLineView.swift in Sources */,
+				72C4CD402C9B6F8300730327 /* TagTextViewModifier.swift in Sources */,
 				722662D12C92717A0071162D /* NotificationsModel.swift in Sources */,
 				7226629E2C8A9D680071162D /* ContainerView.swift in Sources */,
 				72BB66972C93F7AD001F17BA /* RowThreeView.swift in Sources */,

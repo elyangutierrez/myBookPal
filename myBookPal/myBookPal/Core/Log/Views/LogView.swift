@@ -15,8 +15,22 @@ struct LogView: View {
     @State private var inputRating: Double?
     @State private var currentNoteInEdit: Bool = false
     @State private var dateTracker = DateTracker()
+    @State private var showDeletionAlert = false
+    @State private var currentLog: Log?
+    @State private var lastPageNumber: Int?
     
     var book: Book
+    
+    var getLogCompletionDate: String {
+        let logs = book.logs
+        let lastLog = logs?.last
+        
+        if Int(book.pages) == lastLog?.totalPagesRead {
+            return lastLog!.getFullDate
+        }
+        
+        return ""
+    }
 
     var body: some View {
         NavigationStack {
@@ -28,16 +42,15 @@ struct LogView: View {
                 } else {
                     ScrollView(.vertical, showsIndicators: false) {
                         Spacer()
-                            .frame(height: 20)
+                            .frame(height: 25)
                         VStack(alignment: .leading) {
-                            
                             HStack {
                                 Circle()
                                     .fill(.gray.opacity(0.20))
                                     .frame(width: 25, height: 25)
                                     .overlay {
                                         Circle()
-                                            .fill(.black)
+                                            .fill(.black.opacity(0.70))
                                             .frame(width: 12, height: 12)
                                     }
                                     .padding(.horizontal, 2.5)
@@ -54,10 +67,10 @@ struct LogView: View {
                                 .overlay {
                                     VStack {
                                         Rectangle()
-                                            .frame(width: 1, height: 20)
+                                            .frame(width: 1, height: 25)
                                     }
                                 }
-                                .padding(.vertical, -6)
+                                .padding(.vertical, -3)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 25)
@@ -76,10 +89,7 @@ struct LogView: View {
                                             .frame(width: 50, height: 50)
                                             .overlay {
                                                 Image(systemName: "book.pages.fill")
-                                                    .resizable()
-                                                    .frame(width: 25, height: 30)
-                                                    .foregroundStyle(.white)
-                                                    .offset(y: -1)
+                                                    .BookPagesFillImageExtension()
                                             }
                                         Rectangle()
                                             .fill(.clear)
@@ -133,6 +143,24 @@ struct LogView: View {
                                                                 Text("\(log.totalPagesRead) / \(book.pages)")
                                                                     .fontWeight(.bold)
                                                                 
+                                                                VStack {
+                                                                    Button(action: {
+//                                                                        print("DEBUG: \(log)")
+                                                                        
+                                                                        currentLog = log
+                                                                        
+                                                                        showDeletionAlert.toggle()
+                                                                    }) {
+                                                                        Circle()
+                                                                            .fill(.clear)
+                                                                            .frame(width: 30, height: 30)
+                                                                            .overlay {
+                                                                                Image(systemName: "ellipsis")
+                                                                            }
+                                                                    }
+                                                                }
+                                                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                                                
                                                             }
                                                         }
                                                         .frame(maxHeight: .infinity, alignment: .top)
@@ -141,6 +169,7 @@ struct LogView: View {
                                                     .frame(maxWidth: .infinity, alignment: .leading)
                                                     .padding(.horizontal, 15)
                                                 }
+                                                .allowsHitTesting(true) // lets user tap through overlay
                                         }
                                         .frame(maxHeight: .infinity, alignment: .top)
                                         .padding(.vertical, 18)
@@ -159,10 +188,28 @@ struct LogView: View {
                                                                 Image(systemName: "book.circle")
                                                                     .resizable()
                                                                     .frame(width: 30, height: 30)
+                                                                    
                                                                 
                                                                 Text("\(log.totalPagesRead) / \(book.pages)")
                                                                     .fontWeight(.bold)
                                                                 
+                                                                VStack {
+                                                                    Button(action: {
+//                                                                        print("DEBUG: \(log)")
+                                                                        
+                                                                        currentLog = log
+                                                                        
+                                                                        showDeletionAlert.toggle()
+                                                                    }) {
+                                                                        Circle()
+                                                                            .fill(.clear)
+                                                                            .frame(width: 30, height: 30)
+                                                                            .overlay {
+                                                                                Image(systemName: "ellipsis")
+                                                                            }
+                                                                    }
+                                                                }
+                                                                .frame(maxWidth: .infinity, alignment: .trailing)
                                                             }
                                                         }
                                                         .frame(maxHeight: .infinity, alignment: .top)
@@ -173,11 +220,7 @@ struct LogView: View {
                                                                 HStack {
                                                                     ForEach(log.tags ?? [Tag](), id: \.self) { tag in
                                                                         Text(tag.text)
-                                                                            .font(.system(size: 14))
-                                                                            .foregroundStyle(.white)
-                                                                            .fontWeight(.bold)
-                                                                            .padding(.horizontal, 7)
-                                                                            .padding(.vertical, 5)
+                                                                            .tagTextViewModifier()
                                                                             .background {
                                                                                 let convertedColor = convertStringToColor(tag: tag)
                                                                                 Capsule()
@@ -194,6 +237,7 @@ struct LogView: View {
                                                     .frame(maxWidth: .infinity, alignment: .leading)
                                                     .padding(.horizontal, 15)
                                                 }
+                                                .allowsHitTesting(true) // lets user tap through overlay
                                         }
                                         .frame(maxHeight: .infinity, alignment: .top)
                                         .padding(.vertical, -6)
@@ -206,6 +250,32 @@ struct LogView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 15)
+                        
+                        if getLogCompletionDate != "" {
+//                            Text("Completed on \(getLogCompletionDate)")
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    Circle()
+                                        .fill(.gray.opacity(0.20))
+                                        .frame(width: 25, height: 25)
+                                        .overlay {
+                                            Circle()
+                                                .fill(.black.opacity(0.70))
+                                                .frame(width: 12, height: 12)
+                                        }
+                                        .padding(.horizontal, 2.5)
+                                    
+                                    Text("Completed on \(getLogCompletionDate)")
+                                        .foregroundStyle(.longDate)
+                                        .fontWeight(.semibold)
+                                        .padding(.horizontal, 4)
+                                }
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 25)
+                            .padding(.vertical, -10)
+                            
+                        }
                     }
                 }
             }
@@ -217,6 +287,22 @@ struct LogView: View {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         isStarRatingAlertOn = true
                     }
+                }
+            }
+            .onAppear {
+                let logs = book.logs
+                let lastLog = logs?.last
+                
+                if lastPageNumber == nil {
+                    lastPageNumber = lastLog?.totalPagesRead
+                }
+            }
+            .onChange(of: lastPageNumber) {
+                let logs = book.logs
+                let lastLog = logs?.last
+                
+                if lastPageNumber == nil {
+                    lastPageNumber = lastLog?.totalPagesRead
                 }
             }
             .toolbar {
@@ -243,7 +329,7 @@ struct LogView: View {
                 }
             }
             .sheet(isPresented: $showSheet) {
-                AddLogEntryView(book: book)
+                AddLogEntryView(book: book, lastPageNumber: lastPageNumber ?? 0)
             }
             .alert("Rate Book", isPresented: $isStarRatingAlertOn) {
                 TextField("Enter Rating", value: $inputRating, format: .number)
@@ -251,6 +337,12 @@ struct LogView: View {
                 Button("Cancel") { }
             } message: {
                 Text("Enter a rating from 0 to 5.")
+            }
+            .alert("Delete Log", isPresented: $showDeletionAlert) {
+                Button("Yes", role: .destructive, action: deleteLog)
+                Button("Cancel", role: .cancel) { }
+            } message: {
+                Text("Are you sure you want to delete this log entry?")
             }
         }
     }
@@ -271,6 +363,12 @@ struct LogView: View {
         default:
             return Color.black
         }
+    }
+
+    func deleteLog() {
+        let logIndex = book.logs!.firstIndex(of: currentLog!) ?? 0
+        
+        book.logs?.remove(at: logIndex)
     }
 }
 

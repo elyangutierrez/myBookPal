@@ -28,4 +28,8 @@ extension View {
     func darkerTagViewModifier() -> some View {
         return self.modifier(DarkerTagViewModifier())
     }
+    
+    func tagTextViewModifier() -> some View {
+        return self.modifier(TagTextViewModifier())
+    }
 }
