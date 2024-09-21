@@ -19,8 +19,6 @@ class Book: Identifiable, Equatable {
     var logs: [Log]?
     var starRatingSystem: StarRating?
     var isMostRecentlyViewed: Bool?
-    var quickNotes: [String]?
-    var noteIsInEditMode: Bool?
     
     var totalPagesRead: Int {
         guard let logs = logs else {

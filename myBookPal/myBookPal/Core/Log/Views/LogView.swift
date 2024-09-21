@@ -144,13 +144,15 @@ struct LogView: View {
                                                                     .fontWeight(.bold)
                                                                 
                                                                 VStack {
-                                                                    Button(action: {
-//                                                                        print("DEBUG: \(log)")
-                                                                        
-                                                                        currentLog = log
-                                                                        
-                                                                        showDeletionAlert.toggle()
-                                                                    }) {
+                                                                    Menu {
+                                                                        Button(action: {
+                                                                            currentLog = log
+                                                                            showDeletionAlert.toggle()
+                                                                        }) {
+                                                                            Text("Delete")
+                                                                                .tint(.red)
+                                                                        }
+                                                                    } label: {
                                                                         Circle()
                                                                             .fill(.clear)
                                                                             .frame(width: 30, height: 30)
@@ -160,7 +162,6 @@ struct LogView: View {
                                                                     }
                                                                 }
                                                                 .frame(maxWidth: .infinity, alignment: .trailing)
-                                                                
                                                             }
                                                         }
                                                         .frame(maxHeight: .infinity, alignment: .top)
@@ -194,13 +195,15 @@ struct LogView: View {
                                                                     .fontWeight(.bold)
                                                                 
                                                                 VStack {
-                                                                    Button(action: {
-//                                                                        print("DEBUG: \(log)")
-                                                                        
-                                                                        currentLog = log
-                                                                        
-                                                                        showDeletionAlert.toggle()
-                                                                    }) {
+                                                                    Menu {
+                                                                        Button(action: {
+                                                                            currentLog = log
+                                                                            showDeletionAlert.toggle()
+                                                                        }) {
+                                                                            Text("Delete")
+                                                                                .foregroundStyle(.red)
+                                                                        }
+                                                                    } label: {
                                                                         Circle()
                                                                             .fill(.clear)
                                                                             .frame(width: 30, height: 30)

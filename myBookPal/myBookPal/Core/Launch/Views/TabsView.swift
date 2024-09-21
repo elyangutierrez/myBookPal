@@ -43,10 +43,10 @@ struct TabsView: View {
                         print("TAB DEBUG: \(books)")
                     }
                 
-                SettingsView(books: books)
+                ProfileView(books: books)
                     .tabItem {
-                        Image(systemName: "list.bullet")
-                        Text("More")
+                        Image(systemName: "person")
+                        Text("Profile")
                     }
                     .onAppear {
                         print("TAB DEBUG: \(books)")

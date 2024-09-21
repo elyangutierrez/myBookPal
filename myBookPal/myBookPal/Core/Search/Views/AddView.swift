@@ -199,6 +199,7 @@ struct AddView: View {
             bookIsInCollection.toggle()
         } else {
             modelContext.insert(newBook)
+            try? modelContext.save()
             bookCompletionCount += 1
             showAlert = true
         }
@@ -210,6 +211,7 @@ struct AddView: View {
             bookIsInCollection.toggle()
         } else {
             modelContext.insert(newBook)
+            try? modelContext.save()
             bookCompletionCount += 1
             showAlert = true
         }
@@ -221,6 +223,7 @@ struct AddView: View {
             bookIsInCollection.toggle()
         } else {
             modelContext.insert(newBook)
+            try? modelContext.save()
             bookCompletionCount += 1
             showAlert = true
         }
@@ -232,6 +235,7 @@ struct AddView: View {
             bookIsInCollection.toggle()
         } else {
             modelContext.insert(newBook)
+            try? modelContext.save()
             bookCompletionCount += 1
             showAlert = true
         }
