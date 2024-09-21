@@ -129,11 +129,11 @@ struct ProfileView: View {
                     }
                     
                     Spacer()
-                        .frame(height: 40)
+                        .frame(height: 30)
                     
                     Rectangle()
                         .frame(width: 375, height: 2)
-                        .foregroundStyle(.gray.opacity(0.40))
+                        .foregroundStyle(.gray.opacity(0.20))
                     
                     // Sections
                     VStack(alignment: .leading) {
@@ -148,19 +148,16 @@ struct ProfileView: View {
                                         .resizable()
                                         .frame(width: 30, height: 30)
                                 }
-                                
-                                Spacer()
-                                    .frame(width: 20)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                                 
                                 VStack {
                                     Text("Settings")
-                                        .font(.title3)
+                                        .font(.headline)
                                         .fontWeight(.bold)
                                         .foregroundStyle(.gray)
                                 }
-                                
-                                Spacer()
-                                    .frame(width: 200)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, -70)
                                 
                                 VStack {
                                     Spacer()
@@ -168,6 +165,7 @@ struct ProfileView: View {
                                     
                                     CustomArrowView()
                                 }
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                         }
                         .onTapGesture {
@@ -184,19 +182,16 @@ struct ProfileView: View {
                                         .resizable()
                                         .frame(width: 30, height: 30)
                                 }
-                                
-                                Spacer()
-                                    .frame(width: 20)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                                 
                                 VStack {
                                     Text("Statistics")
-                                        .font(.title3)
+                                        .font(.headline)
                                         .fontWeight(.bold)
                                         .foregroundStyle(.gray)
                                 }
-                                
-                                Spacer()
-                                    .frame(width: 190)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, -70)
                                 
                                 VStack {
                                     Spacer()
@@ -204,6 +199,7 @@ struct ProfileView: View {
                                     
                                     CustomArrowView()
                                 }
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                         }
                         .onTapGesture {
@@ -220,19 +216,16 @@ struct ProfileView: View {
                                         .resizable()
                                         .frame(width: 30, height: 30)
                                 }
-                                
-                                Spacer()
-                                    .frame(width: 20)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                                 
                                 VStack {
                                     Text("Notifications")
-                                        .font(.title3)
+                                        .font(.headline)
                                         .fontWeight(.bold)
                                         .foregroundStyle(.gray)
                                 }
-                                
-                                Spacer()
-                                    .frame(width: 157)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, -70)
                                 
                                 VStack {
                                     Spacer()
@@ -240,6 +233,7 @@ struct ProfileView: View {
                                     
                                     CustomArrowView()
                                 }
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                         }
                         .onTapGesture {
@@ -254,7 +248,7 @@ struct ProfileView: View {
                     
                     Rectangle()
                         .frame(width: 375, height: 2)
-                        .foregroundStyle(.gray.opacity(0.40))
+                        .foregroundStyle(.gray.opacity(0.20))
                     
                     VStack(alignment: .leading) {
                         
@@ -268,19 +262,16 @@ struct ProfileView: View {
                                         .resizable()
                                         .frame(width: 30, height: 30)
                                 }
-                                
-                                Spacer()
-                                    .frame(width: 20)
+                                .frame(maxWidth: .infinity, alignment: .leading)
                                 
                                 VStack {
                                     Text("Help & Support")
-                                        .font(.title3)
+                                        .font(.headline)
                                         .fontWeight(.bold)
                                         .foregroundStyle(.gray)
                                 }
-                                
-                                Spacer()
-                                    .frame(width: 135)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, -70)
                                 
                                 VStack {
                                     Spacer()
@@ -288,6 +279,7 @@ struct ProfileView: View {
                                     
                                     CustomArrowView()
                                 }
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
                         }
                         .onTapGesture {

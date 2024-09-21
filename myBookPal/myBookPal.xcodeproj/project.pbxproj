@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		720A001A2C9E768D00BD9A45 /* HelpAndSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00192C9E768D00BD9A45 /* HelpAndSupportView.swift */; };
+		720A001C2C9F775700BD9A45 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A001B2C9F775700BD9A45 /* MailComposer.swift */; };
 		722662962C8956EA0071162D /* CrimsonText-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */; };
 		722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662912C894ED70071162D /* CrimsonText-Regular.ttf */; };
 		722662992C8957C40071162D /* CrimsonText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662982C8957C40071162D /* CrimsonText-Bold.ttf */; };
@@ -73,6 +74,7 @@
 
 /* Begin PBXFileReference section */
 		720A00192C9E768D00BD9A45 /* HelpAndSupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportView.swift; sourceTree = "<group>"; };
+		720A001B2C9F775700BD9A45 /* MailComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		722662912C894ED70071162D /* CrimsonText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Regular.ttf"; sourceTree = "<group>"; };
 		722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-SemiBold.ttf"; sourceTree = "<group>"; };
 		722662982C8957C40071162D /* CrimsonText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Bold.ttf"; sourceTree = "<group>"; };
@@ -360,6 +362,7 @@
 			children = (
 				722662D02C92717A0071162D /* NotificationsModel.swift */,
 				7248FF522C9CBD5000722F23 /* PictureHandler.swift */,
+				720A001B2C9F775700BD9A45 /* MailComposer.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -590,6 +593,7 @@
 				722662DB2C929B940071162D /* View.swift in Sources */,
 				7248FF562C9CC35B00722F23 /* TransferableImage.swift in Sources */,
 				724070EC2BED76CA00E1E07C /* AddView.swift in Sources */,
+				720A001C2C9F775700BD9A45 /* MailComposer.swift in Sources */,
 				72D098122BF1692D0021819E /* BookItem.swift in Sources */,
 				724070F42BED7A6000E1E07C /* SettingsView.swift in Sources */,
 				72D098162BF1692D0021819E /* VolumeInfo.swift in Sources */,
