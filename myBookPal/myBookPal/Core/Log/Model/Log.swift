@@ -8,11 +8,14 @@
 import SwiftData
 import Foundation
 
-struct Log: Hashable, Codable, Identifiable {
+@Model
+class Log: Identifiable {
     var id = UUID()
-    let currentPage: String
-    let dateLogged: Date
+    var currentPage: String
+    var dateLogged: Date
     var tags: [Tag]?
+    var quickNote: QuickNote?
+    var showingNote: Bool
     
     var totalPagesRead: Int {
         return Int(currentPage) ?? 0
@@ -51,5 +54,14 @@ struct Log: Hashable, Codable, Identifiable {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         return formatter.string(from: date)
+    }
+    
+    init(id: UUID = UUID(), currentPage: String, dateLogged: Date, tags: [Tag]? = nil, quickNote: QuickNote? = nil, showingNote: Bool) {
+        self.id = id
+        self.currentPage = currentPage
+        self.dateLogged = dateLogged
+        self.tags = tags
+        self.quickNote = quickNote
+        self.showingNote = showingNote
     }
 }

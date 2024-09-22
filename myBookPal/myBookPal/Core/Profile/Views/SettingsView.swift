@@ -8,6 +8,7 @@
 import Charts
 import SwiftUI
 import UserNotifications
+import SwiftData
 
 struct SettingsView: View {
     @Environment(\.modelContext) var modelContext
@@ -52,7 +53,7 @@ struct SettingsView: View {
                     Alert(title: Text("Are you sure you want to delete all books?"),
                           message: Text("Once deleted, you can't get your books and logs back."),
                           primaryButton: .destructive(Text("Delete")) {
-                        deleteBooks()
+                        deleteBooks(context: modelContext)
                     },
                           secondaryButton: .cancel())
                     
@@ -72,7 +73,7 @@ struct SettingsView: View {
         deletedBooksAlert = true
     }
     
-    func deleteBooks() {
+    func deleteBooks(context: ModelContext) {
         do {
             try modelContext.delete(model: Book.self)
         } catch {

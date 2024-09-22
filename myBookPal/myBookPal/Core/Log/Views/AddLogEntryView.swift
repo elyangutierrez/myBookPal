@@ -27,6 +27,8 @@ struct AddLogEntryView: View {
     @State private var invalidPageCount = false
     @State private var tagsTextArray = [Tag]()
     @State private var pageLessThanLastPage = false
+    @State private var quickNoteText = ""
+    @State private var maxCharacterCount = 125
     
     let today = Date.now
     let endOfToday = Date.now
@@ -34,7 +36,7 @@ struct AddLogEntryView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section {
+                Section("Log Infomation") {
                     TextField("Enter Current Page", text: $page)
                     
                     DatePicker("Datetime", selection: $date, in: today...endOfToday)
@@ -157,6 +159,14 @@ struct AddLogEntryView: View {
                     }
                 }
                 
+                Section("Quick Note") {
+                    TextField("", text: $quickNoteText, prompt: Text("Enter ideas, themes, or thoughts here..."), axis: .vertical)
+                        .lineLimit(2, reservesSpace: true)
+                        .onChange(of: quickNoteText) {
+                            quickNoteText = String(quickNoteText.prefix(maxCharacterCount))
+                        }
+                }
+                
                 Section {
                     Button(action: {
                         addEntry()
@@ -204,10 +214,20 @@ struct AddLogEntryView: View {
                 invalidPageCount = true
             } else if intPage < lastPage {
                 pageLessThanLastPage = true
-            } else {
-                let entry = Log(currentPage: page, dateLogged: date, tags: tagsTextArray)
+            } else if quickNoteText == "" {
+                let entry = Log(currentPage: page, dateLogged: date, tags: tagsTextArray, showingNote: false)
+                modelContext.insert(entry)
                 book.addLogEntry(entry)
                 page = ""
+                quickNoteText = ""
+                dismiss()
+            } else {
+                let note = QuickNote(noteText: quickNoteText, date: .now)
+                let entry = Log(currentPage: page, dateLogged: date, tags: tagsTextArray, quickNote: note, showingNote: false)
+                modelContext.insert(entry)
+                book.addLogEntry(entry)
+                page = ""
+                quickNoteText = ""
                 dismiss()
             }
         } else {
