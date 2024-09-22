@@ -46,21 +46,23 @@ struct LogView: View {
                         Spacer()
                             .frame(height: 25)
                         VStack(alignment: .leading) {
-                            HStack {
-                                Circle()
-                                    .fill(.gray.opacity(0.20))
-                                    .frame(width: 25, height: 25)
-                                    .overlay {
-                                        Circle()
-                                            .fill(.black.opacity(0.70))
-                                            .frame(width: 12, height: 12)
-                                    }
-                                    .padding(.horizontal, 2.5)
-                                
-                                Text("Created on \(book.getLogCreationDate)")
-                                    .foregroundStyle(.longDate)
-                                    .fontWeight(.semibold)
-                                    .padding(.horizontal, 4)
+                            if book.logs?.count != 0 {
+                                HStack {
+                                    Circle()
+                                        .fill(.gray.opacity(0.20))
+                                        .frame(width: 25, height: 25)
+                                        .overlay {
+                                            Circle()
+                                                .fill(.black.opacity(0.70))
+                                                .frame(width: 12, height: 12)
+                                        }
+                                        .padding(.horizontal, 2.5)
+                                    
+                                    Text("Created on \(book.getLogCreationDate)")
+                                        .foregroundStyle(.longDate)
+                                        .fontWeight(.semibold)
+                                        .padding(.horizontal, 4)
+                                }
                             }
                             
                             Rectangle()
