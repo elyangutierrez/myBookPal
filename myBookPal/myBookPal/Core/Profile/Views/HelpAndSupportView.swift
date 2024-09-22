@@ -92,7 +92,7 @@ struct HelpAndSupportView: View {
                             )
                             .tint(.black)
                             .foregroundStyle(.gray)
-                            .lineLimit(1...10)
+                            .lineLimit(6, reservesSpace: true)
                             .onSubmit {
                                 date = .now
                             }

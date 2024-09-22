@@ -72,10 +72,6 @@ class Book: Identifiable, Equatable {
         return lhs.title == rhs.title && lhs.author == rhs.author && lhs.catagory == rhs.catagory && lhs.pages == rhs.pages
     }
     
-    func convertToRVB() -> RecentlyViewedBook {
-        return RecentlyViewedBook(coverImage: self.coverImage, title: self.title, author: self.author, catagory: self.catagory, pages: self.pages, dateAdded: self.dateAdded)
-    }
-    
     init(coverImage: String, title: String, author: String, catagory: String, pages: String, dateAdded: Date = Date()) {
         self.coverImage = coverImage
         self.title = title

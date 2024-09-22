@@ -18,6 +18,8 @@ struct LogView: View {
     @State private var showDeletionAlert = false
     @State private var currentLog: Log?
     @State private var lastPageNumber: Int?
+    @State private var noteVisibility = NoteVisibility()
+    @State private var currentNote: QuickNote?
     
     var book: Book
     
@@ -35,8 +37,8 @@ struct LogView: View {
     var body: some View {
         NavigationStack {
             VStack {
-                if book.getLogCount == nil {
-                    ContentUnavailableView("No Logs Avaliable", 
+                if book.getLogCount == nil || book.logs?.count == 0  {
+                    ContentUnavailableView("No Logs Avaliable",
                                            systemImage: "book.pages",
                                            description: Text("Click the '+' to add a log!"))
                 } else {
@@ -136,22 +138,62 @@ struct LogView: View {
                                                             .frame(height: 15)
                                                         VStack {
                                                             HStack {
-                                                                Image(systemName: "book.circle")
-                                                                    .resizable()
-                                                                    .frame(width: 30, height: 30)
+                                                                VStack {
+                                                                    Image(systemName: "book.circle")
+                                                                        .resizable()
+                                                                        .frame(width: 30, height: 30)
+                                                                }
+                                                                .frame(maxWidth: .infinity, alignment: .leading)
                                                                 
-                                                                Text("\(log.totalPagesRead) / \(book.pages)")
-                                                                    .fontWeight(.bold)
+                                                                if log.quickNote?.noteText != nil {
+                                                                    VStack {
+                                                                        Text("\(log.totalPagesRead) / \(book.pages)")
+                                                                            .font(.subheadline)
+                                                                            .fontWeight(.bold)
+                                                                    }
+                                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                                    .padding(.horizontal, -17)
+                                                                } else {
+                                                                    VStack {
+                                                                        Text("\(log.totalPagesRead) / \(book.pages)")
+                                                                            .font(.subheadline)
+                                                                            .fontWeight(.bold)
+                                                                    }
+                                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                                    .padding(.horizontal, -35)
+                                                                }
+                                                                
+                                                                if log.quickNote?.noteText != nil {
+                                                                    VStack {
+                                                                        Image(systemName: "note.text")
+                                                                            .onTapGesture {
+                                                                                guard let noteText = log.quickNote?.noteText else {
+                                                                                    print("Error printing note")
+                                                                                    return
+                                                                                }
+                                                                                print(noteText)
+                                                                                
+                                                                                let currentDate = Date.now
+                                                                                
+                                                                                currentNote = QuickNote(noteText: noteText, date: currentDate)
+                                                                                
+                                                                                currentLog = log
+                                                                            }
+                                                                    }
+                                                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                                                    .padding(.horizontal, -23)
+                                                                }
                                                                 
                                                                 VStack {
                                                                     Menu {
-                                                                        Button(action: {
+                                                                        Button("Delete",
+                                                                               role: .destructive,
+                                                                               action: {
                                                                             currentLog = log
                                                                             showDeletionAlert.toggle()
-                                                                        }) {
-                                                                            Text("Delete")
-                                                                                .tint(.red)
                                                                         }
+                                                                        )
+                                                                        .tint(.red)
                                                                     } label: {
                                                                         Circle()
                                                                             .fill(.clear)
@@ -186,23 +228,62 @@ struct LogView: View {
                                                             .frame(height: 15)
                                                         VStack {
                                                             HStack {
-                                                                Image(systemName: "book.circle")
-                                                                    .resizable()
-                                                                    .frame(width: 30, height: 30)
-                                                                    
+                                                                VStack {
+                                                                    Image(systemName: "book.circle")
+                                                                        .resizable()
+                                                                        .frame(width: 30, height: 30)
+                                                                }
+                                                                .frame(maxWidth: .infinity, alignment: .leading)
                                                                 
-                                                                Text("\(log.totalPagesRead) / \(book.pages)")
-                                                                    .fontWeight(.bold)
+                                                                if log.quickNote?.noteText != nil {
+                                                                    VStack {
+                                                                        Text("\(log.totalPagesRead) / \(book.pages)")
+                                                                            .font(.subheadline)
+                                                                            .fontWeight(.bold)
+                                                                    }
+                                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                                    .padding(.horizontal, -17)
+                                                                } else {
+                                                                    VStack {
+                                                                        Text("\(log.totalPagesRead) / \(book.pages)")
+                                                                            .font(.subheadline)
+                                                                            .fontWeight(.bold)
+                                                                    }
+                                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                                    .padding(.horizontal, -35)
+                                                                }
+                                                                
+                                                                if log.quickNote?.noteText != nil {
+                                                                    VStack {
+                                                                        Image(systemName: "note.text")
+                                                                            .onTapGesture {
+                                                                                guard let noteText = log.quickNote?.noteText else {
+                                                                                    print("Error printing note")
+                                                                                    return
+                                                                                }
+                                                                                print(noteText)
+                                                                                
+                                                                                let currentDate = Date.now
+                                                                                
+                                                                                currentNote = QuickNote(noteText: noteText, date: currentDate)
+                                                                                
+                                                                                currentLog = log
+                                                                            }
+                                                                    }
+                                                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                                                    .padding(.horizontal, -23)
+                                                                }
                                                                 
                                                                 VStack {
                                                                     Menu {
-                                                                        Button(action: {
+                                                                        Button("Delete",
+                                                                               role: .destructive,
+                                                                               action: {
                                                                             currentLog = log
                                                                             showDeletionAlert.toggle()
-                                                                        }) {
-                                                                            Text("Delete")
-                                                                                .foregroundStyle(.red)
                                                                         }
+                                                                        )
+                                                                        .tint(.red)
                                                                     } label: {
                                                                         Circle()
                                                                             .fill(.clear)
@@ -285,6 +366,14 @@ struct LogView: View {
             .preferredColorScheme(.dark)
             .navigationTitle("Logs")
             .navigationBarTitleDisplayMode(.inline)
+//            .navigationDestination(item: $currentNote) { note in
+//                NoteTextView(note: note)
+//            }
+            .sheet(item: $currentNote) { note in
+                NoteTextView(note: note)
+                    .presentationDetents([.height(450)])
+                    .presentationCornerRadius(25.0)
+            }
             .onChange(of: book.logs) {
                 if book.isFullyRead {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
@@ -293,8 +382,8 @@ struct LogView: View {
                 }
             }
             .onAppear {
-                let logs = book.logs
-                let lastLog = logs?.last
+                let logsArray = book.logs
+                let lastLog = logsArray?.last
                 
                 if lastPageNumber == nil {
                     lastPageNumber = lastLog?.totalPagesRead
