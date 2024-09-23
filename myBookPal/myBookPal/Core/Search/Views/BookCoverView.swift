@@ -20,6 +20,8 @@ struct BookCoverView: View {
                     .resizable()
                     .frame(width: 200, height: 310)
                     .clipShape(RoundedRectangle(cornerRadius: 20.0))
+                    .shadow(radius: 15)
+                    .shadow(radius: 15)
                     .overlay {
                         RoundedRectangle(cornerRadius: 20.0)
                             .fill(.clear)
