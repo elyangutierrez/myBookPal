@@ -9,6 +9,7 @@ import SwiftData
 import SwiftUI
 
 struct TabsView: View {
+    @Environment(\.modelContext) var modelContext
     @Query(sort: \Book.title) var books: [Book]
     @State private var selectedTab = 0
     
@@ -41,6 +42,12 @@ struct TabsView: View {
                     }
                     .onAppear {
                         print("TAB DEBUG: \(books)")
+                    }
+                
+                CurrentGoalsView(modelContext: modelContext)
+                    .tabItem {
+                        Image(systemName: "target")
+                        Text("Goals")
                     }
                 
                 ProfileView(books: books)

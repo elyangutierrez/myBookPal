@@ -13,6 +13,10 @@
 		720A00202C9FB9FE00BD9A45 /* AddQuickNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A001F2C9FB9FE00BD9A45 /* AddQuickNoteView.swift */; };
 		720A00232CA080D800BD9A45 /* NoteVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00222CA080D800BD9A45 /* NoteVisibility.swift */; };
 		720A00252CA0961B00BD9A45 /* NoteTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00242CA0961B00BD9A45 /* NoteTextView.swift */; };
+		720A002C2CA0FC8C00BD9A45 /* Goal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A002B2CA0FC8C00BD9A45 /* Goal.swift */; };
+		720A002E2CA0FEE500BD9A45 /* GoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A002D2CA0FEE500BD9A45 /* GoalManager.swift */; };
+		720A00302CA1017900BD9A45 /* AddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A002F2CA1017900BD9A45 /* AddGoalView.swift */; };
+		720A00322CA1019000BD9A45 /* CurrentGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00312CA1019000BD9A45 /* CurrentGoalsView.swift */; };
 		722662962C8956EA0071162D /* CrimsonText-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */; };
 		722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662912C894ED70071162D /* CrimsonText-Regular.ttf */; };
 		722662992C8957C40071162D /* CrimsonText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662982C8957C40071162D /* CrimsonText-Bold.ttf */; };
@@ -82,6 +86,10 @@
 		720A001F2C9FB9FE00BD9A45 /* AddQuickNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuickNoteView.swift; sourceTree = "<group>"; };
 		720A00222CA080D800BD9A45 /* NoteVisibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteVisibility.swift; sourceTree = "<group>"; };
 		720A00242CA0961B00BD9A45 /* NoteTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTextView.swift; sourceTree = "<group>"; };
+		720A002B2CA0FC8C00BD9A45 /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
+		720A002D2CA0FEE500BD9A45 /* GoalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalManager.swift; sourceTree = "<group>"; };
+		720A002F2CA1017900BD9A45 /* AddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalView.swift; sourceTree = "<group>"; };
+		720A00312CA1019000BD9A45 /* CurrentGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentGoalsView.swift; sourceTree = "<group>"; };
 		722662912C894ED70071162D /* CrimsonText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Regular.ttf"; sourceTree = "<group>"; };
 		722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-SemiBold.ttf"; sourceTree = "<group>"; };
 		722662982C8957C40071162D /* CrimsonText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Bold.ttf"; sourceTree = "<group>"; };
@@ -161,6 +169,49 @@
 			children = (
 				72C4CD3B2C9A7EF800730327 /* DateTracker.swift */,
 				720A00222CA080D800BD9A45 /* NoteVisibility.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		720A00262CA0FBBB00BD9A45 /* ReadingGoals */ = {
+			isa = PBXGroup;
+			children = (
+				720A00272CA0FC2100BD9A45 /* Model */,
+				720A002A2CA0FC3100BD9A45 /* ViewModel */,
+				720A00282CA0FC2500BD9A45 /* ViewModifiers */,
+				720A00292CA0FC2900BD9A45 /* Views */,
+			);
+			path = ReadingGoals;
+			sourceTree = "<group>";
+		};
+		720A00272CA0FC2100BD9A45 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				720A002B2CA0FC8C00BD9A45 /* Goal.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		720A00282CA0FC2500BD9A45 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModifiers;
+			sourceTree = "<group>";
+		};
+		720A00292CA0FC2900BD9A45 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				720A002F2CA1017900BD9A45 /* AddGoalView.swift */,
+				720A00312CA1019000BD9A45 /* CurrentGoalsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		720A002A2CA0FC3100BD9A45 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				720A002D2CA0FEE500BD9A45 /* GoalManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -475,6 +526,7 @@
 		728B62F22C89464800A12046 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				720A00262CA0FBBB00BD9A45 /* ReadingGoals */,
 				7248FF452C9C952D00722F23 /* Profile */,
 				728B62F02C89462B00A12046 /* Category */,
 				722662B92C8FC2AF0071162D /* Collection */,
@@ -625,6 +677,7 @@
 				72BB66932C93F782001F17BA /* RowOneView.swift in Sources */,
 				720A00252CA0961B00BD9A45 /* NoteTextView.swift in Sources */,
 				72BBD3502BF2A64C006BC431 /* Log.swift in Sources */,
+				720A00302CA1017900BD9A45 /* AddGoalView.swift in Sources */,
 				72C4CD3C2C9A7EF800730327 /* DateTracker.swift in Sources */,
 				720A001A2C9E768D00BD9A45 /* HelpAndSupportView.swift in Sources */,
 				72A8893E2C3A23520032A56C /* BackgroundBookCoverView.swift in Sources */,
@@ -638,6 +691,7 @@
 				72D098092BF168D50021819E /* Book.swift in Sources */,
 				722662DD2C929CB70071162D /* PlaceholderModifier.swift in Sources */,
 				720A00232CA080D800BD9A45 /* NoteVisibility.swift in Sources */,
+				720A00322CA1019000BD9A45 /* CurrentGoalsView.swift in Sources */,
 				72DAA9432C9CEE1B001DAD75 /* NotificationsView.swift in Sources */,
 				72D098182BF16DE80021819E /* BookCoverView.swift in Sources */,
 				7248FF5B2C9CE0CB00722F23 /* CustomArrowView.swift in Sources */,
@@ -654,7 +708,9 @@
 				7259CABF2BFE45BD0039D778 /* CatagoryView.swift in Sources */,
 				72D098152BF1692D0021819E /* ImageLinks.swift in Sources */,
 				724BEAA22C96370B00B86198 /* Tag.swift in Sources */,
+				720A002C2CA0FC8C00BD9A45 /* Goal.swift in Sources */,
 				72D0981A2BF174CB0021819E /* RectangleLineView.swift in Sources */,
+				720A002E2CA0FEE500BD9A45 /* GoalManager.swift in Sources */,
 				722662A62C8CAE030071162D /* StarRatingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
