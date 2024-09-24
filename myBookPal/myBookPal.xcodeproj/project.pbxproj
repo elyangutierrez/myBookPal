@@ -17,6 +17,8 @@
 		720A002E2CA0FEE500BD9A45 /* GoalManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A002D2CA0FEE500BD9A45 /* GoalManager.swift */; };
 		720A00302CA1017900BD9A45 /* AddGoalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A002F2CA1017900BD9A45 /* AddGoalView.swift */; };
 		720A00322CA1019000BD9A45 /* CurrentGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00312CA1019000BD9A45 /* CurrentGoalsView.swift */; };
+		720A00342CA1087B00BD9A45 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00332CA1087B00BD9A45 /* ReminderManager.swift */; };
+		720A00362CA2581000BD9A45 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00352CA2581000BD9A45 /* DateManager.swift */; };
 		722662962C8956EA0071162D /* CrimsonText-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */; };
 		722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662912C894ED70071162D /* CrimsonText-Regular.ttf */; };
 		722662992C8957C40071162D /* CrimsonText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662982C8957C40071162D /* CrimsonText-Bold.ttf */; };
@@ -90,6 +92,8 @@
 		720A002D2CA0FEE500BD9A45 /* GoalManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalManager.swift; sourceTree = "<group>"; };
 		720A002F2CA1017900BD9A45 /* AddGoalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalView.swift; sourceTree = "<group>"; };
 		720A00312CA1019000BD9A45 /* CurrentGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentGoalsView.swift; sourceTree = "<group>"; };
+		720A00332CA1087B00BD9A45 /* ReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderManager.swift; sourceTree = "<group>"; };
+		720A00352CA2581000BD9A45 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		722662912C894ED70071162D /* CrimsonText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Regular.ttf"; sourceTree = "<group>"; };
 		722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-SemiBold.ttf"; sourceTree = "<group>"; };
 		722662982C8957C40071162D /* CrimsonText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Bold.ttf"; sourceTree = "<group>"; };
@@ -173,7 +177,7 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		720A00262CA0FBBB00BD9A45 /* ReadingGoals */ = {
+		720A00262CA0FBBB00BD9A45 /* Goals */ = {
 			isa = PBXGroup;
 			children = (
 				720A00272CA0FC2100BD9A45 /* Model */,
@@ -181,7 +185,7 @@
 				720A00282CA0FC2500BD9A45 /* ViewModifiers */,
 				720A00292CA0FC2900BD9A45 /* Views */,
 			);
-			path = ReadingGoals;
+			path = Goals;
 			sourceTree = "<group>";
 		};
 		720A00272CA0FC2100BD9A45 /* Model */ = {
@@ -212,6 +216,8 @@
 			isa = PBXGroup;
 			children = (
 				720A002D2CA0FEE500BD9A45 /* GoalManager.swift */,
+				720A00332CA1087B00BD9A45 /* ReminderManager.swift */,
+				720A00352CA2581000BD9A45 /* DateManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -526,7 +532,7 @@
 		728B62F22C89464800A12046 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				720A00262CA0FBBB00BD9A45 /* ReadingGoals */,
+				720A00262CA0FBBB00BD9A45 /* Goals */,
 				7248FF452C9C952D00722F23 /* Profile */,
 				728B62F02C89462B00A12046 /* Category */,
 				722662B92C8FC2AF0071162D /* Collection */,
@@ -687,6 +693,7 @@
 				720A00202C9FB9FE00BD9A45 /* AddQuickNoteView.swift in Sources */,
 				72DAA9412C9CEE15001DAD75 /* StatisticsView.swift in Sources */,
 				725D054D2BF971E7001557A4 /* InProgressView.swift in Sources */,
+				720A00362CA2581000BD9A45 /* DateManager.swift in Sources */,
 				72BB66952C93F7A2001F17BA /* RowTwoView.swift in Sources */,
 				72D098092BF168D50021819E /* Book.swift in Sources */,
 				722662DD2C929CB70071162D /* PlaceholderModifier.swift in Sources */,
@@ -695,6 +702,7 @@
 				72DAA9432C9CEE1B001DAD75 /* NotificationsView.swift in Sources */,
 				72D098182BF16DE80021819E /* BookCoverView.swift in Sources */,
 				7248FF5B2C9CE0CB00722F23 /* CustomArrowView.swift in Sources */,
+				720A00342CA1087B00BD9A45 /* ReminderManager.swift in Sources */,
 				722662CE2C9250EC0071162D /* DonutChartView.swift in Sources */,
 				724070F02BED774C00E1E07C /* TabsView.swift in Sources */,
 				724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */,
