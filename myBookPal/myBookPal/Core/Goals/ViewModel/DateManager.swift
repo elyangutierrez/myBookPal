@@ -15,6 +15,22 @@ class DateManager {
     var currentDay: String = ""
     var selectedDay: String = ""
     
+    var dayNameOne: String = ""
+    var dayNameTwo: String = ""
+    var dayNameThree: String = ""
+    var dayNameFour: String = ""
+    var dayNameFive: String = ""
+    var dayNameSix: String = ""
+    var dayNameSeven: String = ""
+    
+    var dayNumberOne: String = ""
+    var dayNumberTwo: String = ""
+    var dayNumberThree: String = ""
+    var dayNumberFour: String = ""
+    var dayNumberFive: String = ""
+    var dayNumberSix: String = ""
+    var dayNumberSeven: String = ""
+    
     func getCurrentMonth() {
         let calendar = Calendar.current
         let today = Date()
@@ -50,14 +66,22 @@ class DateManager {
             currentMonth = "Error"
         }
         
-        print(currentMonth)
+//        print("DEBUG: current month: \(currentMonth)")
     }
     
     func getWeekDayNames() {
         let calendar = Calendar.current
         weekDayNames = calendar.shortWeekdaySymbols
         
-        print(weekDayNames)
+        dayNameOne = weekDayNames[0]
+        dayNameTwo = weekDayNames[1]
+        dayNameThree = weekDayNames[2]
+        dayNameFour = weekDayNames[3]
+        dayNameFive = weekDayNames[4]
+        dayNameSix = weekDayNames[5]
+        dayNameSeven = weekDayNames[6]
+        
+//        print("DEBUG: weekdaynames: \(weekDayNames)")
     }
     
     func getWeekDayNumbers() {
@@ -80,12 +104,22 @@ class DateManager {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd"
         
+        weekDayNumbers = []
+        
         for date in currentWeek {
             let item = formatter.string(from: date)
             weekDayNumbers.append(item)
         }
         
-        print(weekDayNumbers)
+        dayNumberOne = weekDayNumbers[0]
+        dayNumberTwo = weekDayNumbers[1]
+        dayNumberThree = weekDayNumbers[2]
+        dayNumberFour = weekDayNumbers[3]
+        dayNumberFive = weekDayNumbers[4]
+        dayNumberSix = weekDayNumbers[5]
+        dayNumberSeven = weekDayNumbers[6]
+
+//        print("DEBUG: week day nums \(weekDayNumbers)")
     }
     
     func getCurrentDay() {
@@ -95,7 +129,7 @@ class DateManager {
         let item = formatter.string(from: today)
         currentDay = item
         
-        print(currentDay)
+//        print("DEBUG: current day: \(currentDay)")
     }
     
     func setSelectedDay() {
@@ -109,6 +143,6 @@ class DateManager {
             }
         }
         
-        print(selectedDay)
+//        print("DEBUG: selected day: \(selectedDay)")
     }
 }

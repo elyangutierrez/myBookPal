@@ -9,7 +9,18 @@ import SwiftUI
 
 struct AddGoalView: View {
     var body: some View {
-        Text("Hello, World!")
+        NavigationStack {
+            VStack {
+                Text("This is add goal view!")
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("Add Goal")
+                        .fontWeight(.semibold)
+                }
+            }
+        }
     }
 }
 
