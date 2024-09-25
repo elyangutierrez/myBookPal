@@ -13,6 +13,7 @@ struct CurrentGoalsView: View {
     @State private var goalManager: GoalManager
     @State private var goalToDelete: Goal?
     @State private var dateManager = DateManager()
+    @State private var showAddGoalSheet = false
     
     private func callManagerMethods() {
         dateManager.getWeekDayNames()
@@ -24,6 +25,10 @@ struct CurrentGoalsView: View {
     
     var body: some View {
         NavigationStack {
+            
+            Spacer()
+                .frame(height: 10)
+            
             ScrollView(.vertical, showsIndicators: false) {
                 LazyVStack {
                     VStack {
@@ -60,7 +65,7 @@ struct CurrentGoalsView: View {
                                 if dateManager.currentDay == dateManager.dayNumberOne {
                                     RoundedRectangle(cornerRadius: 15.0)
                                         .fill(.complement.opacity(0.70))
-                                        .frame(width: 40, height: 50)
+                                        .frame(width: 35, height: 50)
                                 }
                             }
                             
@@ -86,7 +91,7 @@ struct CurrentGoalsView: View {
                                 if dateManager.currentDay == dateManager.dayNumberTwo {
                                     RoundedRectangle(cornerRadius: 15.0)
                                         .fill(.complement.opacity(0.70))
-                                        .frame(width: 40, height: 60)
+                                        .frame(width: 35, height: 60)
                                 }
                             }
                             
@@ -108,6 +113,13 @@ struct CurrentGoalsView: View {
                                     .fontWeight(.bold)
                                     .foregroundStyle(dateManager.currentDay == dateManager.dayNumberThree ? .white : .black)
                             }
+                            .background {
+                                if dateManager.currentDay == dateManager.dayNumberThree {
+                                    RoundedRectangle(cornerRadius: 15.0)
+                                        .fill(.complement.opacity(0.70))
+                                        .frame(width: 35, height: 60)
+                                }
+                            }
                             
                             Spacer()
                                 .frame(width: 16)
@@ -126,6 +138,13 @@ struct CurrentGoalsView: View {
                                     .font(.subheadline)
                                     .fontWeight(.bold)
                                     .foregroundStyle(dateManager.currentDay == dateManager.dayNumberFour ? .white : .black)
+                            }
+                            .background {
+                                if dateManager.currentDay == dateManager.dayNumberFour {
+                                    RoundedRectangle(cornerRadius: 15.0)
+                                        .fill(.complement.opacity(0.70))
+                                        .frame(width: 35, height: 60)
+                                }
                             }
                             
                             Spacer()
@@ -146,6 +165,13 @@ struct CurrentGoalsView: View {
                                     .fontWeight(.bold)
                                     .foregroundStyle(dateManager.currentDay == dateManager.dayNumberFive ? .white : .black)
                             }
+                            .background {
+                                if dateManager.currentDay == dateManager.dayNumberFive {
+                                    RoundedRectangle(cornerRadius: 15.0)
+                                        .fill(.complement.opacity(0.70))
+                                        .frame(width: 35, height: 60)
+                                }
+                            }
                             
                             Spacer()
                                 .frame(width: 16)
@@ -164,6 +190,13 @@ struct CurrentGoalsView: View {
                                     .font(.subheadline)
                                     .fontWeight(.bold)
                                     .foregroundStyle(dateManager.currentDay == dateManager.dayNumberSix ? .white : .black)
+                            }
+                            .background {
+                                if dateManager.currentDay == dateManager.dayNumberSix {
+                                    RoundedRectangle(cornerRadius: 15.0)
+                                        .fill(.complement.opacity(0.70))
+                                        .frame(width: 35, height: 60)
+                                }
                             }
                             
                             Spacer()
@@ -186,10 +219,17 @@ struct CurrentGoalsView: View {
                                 
                                     
                             }
+                            .background {
+                                if dateManager.currentDay == dateManager.dayNumberSeven {
+                                    RoundedRectangle(cornerRadius: 15.0)
+                                        .fill(.complement.opacity(0.70))
+                                        .frame(width: 35, height: 60)
+                                }
+                            }
                         }
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 68)
+                    .frame(maxWidth: .infinity, alignment: .center)
+//                    .padding(.horizontal, 68)
                     
                     Spacer()
                         .frame(height: 30)
@@ -218,23 +258,40 @@ struct CurrentGoalsView: View {
                                     Spacer()
                                         .frame(height: 15)
                                     
-                                    NavigationLink(destination: AddGoalView()) {
+                                    Button(action: {
+                                        showAddGoalSheet.toggle()
+                                    }) {
                                         RoundedRectangle(cornerRadius: 15.0)
                                             .fill(.black)
                                             .frame(width: 265, height: 30)
                                             .overlay {
-                                                Image(systemName: "plus")
-                                                    .foregroundStyle(.white)
-                                                    .fontWeight(.bold)
+                                                VStack {
+                                                    Image(systemName: "plus")
+                                                        .foregroundStyle(.white)
+                                                        .fontWeight(.bold)
+                                                }
                                             }
                                     }
+                                    
+//                                    NavigationLink(destination: AddGoalView()) {
+//                                        RoundedRectangle(cornerRadius: 15.0)
+//                                            .fill(.black)
+//                                            .frame(width: 265, height: 30)
+//                                            .overlay {
+//                                                VStack {
+//                                                    Image(systemName: "plus")
+//                                                        .foregroundStyle(.white)
+//                                                        .fontWeight(.bold)
+//                                                }
+//                                            }
+//                                    }
                                 }
                             }
                             .allowsHitTesting(true)
                     }
                     
                     Spacer()
-                        .frame(height: 20)
+                        .frame(height: 30)
                     
                     VStack {
                         // current goals text
@@ -245,20 +302,115 @@ struct CurrentGoalsView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.horizontal, 20)
                     
+                    Spacer()
+                        .frame(height: 10)
+                    
                     VStack {
-                        // date goal was added
-                        
-                        HStack {
+                        ForEach(goalManager.goals, id: \.self) { goal in
                             VStack {
-                                // time and line
+                
+                                // date goal was created on
+                                
+                                VStack {
+                                    Text(goal.createdOnString)
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.gray.opacity(0.75))
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 20)
+                                
+                                HStack {
+                                    VStack {
+                                        // time
+                                        
+                                        Text(goal.timeCreated)
+                                            .font(.footnote)
+                                            .fontWeight(.bold)
+                                            .foregroundStyle(.weekName)
+                                        
+                                        // vertical line
+                                        
+                                        Rectangle()
+                                            .foregroundStyle(.weekName)
+                                            .frame(width: 1.50, height: 150)
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.horizontal, 21)
+                                    
+                                    VStack {
+                                        VStack {
+                                            RoundedRectangle(cornerRadius: 15.0)
+                                                .fill(goal.selectedNumber == 1 ? .complement.opacity(0.50) : .darkerComplement)
+                                                .frame(width: 275, height: 150)
+                                                .overlay {
+                                                    VStack {
+                                                        VStack(alignment: .leading) {
+                                                            RoundedRectangle(cornerRadius: 5.0)
+                                                                .fill(.white)
+                                                                .frame(width: 50, height: 25)
+                                                                .overlay {
+                                                                    VStack {
+                                                                        Text(goal.priority)
+                                                                            .font(.caption2)
+                                                                    }
+                                                                }
+                                                            
+                                                            Spacer()
+                                                                .frame(height: 15)
+                                                            
+                                                            Text(goal.text)
+                                                                .fontWeight(.bold)
+                                                                .foregroundStyle(.white)
+                                                            
+                                                            Spacer()
+                                                                .frame(height: 15)
+                                                            
+                                                            HStack {
+                                                                Image(systemName: "calendar")
+                                                                    .foregroundStyle(.white)
+                                                                    .fontWeight(.bold)
+                                                                
+                                                                Spacer()
+                                                                    .frame(width: 5)
+                                                                
+                                                                Text("Deadline: \(goal.getDeadline)")
+                                                                    .font(.footnote)
+                                                                    .foregroundStyle(.white)
+                                                            }
+                                                            
+                                                            Spacer()
+                                                                .frame(height: 20)
+                                                        
+                                                            // have progress bar here
+                                                            
+                                                            ProgressView(value: 9, total: goal.target)
+                                                                .tint(.white)
+                                                            
+                                                        }
+                                                        .frame(maxHeight: .infinity, alignment: .top)
+                                                        .padding(.vertical, 10)
+                                                    }
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                    .padding(.horizontal, 10)
+                                                }
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                    }
+                                    .frame(maxHeight: .infinity, alignment: .top)
+                                    
+                                    Spacer()
+                                        .frame(width: 20)
+                                }
                             }
-                            
-                            VStack {
-                                // goal card
+                            .onLongPressGesture {
+                                goalManager.removeGoal(goal)
                             }
                         }
                     }
                 }
+                
+                Spacer()
+                    .frame(height: 35)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -266,9 +418,23 @@ struct CurrentGoalsView: View {
                     Text("Goals")
                         .fontWeight(.semibold)
                 }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(action: {
+                        goalManager.addGoal()
+                    }) {
+                        Image(systemName: "plus")
+                    }
+                }
             }
             .onAppear {
                 callManagerMethods()
+                print(goalManager.goals)
+            }
+            .sheet(isPresented: $showAddGoalSheet) {
+                AddGoalView()
+                    .presentationDetents([.height(675)])
+                    .presentationCornerRadius(25.0)
             }
         }
     }

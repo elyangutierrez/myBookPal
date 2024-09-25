@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct AddGoalView: View {
+    
+    @Environment(\.dismiss) var dismiss
+    
     var body: some View {
         NavigationStack {
             VStack {
@@ -18,6 +21,14 @@ struct AddGoalView: View {
                 ToolbarItem(placement: .principal) {
                     Text("Add Goal")
                         .fontWeight(.semibold)
+                }
+                
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Text("Cancel")
+                    }
                 }
             }
         }

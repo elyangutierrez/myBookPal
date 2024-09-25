@@ -31,7 +31,9 @@ class GoalManager {
         
         // Example Model
         
-        let exampleGoal = Goal(text: "Testing", createdOn: Date.now, timeFrame: DateInterval(start: Date.now, end: .now.addingTimeInterval(24.0 * 365)), target: 14, status: "In Progress", reminderOn: false, priority: "Important")
+        let gen = Int.random(in: 1...2)
+        
+        let exampleGoal = Goal(text: "Testing", createdOn: Date.now, timeFrame: DateInterval(start: Date.now, end: .now.addingTimeInterval(24.0 * 365)), deadline: Date.now.addingTimeInterval(24.0 * 180) ,target: 14.0, status: "In Progress", reminderOn: false, priority: "High", selectedNumber: gen)
         
         print("Got example goal")
         
@@ -44,6 +46,8 @@ class GoalManager {
     
     func removeGoal(_ goal: Goal) {
         modelContext.delete(goal)
+        goals.remove(at: goals.firstIndex(of: goal)!)
+        print("DEBUG: removed goal from context")
     }
     
     func modifyGoal(_ goal: Goal) {
