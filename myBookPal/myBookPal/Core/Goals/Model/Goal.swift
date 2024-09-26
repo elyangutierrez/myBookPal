@@ -14,18 +14,16 @@ class Goal {
     var createdOn: Date
     var finishedOn: Date?
     var deadline: Date
-    var target: Double?
     var status: String
     var reminderOn: Bool
     var priority: String
     var selectedNumber: Int
     
-    init(text: String, createdOn: Date, finishedOn: Date? = nil, deadline: Date, target: Double? = nil, status: String, reminderOn: Bool, priority: String, selectedNumber: Int) {
+    init(text: String, createdOn: Date, finishedOn: Date? = nil, deadline: Date, status: String, reminderOn: Bool, priority: String, selectedNumber: Int) {
         self.text = text
         self.createdOn = createdOn
         self.finishedOn = finishedOn
         self.deadline = deadline
-        self.target = target
         self.status = status
         self.reminderOn = reminderOn
         self.priority = priority

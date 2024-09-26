@@ -15,6 +15,7 @@ struct CurrentGoalsView: View {
     @State private var dateManager = DateManager()
     @State private var showAddGoalSheet = false
     @State private var goalAdded: Bool = false
+    @State private var today = Date.now
     
     private func callManagerMethods() {
         dateManager.getWeekDayNames()
@@ -303,7 +304,7 @@ struct CurrentGoalsView: View {
                     
                     if goalManager.goals == [] {
                         VStack {
-                            Text("No Goals Avaliable...")
+                            Text("No Active Goals...")
 //                                .fontWeight(.bold)
                                 .foregroundStyle(.gray)
                         }
@@ -379,6 +380,7 @@ struct CurrentGoalsView: View {
                                                                                 .overlay {
                                                                                     Image(systemName: "ellipsis")
                                                                                         .foregroundStyle(.white)
+                                                                                        .fontWeight(.bold)
                                                                                 }
                                                                         }
                                                                     }
@@ -403,27 +405,22 @@ struct CurrentGoalsView: View {
                                                                     Spacer()
                                                                         .frame(width: 5)
                                                                     
-                                                                    Text("Deadline: \(goal.getDeadline)")
-                                                                        .font(.footnote)
-                                                                        .foregroundStyle(.white)
+                                                                    HStack {
+                                                                        Text("Deadline:")
+                                                                            .font(.footnote)
+                                                                            .fontWeight(.bold)
+                                                                            .foregroundStyle(.white)
+                                                                        
+                                                                        Text("\(goal.getDeadline)")
+                                                                            .font(.footnote)
+                                                                            .foregroundStyle(.white)
+                                                                            .padding(.horizontal, -5)
+                                                                    }
                                                                 }
                                                                 
                                                                 Spacer()
                                                                     .frame(height: 20)
-                                                                
-                                                                // have progress bar here
-                                                                // TODO: make value an actual variable watcher
-                                                                
-                                                                if let unwrappedTarget = goal.target {
-                                                                    if unwrappedTarget > 0.0 {
-                                                                        ProgressView(value: 2, total: unwrappedTarget)
-                                                                            .tint(.white)
-                                                                            .background {
-                                                                                RoundedRectangle(cornerRadius: 20.0)
-                                                                                    .fill(.accent.opacity(0.70))
-                                                                            }
-                                                                    }
-                                                                }
+                                                        
                                                             }
                                                             .frame(maxHeight: .infinity, alignment: .top)
                                                             .padding(.vertical, 10)
@@ -441,14 +438,11 @@ struct CurrentGoalsView: View {
                                             .frame(width: 20)
                                     }
                                     .onAppear {
-                                        if goal.deadline < Date.now {
+                                        if goal.deadline < today {
                                             goalManager.removeGoal(goal)
                                         }
                                     }
                                 }
-//                                .onLongPressGesture {
-//                                    goalManager.removeGoal(goal)
-//                                }
                             }
                         }
                     }
@@ -463,7 +457,7 @@ struct CurrentGoalsView: View {
                     Text("Goals")
                         .fontWeight(.semibold)
                 }
-                
+ 
                 // DEBUG:
 //                ToolbarItem(placement: .topBarTrailing) {
 //                    Button(action: {

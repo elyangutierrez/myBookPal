@@ -28,26 +28,32 @@ class GoalManager {
         }
     }
     
-//    func addGoal() {
-//        
-//        // Example Model
-//        
-//        let gen = Int.random(in: 1...2)
-//        
-//        let exampleGoal = Goal(text: "Testing", createdOn: Date.now, deadline: Date.now.addingTimeInterval(24.0 * 180) ,target: 14.0, status: "In Progress", reminderOn: false, priority: "High", selectedNumber: gen)
-//        
-//        print("Got example goal")
-//        
-//        modelContext.insert(exampleGoal)
-//        
-//        print("Inserted goal into context.")
-//        
-//        fetchGoals()
-//    }
+    func addGoal() {
+        
+        // Example Model
+        
+        let gen = Int.random(in: 1...2)
+        
+        let exampleGoal = Goal(text: "Testing", createdOn: Date.now, deadline: Date.now.addingTimeInterval(24.0 * 180), status: "In Progress", reminderOn: false, priority: "High", selectedNumber: gen)
+        
+        print("Got example goal")
+        
+        modelContext.insert(exampleGoal)
+        
+        print("Inserted goal into context.")
+        
+        fetchGoals()
+    }
     
     func removeGoal(_ goal: Goal) {
         modelContext.delete(goal)
-        goals.remove(at: goals.firstIndex(of: goal)!)
+        
+        guard let index = goals.firstIndex(of: goal) else {
+            print("Failed to remove goal.")
+            return
+        }
+        
+        goals.remove(at: index)
         print("DEBUG: removed goal from context")
     }
     

@@ -17,28 +17,11 @@ struct AddGoalView: View {
     @State private var reminderDate = Date()
     @State private var prioritySelection: String = "Medium"
     @State private var showAddGoalAlert: Bool = false
-    @State private var pagesWantToRead: Int? = nil
     @State private var reminderManager = ReminderManager()
+    @State private var showAlert = false
     @Binding var goalAdded: Bool
     
     let selections = ["High", "Medium", "Low"]
-    
-//    var getInterval: TimeInterval {
-//        let minute = 60
-//        let hour = 60 * minute
-//        let day = 24 * hour
-//        
-//        switch prioritySelection {
-//        case "High":
-//            return Double(day) * 1.0
-//        case "Medium":
-//            return Double(day) * 2.0
-//        case "Low":
-//            return Double(day) * 3.0
-//        default:
-//            return Double(day)
-//        }
-//    }
     
     var initialDate: TimeInterval {
         let minute = 60
@@ -55,12 +38,8 @@ struct AddGoalView: View {
                     TextField("Enter description", text: $goalDescription)
                 }
                 
-                Section("Page Target (Optional)") {
-                    TextField("Enter Target", value: $pagesWantToRead, format: .number)
-                }
-                
                 Section("Due Date") {
-                    DatePicker("Date", selection: $dueDateSelection, in: Date.now...Date.distantFuture)
+                    DatePicker("Date", selection: $dueDateSelection, in: Date.now.addingTimeInterval(initialDate)...Date.distantFuture)
                 }
                 
                 Section("Reminder Notification") {
@@ -70,7 +49,7 @@ struct AddGoalView: View {
                     
                     if isReminderEnabled {
                         
-                        DatePicker("Reminder", selection: $reminderDate, in: Date.now...Date.distantFuture)
+                        DatePicker("Reminder", selection: $reminderDate, in: Date.now.addingTimeInterval(initialDate)...Date.distantFuture)
                     }
                 }
                 
@@ -126,6 +105,11 @@ struct AddGoalView: View {
             } message: {
                 Text("This goal has been added to your list!")
             }
+            .alert("Invalid Info", isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
+            } message: {
+                Text("You")
+            }
         }
     }
     
@@ -135,7 +119,7 @@ struct AddGoalView: View {
         
         
         if isReminderEnabled {
-            let goal = Goal(text: goalDescription, createdOn: Date.now, deadline: dueDateSelection, target: Double(pagesWantToRead ?? 0), status: "In Progress", reminderOn: isReminderEnabled, priority: prioritySelection, selectedNumber: gen)
+            let goal = Goal(text: goalDescription, createdOn: Date.now, deadline: dueDateSelection, status: "In Progress", reminderOn: isReminderEnabled, priority: prioritySelection, selectedNumber: gen)
             reminderManager.goalTitle = goalDescription
             reminderManager.reminderDate = reminderDate
             reminderManager.createNotification()
@@ -144,7 +128,7 @@ struct AddGoalView: View {
             print("Add goal to list!")
             goalAdded.toggle()
         } else {
-            let goal = Goal(text: goalDescription, createdOn: Date.now, deadline: dueDateSelection, target: Double(pagesWantToRead ?? 0), status: "In Progress", reminderOn: isReminderEnabled, priority: prioritySelection, selectedNumber: gen)
+            let goal = Goal(text: goalDescription, createdOn: Date.now, deadline: dueDateSelection, status: "In Progress", reminderOn: isReminderEnabled, priority: prioritySelection, selectedNumber: gen)
             modelContext.insert(goal)
             try? modelContext.save()
             print("Add goal to list!")
