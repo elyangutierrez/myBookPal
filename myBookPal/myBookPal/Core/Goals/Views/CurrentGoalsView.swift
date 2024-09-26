@@ -14,6 +14,7 @@ struct CurrentGoalsView: View {
     @State private var goalToDelete: Goal?
     @State private var dateManager = DateManager()
     @State private var showAddGoalSheet = false
+    @State private var goalAdded: Bool = false
     
     private func callManagerMethods() {
         dateManager.getWeekDayNames()
@@ -262,7 +263,7 @@ struct CurrentGoalsView: View {
                                         showAddGoalSheet.toggle()
                                     }) {
                                         RoundedRectangle(cornerRadius: 15.0)
-                                            .fill(.black)
+                                            .fill(.accent)
                                             .frame(width: 265, height: 30)
                                             .overlay {
                                                 VStack {
@@ -272,19 +273,6 @@ struct CurrentGoalsView: View {
                                                 }
                                             }
                                     }
-                                    
-//                                    NavigationLink(destination: AddGoalView()) {
-//                                        RoundedRectangle(cornerRadius: 15.0)
-//                                            .fill(.black)
-//                                            .frame(width: 265, height: 30)
-//                                            .overlay {
-//                                                VStack {
-//                                                    Image(systemName: "plus")
-//                                                        .foregroundStyle(.white)
-//                                                        .fontWeight(.bold)
-//                                                }
-//                                            }
-//                                    }
                                 }
                             }
                             .allowsHitTesting(true)
@@ -324,7 +312,7 @@ struct CurrentGoalsView: View {
                                         // time
                                         
                                         Text(goal.timeCreated)
-                                            .font(.footnote)
+                                            .font(.caption2)
                                             .fontWeight(.bold)
                                             .foregroundStyle(.weekName)
                                         
@@ -382,10 +370,14 @@ struct CurrentGoalsView: View {
                                                                 .frame(height: 20)
                                                         
                                                             // have progress bar here
+                                                            // TODO: make value an actual variable watcher
                                                             
-                                                            ProgressView(value: 9, total: goal.target)
-                                                                .tint(.white)
-                                                            
+                                                            if let unwrappedTarget = goal.target {
+                                                                if unwrappedTarget > 0.0 {
+                                                                    ProgressView(value: 9, total: unwrappedTarget)
+                                                                        .tint(.white)
+                                                                }
+                                                            }
                                                         }
                                                         .frame(maxHeight: .infinity, alignment: .top)
                                                         .padding(.vertical, 10)
@@ -432,9 +424,13 @@ struct CurrentGoalsView: View {
                 print(goalManager.goals)
             }
             .sheet(isPresented: $showAddGoalSheet) {
-                AddGoalView()
+                AddGoalView(goalAdded: $goalAdded)
                     .presentationDetents([.height(675)])
                     .presentationCornerRadius(25.0)
+            }
+            .onChange(of: goalAdded) {
+                goalManager.fetchGoals()
+                print("Call the methods on change.")
             }
         }
     }

@@ -22,6 +22,7 @@ class GoalManager {
         do {
             let descriptor = FetchDescriptor<Goal>(sortBy: [SortDescriptor(\.createdOn)])
             goals = try modelContext.fetch(descriptor)
+            print("Fetched goals.")
         } catch {
             print("Failed to fetch goals.")
         }
