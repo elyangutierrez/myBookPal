@@ -67,6 +67,7 @@ struct CurrentGoalsView: View {
                                     RoundedRectangle(cornerRadius: 15.0)
                                         .fill(.complement.opacity(0.70))
                                         .frame(width: 35, height: 50)
+                                        .shadow(color: .complement, radius: 5)
                                 }
                             }
                             
@@ -93,6 +94,7 @@ struct CurrentGoalsView: View {
                                     RoundedRectangle(cornerRadius: 15.0)
                                         .fill(.complement.opacity(0.70))
                                         .frame(width: 35, height: 60)
+                                        .shadow(color: .complement, radius: 5)
                                 }
                             }
                             
@@ -119,6 +121,7 @@ struct CurrentGoalsView: View {
                                     RoundedRectangle(cornerRadius: 15.0)
                                         .fill(.complement.opacity(0.70))
                                         .frame(width: 35, height: 60)
+                                        .shadow(color: .complement, radius: 5)
                                 }
                             }
                             
@@ -145,6 +148,7 @@ struct CurrentGoalsView: View {
                                     RoundedRectangle(cornerRadius: 15.0)
                                         .fill(.complement.opacity(0.70))
                                         .frame(width: 35, height: 60)
+                                        .shadow(color: .complement, radius: 5)
                                 }
                             }
                             
@@ -171,6 +175,7 @@ struct CurrentGoalsView: View {
                                     RoundedRectangle(cornerRadius: 15.0)
                                         .fill(.complement.opacity(0.70))
                                         .frame(width: 35, height: 60)
+                                        .shadow(color: .complement, radius: 5)
                                 }
                             }
                             
@@ -197,6 +202,7 @@ struct CurrentGoalsView: View {
                                     RoundedRectangle(cornerRadius: 15.0)
                                         .fill(.complement.opacity(0.70))
                                         .frame(width: 35, height: 60)
+                                        .shadow(color: .complement, radius: 5)
                                 }
                             }
                             
@@ -225,6 +231,7 @@ struct CurrentGoalsView: View {
                                     RoundedRectangle(cornerRadius: 15.0)
                                         .fill(.complement.opacity(0.70))
                                         .frame(width: 35, height: 60)
+                                        .shadow(color: .complement, radius: 5)
                                 }
                             }
                         }
@@ -272,6 +279,7 @@ struct CurrentGoalsView: View {
                                                         .fontWeight(.bold)
                                                 }
                                             }
+                                            .shadow(radius: 5)
                                     }
                                 }
                             }
@@ -293,109 +301,145 @@ struct CurrentGoalsView: View {
                     Spacer()
                         .frame(height: 10)
                     
-                    VStack {
-                        ForEach(goalManager.goals, id: \.self) { goal in
-                            VStack {
-                
-                                // date goal was created on
-                                
+                    if goalManager.goals == [] {
+                        VStack {
+                            Text("No Goals Avaliable...")
+//                                .fontWeight(.bold)
+                                .foregroundStyle(.gray)
+                        }
+                        .frame(maxHeight: .infinity, alignment: .top)
+                        .padding(.vertical, 150)
+                    } else {
+                        VStack {
+                            ForEach(goalManager.goals, id: \.self) { goal in
                                 VStack {
-                                    Text(goal.createdOnString)
-                                        .fontWeight(.bold)
-                                        .foregroundStyle(.gray.opacity(0.75))
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal, 20)
-                                
-                                HStack {
+                                    
+                                    // date goal was created on
+                                    
                                     VStack {
-                                        // time
-                                        
-                                        Text(goal.timeCreated)
-                                            .font(.caption2)
+                                        Text(goal.createdOnString)
                                             .fontWeight(.bold)
-                                            .foregroundStyle(.weekName)
-                                        
-                                        // vertical line
-                                        
-                                        Rectangle()
-                                            .foregroundStyle(.weekName)
-                                            .frame(width: 1.50, height: 150)
+                                            .foregroundStyle(.gray.opacity(0.75))
                                     }
                                     .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.horizontal, 21)
+                                    .padding(.horizontal, 20)
                                     
-                                    VStack {
+                                    HStack {
                                         VStack {
-                                            RoundedRectangle(cornerRadius: 15.0)
-                                                .fill(goal.selectedNumber == 1 ? .complement.opacity(0.50) : .darkerComplement)
-                                                .frame(width: 275, height: 150)
-                                                .overlay {
-                                                    VStack {
-                                                        VStack(alignment: .leading) {
-                                                            RoundedRectangle(cornerRadius: 5.0)
-                                                                .fill(.white)
-                                                                .frame(width: 50, height: 25)
-                                                                .overlay {
+                                            // time
+                                            
+                                            Text(goal.timeCreated)
+                                                .font(.caption2)
+                                                .fontWeight(.bold)
+                                                .foregroundStyle(.weekName)
+                                            
+                                            // vertical line
+                                            
+                                            Rectangle()
+                                                .foregroundStyle(.weekName)
+                                                .frame(width: 1.50, height: 150)
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.horizontal, 21)
+                                        
+                                        VStack {
+                                            VStack {
+                                                RoundedRectangle(cornerRadius: 15.0)
+                                                    .fill(goal.selectedNumber == 1 ? .complement.opacity(0.50) : .darkerComplement)
+                                                    .frame(width: 275, height: 150)
+                                                    .overlay {
+                                                        VStack {
+                                                            VStack(alignment: .leading) {
+                                                                HStack {
                                                                     VStack {
-                                                                        Text(goal.priority)
-                                                                            .font(.caption2)
+                                                                        RoundedRectangle(cornerRadius: 5.0)
+                                                                            .fill(.white)
+                                                                            .frame(width: 50, height: 25)
+                                                                            .overlay {
+                                                                                VStack {
+                                                                                    Text(goal.priority)
+                                                                                        .font(.caption2)
+                                                                                }
+                                                                            }
                                                                     }
+                                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                                    
+                                                                    VStack {
+                                                                        Menu {
+                                                                            Button("Delete", role: .destructive, action: {
+                                                                                goalToDelete = goal
+                                                                                deleteGoal()
+                                                                            }
+                                                                            )
+                                                                    
+                                                                        } label: {
+                                                                            Circle()
+                                                                                .fill(.clear)
+                                                                                .frame(width: 30, height: 30)
+                                                                                .overlay {
+                                                                                    Image(systemName: "ellipsis")
+                                                                                        .foregroundStyle(.white)
+                                                                                }
+                                                                        }
+                                                                    }
+                                                                    .frame(maxWidth: .infinity, alignment: .trailing)
                                                                 }
-                                                            
-                                                            Spacer()
-                                                                .frame(height: 15)
-                                                            
-                                                            Text(goal.text)
-                                                                .fontWeight(.bold)
-                                                                .foregroundStyle(.white)
-                                                            
-                                                            Spacer()
-                                                                .frame(height: 15)
-                                                            
-                                                            HStack {
-                                                                Image(systemName: "calendar")
-                                                                    .foregroundStyle(.white)
-                                                                    .fontWeight(.bold)
                                                                 
                                                                 Spacer()
-                                                                    .frame(width: 5)
+                                                                    .frame(height: 15)
                                                                 
-                                                                Text("Deadline: \(goal.getDeadline)")
-                                                                    .font(.footnote)
+                                                                Text(goal.text)
+                                                                    .fontWeight(.bold)
                                                                     .foregroundStyle(.white)
-                                                            }
-                                                            
-                                                            Spacer()
-                                                                .frame(height: 20)
-                                                        
-                                                            // have progress bar here
-                                                            // TODO: make value an actual variable watcher
-                                                            
-                                                            if let unwrappedTarget = goal.target {
-                                                                if unwrappedTarget > 0.0 {
-                                                                    ProgressView(value: 9, total: unwrappedTarget)
-                                                                        .tint(.white)
+                                                                
+                                                                Spacer()
+                                                                    .frame(height: 15)
+                                                                
+                                                                HStack {
+                                                                    Image(systemName: "calendar")
+                                                                        .foregroundStyle(.white)
+                                                                        .fontWeight(.bold)
+                                                                    
+                                                                    Spacer()
+                                                                        .frame(width: 5)
+                                                                    
+                                                                    Text("Deadline: \(goal.getDeadline)")
+                                                                        .font(.footnote)
+                                                                        .foregroundStyle(.white)
+                                                                }
+                                                                
+                                                                Spacer()
+                                                                    .frame(height: 20)
+                                                                
+                                                                // have progress bar here
+                                                                // TODO: make value an actual variable watcher
+                                                                
+                                                                if let unwrappedTarget = goal.target {
+                                                                    if unwrappedTarget > 0.0 {
+                                                                        ProgressView(value: 2, total: unwrappedTarget)
+                                                                            .tint(.white)
+                                                                    }
                                                                 }
                                                             }
+                                                            .frame(maxHeight: .infinity, alignment: .top)
+                                                            .padding(.vertical, 10)
                                                         }
-                                                        .frame(maxHeight: .infinity, alignment: .top)
-                                                        .padding(.vertical, 10)
+                                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                                        .padding(.horizontal, 10)
                                                     }
-                                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                                    .padding(.horizontal, 10)
-                                                }
+                                                    .shadow(color: goal.selectedNumber == 1 ? .complement.opacity(0.50) : .darkerComplement, radius: 5)
+                                            }
+                                            .frame(maxWidth: .infinity, alignment: .trailing)
                                         }
-                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                        .frame(maxHeight: .infinity, alignment: .top)
+                                        
+                                        Spacer()
+                                            .frame(width: 20)
                                     }
-                                    .frame(maxHeight: .infinity, alignment: .top)
-                                    
-                                    Spacer()
-                                        .frame(width: 20)
                                 }
-                            }
-                            .onLongPressGesture {
-                                goalManager.removeGoal(goal)
+                                .onLongPressGesture {
+                                    goalManager.removeGoal(goal)
+                                }
                             }
                         }
                     }
@@ -411,13 +455,13 @@ struct CurrentGoalsView: View {
                         .fontWeight(.semibold)
                 }
                 
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(action: {
-                        goalManager.addGoal()
-                    }) {
-                        Image(systemName: "plus")
-                    }
-                }
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    Button(action: {
+//                        goalManager.addGoal()
+//                    }) {
+//                        Image(systemName: "plus")
+//                    }
+//                }
             }
             .onAppear {
                 callManagerMethods()
@@ -438,6 +482,20 @@ struct CurrentGoalsView: View {
     init(modelContext: ModelContext) {
         let goalManager = GoalManager(modelContext: modelContext)
         _goalManager = State(initialValue: goalManager)
+    }
+    
+    func deleteGoal() {
+        
+        guard let goal = goalToDelete else {
+            print("DEBUG: Failed to delete goal")
+            return
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            withAnimation(.easeOut(duration: 0.15)) {
+                goalManager.removeGoal(goal)
+            }
+        }
     }
 }
 

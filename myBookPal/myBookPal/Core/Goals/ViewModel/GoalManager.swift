@@ -34,7 +34,7 @@ class GoalManager {
         
         let gen = Int.random(in: 1...2)
         
-        let exampleGoal = Goal(text: "Testing", createdOn: Date.now, timeFrame: DateInterval(start: Date.now, end: .now.addingTimeInterval(24.0 * 365)), deadline: Date.now.addingTimeInterval(24.0 * 180) ,target: 14.0, status: "In Progress", reminderOn: false, priority: "High", selectedNumber: gen)
+        let exampleGoal = Goal(text: "Testing", createdOn: Date.now, deadline: Date.now.addingTimeInterval(24.0 * 180) ,target: 14.0, status: "In Progress", reminderOn: false, priority: "High", selectedNumber: gen)
         
         print("Got example goal")
         

@@ -21,11 +21,6 @@ struct AddGoalView: View {
     
     let selections = ["High", "Medium", "Low"]
     
-    var interval: DateInterval {
-        let i = DateInterval(start: Date.now, end: dueDateSelection)
-        return i
-    }
-    
     var body: some View {
         NavigationStack {
             Form {
@@ -34,7 +29,7 @@ struct AddGoalView: View {
                     TextField("Enter description", text: $goalDescription)
                 }
                 
-                Section("Page Target (Optional") {
+                Section("Page Target (Optional)") {
                     TextField("Enter Target", value: $pagesWantToRead, format: .number)
                 }
                 
@@ -98,7 +93,7 @@ struct AddGoalView: View {
         
         let gen = Int.random(in: 1...2)
         
-        let goal = Goal(text: goalDescription, createdOn: Date.now, timeFrame: interval, deadline: dueDateSelection, target: Double(pagesWantToRead ?? 0), status: "In Progress", reminderOn: isReminderEnabled, priority: prioritySelection, selectedNumber: gen)
+        let goal = Goal(text: goalDescription, createdOn: Date.now, deadline: dueDateSelection, target: Double(pagesWantToRead ?? 0), status: "In Progress", reminderOn: isReminderEnabled, priority: prioritySelection, selectedNumber: gen)
         modelContext.insert(goal)
         try? modelContext.save()
         print("Add goal to list!")

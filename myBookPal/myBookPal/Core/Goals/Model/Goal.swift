@@ -13,7 +13,6 @@ class Goal {
     var text: String
     var createdOn: Date
     var finishedOn: Date?
-    var timeFrame: DateInterval
     var deadline: Date
     var target: Double?
     var status: String
@@ -21,11 +20,10 @@ class Goal {
     var priority: String
     var selectedNumber: Int
     
-    init(text: String, createdOn: Date, finishedOn: Date? = nil, timeFrame: DateInterval, deadline: Date, target: Double? = nil, status: String, reminderOn: Bool, priority: String, selectedNumber: Int) {
+    init(text: String, createdOn: Date, finishedOn: Date? = nil, deadline: Date, target: Double? = nil, status: String, reminderOn: Bool, priority: String, selectedNumber: Int) {
         self.text = text
         self.createdOn = createdOn
         self.finishedOn = finishedOn
-        self.timeFrame = timeFrame
         self.deadline = deadline
         self.target = target
         self.status = status
