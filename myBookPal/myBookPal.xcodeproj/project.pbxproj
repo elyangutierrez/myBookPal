@@ -19,6 +19,7 @@
 		720A00322CA1019000BD9A45 /* CurrentGoalsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00312CA1019000BD9A45 /* CurrentGoalsView.swift */; };
 		720A00342CA1087B00BD9A45 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00332CA1087B00BD9A45 /* ReminderManager.swift */; };
 		720A00362CA2581000BD9A45 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00352CA2581000BD9A45 /* DateManager.swift */; };
+		720B446D2CA5D421004B02FC /* PageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B446C2CA5D421004B02FC /* PageManager.swift */; };
 		722662962C8956EA0071162D /* CrimsonText-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */; };
 		722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662912C894ED70071162D /* CrimsonText-Regular.ttf */; };
 		722662992C8957C40071162D /* CrimsonText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662982C8957C40071162D /* CrimsonText-Bold.ttf */; };
@@ -94,6 +95,7 @@
 		720A00312CA1019000BD9A45 /* CurrentGoalsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentGoalsView.swift; sourceTree = "<group>"; };
 		720A00332CA1087B00BD9A45 /* ReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderManager.swift; sourceTree = "<group>"; };
 		720A00352CA2581000BD9A45 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
+		720B446C2CA5D421004B02FC /* PageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageManager.swift; sourceTree = "<group>"; };
 		722662912C894ED70071162D /* CrimsonText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Regular.ttf"; sourceTree = "<group>"; };
 		722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-SemiBold.ttf"; sourceTree = "<group>"; };
 		722662982C8957C40071162D /* CrimsonText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Bold.ttf"; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				720A002D2CA0FEE500BD9A45 /* GoalManager.swift */,
 				720A00332CA1087B00BD9A45 /* ReminderManager.swift */,
 				720A00352CA2581000BD9A45 /* DateManager.swift */,
+				720B446C2CA5D421004B02FC /* PageManager.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				722662D92C929B150071162D /* TitleModifier.swift in Sources */,
 				72BB668F2C93F15A001F17BA /* LightTagViewModifier.swift in Sources */,
 				722662DB2C929B940071162D /* View.swift in Sources */,
+				720B446D2CA5D421004B02FC /* PageManager.swift in Sources */,
 				7248FF562C9CC35B00722F23 /* TransferableImage.swift in Sources */,
 				724070EC2BED76CA00E1E07C /* AddView.swift in Sources */,
 				720A001C2C9F775700BD9A45 /* MailComposer.swift in Sources */,

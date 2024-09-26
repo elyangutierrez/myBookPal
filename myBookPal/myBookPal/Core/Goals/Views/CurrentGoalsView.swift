@@ -418,6 +418,10 @@ struct CurrentGoalsView: View {
                                                                     if unwrappedTarget > 0.0 {
                                                                         ProgressView(value: 2, total: unwrappedTarget)
                                                                             .tint(.white)
+                                                                            .background {
+                                                                                RoundedRectangle(cornerRadius: 20.0)
+                                                                                    .fill(.accent.opacity(0.70))
+                                                                            }
                                                                     }
                                                                 }
                                                             }
@@ -436,10 +440,15 @@ struct CurrentGoalsView: View {
                                         Spacer()
                                             .frame(width: 20)
                                     }
+                                    .onAppear {
+                                        if goal.deadline < Date.now {
+                                            goalManager.removeGoal(goal)
+                                        }
+                                    }
                                 }
-                                .onLongPressGesture {
-                                    goalManager.removeGoal(goal)
-                                }
+//                                .onLongPressGesture {
+//                                    goalManager.removeGoal(goal)
+//                                }
                             }
                         }
                     }
@@ -455,6 +464,7 @@ struct CurrentGoalsView: View {
                         .fontWeight(.semibold)
                 }
                 
+                // DEBUG:
 //                ToolbarItem(placement: .topBarTrailing) {
 //                    Button(action: {
 //                        goalManager.addGoal()

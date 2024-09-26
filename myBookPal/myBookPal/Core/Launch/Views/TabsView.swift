@@ -60,9 +60,6 @@ struct TabsView: View {
                     }
             }
             .toolbarBackground(.visible, for: .tabBar)
-//            .onAppear {
-//                print("TAB DEBUG: \(books)")
-//            }
         }
         .tint(Color.accent)
         .preferredColorScheme(.light)

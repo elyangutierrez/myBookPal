@@ -14,12 +14,38 @@ struct AddGoalView: View {
     @State private var goalDescription: String = ""
     @State private var dueDateSelection = Date()
     @State private var isReminderEnabled: Bool = false
+    @State private var reminderDate = Date()
     @State private var prioritySelection: String = "Medium"
     @State private var showAddGoalAlert: Bool = false
     @State private var pagesWantToRead: Int? = nil
+    @State private var reminderManager = ReminderManager()
     @Binding var goalAdded: Bool
     
     let selections = ["High", "Medium", "Low"]
+    
+//    var getInterval: TimeInterval {
+//        let minute = 60
+//        let hour = 60 * minute
+//        let day = 24 * hour
+//        
+//        switch prioritySelection {
+//        case "High":
+//            return Double(day) * 1.0
+//        case "Medium":
+//            return Double(day) * 2.0
+//        case "Low":
+//            return Double(day) * 3.0
+//        default:
+//            return Double(day)
+//        }
+//    }
+    
+    var initialDate: TimeInterval {
+        let minute = 60
+        let hour = 60 * minute
+        
+        return Double(hour) * 24.0
+    }
     
     var body: some View {
         NavigationStack {
@@ -34,11 +60,18 @@ struct AddGoalView: View {
                 }
                 
                 Section("Due Date") {
-                    DatePicker("Date", selection: $dueDateSelection)
+                    DatePicker("Date", selection: $dueDateSelection, in: Date.now...Date.distantFuture)
                 }
                 
                 Section("Reminder Notification") {
                     Toggle("Enable Reminder", isOn: $isReminderEnabled)
+                    
+                    // TODO: When enabled, ask for noti perms, else carry on.
+                    
+                    if isReminderEnabled {
+                        
+                        DatePicker("Reminder", selection: $reminderDate, in: Date.now...Date.distantFuture)
+                    }
                 }
                 
                 Section("Priority") {
@@ -75,9 +108,16 @@ struct AddGoalView: View {
                 ToolbarItem(placement: .cancellationAction) {
                     Button(action: {
                         dismiss()
+                        
                     }) {
                         Text("Cancel")
                     }
+                }
+            }
+            .onChange(of: isReminderEnabled) {
+//                let manager = ReminderManager()
+                Task {
+                    await reminderManager.checkIfNotificationsAreEnabled()
                 }
             }
             .alert("Goal Added!", isPresented: $showAddGoalAlert) {
@@ -93,11 +133,23 @@ struct AddGoalView: View {
         
         let gen = Int.random(in: 1...2)
         
-        let goal = Goal(text: goalDescription, createdOn: Date.now, deadline: dueDateSelection, target: Double(pagesWantToRead ?? 0), status: "In Progress", reminderOn: isReminderEnabled, priority: prioritySelection, selectedNumber: gen)
-        modelContext.insert(goal)
-        try? modelContext.save()
-        print("Add goal to list!")
-        goalAdded.toggle()
+        
+        if isReminderEnabled {
+            let goal = Goal(text: goalDescription, createdOn: Date.now, deadline: dueDateSelection, target: Double(pagesWantToRead ?? 0), status: "In Progress", reminderOn: isReminderEnabled, priority: prioritySelection, selectedNumber: gen)
+            reminderManager.goalTitle = goalDescription
+            reminderManager.reminderDate = reminderDate
+            reminderManager.createNotification()
+            modelContext.insert(goal)
+            try? modelContext.save()
+            print("Add goal to list!")
+            goalAdded.toggle()
+        } else {
+            let goal = Goal(text: goalDescription, createdOn: Date.now, deadline: dueDateSelection, target: Double(pagesWantToRead ?? 0), status: "In Progress", reminderOn: isReminderEnabled, priority: prioritySelection, selectedNumber: gen)
+            modelContext.insert(goal)
+            try? modelContext.save()
+            print("Add goal to list!")
+            goalAdded.toggle()
+        }
     }
 }
 
