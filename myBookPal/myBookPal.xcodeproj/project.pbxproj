@@ -84,6 +84,19 @@
 		72DAA9432C9CEE1B001DAD75 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72DAA9422C9CEE1B001DAD75 /* NotificationsView.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		72AC47812CA64E80007E72DE /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		720A00192C9E768D00BD9A45 /* HelpAndSupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportView.swift; sourceTree = "<group>"; };
 		720A001B2C9F775700BD9A45 /* MailComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
@@ -593,6 +606,7 @@
 				724070D02BEC6AAF00E1E07C /* Sources */,
 				724070D12BEC6AAF00E1E07C /* Frameworks */,
 				724070D22BEC6AAF00E1E07C /* Resources */,
+				72AC47812CA64E80007E72DE /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -614,7 +628,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1530;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					724070D32BEC6AAF00E1E07C = {
