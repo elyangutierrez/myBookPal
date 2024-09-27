@@ -33,9 +33,13 @@ struct AddGoalView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Goal Description") {
-                    // enter goal description
+                
+                Section {
                     TextField("Enter description", text: $goalDescription)
+                } header: {
+                    Text("Goal Description")
+                } footer: {
+                    Text("Keep your goals short and concise for optimal efficiency.")
                 }
                 
                 Section("Due Date") {

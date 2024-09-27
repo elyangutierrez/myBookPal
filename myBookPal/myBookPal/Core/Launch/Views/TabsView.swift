@@ -35,14 +35,14 @@ struct TabsView: View {
                         print("TAB DEBUG: \(books)")
                     }
                 
-                SearchView(collectionBooks: books)
-                    .tabItem {
-                        Image(systemName: "magnifyingglass")
-                        Text("Search")
-                    }
-                    .onAppear {
-                        print("TAB DEBUG: \(books)")
-                    }
+//                SearchView(collectionBooks: books)
+//                    .tabItem {
+//                        Image(systemName: "magnifyingglass")
+//                        Text("Search")
+//                    }
+//                    .onAppear {
+//                        print("TAB DEBUG: \(books)")
+//                    }
                 
                 CurrentGoalsView(modelContext: modelContext)
                     .tabItem {

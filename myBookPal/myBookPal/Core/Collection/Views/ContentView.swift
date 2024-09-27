@@ -298,9 +298,38 @@ struct ContentView: View {
                     .padding(.horizontal, 20)
                 }
             }
+            .overlay {
+                VStack {
+                    VStack {
+                        Menu {
+                            NavigationLink(destination: SearchView(collectionBooks: books)) {
+                                Text("Search Online")
+                            }
+                            
+//                            Text("Enter Manually")
+//                            
+//                            Text("Scan ISBN Number")
+                            
+                        } label: {
+                            Circle()
+                                .fill(.complement)
+                                .frame(width: 60, height: 60)
+                                .overlay {
+                                    Image(systemName: "plus")
+                                        .resizable()
+                                        .frame(width: 17, height: 17, alignment: .center)
+                                        .foregroundStyle(.white)
+                                }
+                        }
+                    }
+                    .frame(maxHeight: .infinity, alignment: .bottomTrailing)
+                }
+                .frame(maxWidth: .infinity, alignment: .trailing)
+                .padding(.horizontal, 10)
+                .padding(.vertical, -20)
+            }
             .padding(.bottom, 30)
             .navigationBarTitleDisplayMode(.inline)
-            .searchable(text: $searchText)
             .scrollContentBackground(.hidden)
             .listStyle(.grouped)
             .toolbar {
@@ -309,6 +338,21 @@ struct ContentView: View {
                         .font(Font.custom("CrimsonText-SemiBold", size: 20))
                         .foregroundStyle(.accent)
                 }
+                
+//                ToolbarItem(placement: .topBarTrailing) {
+//                    Menu {
+//                        NavigationLink(destination: SearchView(collectionBooks: books)) {
+//                            Text("Search Online")
+//                        }
+//                        
+//                        Text("Enter Manually")
+//                        
+//                        Text("Scan ISBN Number")
+//                        
+//                    } label: {
+//                        Image(systemName: "plus")
+//                    }
+//                }
             }
             .onChange(of: books) {
                 if books.isEmpty {
@@ -319,6 +363,7 @@ struct ContentView: View {
                 print("DEBUG: \(books)")
             }
         }
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         .alert("Book Deleted", isPresented: $activateBookDeletionAlert) {
             Button("Ok", role: .cancel, action: reset)
         } message: {
