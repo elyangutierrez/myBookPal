@@ -67,130 +67,52 @@ struct ContentView: View {
                             NavigationLink(destination: LogView(book: mostRecent ?? testBook)) {
                                 VStack {
                                     HStack {
-                                        VStack(alignment: .leading) {
+                                        VStack {
                                             WebImage(url: URL(string: mostRecent?.coverImage ?? "N/A")) { image in
                                                 image
-                                                    .ContentViewImageExtension()
-                                            } placeholder: {
-                                                Rectangle()
-                                                    .placeHolderModifier()
+                                                    .image?.resizable()
+                                                    .frame(width: 140, height: 210)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                                    .shadow(color: .black.opacity(0.30), radius: 5)
                                             }
                                         }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
                                         
-                                        VStack(alignment: .leading) {
-                                            
-                                            Text(mostRecent?.title ?? testBook.title)
-                                                .titleModifier()
-                                            
-                                            
-                                            Text(mostRecent?.author ?? testBook.author)
-                                                .font(.system(size: 15))
-                                                .fontWeight(.medium)
-                                                .padding(.vertical, 1)
-                                            
-                                            
-                                            Text("\(mostRecent?.pages ?? testBook.pages) pages")
-                                                .font(.system(size: 14))
-                                                .padding(.vertical, 1)
-                                            
-                                            HStack {
-                                                ProgressView(value: mostRecent?.completionStatus)
-                                                    .frame(width: 100)
-                                                    .tint(mostRecent?.completionStatus == 1 ? .green : .blue)
-                                                let formatted = String(format: "%.1f", (mostRecent?.completionStatus ?? 0) * 100)
-                                                Text("\(formatted)%")
-                                                    .font(.footnote)
-                                            }
-                                            
-                                            StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
-                                                .font(.headline)
-                                                .offset(y: 10)
-                                            
-                                            VStack {
-                                                Circle()
-                                                    .fill(mostRecent?.completionStatus == 1 ? .green : .blue)
-                                                    .frame(width: 30, height: 30)
-                                                    .overlay {
-                                                        Text("\(mostRecent?.getLogCount ?? 0)")
-                                                            .font(.system(size: 15))
-                                                            .fontWeight(.medium)
-                                                            .foregroundStyle(.white)
-                                                    }
-                                            }
-                                            .frame(maxHeight: .infinity, alignment: .bottomLeading)
-                                        }
-                                        .frame(maxHeight: .infinity, alignment: .top)
-                                        .padding(.horizontal, -15)
-                                    }
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal, -20)
-                            }
-                        }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-                    
-                    Spacer()
-                        .frame(height: 40)
-                    
-                    Rectangle()
-                        .frame(width: 350, height: 2)
-                        .foregroundStyle(.gray.opacity(0.30))
-                    
-                    if recentlyViewedBook != nil && books.contains(recentlyViewedBook!) {
-                        VStack(alignment: .leading) {
-                            Text("Recently Viewed")
-                                .font(.title.bold())
-                                .fontDesign(.serif)
-                            VStack(alignment: .leading) {
-                                NavigationLink(destination: LogView(book: recentlyViewedBook!)) {
-                                    VStack {
-                                        HStack {
+                                        VStack {
                                             VStack(alignment: .leading) {
-                                                WebImage(url: URL(string: recentlyViewedBook?.coverImage ?? "N/A")) { image in
-                                                    image
-                                                        .ContentViewImageExtension()
-                                                } placeholder: {
-                                                    Rectangle()
-                                                        .placeHolderModifier()
-                                                }
-                                            }
-                                            
-                                            VStack(alignment: .leading) {
-                                                
-                                                Text(recentlyViewedBook?.title ?? testBook.title)
+                                                Text(mostRecent?.title ?? testBook.title)
                                                     .titleModifier()
                                                 
-                                                Text(recentlyViewedBook?.author ?? testBook.author)
+                                                
+                                                Text(mostRecent?.author ?? testBook.author)
                                                     .font(.system(size: 15))
                                                     .fontWeight(.medium)
                                                     .padding(.vertical, 1)
                                                 
                                                 
-                                                Text("\(recentlyViewedBook?.pages ?? testBook.pages) pages")
+                                                Text("\(mostRecent?.pages ?? testBook.pages) pages")
                                                     .font(.system(size: 14))
                                                     .padding(.vertical, 1)
                                                 
                                                 HStack {
-                                                    ProgressView(value: recentlyViewedBook?.completionStatus)
+                                                    ProgressView(value: mostRecent?.completionStatus)
                                                         .frame(width: 100)
-                                                        .tint(recentlyViewedBook?.completionStatus == 1 ? .green : .blue)
-                                                    let formatted = String(format: "%.1f", (recentlyViewedBook?.completionStatus ?? 0) * 100)
+                                                        .tint(mostRecent?.completionStatus == 1 ? .green : .blue)
+                                                    let formatted = String(format: "%.1f", (mostRecent?.completionStatus ?? 0) * 100)
                                                     Text("\(formatted)%")
                                                         .font(.footnote)
                                                 }
                                                 
-                                                StarRatingView(rating: recentlyViewedBook?.starRatingSystem?.rating ?? 0.0)
+                                                StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
                                                     .font(.headline)
                                                     .offset(y: 10)
                                                 
                                                 VStack {
                                                     Circle()
-                                                        .fill(recentlyViewedBook?.completionStatus == 1 ? .green : .blue)
+                                                        .fill(mostRecent?.completionStatus == 1 ? .green : .blue)
                                                         .frame(width: 30, height: 30)
                                                         .overlay {
-                                                            Text("\(recentlyViewedBook?.getLogCount ?? 0)")
+                                                            Text("\(mostRecent?.getLogCount ?? 0)")
                                                                 .font(.system(size: 15))
                                                                 .fontWeight(.medium)
                                                                 .foregroundStyle(.white)
@@ -198,24 +120,102 @@ struct ContentView: View {
                                                 }
                                                 .frame(maxHeight: .infinity, alignment: .bottomLeading)
                                             }
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                        }
+                                        .frame(maxHeight: .infinity, alignment: .top)
+                                        .padding(.horizontal, -30)
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 20)
+
+                    Rectangle()
+                        .fill(.gray.opacity(0.30))
+                        .frame(maxWidth: .infinity, maxHeight: 1)
+                        .padding()
+                    
+                    if recentlyViewedBook != nil && books.contains(recentlyViewedBook!) {
+                        VStack(alignment: .leading) {
+                            Text("Last Viewed")
+                                .font(.title.bold())
+                                .fontDesign(.serif)
+                            VStack(alignment: .leading) {
+                                NavigationLink(destination: LogView(book: recentlyViewedBook!)) {
+                                    VStack {
+                                        HStack {
+                                            VStack {
+                                                WebImage(url: URL(string: recentlyViewedBook?.coverImage ?? "N/A")) { image in
+                                                    image
+                                                        .image?.resizable()
+                                                        .frame(width: 140, height: 210)
+                                                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                                        .shadow(color: .black.opacity(0.30), radius: 5)
+                                                }
+                                            }
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            
+                                            VStack {
+                                                VStack(alignment: .leading) {
+                                                    Text(recentlyViewedBook?.title ?? testBook.title)
+                                                        .titleModifier()
+                                                    
+                                                    
+                                                    Text(recentlyViewedBook?.author ?? testBook.author)
+                                                        .font(.system(size: 15))
+                                                        .fontWeight(.medium)
+                                                        .padding(.vertical, 1)
+                                                    
+                                                    
+                                                    Text("\(recentlyViewedBook?.pages ?? testBook.pages) pages")
+                                                        .font(.system(size: 14))
+                                                        .padding(.vertical, 1)
+                                                    
+                                                    HStack {
+                                                        ProgressView(value: recentlyViewedBook?.completionStatus)
+                                                            .frame(width: 100)
+                                                            .tint(recentlyViewedBook?.completionStatus == 1 ? .green : .blue)
+                                                        let formatted = String(format: "%.1f", (recentlyViewedBook?.completionStatus ?? 0) * 100)
+                                                        Text("\(formatted)%")
+                                                            .font(.footnote)
+                                                    }
+                                                    
+                                                    StarRatingView(rating: recentlyViewedBook?.starRatingSystem?.rating ?? 0.0)
+                                                        .font(.headline)
+                                                        .offset(y: 10)
+                                                    
+                                                    VStack {
+                                                        Circle()
+                                                            .fill(recentlyViewedBook?.completionStatus == 1 ? .green : .blue)
+                                                            .frame(width: 30, height: 30)
+                                                            .overlay {
+                                                                Text("\(recentlyViewedBook?.getLogCount ?? 0)")
+                                                                    .font(.system(size: 15))
+                                                                    .fontWeight(.medium)
+                                                                    .foregroundStyle(.white)
+                                                            }
+                                                    }
+                                                    .frame(maxHeight: .infinity, alignment: .bottomLeading)
+                                                }
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                            }
                                             .frame(maxHeight: .infinity, alignment: .top)
-                                            .padding(.horizontal, -15)
+                                            .padding(.horizontal, -30)
                                         }
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.horizontal, -20)
+
                                 }
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 20)
                         
-                        Spacer()
-                            .frame(height: 40)
-                        
                         Rectangle()
-                            .frame(width: 350, height: 2)
-                            .foregroundStyle(.gray.opacity(0.30))
+                            .fill(.gray.opacity(0.30))
+                            .frame(maxWidth: .infinity, maxHeight: 1)
+                            .padding()
                         
                     }
                     

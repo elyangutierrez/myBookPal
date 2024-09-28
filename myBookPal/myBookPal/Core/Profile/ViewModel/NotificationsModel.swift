@@ -32,8 +32,6 @@ class NotificationsModel: @unchecked Sendable {
         content.sound = .default
         
         var dateComponents = DateComponents()
-        dateComponents.calendar = Calendar.current
-        
         dateComponents.hour = 11
         dateComponents.minute = 00
         
@@ -61,4 +59,14 @@ class NotificationsModel: @unchecked Sendable {
         notificationCenter.removePendingNotificationRequests(withIdentifiers: [dailyNotificationsIdenifier])
         print("Canceled all daily notifications!")
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // Notification was triggered, schedule the next one
+        print("Notification triggered, scheduling next one...")
+        Task {
+            await self.sendDailyNotifications()
+        }
+        completionHandler()
+    }
+
 }

@@ -35,7 +35,7 @@ class ReminderManager: @unchecked Sendable {
     func createNotification() {
         let content = UNMutableNotificationContent()
         content.title = "Reminder: \(goalTitle!)"
-        content.body = "⏰ Don't forgot to finish your goal!"
+        content.body = "Don't forgot to finish your goal! ⏰"
         
         let dateComps = Calendar.current.dateComponents([.day, .hour, .minute], from: reminderDate!)
         
