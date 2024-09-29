@@ -125,7 +125,7 @@ class DateManager {
     func getCurrentDay() {
         let today = Date()
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd"
+        formatter.dateFormat = "d"
         let item = formatter.string(from: today)
         currentDay = item
         
