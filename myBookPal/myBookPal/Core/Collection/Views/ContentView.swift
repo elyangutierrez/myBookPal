@@ -354,6 +354,20 @@ struct ContentView: View {
             .fullScreenCover(isPresented: $isShowingScanner) {
                 NavigationStack {
                     CodeScannerView(codeTypes: [.ean13], showViewfinder: true, isTorchOn: isShowingTorch, completion: handleScan)
+                        .overlay {
+                            VStack {
+                                Text("Place ISBN code inside box.")
+                                    .foregroundStyle(.white)
+                                    .background {
+                                        Rectangle()
+                                            .fill(Color.black.opacity(0.5))
+                                            .padding(.vertical, -5)
+                                            .padding(.horizontal, -5)
+                                    }
+                            }
+                            .frame(maxHeight: .infinity, alignment: .top)
+                            .padding(.vertical, 125)
+                        }
                         .toolbar {
                             ToolbarItem(placement: .cancellationAction) {
                                 Button(action: {
