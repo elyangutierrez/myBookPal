@@ -27,6 +27,10 @@ struct ContentView: View {
     @State private var selectedDeletionBook: Book?
     @State private var isShowingScanner = false
     @State private var isShowingTorch = false
+    @State var isbnManager = FetchISBNBookInfoViewModel()
+    @State private var showAddViewSheet = false
+    @State private var addViewBook: VolumeInfo?
+    
     var books: [Book]
     
     let options = ["Ascending", "Descending"]
@@ -344,6 +348,9 @@ struct ContentView: View {
                         .foregroundStyle(.accent)
                 }
             }
+            .navigationDestination(item: $addViewBook) { book in
+                AddView(book: book, books: books)
+            }
             .fullScreenCover(isPresented: $isShowingScanner) {
                 NavigationStack {
                     CodeScannerView(codeTypes: [.ean13], showViewfinder: true, isTorchOn: isShowingTorch, completion: handleScan)
@@ -372,6 +379,24 @@ struct ContentView: View {
             .onChange(of: books) {
                 if books.isEmpty {
                     recentlyViewedBook = nil
+                }
+            }
+            .onChange(of: isbnManager.books) {
+                if !isbnManager.books.isEmpty {
+                    guard let firstBook = isbnManager.books.first else { return }
+//                    print("DEBUG: \(firstBook.title)")
+                    
+                    addViewBook = firstBook
+                    
+                    if let unwrapped = addViewBook {
+                        print(unwrapped.title)
+                        
+                        showAddViewSheet.toggle()
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
+                        addViewBook = nil
+                    }
                 }
             }
             .onAppear {
@@ -408,12 +433,10 @@ struct ContentView: View {
         
         switch result {
         case .success(let result):
-            let details = result.string
+            let isbnString = result.string
             
-//            guard details.count == 1 else { return }
-            
-            print(details)
-            
+            isbnManager.isbnNumber = isbnString
+            isbnManager.fetchBookInfo()
         case .failure(let error):
             print("Scanning failed: \(error)")
         }
