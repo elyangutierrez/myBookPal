@@ -5,6 +5,7 @@
 //  Created by Elyan Gutierrez on 5/14/24.
 //
 
+import CodeScanner
 import SDWebImageSwiftUI
 import SlidingTabView
 import SwiftData
@@ -24,6 +25,8 @@ struct ContentView: View {
     @State private var isEditing = false
     @State private var selectedChoice = ""
     @State private var selectedDeletionBook: Book?
+    @State private var isShowingScanner = false
+    @State private var isShowingTorch = false
     var books: [Book]
     
     let options = ["Ascending", "Descending"]
@@ -306,10 +309,12 @@ struct ContentView: View {
                                 Text("Search Online")
                             }
                             
-//                            Text("Enter Manually")
-//                            
-//                            Text("Scan ISBN Number")
-                            
+                            Button(action: {
+                                isShowingScanner.toggle()
+                            }) {
+                                Text("Scan ISBN Number")
+                            }
+       
                         } label: {
                             Circle()
                                 .fill(.complement)
@@ -338,21 +343,31 @@ struct ContentView: View {
                         .font(Font.custom("CrimsonText-SemiBold", size: 20))
                         .foregroundStyle(.accent)
                 }
-                
-//                ToolbarItem(placement: .topBarTrailing) {
-//                    Menu {
-//                        NavigationLink(destination: SearchView(collectionBooks: books)) {
-//                            Text("Search Online")
-//                        }
-//                        
-//                        Text("Enter Manually")
-//                        
-//                        Text("Scan ISBN Number")
-//                        
-//                    } label: {
-//                        Image(systemName: "plus")
-//                    }
-//                }
+            }
+            .fullScreenCover(isPresented: $isShowingScanner) {
+                NavigationStack {
+                    CodeScannerView(codeTypes: [.ean13], showViewfinder: true, isTorchOn: isShowingTorch, completion: handleScan)
+                        .toolbar {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button(action: {
+                                    isShowingScanner = false
+                                }) {
+                                    Text("Cancel")
+                                        .foregroundStyle(.white)
+                                }
+                            }
+                            
+                            ToolbarItem(placement: .topBarTrailing) {
+                                Button(action: {
+                                    isShowingTorch.toggle()
+                                }) {
+                                    Image(systemName: isShowingTorch ? "bolt.circle" : "bolt.slash.circle")
+                                        .foregroundStyle(.white)
+                                }
+                            }
+                         }
+                        .ignoresSafeArea()
+                }
             }
             .onChange(of: books) {
                 if books.isEmpty {
@@ -384,6 +399,23 @@ struct ContentView: View {
             
             deletedBookTitle = bookToDelete.title.uppercased()
             activateDeleteAlert()
+        }
+    }
+    
+    func handleScan(result: Result<ScanResult, ScanError>) {
+        isShowingScanner = false
+        isShowingTorch = false
+        
+        switch result {
+        case .success(let result):
+            let details = result.string
+            
+//            guard details.count == 1 else { return }
+            
+            print(details)
+            
+        case .failure(let error):
+            print("Scanning failed: \(error)")
         }
     }
     

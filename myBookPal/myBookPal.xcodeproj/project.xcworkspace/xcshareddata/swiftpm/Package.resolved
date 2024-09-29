@@ -1,6 +1,15 @@
 {
-  "originHash" : "66f9123fc7d0261ea99df5dd69274c14cc51518e55b95d89fb25e9d99bd54dec",
+  "originHash" : "f5d173e6bdf5c910c1e8cb5c85ce501c5c82c252ab718d45cd24cad7b036370b",
   "pins" : [
+    {
+      "identity" : "codescanner",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/twostraws/CodeScanner.git",
+      "state" : {
+        "revision" : "9fa582f4b36c69c2a55bff5fb3377eb170ae273c",
+        "version" : "2.5.1"
+      }
+    },
     {
       "identity" : "sdwebimage",
       "kind" : "remoteSourceControl",
