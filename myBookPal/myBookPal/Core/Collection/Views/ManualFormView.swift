@@ -63,10 +63,12 @@ struct ManualFormView: View {
                 }
                 
                 Button(action: {
-                    
+                    addBookToCollection()
+                    print("tapped!")
                 }) {
                     Text("Add Book")
                 }
+                .disabled(pictureHandler.displayedImage == nil || title.isEmpty || genre.isEmpty || author.isEmpty || pages.isEmpty)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -83,10 +85,25 @@ struct ManualFormView: View {
                 }
             }
         }
+        .alert("Book Added", isPresented: $successfulAlert) {
+            Button("Ok", role: .cancel) { }
+        } message: {
+            Text("\(title) has been added to your collection.")
+        }
+        .alert("Failed To Add Book", isPresented: $unsuccessfulAlert) {
+            Button("Ok", role: .cancel) { }
+        } message: {
+            Text("Please try again.")
+        }
     }
     
     func addBookToCollection() {
+        
+        coverImage = pictureHandler.convertedString!
+        print("Value of coverImage: \(coverImage)")
         let book = Book(coverImage: coverImage, title: title, author: author, catagory: genre, pages: pages)
+        
+        
         
         if collectionBooks.contains(book) {
             unsuccessfulAlert.toggle()

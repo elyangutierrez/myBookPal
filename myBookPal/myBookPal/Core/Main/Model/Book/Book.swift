@@ -10,6 +10,7 @@ import Foundation
 
 @Model
 class Book: Identifiable, Equatable {
+    var id = UUID()
     var coverImage: String
     var title: String
     var author: String

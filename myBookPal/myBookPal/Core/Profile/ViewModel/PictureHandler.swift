@@ -16,6 +16,7 @@ class PictureHandler: @unchecked Sendable {
     var selectedImage: UIImage?
     var displayedImage: Image?
     var imageData: Data?
+    var convertedString: String?
     
     func convertPickerItemToImage() async {
         guard let pickerItem else { return }
@@ -23,6 +24,13 @@ class PictureHandler: @unchecked Sendable {
         if let loaded = try? await pickerItem.loadTransferable(type: TransferableImage.self) {
             let uiImage = loaded.image
             selectedImage = uiImage
+            
+            guard let selectedImage else { return }
+            
+            print(selectedImage)
+            
+            convertImageToString(uiimage: selectedImage)
+            
             displayedImage = Image(uiImage: uiImage)
             print(displayedImage!)
             print("Got image from picker item.")
@@ -69,5 +77,17 @@ class PictureHandler: @unchecked Sendable {
             print("Error loading image: \(error)")
             return nil
         }
+    }
+    
+    func convertImageToString(uiimage: UIImage) {
+//        guard let uiImage = selectedImage else {
+//            return
+//        }
+        
+        let data = uiimage.jpegData(compressionQuality: 1)
+        print(data!)
+        let result = data?.base64EncodedString(options: .endLineWithLineFeed)
+        print(result!)
+        convertedString = result
     }
 }
