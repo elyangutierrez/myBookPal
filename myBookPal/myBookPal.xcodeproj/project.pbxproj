@@ -68,6 +68,8 @@
 		72AC47A22CAB5347007E72DE /* ImageCapturingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC47A12CAB5347007E72DE /* ImageCapturingHandler.swift */; };
 		72AC47A52CAB66C2007E72DE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC47A42CAB66C2007E72DE /* String.swift */; };
 		72AC47A72CAB73F3007E72DE /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC47A62CAB73F3007E72DE /* CameraPickerView.swift */; };
+		72AC47AA2CAC753E007E72DE /* HapticsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC47A92CAC753E007E72DE /* HapticsManager.swift */; };
+		72AC47AC2CAC9392007E72DE /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC47AB2CAC9392007E72DE /* Haptics.swift */; };
 		72BB668F2C93F15A001F17BA /* LightTagViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB668E2C93F15A001F17BA /* LightTagViewModifier.swift */; };
 		72BB66912C93F371001F17BA /* DarkerTagViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB66902C93F371001F17BA /* DarkerTagViewModifier.swift */; };
 		72BB66932C93F782001F17BA /* RowOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB66922C93F782001F17BA /* RowOneView.swift */; };
@@ -163,6 +165,8 @@
 		72AC47A12CAB5347007E72DE /* ImageCapturingHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCapturingHandler.swift; sourceTree = "<group>"; };
 		72AC47A42CAB66C2007E72DE /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		72AC47A62CAB73F3007E72DE /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
+		72AC47A92CAC753E007E72DE /* HapticsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticsManager.swift; sourceTree = "<group>"; };
+		72AC47AB2CAC9392007E72DE /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		72BB668E2C93F15A001F17BA /* LightTagViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTagViewModifier.swift; sourceTree = "<group>"; };
 		72BB66902C93F371001F17BA /* DarkerTagViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkerTagViewModifier.swift; sourceTree = "<group>"; };
 		72BB66922C93F782001F17BA /* RowOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowOneView.swift; sourceTree = "<group>"; };
@@ -424,6 +428,7 @@
 				7226628F2C894A950071162D /* Extensions */,
 				722662B22C8FC0680071162D /* Networking */,
 				722662B12C8FBE950071162D /* Resources */,
+				72AC47A82CAC752E007E72DE /* Shared */,
 			);
 			path = myBookPal;
 			sourceTree = "<group>";
@@ -473,7 +478,6 @@
 			isa = PBXGroup;
 			children = (
 				722662D02C92717A0071162D /* NotificationsModel.swift */,
-				7248FF522C9CBD5000722F23 /* PictureHandler.swift */,
 				720A001B2C9F775700BD9A45 /* MailComposer.swift */,
 			);
 			path = ViewModel;
@@ -589,6 +593,16 @@
 				72AC47A62CAB73F3007E72DE /* CameraPickerView.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		72AC47A82CAC752E007E72DE /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				7248FF522C9CBD5000722F23 /* PictureHandler.swift */,
+				72AC47A92CAC753E007E72DE /* HapticsManager.swift */,
+				72AC47AB2CAC9392007E72DE /* Haptics.swift */,
+			);
+			path = Shared;
 			sourceTree = "<group>";
 		};
 		72BB668D2C93F142001F17BA /* ViewModifier */ = {
@@ -728,6 +742,7 @@
 				72D098162BF1692D0021819E /* VolumeInfo.swift in Sources */,
 				728E7BA42BF0A37700A1D11B /* SearchView.swift in Sources */,
 				725D05452BF4FCB8001557A4 /* EmptyBookCoverView.swift in Sources */,
+				72AC47AC2CAC9392007E72DE /* Haptics.swift in Sources */,
 				722662D62C9299E20071162D /* Image.swift in Sources */,
 				725D054F2BF97FDB001557A4 /* Library.swift in Sources */,
 				7248FF532C9CBD5000722F23 /* PictureHandler.swift in Sources */,
@@ -771,6 +786,7 @@
 				72BB66972C93F7AD001F17BA /* RowThreeView.swift in Sources */,
 				72D098132BF1692D0021819E /* BookResponse.swift in Sources */,
 				7259CABF2BFE45BD0039D778 /* CatagoryView.swift in Sources */,
+				72AC47AA2CAC753E007E72DE /* HapticsManager.swift in Sources */,
 				72AC47922CA90EA1007E72DE /* FetchISBNBookInfoViewModel.swift in Sources */,
 				72D098152BF1692D0021819E /* ImageLinks.swift in Sources */,
 				724BEAA22C96370B00B86198 /* Tag.swift in Sources */,

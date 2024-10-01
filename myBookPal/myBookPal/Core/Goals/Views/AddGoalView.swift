@@ -11,6 +11,7 @@ struct AddGoalView: View {
     
     @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
+    
     @State private var goalDescription: String = ""
     @State private var dueDateSelection = Date()
     @State private var isReminderEnabled: Bool = false
@@ -19,6 +20,8 @@ struct AddGoalView: View {
     @State private var showAddGoalAlert: Bool = false
     @State private var reminderManager = ReminderManager()
     @State private var showAlert = false
+    @State private var hapticsManager = HapticsManager()
+    
     @Binding var goalAdded: Bool
     
     let selections = ["High", "Medium", "Low"]
@@ -129,12 +132,14 @@ struct AddGoalView: View {
             reminderManager.createNotification()
             modelContext.insert(goal)
             try? modelContext.save()
+            hapticsManager.playAddedGoal()
             print("Add goal to list!")
             goalAdded.toggle()
         } else {
             let goal = Goal(text: goalDescription, createdOn: Date.now, deadline: dueDateSelection, status: "In Progress", reminderOn: isReminderEnabled, priority: prioritySelection, selectedNumber: gen)
             modelContext.insert(goal)
             try? modelContext.save()
+            hapticsManager.playAddedGoal()
             print("Add goal to list!")
             goalAdded.toggle()
         }
