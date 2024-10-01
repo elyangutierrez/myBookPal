@@ -10,6 +10,7 @@ import PhotosUI
 
 struct ManualFormView: View {
     
+    @Environment(\.dismiss) var dismiss
     @Environment(\.modelContext) var modelContext
     @State private var coverImage: String = ""
     @State private var title: String = ""
@@ -90,6 +91,14 @@ struct ManualFormView: View {
                     Text("Manual Entry")
                         .foregroundStyle(.accent)
                         .fontWeight(.semibold)
+                }
+                
+                ToolbarItem(placement: .cancellationAction) {
+                    Button(action: {
+                        dismiss()
+                    }) {
+                        Text("Cancel")
+                    }
                 }
             }
             .photosPicker(isPresented: $pictureHandler.showPhotosPicker, selection: $pictureHandler.pickerItem, matching: .images)
