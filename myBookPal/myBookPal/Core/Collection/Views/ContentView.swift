@@ -32,6 +32,7 @@ struct ContentView: View {
     @State private var addViewBook: VolumeInfo?
     @State private var showManualFormSheet = false
     @State private var displayedImage: Image?
+    @State private var hapticsManager = HapticsManager()
     
     var books: [Book]
     
@@ -486,7 +487,7 @@ struct ContentView: View {
         
         if index != nil {
             modelContext.delete(bookToDelete)
-            
+            hapticsManager.playRemovedBookHaptic()
             deletedBookTitle = bookToDelete.title.uppercased()
             activateDeleteAlert()
         }

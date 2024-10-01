@@ -10,23 +10,21 @@ import SwiftUI
 
 struct AddView: View {
     @Environment(\.modelContext) var modelContext
-    var book: VolumeInfo
-    var books: [Book]
-
+    
     @State private var showAlert = false
-    
-    let authorText = Color(red: 0.3, green: 0.3, blue: 0.3)
-    
     @State private var enterPageCountBool = false
     @State private var manualBookCount = ""
     @State private var enterGenreBool = false
     @State private var enterGenre = ""
     @State private var enterBothBool = false
-    
-    @Environment(\.requestReview) var requestReview
-    @AppStorage("bookCompletionCount") var bookCompletionCount = 0
-    
+    @State private var bookAddedCounter = 0
     @State private var bookIsInCollection = false
+    @State private var hapticsManager = HapticsManager()
+    
+    var book: VolumeInfo
+    var books: [Book]
+
+    let authorText = Color(red: 0.3, green: 0.3, blue: 0.3)
     
     var body: some View {
         NavigationStack {
@@ -155,7 +153,9 @@ struct AddView: View {
             .preferredColorScheme(.light)
         }
         .alert("Book Added", isPresented: $showAlert) {
-            Button("Ok", action: showReview)
+            Button("Ok", role: .cancel, action: {
+                hapticsManager.playAddedBookToCollectionHaptic()
+            })
         } message: {
             Text("\(book.title) has been added to your collection.")
         }
@@ -201,7 +201,7 @@ struct AddView: View {
         } else {
             modelContext.insert(newBook)
             try? modelContext.save()
-            bookCompletionCount += 1
+            bookAddedCounter += 1
             showAlert = true
         }
     }
@@ -213,7 +213,7 @@ struct AddView: View {
         } else {
             modelContext.insert(newBook)
             try? modelContext.save()
-            bookCompletionCount += 1
+            bookAddedCounter += 1
             showAlert = true
         }
     }
@@ -225,7 +225,7 @@ struct AddView: View {
         } else {
             modelContext.insert(newBook)
             try? modelContext.save()
-            bookCompletionCount += 1
+            bookAddedCounter += 1
             showAlert = true
         }
     }
@@ -237,17 +237,8 @@ struct AddView: View {
         } else {
             modelContext.insert(newBook)
             try? modelContext.save()
-            bookCompletionCount += 1
+            bookAddedCounter += 1
             showAlert = true
-        }
-    }
-    
-    @MainActor func showReview() {
-        
-        print(bookCompletionCount)
-        
-        if bookCompletionCount == 5 {
-            requestReview()
         }
     }
 }
