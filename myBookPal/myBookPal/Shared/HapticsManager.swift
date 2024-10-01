@@ -18,4 +18,24 @@ class HapticsManager {
     @MainActor func playRemovedBookHaptic() {
         haptics.notify(.error)
     }
+    
+    @MainActor func playFoundISBNHaptic() {
+        haptics.play(.heavy)
+    }
+    
+    @MainActor func playAddedGoal() {
+        haptics.notify(.success)
+    }
+    
+    @MainActor func playRemovedGoal() {
+        haptics.play(.medium)
+    }
+    
+    @MainActor func playAddBookLog() {
+        haptics.play(.light)
+    }
+    
+    @MainActor func playDeleteBookLog() {
+        haptics.play(.medium)
+    }
 }

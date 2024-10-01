@@ -499,6 +499,8 @@ struct ContentView: View {
         
         switch result {
         case .success(let result):
+            hapticsManager.playFoundISBNHaptic()
+            
             let isbnString = result.string
             
             isbnManager.isbnNumber = isbnString

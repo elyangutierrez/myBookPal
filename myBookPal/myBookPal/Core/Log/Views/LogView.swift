@@ -20,6 +20,7 @@ struct LogView: View {
     @State private var lastPageNumber: Int?
     @State private var noteVisibility = NoteVisibility()
     @State private var currentNote: QuickNote?
+    @State private var hapticsManager = HapticsManager()
     
     var book: Book
     
@@ -463,6 +464,7 @@ struct LogView: View {
         let logIndex = book.logs!.firstIndex(of: currentLog!) ?? 0
         
         book.logs?.remove(at: logIndex)
+        hapticsManager.playDeleteBookLog()
     }
 }
 

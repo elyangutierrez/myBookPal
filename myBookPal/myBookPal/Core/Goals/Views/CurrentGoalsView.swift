@@ -16,6 +16,7 @@ struct CurrentGoalsView: View {
     @State private var showAddGoalSheet = false
     @State private var goalAdded: Bool = false
     @State private var today = Date.now
+    @State private var hapticManager = HapticsManager()
     
     private func callManagerMethods() {
         dateManager.getWeekDayNames()
@@ -500,6 +501,7 @@ struct CurrentGoalsView: View {
                 goalManager.removeGoal(goal)
             }
         }
+        hapticManager.playRemovedGoal()
     }
 }
 

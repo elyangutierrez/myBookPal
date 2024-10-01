@@ -478,7 +478,6 @@
 			isa = PBXGroup;
 			children = (
 				722662D02C92717A0071162D /* NotificationsModel.swift */,
-				7248FF522C9CBD5000722F23 /* PictureHandler.swift */,
 				720A001B2C9F775700BD9A45 /* MailComposer.swift */,
 			);
 			path = ViewModel;
@@ -599,6 +598,7 @@
 		72AC47A82CAC752E007E72DE /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				7248FF522C9CBD5000722F23 /* PictureHandler.swift */,
 				72AC47A92CAC753E007E72DE /* HapticsManager.swift */,
 				72AC47AB2CAC9392007E72DE /* Haptics.swift */,
 			);

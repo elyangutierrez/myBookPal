@@ -8,8 +8,18 @@
 import SwiftUI
 
 struct AddLogEntryView: View {
+    
+    @Environment(\.dismiss) var dismiss
+    @Environment(\.modelContext) var modelContext
+    
     @State private var page = ""
     @State private var date = Date.now
+    @State private var invalidPageCount = false
+    @State private var tagsTextArray = [Tag]()
+    @State private var pageLessThanLastPage = false
+    @State private var quickNoteText = ""
+    @State private var maxCharacterCount = 125
+    @State private var hapticsManager = HapticsManager()
     
     var checkFields: Bool {
         if page.isEmpty {
@@ -18,17 +28,8 @@ struct AddLogEntryView: View {
         return false
     }
     
-    @Environment(\.dismiss) var dismiss
-    @Environment(\.modelContext) var modelContext
-    
     var book: Book
     var lastPageNumber: Int?
-    
-    @State private var invalidPageCount = false
-    @State private var tagsTextArray = [Tag]()
-    @State private var pageLessThanLastPage = false
-    @State private var quickNoteText = ""
-    @State private var maxCharacterCount = 125
     
     let today = Date.now
     let endOfToday = Date.now
@@ -217,6 +218,7 @@ struct AddLogEntryView: View {
             } else if quickNoteText == "" {
                 let entry = Log(currentPage: page, dateLogged: date, tags: tagsTextArray, showingNote: false)
                 modelContext.insert(entry)
+                hapticsManager.playAddBookLog()
                 book.addLogEntry(entry)
                 page = ""
                 quickNoteText = ""
@@ -225,6 +227,7 @@ struct AddLogEntryView: View {
                 let note = QuickNote(noteText: quickNoteText, date: .now)
                 let entry = Log(currentPage: page, dateLogged: date, tags: tagsTextArray, quickNote: note, showingNote: false)
                 modelContext.insert(entry)
+                hapticsManager.playAddBookLog()
                 book.addLogEntry(entry)
                 page = ""
                 quickNoteText = ""
