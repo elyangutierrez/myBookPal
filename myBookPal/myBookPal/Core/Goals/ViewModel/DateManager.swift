@@ -102,7 +102,7 @@ class DateManager {
         }
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "dd"
+        formatter.dateFormat = "d"
         
         weekDayNumbers = []
         
