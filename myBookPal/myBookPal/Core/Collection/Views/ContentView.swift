@@ -30,6 +30,8 @@ struct ContentView: View {
     @State var isbnManager = FetchISBNBookInfoViewModel()
     @State private var showAddViewSheet = false
     @State private var addViewBook: VolumeInfo?
+    @State private var showManualFormSheet = false
+    @State private var displayedImage: Image?
     
     var books: [Book]
     
@@ -75,9 +77,22 @@ struct ContentView: View {
                                 VStack {
                                     HStack {
                                         VStack {
-                                            WebImage(url: URL(string: mostRecent?.coverImage ?? "N/A")) { image in
-                                                image
-                                                    .image?.resizable()
+                                            let imageString = mostRecent?.coverImage ?? "N/A"
+                                            
+                                            if imageString.contains("https") {
+                                                
+                                                WebImage(url: URL(string: imageString)) { image in
+                                                    image
+                                                        .image?.resizable()
+                                                        .frame(width: 140, height: 210)
+                                                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                                        .shadow(color: .black.opacity(0.30), radius: 5)
+                                                }
+                                            } else {
+                                                let image = imageString.toImage()
+                                                
+                                                image?
+                                                    .resizable()
                                                     .frame(width: 140, height: 210)
                                                     .clipShape(RoundedRectangle(cornerRadius: 15.0))
                                                     .shadow(color: .black.opacity(0.30), radius: 5)
@@ -154,9 +169,24 @@ struct ContentView: View {
                                     VStack {
                                         HStack {
                                             VStack {
-                                                WebImage(url: URL(string: recentlyViewedBook?.coverImage ?? "N/A")) { image in
-                                                    image
-                                                        .image?.resizable()
+
+                                                let imageString = recentlyViewedBook?.coverImage ?? "N/A"
+                                                
+                                                if imageString.contains("https") {
+
+                                                    
+                                                    WebImage(url: URL(string: imageString)) { image in
+                                                        image
+                                                            .image?.resizable()
+                                                            .frame(width: 140, height: 210)
+                                                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                                            .shadow(color: .black.opacity(0.30), radius: 5)
+                                                    }
+                                                } else {
+                                                    let image = imageString.toImage()
+                                                    
+                                                    image?
+                                                        .resizable()
                                                         .frame(width: 140, height: 210)
                                                         .clipShape(RoundedRectangle(cornerRadius: 15.0))
                                                         .shadow(color: .black.opacity(0.30), radius: 5)
@@ -266,13 +296,25 @@ struct ContentView: View {
                                                 .frame(height: 20)
                                         }
                                         
-                                        WebImage(url: URL(string: book.coverImage)) { image in
-                                            image
+                                        let imageString = book.coverImage
+                                        
+                                        if imageString.contains("https") {
+                                            
+                                            WebImage(url: URL(string: imageString)) { image in
+                                                image
+                                                    .image?.resizable()
+                                                    .frame(width: 90, height: 150)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                                    .shadow(color: .black.opacity(0.30), radius: 5)
+                                            }
+                                        } else {
+                                            let image = imageString.toImage()
+                                            
+                                            image?
                                                 .resizable()
-                                                .clipShape(RoundedRectangle(cornerRadius: 10.0))
                                                 .frame(width: 90, height: 150)
-                                        } placeholder: {
-                                            Rectangle()
+                                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                                .shadow(color: .black.opacity(0.30), radius: 5)
                                         }
                                         
                                         HStack {
@@ -317,6 +359,12 @@ struct ContentView: View {
                                 isShowingScanner.toggle()
                             }) {
                                 Text("Scan ISBN Number")
+                            }
+                            
+                            Button(action: {
+                                showManualFormSheet.toggle()
+                            }) {
+                                Text("Manually Add Book")
                             }
        
                         } label: {
@@ -389,6 +437,9 @@ struct ContentView: View {
                          }
                         .ignoresSafeArea()
                 }
+            }
+            .sheet(isPresented: $showManualFormSheet) {
+                ManualFormView(collectionBooks: books)
             }
             .onChange(of: books) {
                 if books.isEmpty {
