@@ -20,6 +20,7 @@ struct ManualFormView: View {
     @State private var successfulAlert = false
     @State private var unsuccessfulAlert = false
     @State private var pictureHandler = PictureHandler()
+    @State private var showCameraPicker = false
     
     var collectionBooks: [Book]
     
@@ -45,7 +46,7 @@ struct ManualFormView: View {
                 Section("Book Cover Image") {
                     
                     Button(action: {
-                        
+                        showCameraPicker.toggle()
                     }) {
                         Text("Take Picture")
                     }
@@ -62,13 +63,26 @@ struct ManualFormView: View {
                         .scaledToFill()
                 }
                 
-                Button(action: {
-                    addBookToCollection()
-                    print("tapped!")
-                }) {
-                    Text("Add Book")
+//                Button(action: {
+//                    addBookToCollection()
+//                    print("tapped!")
+//                }) {
+//                    Text("Add Book")
+//                }
+//                .disabled(pictureHandler.displayedImage == nil || title.isEmpty || genre.isEmpty || author.isEmpty || pages.isEmpty)
+                
+                Section {
+                    Button(action: {
+                        addBookToCollection()
+                    }) {
+                        Text("Add Book")
+                    }
+                    .disabled(pictureHandler.displayedImage == nil || title.isEmpty || genre.isEmpty || author.isEmpty || pages.isEmpty)
+                } header: {
+                    Text("")
+                } footer: {
+                    Text("Warning: Manually adding books to your collection may cause lag or performance issues as it was not intended to be manually added but rather with isbn or online.")
                 }
-                .disabled(pictureHandler.displayedImage == nil || title.isEmpty || genre.isEmpty || author.isEmpty || pages.isEmpty)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
@@ -83,6 +97,12 @@ struct ManualFormView: View {
                 Task {
                     await pictureHandler.convertPickerItemToImage()
                 }
+            }
+            .fullScreenCover(isPresented: $showCameraPicker) {
+                CameraPickerView { image in
+                    pictureHandler.convertUIImageToImage(image: image)
+                }
+                .ignoresSafeArea()
             }
         }
         .alert("Book Added", isPresented: $successfulAlert) {

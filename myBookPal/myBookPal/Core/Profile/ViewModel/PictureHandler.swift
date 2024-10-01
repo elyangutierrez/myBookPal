@@ -37,6 +37,17 @@ class PictureHandler: @unchecked Sendable {
         }
     }
     
+    func convertUIImageToImage(image: UIImage) {
+        let uiImage = image
+        selectedImage = uiImage
+        
+        guard let selectedImage else { return }
+        
+        convertImageToString(uiimage: selectedImage)
+        
+        displayedImage = Image(uiImage: uiImage)
+    }
+    
     @MainActor func convertImageToData(image: UIImage) -> Data {
         let imageData = image.jpegData(compressionQuality: 0.90)
         print("Converted image to data.")

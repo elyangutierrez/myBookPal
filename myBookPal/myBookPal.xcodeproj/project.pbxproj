@@ -67,6 +67,7 @@
 		72AC47A02CAB4CCD007E72DE /* ManualFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC479F2CAB4CCD007E72DE /* ManualFormView.swift */; };
 		72AC47A22CAB5347007E72DE /* ImageCapturingHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC47A12CAB5347007E72DE /* ImageCapturingHandler.swift */; };
 		72AC47A52CAB66C2007E72DE /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC47A42CAB66C2007E72DE /* String.swift */; };
+		72AC47A72CAB73F3007E72DE /* CameraPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC47A62CAB73F3007E72DE /* CameraPickerView.swift */; };
 		72BB668F2C93F15A001F17BA /* LightTagViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB668E2C93F15A001F17BA /* LightTagViewModifier.swift */; };
 		72BB66912C93F371001F17BA /* DarkerTagViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB66902C93F371001F17BA /* DarkerTagViewModifier.swift */; };
 		72BB66932C93F782001F17BA /* RowOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB66922C93F782001F17BA /* RowOneView.swift */; };
@@ -161,6 +162,7 @@
 		72AC479F2CAB4CCD007E72DE /* ManualFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManualFormView.swift; sourceTree = "<group>"; };
 		72AC47A12CAB5347007E72DE /* ImageCapturingHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCapturingHandler.swift; sourceTree = "<group>"; };
 		72AC47A42CAB66C2007E72DE /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		72AC47A62CAB73F3007E72DE /* CameraPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPickerView.swift; sourceTree = "<group>"; };
 		72BB668E2C93F15A001F17BA /* LightTagViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTagViewModifier.swift; sourceTree = "<group>"; };
 		72BB66902C93F371001F17BA /* DarkerTagViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkerTagViewModifier.swift; sourceTree = "<group>"; };
 		72BB66922C93F782001F17BA /* RowOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowOneView.swift; sourceTree = "<group>"; };
@@ -584,6 +586,7 @@
 			isa = PBXGroup;
 			children = (
 				72AC47A12CAB5347007E72DE /* ImageCapturingHandler.swift */,
+				72AC47A62CAB73F3007E72DE /* CameraPickerView.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -738,6 +741,7 @@
 				720A001A2C9E768D00BD9A45 /* HelpAndSupportView.swift in Sources */,
 				72A8893E2C3A23520032A56C /* BackgroundBookCoverView.swift in Sources */,
 				722662A42C8CAB4A0071162D /* StarRating.swift in Sources */,
+				72AC47A72CAB73F3007E72DE /* CameraPickerView.swift in Sources */,
 				7248FF4C2C9C977500722F23 /* ProfileView.swift in Sources */,
 				72BBD34C2BF29EB2006BC431 /* AddLogEntryView.swift in Sources */,
 				720A00202C9FB9FE00BD9A45 /* AddQuickNoteView.swift in Sources */,
