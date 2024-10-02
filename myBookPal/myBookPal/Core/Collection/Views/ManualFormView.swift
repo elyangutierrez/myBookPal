@@ -65,14 +65,6 @@ struct ManualFormView: View {
                         .scaledToFill()
                 }
                 
-//                Button(action: {
-//                    addBookToCollection()
-//                    print("tapped!")
-//                }) {
-//                    Text("Add Book")
-//                }
-//                .disabled(pictureHandler.displayedImage == nil || title.isEmpty || genre.isEmpty || author.isEmpty || pages.isEmpty)
-                
                 Section {
                     Button(action: {
                         addBookToCollection()

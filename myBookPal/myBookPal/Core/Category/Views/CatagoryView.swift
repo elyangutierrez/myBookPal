@@ -19,8 +19,10 @@ struct CatagoryView: View {
             
             if selectedView == 0 {
                 InProgressView(books: books)
+                    .accessibilityLabel("Showing books that are in progress")
             } else {
                 CompletedView(books: books)
+                    .accessibilityLabel("Showing books that are completed")
             }
         }
         .tint(Color.accent)

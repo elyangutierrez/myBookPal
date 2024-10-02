@@ -284,9 +284,9 @@ struct LogView: View {
                                                                                action: {
                                                                             currentLog = log
                                                                             showDeletionAlert.toggle()
-                                                                        }
-                                                                        )
+                                                                        })
                                                                         .tint(.red)
+                                                                        .accessibilityLabel("Delete log")
                                                                     } label: {
                                                                         Circle()
                                                                             .fill(.clear)
@@ -297,6 +297,7 @@ struct LogView: View {
                                                                     }
                                                                 }
                                                                 .frame(maxWidth: .infinity, alignment: .trailing)
+                                                                .accessibilityAddTraits(.isButton)
                                                             }
                                                         }
                                                         .frame(maxHeight: .infinity, alignment: .top)
@@ -369,9 +370,6 @@ struct LogView: View {
             .preferredColorScheme(.dark)
             .navigationTitle("Logs")
             .navigationBarTitleDisplayMode(.inline)
-//            .navigationDestination(item: $currentNote) { note in
-//                NoteTextView(note: note)
-//            }
             .sheet(item: $currentNote) { note in
                 NoteTextView(note: note)
                     .presentationDetents([.height(450)])
@@ -430,14 +428,22 @@ struct LogView: View {
             }
             .alert("Rate Book", isPresented: $isStarRatingAlertOn) {
                 TextField("Enter Rating", value: $inputRating, format: .number)
+                    .accessibilityLabel("Enter Rating")
                 Button("Add", role: .cancel, action: addRatingToBook)
+                    .accessibilityAddTraits(.isButton)
                 Button("Cancel") { }
+                    .accessibilityLabel("Cancel rating")
+                    .accessibilityAddTraits(.isButton)
             } message: {
                 Text("Enter a rating from 0 to 5.")
             }
             .alert("Delete Log", isPresented: $showDeletionAlert) {
                 Button("Yes", role: .destructive, action: deleteLog)
+                    .accessibilityLabel("Confirm deletion")
+                    .accessibilityAddTraits(.isButton)
                 Button("Cancel", role: .cancel) { }
+                    .accessibilityLabel("Cancel deletion")
+                    .accessibilityAddTraits(.isButton)
             } message: {
                 Text("Are you sure you want to delete this log entry?")
             }

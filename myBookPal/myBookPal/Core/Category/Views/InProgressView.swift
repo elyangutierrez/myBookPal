@@ -73,6 +73,7 @@ struct InProgressView: View {
                     }
                 }
             }
+            .accessibilityHint("Books in progress: \(getInProgressOnly.count)")
             .navigationDestination(item: $selectedBook) { book in
                 LogView(book: book)
             }

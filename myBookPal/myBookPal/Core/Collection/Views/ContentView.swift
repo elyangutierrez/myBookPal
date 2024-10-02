@@ -263,6 +263,7 @@ struct ContentView: View {
                     HStack {
                         Text("Collection")
                             .collectionTextModifier()
+                            .accessibilityLabel("Collection of books")
                         
                         Button(action: {
                             withAnimation(.spring(duration: 0.2, bounce: 0.1)) {
@@ -272,12 +273,11 @@ struct ContentView: View {
                             Text("Edit")
                                 .fontDesign(.serif)
                                 .fontWeight(.semibold)
-                            Image(systemName: "pencil")
                                 .accessibilityLabel("Editing pencil to edit collection")
+                            Image(systemName: "pencil")
                         }
-                        .padding(.horizontal, 20)
                         .accessibilityAddTraits(.isButton)
-                        
+                        .padding(.horizontal, 20)
                     }
                     
                     ScrollView(.horizontal) {
@@ -291,7 +291,8 @@ struct ContentView: View {
                                                 .frame(width: 30)
                                                 .overlay {
                                                     Button(action: {
-                                                        deleteBookFromCollection(book)
+                                                        selectedDeletionBook = book
+                                                        activateBookDeletionAlert.toggle()
                                                     }) {
                                                         Image(systemName: "trash")
                                                             .foregroundStyle(.red)
@@ -311,7 +312,6 @@ struct ContentView: View {
                                                     .image?.resizable()
                                                     .frame(width: 90, height: 150)
                                                     .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                                    .shadow(color: .black.opacity(0.30), radius: 5)
                                             }
                                         } else {
                                             let image = imageString.toImage()
@@ -346,7 +346,6 @@ struct ContentView: View {
                                 )
                                 .buttonStyle(PlainButtonStyle())
                             }
-                            .accessibilityLabel("Collection of books")
                         }
                     }
                     .scrollIndicators(.hidden)
@@ -358,29 +357,25 @@ struct ContentView: View {
                 VStack {
                     VStack {
                         Menu {
-//                            NavigationLink(destination: SearchView(collectionBooks: books)) {
-//                                Text("Search Online")
-//                            }
-                            
                             Button(action: {
                                 isShowingOnlineSheet.toggle()
                             }) {
                                 Text("Search Online")
-                                    .accessibilityHint("Search the book online", isEnabled: showBookAddingVO)
+                                    .accessibilityHint("Search book online")
                             }
                             
                             Button(action: {
                                 isShowingScanner.toggle()
                             }) {
                                 Text("Scan ISBN Number")
-                                    .accessibilityHint("Scan the ISBN number", isEnabled: showBookAddingVO)
+                                    .accessibilityHint("Scan isbn number")
                             }
                             
                             Button(action: {
                                 showManualFormSheet.toggle()
                             }) {
                                 Text("Manually Add Book")
-                                    .accessibilityHint("Manually add the book", isEnabled: showBookAddingVO)
+                                    .accessibilityHint("Manually add book")
                             }
        
                         } label: {
@@ -393,14 +388,10 @@ struct ContentView: View {
                                         .frame(width: 17, height: 17, alignment: .center)
                                         .foregroundStyle(.white)
                                 }
-                                .accessibilityHint("Show a menu regarding book adding")
-                            
+                                .accessibilityLabel("Ways to add a book")
                         }
                     }
                     .frame(maxHeight: .infinity, alignment: .bottomTrailing)
-                    .onTapGesture {
-                        showBookAddingVO.toggle()
-                    }
                     .accessibilityAddTraits(.isButton)
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -491,26 +482,23 @@ struct ContentView: View {
             }
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
-        .alert("Book Deleted", isPresented: $activateBookDeletionAlert) {
-            Button("Ok", role: .cancel, action: reset)
-        } message: {
-            Text("\(deletedBookTitle) has been removed.")
+        .alert("Are you sure you want to delete this book?", isPresented: $activateBookDeletionAlert) {
+            Button("Yes", role: .destructive, action: {
+                deleteBookFromCollection(selectedDeletionBook)
+                reset()
+            })
+            Button("Cancel", role: .cancel, action: reset)
         }
     }
     
-    func activateDeleteAlert() {
-        activateBookDeletionAlert = true
-    }
-    
-    func deleteBookFromCollection(_ bookToDelete: Book) {
-        print("Called the function and book name is: \(bookToDelete.title)")
-        let index = books.firstIndex(of: bookToDelete) ?? nil
+    func deleteBookFromCollection(_ bookToDelete: Book?) {
+        print("Called the function and book name is: \(bookToDelete?.title ?? "N/A")")
+        let index = books.firstIndex(of: bookToDelete!) ?? nil
         
         if index != nil {
-            modelContext.delete(bookToDelete)
+            modelContext.delete(bookToDelete!)
             hapticsManager.playRemovedBookHaptic()
-            deletedBookTitle = bookToDelete.title.uppercased()
-            activateDeleteAlert()
+            deletedBookTitle = (bookToDelete?.title.uppercased())!
         }
     }
     
@@ -535,6 +523,7 @@ struct ContentView: View {
     
     func reset() {
         activateBookDeletionAlert = false
+        selectedDeletionBook = nil
     }
 }
 

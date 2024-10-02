@@ -73,6 +73,7 @@ struct CompletedView: View {
                     }
                 }
             }
+            .accessibilityHint("Books in progress: \(getCompletedOnly.count)")
             .navigationDestination(item: $selectedBook) { book in
                 LogView(book: book)
             }
