@@ -22,6 +22,7 @@ struct ManualFormView: View {
     @State private var unsuccessfulAlert = false
     @State private var pictureHandler = PictureHandler()
     @State private var showCameraPicker = false
+    @State private var hapticsManager = HapticsManager()
     
     var collectionBooks: [Book]
     
@@ -115,7 +116,10 @@ struct ManualFormView: View {
             }
         }
         .alert("Book Added", isPresented: $successfulAlert) {
-            Button("Ok", role: .cancel) { }
+            Button("Ok", role: .cancel, action: {
+                hapticsManager.playAddedBookToCollectionHaptic()
+                dismiss()
+            })
         } message: {
             Text("\(title) has been added to your collection.")
         }

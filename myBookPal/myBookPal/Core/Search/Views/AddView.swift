@@ -21,6 +21,9 @@ struct AddView: View {
     @State private var bookIsInCollection = false
     @State private var hapticsManager = HapticsManager()
     
+    @Binding var showingSheet: Bool
+    @Binding var bookItem: VolumeInfo?
+    
     var book: VolumeInfo
     var books: [Book]
 
@@ -155,6 +158,7 @@ struct AddView: View {
         .alert("Book Added", isPresented: $showAlert) {
             Button("Ok", role: .cancel, action: {
                 hapticsManager.playAddedBookToCollectionHaptic()
+                showingSheet = false
             })
         } message: {
             Text("\(book.title) has been added to your collection.")
@@ -202,6 +206,7 @@ struct AddView: View {
             modelContext.insert(newBook)
             try? modelContext.save()
             bookAddedCounter += 1
+            bookItem = nil
             showAlert = true
         }
     }
@@ -246,5 +251,5 @@ struct AddView: View {
 #Preview {
     let example = VolumeInfo(title: "Dune", authors: ["Frank Herbert"], pageCount: 0, categories: ["N/A"])
     
-    return AddView(book: example, books: [Book]())
+    return AddView(showingSheet: .constant(false), bookItem: .constant(VolumeInfo(title: "", authors: [""], pageCount: 5, categories: [""])), book: example, books: [Book]())
 }

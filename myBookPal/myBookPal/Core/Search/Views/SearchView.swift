@@ -10,6 +10,10 @@ import SwiftUI
 struct SearchView: View {
     @State var fetchBookInfoViewModel = FetchBookInfoViewModel()
     @State private var currentBook: VolumeInfo?
+    @State private var addViewBook: VolumeInfo? = nil
+    
+    @Binding var isShowingSheet: Bool
+    
     var collectionBooks: [Book]
     
     private let adaptiveColumn = [
@@ -27,7 +31,7 @@ struct SearchView: View {
                         // TODO: Instead of using navigationDestination, try navigationLink?
                         
                         NavigationLink {
-                            AddView(book: book, books: collectionBooks)
+                            AddView(showingSheet: $isShowingSheet, bookItem: $addViewBook, book: book, books: collectionBooks)
                         } label: {
                             Rectangle()
                                 .fill(.white)
@@ -103,11 +107,17 @@ struct SearchView: View {
                         .fontWeight(.semibold)
                         .foregroundStyle(.accent)
                 }
+                
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("Cancel", role: .cancel, action: {
+                        isShowingSheet.toggle()
+                    })
+                }
             }
         }
     }
 }
 
 #Preview {
-    SearchView(collectionBooks: [Book]())
+    SearchView(isShowingSheet: .constant(false), collectionBooks: [Book]())
 }
