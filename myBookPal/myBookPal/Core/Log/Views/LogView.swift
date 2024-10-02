@@ -411,6 +411,7 @@ struct LogView: View {
                             Image(systemName: "star")
                         }
                         .padding(.horizontal, -10)
+                        .accessibilityLabel("Rate Book")
                     }
                 }
                 
@@ -421,6 +422,7 @@ struct LogView: View {
                     }) {
                         Image(systemName: "plus")
                     }
+                    .accessibilityLabel("Add Log")
                 }
             }
             .sheet(isPresented: $showSheet) {

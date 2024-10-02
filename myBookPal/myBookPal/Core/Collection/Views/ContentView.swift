@@ -34,6 +34,7 @@ struct ContentView: View {
     @State private var displayedImage: Image?
     @State private var hapticsManager = HapticsManager()
     @State private var isShowingOnlineSheet = false
+    @State private var showBookAddingVO = false
     
     var books: [Book]
     
@@ -150,6 +151,7 @@ struct ContentView: View {
                                         .padding(.horizontal, -30)
                                     }
                                 }
+                                .accessibilityLabel("Recently Added: \(mostRecent?.title ?? testBook.title)")
                             }
                         }
                     }
@@ -244,7 +246,7 @@ struct ContentView: View {
                                             .padding(.horizontal, -30)
                                         }
                                     }
-
+                                    .accessibilityLabel("Last Viewed: \(recentlyViewedBook?.title ?? testBook.title)")
                                 }
                             }
                         }
@@ -271,8 +273,10 @@ struct ContentView: View {
                                 .fontDesign(.serif)
                                 .fontWeight(.semibold)
                             Image(systemName: "pencil")
+                                .accessibilityLabel("Editing pencil to edit collection")
                         }
                         .padding(.horizontal, 20)
+                        .accessibilityAddTraits(.isButton)
                         
                     }
                     
@@ -342,6 +346,7 @@ struct ContentView: View {
                                 )
                                 .buttonStyle(PlainButtonStyle())
                             }
+                            .accessibilityLabel("Collection of books")
                         }
                     }
                     .scrollIndicators(.hidden)
@@ -361,18 +366,21 @@ struct ContentView: View {
                                 isShowingOnlineSheet.toggle()
                             }) {
                                 Text("Search Online")
+                                    .accessibilityHint("Search the book online", isEnabled: showBookAddingVO)
                             }
                             
                             Button(action: {
                                 isShowingScanner.toggle()
                             }) {
                                 Text("Scan ISBN Number")
+                                    .accessibilityHint("Scan the ISBN number", isEnabled: showBookAddingVO)
                             }
                             
                             Button(action: {
                                 showManualFormSheet.toggle()
                             }) {
                                 Text("Manually Add Book")
+                                    .accessibilityHint("Manually add the book", isEnabled: showBookAddingVO)
                             }
        
                         } label: {
@@ -385,9 +393,15 @@ struct ContentView: View {
                                         .frame(width: 17, height: 17, alignment: .center)
                                         .foregroundStyle(.white)
                                 }
+                                .accessibilityHint("Show a menu regarding book adding")
+                            
                         }
                     }
                     .frame(maxHeight: .infinity, alignment: .bottomTrailing)
+                    .onTapGesture {
+                        showBookAddingVO.toggle()
+                    }
+                    .accessibilityAddTraits(.isButton)
                 }
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.horizontal, 10)

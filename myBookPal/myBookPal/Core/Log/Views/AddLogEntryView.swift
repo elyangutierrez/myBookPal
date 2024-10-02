@@ -39,8 +39,10 @@ struct AddLogEntryView: View {
             Form {
                 Section("Log Infomation") {
                     TextField("Enter Current Page", text: $page)
+                        .accessibilityLabel("Enter current page number")
                     
                     DatePicker("Datetime", selection: $date, in: today...endOfToday)
+                        .accessibilityLabel("Select the date and time read")
                 }
                 
                 Section {
@@ -121,6 +123,7 @@ struct AddLogEntryView: View {
                                     .foregroundStyle(.gray)
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
+                            .accessibilityHint("Select up to 3 optional tags to express the emotions that the story evokes.")
                             .padding(.horizontal, 25)
                             
                             ZStack {
@@ -166,6 +169,7 @@ struct AddLogEntryView: View {
                         .onChange(of: quickNoteText) {
                             quickNoteText = String(quickNoteText.prefix(maxCharacterCount))
                         }
+                        .accessibilityLabel("Add a optional quick note")
                 }
                 
                 Section {
@@ -173,8 +177,10 @@ struct AddLogEntryView: View {
                         addEntry()
                     }) {
                         Text("Add")
+                            .accessibilityLabel("Add Log Entry")
                     }
                     .disabled(checkFields)
+                    .accessibilityAddTraits(.isButton)
                 }
             }
             .navigationTitle("Add Log Entry")
