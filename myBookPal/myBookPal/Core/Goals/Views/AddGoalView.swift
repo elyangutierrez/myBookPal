@@ -107,7 +107,10 @@ struct AddGoalView: View {
                 }
             }
             .alert("Goal Added!", isPresented: $showAddGoalAlert) {
-                Button("Ok", role: .cancel, action: addGoalToList)
+                Button("Ok", role: .cancel, action: {
+                    addGoalToList()
+                    dismiss()
+                })
                 // actually add it to the list
             } message: {
                 Text("This goal has been added to your list!")

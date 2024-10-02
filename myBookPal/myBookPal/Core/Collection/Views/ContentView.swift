@@ -29,10 +29,11 @@ struct ContentView: View {
     @State private var isShowingTorch = false
     @State var isbnManager = FetchISBNBookInfoViewModel()
     @State private var showAddViewSheet = false
-    @State private var addViewBook: VolumeInfo?
+    @State private var addViewBook: VolumeInfo? = nil
     @State private var showManualFormSheet = false
     @State private var displayedImage: Image?
     @State private var hapticsManager = HapticsManager()
+    @State private var isShowingOnlineSheet = false
     
     var books: [Book]
     
@@ -352,7 +353,13 @@ struct ContentView: View {
                 VStack {
                     VStack {
                         Menu {
-                            NavigationLink(destination: SearchView(collectionBooks: books)) {
+//                            NavigationLink(destination: SearchView(collectionBooks: books)) {
+//                                Text("Search Online")
+//                            }
+                            
+                            Button(action: {
+                                isShowingOnlineSheet.toggle()
+                            }) {
                                 Text("Search Online")
                             }
                             
@@ -398,7 +405,7 @@ struct ContentView: View {
                 }
             }
             .navigationDestination(item: $addViewBook) { book in
-                AddView(book: book, books: books)
+                AddView(showingSheet: $isShowingOnlineSheet, bookItem: $addViewBook, book: book, books: books)
             }
             .fullScreenCover(isPresented: $isShowingScanner) {
                 NavigationStack {
@@ -439,6 +446,9 @@ struct ContentView: View {
                         .ignoresSafeArea()
                 }
             }
+            .fullScreenCover(isPresented: $isShowingOnlineSheet) {
+                SearchView(isShowingSheet: $isShowingOnlineSheet, collectionBooks: books)
+            }
             .sheet(isPresented: $showManualFormSheet) {
                 ManualFormView(collectionBooks: books)
             }
@@ -459,14 +469,11 @@ struct ContentView: View {
                         
                         showAddViewSheet.toggle()
                     }
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-                        addViewBook = nil
-                    }
                 }
             }
             .onAppear {
                 print("DEBUG: \(books)")
+                isEditing = false
             }
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
@@ -496,6 +503,8 @@ struct ContentView: View {
     func handleScan(result: Result<ScanResult, ScanError>) {
         isShowingScanner = false
         isShowingTorch = false
+        
+        print("DEBUG: handling scanner result.")
         
         switch result {
         case .success(let result):

@@ -33,7 +33,7 @@ class Goal {
     var createdOnString: String {
         let date = createdOn
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd, yyyy"
+        formatter.dateFormat = "MMM d, yyyy"
         return formatter.string(from: date)
     }
     
@@ -47,7 +47,7 @@ class Goal {
     var getDeadline: String {
         let date = deadline
         let formatter = DateFormatter()
-        formatter.dateFormat = "MMM dd, yyyy"
+        formatter.dateFormat = "MMM d, yyyy"
         return formatter.string(from: date)
     }
 }
