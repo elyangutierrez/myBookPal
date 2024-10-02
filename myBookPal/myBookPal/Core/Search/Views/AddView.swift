@@ -159,6 +159,7 @@ struct AddView: View {
             Button("Ok", role: .cancel, action: {
                 hapticsManager.playAddedBookToCollectionHaptic()
                 showingSheet = false
+                bookItem = nil
             })
         } message: {
             Text("\(book.title) has been added to your collection.")
@@ -206,7 +207,6 @@ struct AddView: View {
             modelContext.insert(newBook)
             try? modelContext.save()
             bookAddedCounter += 1
-            bookItem = nil
             showAlert = true
         }
     }

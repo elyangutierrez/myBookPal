@@ -469,10 +469,6 @@ struct ContentView: View {
                         
                         showAddViewSheet.toggle()
                     }
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 10.0) {
-                        addViewBook = nil
-                    }
                 }
             }
             .onAppear {
@@ -507,6 +503,8 @@ struct ContentView: View {
     func handleScan(result: Result<ScanResult, ScanError>) {
         isShowingScanner = false
         isShowingTorch = false
+        
+        print("DEBUG: handling scanner result.")
         
         switch result {
         case .success(let result):
