@@ -255,6 +255,7 @@ struct CurrentGoalsView: View {
                                     VStack(alignment: .leading) {
                                         Text("Want to add a goal?")
                                             .font(.system(size: 13, weight: .bold))
+                                            .accessibilityLabel("Want to add a goal?")
                                         
                                         Spacer()
                                             .frame(height: 5)
@@ -282,6 +283,7 @@ struct CurrentGoalsView: View {
                                                 }
                                             }
                                             .shadow(radius: 5)
+                                            .accessibilityHint("Touch to add goal")
                                     }
                                 }
                             }
@@ -383,6 +385,7 @@ struct CurrentGoalsView: View {
                                                                                         .foregroundStyle(.white)
                                                                                         .fontWeight(.bold)
                                                                                 }
+                                                                                .accessibilityLabel("Tap to edit goal")
                                                                         }
                                                                     }
                                                                     .frame(maxWidth: .infinity, alignment: .trailing)
@@ -394,6 +397,7 @@ struct CurrentGoalsView: View {
                                                                 Text(goal.text)
                                                                     .fontWeight(.bold)
                                                                     .foregroundStyle(.white)
+                                                                    .accessibilityLabel("Goal: \(goal.text)")
                                                                 
                                                                 Spacer()
                                                                     .frame(height: 15)
@@ -417,6 +421,7 @@ struct CurrentGoalsView: View {
                                                                             .foregroundStyle(.white)
                                                                             .padding(.horizontal, -5)
                                                                     }
+                                                                    .accessibilityLabel("Deadline: \(goal.getDeadline)")
                                                                 }
                                                                 
                                                                 Spacer()

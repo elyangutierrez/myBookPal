@@ -96,9 +96,11 @@ struct AddView: View {
                                     Text("Manual Entry")
                                         .foregroundStyle(.white)
                                         .fontWeight(.semibold)
+                                        .accessibilityLabel("Manually Enter Book Infomation")
                                 }
                         }
                         .padding()
+                        .accessibilityAddTraits(.isButton)
                     } else if book.getPageCount == "0" {
                         Button(action: {
                             enterPageCountBool.toggle()
@@ -112,9 +114,11 @@ struct AddView: View {
                                     Text("Manually Enter Page Count")
                                         .foregroundStyle(.white)
                                         .fontWeight(.semibold)
+                                        .accessibilityLabel("Manually Enter Page Count")
                                 }
                         }
                         .padding()
+                        .accessibilityAddTraits(.isButton)
                     } else if book.getCatagory == "N/A" {
                         Button(action: {
                             enterGenreBool.toggle()
@@ -128,9 +132,11 @@ struct AddView: View {
                                     Text("Manually Enter Genre")
                                         .foregroundStyle(.white)
                                         .fontWeight(.semibold)
+                                        .accessibilityLabel("Manually Enter Genre")
                                 }
                         }
                         .padding()
+                        .accessibilityAddTraits(.isButton)
                     } else {
                         Button(action: {
                             addBookToCollection()
@@ -144,10 +150,12 @@ struct AddView: View {
                                     Text("Add To Collection")
                                         .foregroundStyle(.white)
                                         .fontWeight(.semibold)
+                                        .accessibilityLabel("Add Book To Collection")
                                 }
                             
                         }
                         .padding()
+                        .accessibilityAddTraits(.isButton)
                     }
                 }
             }
@@ -161,39 +169,53 @@ struct AddView: View {
                 showingSheet = false
                 bookItem = nil
             })
+            .accessibilityAddTraits(.isButton)
         } message: {
             Text("\(book.title) has been added to your collection.")
+                .accessibilityLabel("\(book.title) was successfully added")
         }
         
         .alert("Enter Pages and Genre", isPresented: $enterBothBool) {
             Button("Submit", action: twoEmptyFieldsInsertion)
+                .accessibilityAddTraits(.isButton)
             Button("Cancel", role: .cancel) { }
+                .accessibilityAddTraits(.isButton)
             TextField("Enter Pages", text: $manualBookCount)
+                .accessibilityLabel("Enter page count")
             TextField("Enter Genre", text: $enterGenre)
+                .accessibilityLabel("Enter genre")
         } message: {
             Text("Please enter the total pages and genre of \(book.title).")
         }
         
         .alert("Enter Page Count", isPresented: $enterPageCountBool) {
             Button("Submit", action: secondaryBookInsertion)
+                .accessibilityAddTraits(.isButton)
             Button("Cancel", role: .cancel) { }
+                .accessibilityAddTraits(.isButton)
             TextField("Enter Total Page Count", text: $manualBookCount)
+                .accessibilityLabel("Enter page count")
         } message: {
             Text("Please enter the total amount of pages in \(book.title).")
         }
         
         .alert("Enter Genre", isPresented: $enterGenreBool) {
             Button("Submit", action: genreBookInsertion)
+                .accessibilityAddTraits(.isButton)
             Button("Cancel", role: .cancel) { }
+                .accessibilityAddTraits(.isButton)
             TextField("Enter Genre", text: $enterGenre)
+                .accessibilityLabel("Enter genre")
         } message: {
             Text("Please enter the genre of \(book.title).")
         }
         
         .alert("Already in Collection", isPresented: $bookIsInCollection) {
             Button("Ok", role: .cancel) { }
+                .accessibilityAddTraits(.isButton)
         } message: {
             Text("This book is already in the collection.")
+                .accessibilityLabel("This book is already in the collection.")
         }
         
     }

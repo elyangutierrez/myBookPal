@@ -36,6 +36,7 @@ struct DonutChartView: View {
                         .font(.system(size: 50))
                         .padding(.top, -10)
                 }
+                .accessibilityLabel("Total Books \(totalBooksCount)")
             }
             .frame(height: 200)
             
@@ -49,6 +50,7 @@ struct DonutChartView: View {
                     .frame(width: 25)
                 
                 Text("In Progress")
+                    .accessibilityLabel("In Progress: \(booksInProgress)")
                 
                 Spacer()
                     .frame(width: 30)
@@ -58,6 +60,7 @@ struct DonutChartView: View {
                     .frame(width: 25)
                 
                 Text("Books Read")
+                    .accessibilityLabel("Books Read: \(booksRead)")
                 
             }
         }

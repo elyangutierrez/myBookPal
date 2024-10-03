@@ -57,6 +57,8 @@ struct ProfileView: View {
                                         .overlay {
                                             Image(systemName: "plus")
                                                 .foregroundStyle(.white)
+                                                .accessibilityLabel("Edit profile picture")
+                                                .accessibilityAddTraits(.isButton)
                                         }
                                         .onTapGesture {
                                             pictureHandler.showPhotosPicker.toggle()
@@ -92,6 +94,8 @@ struct ProfileView: View {
                                         .overlay {
                                             Image(systemName: "plus")
                                                 .foregroundStyle(.white)
+                                                .accessibilityAddTraits(.isButton)
+                                                .accessibilityLabel("Edit profile picture")
                                         }
                                         .onTapGesture {
                                             pictureHandler.showPhotosPicker.toggle()
@@ -116,6 +120,7 @@ struct ProfileView: View {
                                     isEditingName = false
                                 }
                                 .padding(.horizontal, 135)
+                                .accessibilityLabel("Enter profile name")
                         } else {
                             Text(profileName)
                                 .font(.title2)
@@ -124,6 +129,8 @@ struct ProfileView: View {
                                 isEditingName.toggle()
                             }) {
                                 Image(systemName: "pencil")
+                                    .accessibilityLabel("Edit name")
+                                    .accessibilityAddTraits(.isButton)
                             }
                         }
                     }
@@ -166,6 +173,7 @@ struct ProfileView: View {
                                     CustomArrowView()
                                 }
                                 .frame(maxWidth: .infinity, alignment: .trailing)
+                                .accessibilityAddTraits(.isButton)
                             }
                         }
                         .onTapGesture {
@@ -200,6 +208,7 @@ struct ProfileView: View {
                                     CustomArrowView()
                                 }
                                 .frame(maxWidth: .infinity, alignment: .trailing)
+                                .accessibilityAddTraits(.isButton)
                             }
                         }
                         .onTapGesture {
@@ -234,6 +243,7 @@ struct ProfileView: View {
                                     CustomArrowView()
                                 }
                                 .frame(maxWidth: .infinity, alignment: .trailing)
+                                .accessibilityAddTraits(.isButton)
                             }
                         }
                         .onTapGesture {
@@ -280,6 +290,7 @@ struct ProfileView: View {
                                     CustomArrowView()
                                 }
                                 .frame(maxWidth: .infinity, alignment: .trailing)
+                                .accessibilityAddTraits(.isButton)
                             }
                         }
                         .onTapGesture {

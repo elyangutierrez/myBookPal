@@ -34,6 +34,8 @@ struct SettingsView: View {
                                             }) {
                                                 Text("Delete")
                                                     .foregroundStyle(.red)
+                                                    .accessibilityLabel("Delete")
+                                                    .accessibilityAddTraits(.isButton)
                                             }
                                         }
                                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -50,9 +52,9 @@ struct SettingsView: View {
                 }
                 .navigationBarTitleDisplayMode(.inline)
                 .alert(isPresented: $deletedBooksAlert) {
-                    Alert(title: Text("Are you sure you want to delete all books?"),
+                    Alert(title: Text("Are you sure you want to delete all books?").accessibilityLabel("Are you sure you want to delete all books?"),
                           message: Text("Once deleted, you can't get your books and logs back."),
-                          primaryButton: .destructive(Text("Delete")) {
+                          primaryButton: .destructive(Text("Delete").accessibilityLabel("Delete")) {
                         deleteBooks(context: modelContext)
                     },
                           secondaryButton: .cancel())

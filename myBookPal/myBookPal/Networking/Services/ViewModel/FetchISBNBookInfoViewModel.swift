@@ -11,11 +11,12 @@ import Foundation
 class FetchISBNBookInfoViewModel: @unchecked Sendable {
     var books: [VolumeInfo] = []
     var performAction: Bool = false
+    var apiKey = "AIzaSyB1SgNWofLYMEb_QSxdjBY22TImWqROPk0"
     var isbnNumber = ""
     
     func fetchBookInfo() {
         let lowercasedText = isbnNumber.lowercased()
-        guard let encodedQuery = lowercasedText.replacingOccurrences(of: " ", with: "+").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: "https://www.googleapis.com/books/v1/volumes?q=isbn:\(encodedQuery)") else {
+        guard let encodedQuery = lowercasedText.replacingOccurrences(of: " ", with: "+").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: "https://www.googleapis.com/books/v1/volumes?q=isbn:\(encodedQuery)&key=\(apiKey)") else {
             return
         } // the encodedQuery is what the user has searched for in which is then plugged into the url
         print("---------------------------------")
