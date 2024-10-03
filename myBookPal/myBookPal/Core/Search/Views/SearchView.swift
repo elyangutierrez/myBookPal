@@ -32,6 +32,7 @@ struct SearchView: View {
                         
                         NavigationLink {
                             AddView(showingSheet: $isShowingSheet, bookItem: $addViewBook, book: book, books: collectionBooks)
+                                .accessibilityAddTraits(.isButton)
                         } label: {
                             Rectangle()
                                 .fill(.white)
@@ -50,6 +51,7 @@ struct SearchView: View {
                                             case .success(let image):
                                                 image
                                                     .SearchImageBookExtension()
+                                                    .accessibilityHint("Image of \(book.title)")
                                             case .failure(let error):
                                                 Color.red
                                                 let _ = print(error)
@@ -66,6 +68,7 @@ struct SearchView: View {
                                             .font(.system(size: 13))
                                             .fontWeight(.bold)
                                             .lineLimit(2)
+                                            .accessibilityLabel("\(book.title)")
                                         
                                         Spacer()
                                             .frame(height: 5)
@@ -84,6 +87,7 @@ struct SearchView: View {
             .navigationBarTitleDisplayMode(.inline)
             .searchPresentationToolbarBehavior(.avoidHidingContent)
             .searchable(text: $fetchBookInfoViewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Enter Book Title")
+            .accessibilityAddTraits(.isSearchField)
             .onChange(of: fetchBookInfoViewModel.searchText) {
                 if fetchBookInfoViewModel.searchText.isEmpty {
                     fetchBookInfoViewModel.books.removeAll()
@@ -98,6 +102,7 @@ struct SearchView: View {
                         Label("No Result Found", systemImage: "magnifyingglass")
                     } description: {
                         Text("Enter a book title to begin searching!")
+                            .accessibilityLabel("Enter a book title to begin searching!")
                     }
                 }
             }
