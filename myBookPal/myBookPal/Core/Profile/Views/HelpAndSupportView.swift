@@ -41,6 +41,7 @@ struct HelpAndSupportView: View {
                     Text("Support Category")
 //                        .font(.headline)
                         .padding(.horizontal, 5)
+                        .accessibilityLabel("Support Category")
                     
                     VStack {
                         HStack {
@@ -54,6 +55,7 @@ struct HelpAndSupportView: View {
                                 Picker("", selection: $selectedCategory) {
                                     ForEach(categories, id: \.self) { category in
                                         Text(category)
+                                            .accessibilityLabel(category)
                                     }
                                 }
                             }
@@ -79,6 +81,7 @@ struct HelpAndSupportView: View {
                     Text("Description")
 //                        .font(.headline)
                         .padding(.horizontal, 5)
+                        .accessibilityLabel("Description")
                     
                     VStack(alignment: .leading) {
                         TextField("Enter description...", text: $descriptionText, axis: .vertical)
@@ -100,6 +103,7 @@ struct HelpAndSupportView: View {
                                 currentCount = descriptionText.count
                             }
                             .focused($focus)
+                            .accessibilityLabel("Enter description in textfield")
                     }
                     .padding(.vertical, 5)
                     
@@ -138,6 +142,8 @@ struct HelpAndSupportView: View {
                             .overlay {
                                 VStack {
                                     Text("Submit Ticket")
+                                        .accessibilityLabel("Submit Ticket")
+                                        .accessibilityAddTraits(.isButton)
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding(.horizontal, 17)

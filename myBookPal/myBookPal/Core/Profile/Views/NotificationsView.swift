@@ -26,6 +26,8 @@ struct NotificationsView: View {
                                     .frame(width: 350, height: 35)
                                     .overlay {
                                         Toggle("Enable Notifications", isOn: $isNotificationsOn)
+                                            .accessibilityLabel("Enable Notifications: \(isNotificationsOn ? "On" : "Off")")
+                                            .accessibilityAddTraits(.isToggle)
                                             .padding(.horizontal, 15)
                                             .onChange(of: isNotificationsOn) {
                                                 if isNotificationsOn == true {
