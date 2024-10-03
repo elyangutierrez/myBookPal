@@ -41,22 +41,28 @@ struct AddGoalView: View {
                     TextField("Enter description", text: $goalDescription)
                 } header: {
                     Text("Goal Description")
+                        .accessibilityLabel("Enter goal description")
                 } footer: {
                     Text("Keep your goals short and concise for optimal efficiency.")
+                        .accessibilityHint("Keeps goal descriptions short and concise for optimal efficiency.")
                 }
                 
                 Section("Due Date") {
                     DatePicker("Date", selection: $dueDateSelection, in: Date.now.addingTimeInterval(initialDate)...Date.distantFuture)
+                        .accessibilityLabel("Select a due date")
                 }
                 
                 Section("Reminder Notification") {
                     Toggle("Enable Reminder", isOn: $isReminderEnabled)
+                        .accessibilityLabel("Enable reminder notification")
+                        .accessibilityAddTraits(.isToggle)
                     
                     // TODO: When enabled, ask for noti perms, else carry on.
                     
                     if isReminderEnabled {
                         
                         DatePicker("Reminder", selection: $reminderDate, in: Date.now.addingTimeInterval(initialDate)...Date.distantFuture)
+                            .accessibilityLabel("Select a reminder date")
                     }
                 }
                 
@@ -67,6 +73,7 @@ struct AddGoalView: View {
                         }
                     }
                     .pickerStyle(.segmented)
+                    .accessibilityLabel("Select a priority such as High, Medium, or Low")
                 }
                 
                 RoundedRectangle(cornerRadius: 15.0)
@@ -75,6 +82,7 @@ struct AddGoalView: View {
                     .overlay {
                         VStack {
                             Text("Add Goal")
+                                .accessibilityLabel("Add your goal")
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 20)

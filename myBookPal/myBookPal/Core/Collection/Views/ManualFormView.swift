@@ -31,18 +31,22 @@ struct ManualFormView: View {
             Form {
                 Section("Title") {
                     TextField("Title", text: $title, prompt: Text("Enter book name"))
+                        .accessibilityLabel("Enter book title")
                 }
                 
                 Section("Primary Author") {
                     TextField("Author", text: $author, prompt: Text("Enter author"))
+                        .accessibilityLabel("Enter book author")
                 }
                 
                 Section("Genre") {
                     TextField("Genre", text: $genre, prompt: Text("Enter genre"))
+                        .accessibilityLabel("Enter book genre")
                 }
                 
                 Section("Page Count") {
                     TextField("Page", text: $pages, prompt: Text("Enter page count"))
+                        .accessibilityLabel("Enter book page count")
                 }
                 
                 Section("Book Cover Image") {
@@ -51,12 +55,14 @@ struct ManualFormView: View {
                         showCameraPicker.toggle()
                     }) {
                         Text("Take Picture")
+                            .accessibilityLabel("Take picture of book cover")
                     }
                     
                     Button(action: {
                         pictureHandler.showPhotosPicker.toggle()
                     }) {
                         Text("Select from Gallery")
+                            .accessibilityLabel("Select book cover from gallery")
                     }
                     
                     pictureHandler.displayedImage?
@@ -70,12 +76,15 @@ struct ManualFormView: View {
                         addBookToCollection()
                     }) {
                         Text("Add Book")
+                            .accessibilityLabel("Add Book")
                     }
+                    .accessibilityAddTraits(.isButton)
                     .disabled(pictureHandler.displayedImage == nil || title.isEmpty || genre.isEmpty || author.isEmpty || pages.isEmpty)
                 } header: {
                     Text("")
                 } footer: {
                     Text("Warning: Manually adding books to your collection may cause lag or performance issues as it was not intended to be manually added but rather with isbn or online.")
+                        .accessibilityLabel("Warning: manually adding books may cause performance issues")
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
@@ -91,6 +100,7 @@ struct ManualFormView: View {
                         dismiss()
                     }) {
                         Text("Cancel")
+                            .accessibilityLabel("Exit manual entry")
                     }
                 }
             }
@@ -112,13 +122,16 @@ struct ManualFormView: View {
                 hapticsManager.playAddedBookToCollectionHaptic()
                 dismiss()
             })
+            .accessibilityAddTraits(.isButton)
         } message: {
             Text("\(title) has been added to your collection.")
+                .accessibilityLabel("The book has been successfully added")
         }
         .alert("Failed To Add Book", isPresented: $unsuccessfulAlert) {
             Button("Ok", role: .cancel) { }
         } message: {
             Text("Please try again.")
+                .accessibilityLabel("The book could not be added")
         }
     }
     

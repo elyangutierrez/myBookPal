@@ -296,7 +296,9 @@ struct ContentView: View {
                                                     }) {
                                                         Image(systemName: "trash")
                                                             .foregroundStyle(.red)
+                                                            .accessibilityLabel("Delete book")
                                                     }
+                                                    .accessibilityAddTraits(.isButton)
                                                 }
                                             
                                             Spacer()
@@ -332,6 +334,7 @@ struct ContentView: View {
                                                 .font(.footnote)
                                         }
                                     }
+                                    .accessibilityLabel("\(book.title)")
                                     
                                 }
                                 .simultaneousGesture(
@@ -425,6 +428,7 @@ struct ContentView: View {
                                             .padding(.vertical, -5)
                                             .padding(.horizontal, -5)
                                     }
+                                    .accessibilityLabel("Place ISBN code in the middle of the screen")
                             }
                             .frame(maxHeight: .infinity, alignment: .top)
                             .padding(.vertical, 125)
@@ -436,6 +440,7 @@ struct ContentView: View {
                                 }) {
                                     Text("Cancel")
                                         .foregroundStyle(.white)
+                                        .accessibilityLabel("Exit ISBN scanner")
                                 }
                             }
                             
@@ -445,6 +450,7 @@ struct ContentView: View {
                                 }) {
                                     Image(systemName: isShowingTorch ? "bolt.circle" : "bolt.slash.circle")
                                         .foregroundStyle(.white)
+                                        .accessibilityLabel("Enable/disable flashlight")
                                 }
                             }
                          }
