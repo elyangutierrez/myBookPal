@@ -68,6 +68,7 @@ struct SearchView: View {
                                             .font(.system(size: 13))
                                             .fontWeight(.bold)
                                             .lineLimit(2)
+                                            .multilineTextAlignment(.leading)
                                             .accessibilityLabel("\(book.title)")
                                         
                                         Spacer()

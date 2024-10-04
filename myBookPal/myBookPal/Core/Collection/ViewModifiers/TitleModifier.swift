@@ -13,6 +13,7 @@ struct TitleModifier: ViewModifier {
             .frame(maxWidth: 215, alignment: .leading)
             .fixedSize(horizontal: false, vertical: true)
             .multilineTextAlignment(.leading)
+            .lineLimit(3)
             .font(.system(size: 17).bold())
             .padding(.vertical, 2)
     }

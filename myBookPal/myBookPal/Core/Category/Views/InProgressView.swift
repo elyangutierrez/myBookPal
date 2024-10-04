@@ -14,7 +14,7 @@ struct InProgressView: View {
     var books: [Book]
     
     var adaptiveColumn = [
-        GridItem(.adaptive(minimum: 150), spacing: -15)
+        GridItem(.adaptive(minimum: 165), spacing: -15)
     ]
     
     var getInProgressOnly: [Book] {
