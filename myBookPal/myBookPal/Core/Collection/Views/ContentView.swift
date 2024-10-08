@@ -285,20 +285,36 @@ struct ContentView: View {
                                     NavigationLink(destination: LogView(book: book)) {
                                         VStack {
                                             if isEditing {
+                                                
+                                                let imageString = book.coverImage
+                                
                                                 Circle()
                                                     .fill(.gray.opacity(0.2))
                                                     .frame(width: 30)
                                                     .overlay {
-                                                        Button(action: {
-                                                            selectedDeletionBook = book
-                                                            activateBookDeletionAlert.toggle()
-                                                        }) {
-                                                            Image(systemName: "trash")
-                                                                .foregroundStyle(.red)
-                                                                .accessibilityLabel("Delete book")
+                                                        Menu {
+                                                            Button("Delete Book", systemImage: "trash", role: .destructive, action: {
+                                                                selectedDeletionBook = book
+                                                                activateBookDeletionAlert.toggle()
+                                                            })
+                                                            
+                                                            ShareLink(item: URL(string: imageString)!,
+                                                                      message: Text("I'm currently reading \(book.title) by \(book.author). You should check it out!"),
+                                                                      preview: SharePreview("Check this book out!", image: Image("appIcon")),
+                                                                      label: {
+                                                                Label("Share", systemImage: "square.and.arrow.up")
+                                                            })
+                                                            
+                                                        } label: {
+                                                            Circle()
+                                                                .fill(.clear)
+                                                                .frame(width: 30)
+                                                                .overlay {
+                                                                    Image(systemName: "ellipsis")
+                                                                }
                                                         }
-                                                        .accessibilityAddTraits(.isButton)
                                                     }
+                                                
                                                 
                                                 Spacer()
                                                     .frame(height: 20)
