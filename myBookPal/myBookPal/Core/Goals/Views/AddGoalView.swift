@@ -82,6 +82,7 @@ struct AddGoalView: View {
                     .overlay {
                         VStack {
                             Text("Add Goal")
+                                .padding(.horizontal)
                                 .accessibilityLabel("Add your goal")
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)

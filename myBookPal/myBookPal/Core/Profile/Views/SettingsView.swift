@@ -19,7 +19,7 @@ struct SettingsView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView(.vertical, showsIndicators: false) {
+            ScrollView(showsIndicators: true) {
                 ZStack {
                     VStack {
                         VStack(alignment: .leading) {

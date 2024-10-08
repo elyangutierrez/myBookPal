@@ -24,7 +24,7 @@ struct CompletedView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView(showsIndicators: true) {
                 Spacer()
                     .frame(height: 30)
                 LazyVGrid(columns: adaptiveColumn, spacing: 5) {

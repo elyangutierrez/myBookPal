@@ -36,121 +36,123 @@ struct HelpAndSupportView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                VStack(alignment: .leading) {
-                    Text("Support Category")
-//                        .font(.headline)
-                        .padding(.horizontal, 5)
-                        .accessibilityLabel("Support Category")
-                    
-                    VStack {
-                        HStack {
-                            VStack {
-                                Text("Category")
-                            }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding(.horizontal, 3)
-                            
-                            VStack {
-                                Picker("", selection: $selectedCategory) {
-                                    ForEach(categories, id: \.self) { category in
-                                        Text(category)
-                                            .accessibilityLabel(category)
+            GeometryReader { geometry in
+                VStack {
+                    VStack(alignment: .leading) {
+                        Text("Support Category")
+                        //                        .font(.headline)
+                            .padding(.horizontal, 5)
+                            .accessibilityLabel("Support Category")
+                        
+                        VStack {
+                            HStack {
+                                VStack {
+                                    Text("Category")
+                                }
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.horizontal, 3)
+                                
+                                VStack {
+                                    Picker("", selection: $selectedCategory) {
+                                        ForEach(categories, id: \.self) { category in
+                                            Text(category)
+                                                .accessibilityLabel(category)
+                                        }
                                     }
                                 }
+                                .frame(maxWidth: .infinity, alignment: .trailing)
                             }
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                        }
-                        .background(
-                            RoundedRectangle(cornerRadius: 15.0)
-                                .fill(.gray.opacity(0.10))
-                                .padding(.vertical, -5)
-                                .padding(.horizontal, -10)
-                        )
-                    }
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 5)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 15)
-                
-                Spacer()
-                    .frame(height: 50)
-                
-                VStack(alignment: .leading) {
-                    Text("Description")
-//                        .font(.headline)
-                        .padding(.horizontal, 5)
-                        .accessibilityLabel("Description")
-                    
-                    VStack(alignment: .leading) {
-                        TextField("Enter description...", text: $descriptionText, axis: .vertical)
-                            .padding(.horizontal, 20)
                             .background(
                                 RoundedRectangle(cornerRadius: 15.0)
                                     .fill(.gray.opacity(0.10))
-                                    .frame(width: 375)
-                                    .padding(.vertical, -10)
+                                    .padding(.vertical, -5)
                                     .padding(.horizontal, -10)
                             )
-                            .tint(.black)
-                            .foregroundStyle(.gray)
-                            .lineLimit(6, reservesSpace: true)
-                            .onSubmit {
-                                date = .now
-                            }
-                            .onChange(of: descriptionText) {
-                                currentCount = descriptionText.count
-                            }
-                            .focused($focus)
-                            .accessibilityLabel("Enter description in textfield")
+                        }
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 5)
                     }
-                    .padding(.vertical, 5)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 15)
                     
                     Spacer()
-                        .frame(height: 10)
+                        .frame(height: 50)
+                    
+                    VStack(alignment: .leading) {
+                        Text("Description")
+                        //                        .font(.headline)
+                            .padding(.horizontal, 5)
+                            .accessibilityLabel("Description")
+                        
+                        VStack(alignment: .leading) {
+                            TextField("Enter description...", text: $descriptionText, axis: .vertical)
+                                .padding(.horizontal, 20)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 15.0)
+                                        .fill(.gray.opacity(0.10))
+                                        .frame(width: geometry.size.width * 0.90)
+                                        .padding(.vertical, -10)
+                                        .padding(.horizontal, -10)
+                                )
+                                .tint(.black)
+                                .foregroundStyle(.gray)
+                                .lineLimit(6, reservesSpace: true)
+                                .onSubmit {
+                                    date = .now
+                                }
+                                .onChange(of: descriptionText) {
+                                    currentCount = descriptionText.count
+                                }
+                                .focused($focus)
+                                .accessibilityLabel("Enter description in textfield")
+                        }
+                        .padding(.vertical, 5)
+                        
+                        Spacer()
+                            .frame(height: 10)
+                        
+                        VStack {
+                            Text("\(currentCount)/\(maxCharacters)")
+                                .font(.footnote)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.gray)
+                        }
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.horizontal, 20)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.horizontal, 15)
+                    
+                    Spacer()
+                        .frame(height: 30)
                     
                     VStack {
-                        Text("\(currentCount)/\(maxCharacters)")
-                            .font(.footnote)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.gray)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.horizontal, 20)
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .padding(.horizontal, 15)
-                
-                Spacer()
-                    .frame(height: 30)
-                
-                VStack {
-                    Button(action: {
-                        print("Submitted!")
-                        
-                        if MailComposer.isAvaliable() {
-                            showMailView.toggle()
-                        } else {
-                            noEmailAlert.toggle()
-                        }
-                        
-                    }) {
-                        RoundedRectangle(cornerRadius: 15.0)
-                            .fill(.gray.opacity(0.10))
-                            .frame(width: 375, height: 40)
-                            .overlay {
-                                VStack {
-                                    Text("Submit Ticket")
-                                        .accessibilityLabel("Submit Ticket")
-                                        .accessibilityAddTraits(.isButton)
-                                }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding(.horizontal, 17)
+                        Button(action: {
+                            print("Submitted!")
+                            
+                            if MailComposer.isAvaliable() {
+                                showMailView.toggle()
+                            } else {
+                                noEmailAlert.toggle()
                             }
+                            
+                        }) {
+                            RoundedRectangle(cornerRadius: 15.0)
+                                .fill(.gray.opacity(0.10))
+                                .frame(width: geometry.size.width * 0.90, height: 40)
+                                .overlay {
+                                    VStack {
+                                        Text("Submit Ticket")
+                                            .accessibilityLabel("Submit Ticket")
+                                            .accessibilityAddTraits(.isButton)
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.horizontal, 17)
+                                }
+                        }
+                        .disabled(descriptionText.count == 0 && selectedCategory == "None")
+                        
                     }
-                    .disabled(descriptionText.count == 0 && selectedCategory == "None")
-                    
                 }
             }
             .frame(maxHeight: .infinity, alignment: .top)

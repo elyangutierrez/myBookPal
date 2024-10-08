@@ -50,140 +50,44 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
-                if !networkMonitor.isConnected {
-                    Spacer()
-                        .frame(height: 220)
-                    
-                    ContentUnavailableView("No WiFi Connection", systemImage: "wifi.slash", description: Text("Please check your WiFi connection."))
-                    
-                    
-                    
-                } else if books.isEmpty {
-                    Spacer()
-                        .frame(height: 220)
-                    
-                    ContentUnavailableView("No Books Avaliable",
-                                           systemImage: "books.vertical",
-                                           description: Text("Add one to get started!"))
-                } else {
-                    let testBook = Book(coverImage: "", title: "N/A", author: "N/A", catagory: "N/A", pages: "N/A")
-                    let library = Library(books: Array(books))
-                    let mostRecent = library.getMostRecentBook
-                    
-                    VStack(alignment: .leading) {
-                        Text("Recently Added")
-                            .font(.title.bold())
-                            .fontDesign(.serif)
-                        VStack(alignment: .leading) {
-                            NavigationLink(destination: LogView(book: mostRecent ?? testBook)) {
-                                VStack {
-                                    HStack {
-                                        VStack {
-                                            let imageString = mostRecent?.coverImage ?? "N/A"
-                                            
-                                            if imageString.contains("https") {
-                                                
-                                                WebImage(url: URL(string: imageString)) { image in
-                                                    image
-                                                        .image?.resizable()
-                                                        .frame(width: 140, height: 210)
-                                                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                                        .shadow(color: .black.opacity(0.30), radius: 5)
-                                                }
-                                            } else {
-                                                let image = imageString.toImage()
-                                                
-                                                image?
-                                                    .resizable()
-                                                    .frame(width: 140, height: 210)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                                    .shadow(color: .black.opacity(0.30), radius: 5)
-                                            }
-                                        }
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        
-                                        VStack {
-                                            VStack(alignment: .leading) {
-                                                Text(mostRecent?.title ?? testBook.title)
-                                                    .titleModifier()
-                                                
-                                                
-                                                Text(mostRecent?.author ?? testBook.author)
-                                                    .font(.system(size: 15))
-                                                    .fontWeight(.medium)
-                                                    .padding(.vertical, 1)
-                                                
-                                                
-                                                Text("\(mostRecent?.pages ?? testBook.pages) pages")
-                                                    .font(.system(size: 14))
-                                                    .padding(.vertical, 1)
-                                                
-                                                HStack {
-                                                    ProgressView(value: mostRecent?.completionStatus)
-                                                        .frame(width: 100)
-                                                        .tint(mostRecent?.completionStatus == 1 ? .green : .blue)
-                                                    let formatted = String(format: "%.1f", (mostRecent?.completionStatus ?? 0) * 100)
-                                                    Text("\(formatted)%")
-                                                        .font(.footnote)
-                                                }
-                                                
-                                                StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
-                                                    .font(.headline)
-                                                    .offset(y: 10)
-                                                
-                                                VStack {
-                                                    Circle()
-                                                        .fill(mostRecent?.completionStatus == 1 ? .green : .blue)
-                                                        .frame(width: 30, height: 30)
-                                                        .overlay {
-                                                            Text("\(mostRecent?.getLogCount ?? 0)")
-                                                                .font(.system(size: 15))
-                                                                .fontWeight(.medium)
-                                                                .foregroundStyle(.white)
-                                                        }
-                                                }
-                                                .frame(maxHeight: .infinity, alignment: .bottomLeading)
-                                            }
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                        }
-                                        .frame(maxHeight: .infinity, alignment: .top)
-                                        .padding(.horizontal, -30)
-                                    }
-                                }
-                                .accessibilityLabel("Recently Added: \(mostRecent?.title ?? testBook.title)")
-                            }
+            GeometryReader { geometry in
+                ScrollView(showsIndicators: true) {
+                    if !networkMonitor.isConnected {
+                        VStack {
+                            ContentUnavailableView("No WiFi Connection", systemImage: "wifi.slash", description: Text("Please check your WiFi connection."))
                         }
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
-
-                    Rectangle()
-                        .fill(.gray.opacity(0.30))
-                        .frame(maxWidth: .infinity, maxHeight: 1)
-                        .padding()
-                    
-                    if recentlyViewedBook != nil && books.contains(recentlyViewedBook!) {
+                        .frame(height: geometry.size.height)
+                    } else if books.isEmpty {
+                        VStack {
+                            ContentUnavailableView("No Books Avaliable",
+                                                   systemImage: "books.vertical",
+                                                   description: Text("Add one to get started!")
+                            )
+                        }
+                        .frame(height: geometry.size.height)
+                    } else {
+                        let testBook = Book(coverImage: "", title: "N/A", author: "N/A", catagory: "N/A", pages: "N/A")
+                        let library = Library(books: Array(books))
+                        let mostRecent = library.getMostRecentBook
+                        
                         VStack(alignment: .leading) {
-                            Text("Last Viewed")
+                            Text("Recently Added")
                                 .font(.title.bold())
                                 .fontDesign(.serif)
                             VStack(alignment: .leading) {
-                                NavigationLink(destination: LogView(book: recentlyViewedBook!)) {
+                                NavigationLink(destination: LogView(book: mostRecent ?? testBook)) {
                                     VStack {
                                         HStack {
                                             VStack {
-
-                                                let imageString = recentlyViewedBook?.coverImage ?? "N/A"
+                                                let imageString = mostRecent?.coverImage ?? "N/A"
                                                 
                                                 if imageString.contains("https") {
-
                                                     
                                                     WebImage(url: URL(string: imageString)) { image in
                                                         image
                                                             .image?.resizable()
-                                                            .frame(width: 140, height: 210)
-                                                            .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                                            .frame(width: 130, height: 210)
+                                                            .clipShape(RoundedRectangle(cornerRadius: 10.0))
                                                             .shadow(color: .black.opacity(0.30), radius: 5)
                                                     }
                                                 } else {
@@ -192,47 +96,48 @@ struct ContentView: View {
                                                     image?
                                                         .resizable()
                                                         .frame(width: 140, height: 210)
-                                                        .clipShape(RoundedRectangle(cornerRadius: 15.0))
+                                                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
                                                         .shadow(color: .black.opacity(0.30), radius: 5)
                                                 }
                                             }
                                             .frame(maxWidth: .infinity, alignment: .leading)
+                                            .padding(.horizontal)
                                             
                                             VStack {
                                                 VStack(alignment: .leading) {
-                                                    Text(recentlyViewedBook?.title ?? testBook.title)
+                                                    Text(mostRecent?.title ?? testBook.title)
                                                         .titleModifier()
                                                     
                                                     
-                                                    Text(recentlyViewedBook?.author ?? testBook.author)
+                                                    Text(mostRecent?.author ?? testBook.author)
                                                         .font(.system(size: 15))
                                                         .fontWeight(.medium)
                                                         .padding(.vertical, 1)
                                                     
                                                     
-                                                    Text("\(recentlyViewedBook?.pages ?? testBook.pages) pages")
+                                                    Text("\(mostRecent?.pages ?? testBook.pages) pages")
                                                         .font(.system(size: 14))
                                                         .padding(.vertical, 1)
                                                     
                                                     HStack {
-                                                        ProgressView(value: recentlyViewedBook?.completionStatus)
+                                                        ProgressView(value: mostRecent?.completionStatus)
                                                             .frame(width: 100)
-                                                            .tint(recentlyViewedBook?.completionStatus == 1 ? .green : .blue)
-                                                        let formatted = String(format: "%.1f", (recentlyViewedBook?.completionStatus ?? 0) * 100)
+                                                            .tint(mostRecent?.completionStatus == 1 ? .green : .blue)
+                                                        let formatted = String(format: "%.1f", (mostRecent?.completionStatus ?? 0) * 100)
                                                         Text("\(formatted)%")
                                                             .font(.footnote)
                                                     }
                                                     
-                                                    StarRatingView(rating: recentlyViewedBook?.starRatingSystem?.rating ?? 0.0)
+                                                    StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
                                                         .font(.headline)
-                                                        .offset(y: 10)
+                                                        .offset(y: 3)
                                                     
                                                     VStack {
                                                         Circle()
-                                                            .fill(recentlyViewedBook?.completionStatus == 1 ? .green : .blue)
+                                                            .fill(mostRecent?.completionStatus == 1 ? .green : .blue)
                                                             .frame(width: 30, height: 30)
                                                             .overlay {
-                                                                Text("\(recentlyViewedBook?.getLogCount ?? 0)")
+                                                                Text("\(mostRecent?.getLogCount ?? 0)")
                                                                     .font(.system(size: 15))
                                                                     .fontWeight(.medium)
                                                                     .foregroundStyle(.white)
@@ -243,10 +148,9 @@ struct ContentView: View {
                                                 .frame(maxWidth: .infinity, alignment: .leading)
                                             }
                                             .frame(maxHeight: .infinity, alignment: .top)
-                                            .padding(.horizontal, -30)
                                         }
                                     }
-                                    .accessibilityLabel("Last Viewed: \(recentlyViewedBook?.title ?? testBook.title)")
+                                    .accessibilityLabel("Recently Added: \(mostRecent?.title ?? testBook.title)")
                                 }
                             }
                         }
@@ -258,102 +162,198 @@ struct ContentView: View {
                             .frame(maxWidth: .infinity, maxHeight: 1)
                             .padding()
                         
-                    }
-                    
-                    HStack {
-                        Text("Collection")
-                            .collectionTextModifier()
-                            .accessibilityLabel("Collection of books")
-                        
-                        Button(action: {
-                            withAnimation(.spring(duration: 0.2, bounce: 0.1)) {
-                                isEditing.toggle()
+                        if recentlyViewedBook != nil && books.contains(recentlyViewedBook!) {
+                            VStack(alignment: .leading) {
+                                Text("Last Viewed")
+                                    .font(.title.bold())
+                                    .fontDesign(.serif)
+                                VStack(alignment: .leading) {
+                                    NavigationLink(destination: LogView(book: recentlyViewedBook!)) {
+                                        VStack {
+                                            HStack {
+                                                VStack {
+                                                    
+                                                    let imageString = recentlyViewedBook?.coverImage ?? "N/A"
+                                                    
+                                                    if imageString.contains("https") {
+                                                        
+                                                        
+                                                        WebImage(url: URL(string: imageString)) { image in
+                                                            image
+                                                                .image?.resizable()
+                                                                .frame(width: 130, height: 210)
+                                                                .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                                                .shadow(color: .black.opacity(0.30), radius: 5)
+                                                        }
+                                                    } else {
+                                                        let image = imageString.toImage()
+                                                        
+                                                        image?
+                                                            .resizable()
+                                                            .frame(width: 140, height: 210)
+                                                            .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                                            .shadow(color: .black.opacity(0.30), radius: 5)
+                                                    }
+                                                }
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                .padding(.horizontal)
+                                                
+                                                VStack {
+                                                    VStack(alignment: .leading) {
+                                                        Text(recentlyViewedBook?.title ?? testBook.title)
+                                                            .titleModifier()
+                                                        
+                                                        
+                                                        Text(recentlyViewedBook?.author ?? testBook.author)
+                                                            .font(.system(size: 15))
+                                                            .fontWeight(.medium)
+                                                            .padding(.vertical, 1)
+                                                        
+                                                        
+                                                        Text("\(recentlyViewedBook?.pages ?? testBook.pages) pages")
+                                                            .font(.system(size: 14))
+                                                            .padding(.vertical, 1)
+                                                        
+                                                        HStack {
+                                                            ProgressView(value: recentlyViewedBook?.completionStatus)
+                                                                .frame(width: 100)
+                                                                .tint(recentlyViewedBook?.completionStatus == 1 ? .green : .blue)
+                                                            let formatted = String(format: "%.1f", (recentlyViewedBook?.completionStatus ?? 0) * 100)
+                                                            Text("\(formatted)%")
+                                                                .font(.footnote)
+                                                        }
+                                                        
+                                                        StarRatingView(rating: recentlyViewedBook?.starRatingSystem?.rating ?? 0.0)
+                                                            .font(.headline)
+                                                            .offset(y: 3)
+                                                        
+                                                        VStack {
+                                                            Circle()
+                                                                .fill(recentlyViewedBook?.completionStatus == 1 ? .green : .blue)
+                                                                .frame(width: 30, height: 30)
+                                                                .overlay {
+                                                                    Text("\(recentlyViewedBook?.getLogCount ?? 0)")
+                                                                        .font(.system(size: 15))
+                                                                        .fontWeight(.medium)
+                                                                        .foregroundStyle(.white)
+                                                                }
+                                                        }
+                                                        .frame(maxHeight: .infinity, alignment: .bottomLeading)
+                                                    }
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                }
+                                                .frame(maxHeight: .infinity, alignment: .top)
+                                            }
+                                        }
+                                        .accessibilityLabel("Last Viewed: \(recentlyViewedBook?.title ?? testBook.title)")
+                                    }
+                                }
                             }
-                        }) {
-                            Text("Edit")
-                                .fontDesign(.serif)
-                                .fontWeight(.semibold)
-                                .accessibilityLabel("Editing pencil to edit collection")
-                            Image(systemName: "pencil")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal, 20)
+                            
+                            Rectangle()
+                                .fill(.gray.opacity(0.30))
+                                .frame(maxWidth: .infinity, maxHeight: 1)
+                                .padding()
+                            
                         }
-                        .accessibilityAddTraits(.isButton)
+                        
+                        HStack {
+                            Text("Collection")
+                                .collectionTextModifier()
+                                .accessibilityLabel("Collection of books")
+                            
+                            Button(action: {
+                                withAnimation(.spring(duration: 0.2, bounce: 0.1)) {
+                                    isEditing.toggle()
+                                }
+                            }) {
+                                Text("Edit")
+                                    .fontDesign(.serif)
+                                    .fontWeight(.semibold)
+                                    .accessibilityLabel("Editing pencil to edit collection")
+                                Image(systemName: "pencil")
+                            }
+                            .accessibilityAddTraits(.isButton)
+                            .padding(.horizontal, 20)
+                        }
+                        
+                        ScrollView(.horizontal) {
+                            LazyHStack(alignment: .top) {
+                                ForEach(searchResults, id: \.self) { book in
+                                    NavigationLink(destination: LogView(book: book)) {
+                                        VStack {
+                                            if isEditing {
+                                                Circle()
+                                                    .fill(.gray.opacity(0.2))
+                                                    .frame(width: 30)
+                                                    .overlay {
+                                                        Button(action: {
+                                                            selectedDeletionBook = book
+                                                            activateBookDeletionAlert.toggle()
+                                                        }) {
+                                                            Image(systemName: "trash")
+                                                                .foregroundStyle(.red)
+                                                                .accessibilityLabel("Delete book")
+                                                        }
+                                                        .accessibilityAddTraits(.isButton)
+                                                    }
+                                                
+                                                Spacer()
+                                                    .frame(height: 20)
+                                            }
+                                            
+                                            let imageString = book.coverImage
+                                            
+                                            if imageString.contains("https") {
+                                                
+                                                WebImage(url: URL(string: imageString)) { image in
+                                                    image
+                                                        .image?.resizable()
+                                                        .frame(width: 90, height: 150)
+                                                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                                }
+                                            } else {
+                                                let image = imageString.toImage()
+                                                
+                                                image?
+                                                    .resizable()
+                                                    .frame(width: 90, height: 150)
+                                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                                    .shadow(color: .black.opacity(0.30), radius: 5)
+                                            }
+                                            
+                                            HStack {
+                                                ProgressView(value: book.completionStatus)
+                                                    .frame(width: 40)
+                                                    .tint(book.completionStatus == 1 ? .green : .blue)
+                                                let formatted = String(format: "%.1f", book.completionStatus * 100)
+                                                Text("\(formatted)%")
+                                                    .font(.footnote)
+                                            }
+                                        }
+                                        .accessibilityLabel("\(book.title)")
+                                        
+                                    }
+                                    .simultaneousGesture(
+                                        TapGesture().onEnded {
+                                            if book != mostRecent {
+                                                recentlyViewedBook = book
+                                                
+                                                print("")
+                                                book.isMostRecentlyViewed = true
+                                            }
+                                        }
+                                    )
+                                    .buttonStyle(PlainButtonStyle())
+                                }
+                            }
+                        }
+                        .scrollIndicators(.hidden)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal, 20)
                     }
-                    
-                    ScrollView(.horizontal) {
-                        LazyHStack(alignment: .top) {
-                            ForEach(searchResults, id: \.self) { book in
-                                NavigationLink(destination: LogView(book: book)) {
-                                    VStack {
-                                        if isEditing {
-                                            Circle()
-                                                .fill(.gray.opacity(0.2))
-                                                .frame(width: 30)
-                                                .overlay {
-                                                    Button(action: {
-                                                        selectedDeletionBook = book
-                                                        activateBookDeletionAlert.toggle()
-                                                    }) {
-                                                        Image(systemName: "trash")
-                                                            .foregroundStyle(.red)
-                                                            .accessibilityLabel("Delete book")
-                                                    }
-                                                    .accessibilityAddTraits(.isButton)
-                                                }
-                                            
-                                            Spacer()
-                                                .frame(height: 20)
-                                        }
-                                        
-                                        let imageString = book.coverImage
-                                        
-                                        if imageString.contains("https") {
-                                            
-                                            WebImage(url: URL(string: imageString)) { image in
-                                                image
-                                                    .image?.resizable()
-                                                    .frame(width: 90, height: 150)
-                                                    .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                            }
-                                        } else {
-                                            let image = imageString.toImage()
-                                            
-                                            image?
-                                                .resizable()
-                                                .frame(width: 90, height: 150)
-                                                .clipShape(RoundedRectangle(cornerRadius: 15.0))
-                                                .shadow(color: .black.opacity(0.30), radius: 5)
-                                        }
-                                        
-                                        HStack {
-                                            ProgressView(value: book.completionStatus)
-                                                .frame(width: 40)
-                                                .tint(book.completionStatus == 1 ? .green : .blue)
-                                            let formatted = String(format: "%.1f", book.completionStatus * 100)
-                                            Text("\(formatted)%")
-                                                .font(.footnote)
-                                        }
-                                    }
-                                    .accessibilityLabel("\(book.title)")
-                                    
-                                }
-                                .simultaneousGesture(
-                                    TapGesture().onEnded {
-                                        if book != mostRecent {
-                                            recentlyViewedBook = book
-                                            
-                                            print("")
-                                            book.isMostRecentlyViewed = true
-                                        }
-                                    }
-                                )
-                                .buttonStyle(PlainButtonStyle())
-                            }
-                        }
-                    }
-                    .scrollIndicators(.hidden)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.horizontal, 20)
                 }
             }
             .overlay {

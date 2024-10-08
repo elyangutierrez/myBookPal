@@ -26,10 +26,10 @@ extension Image {
             .shadow(color: .black.opacity(0.70), radius: 10)
     }
     
-    func SearchImageBookExtension() -> some View {
+    func SearchImageBookExtension(width: CGFloat, height: CGFloat) -> some View {
         self
             .resizable()
-            .frame(width: 165, height: 245)
+            .frame(width: width, height: height)
             .clipShape(RoundedRectangle(cornerRadius: 15.0))
             .offset(y: -50)
     }

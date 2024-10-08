@@ -14,7 +14,7 @@ struct InProgressView: View {
     var books: [Book]
     
     var adaptiveColumn = [
-        GridItem(.adaptive(minimum: 150), spacing: -15)
+        GridItem(.adaptive(minimum: 165), spacing: -15)
     ]
     
     var getInProgressOnly: [Book] {
@@ -24,7 +24,7 @@ struct InProgressView: View {
     
     var body: some View {
         NavigationStack {
-            ScrollView {
+            ScrollView(showsIndicators: true) {
                 Spacer()
                     .frame(height: 30)
                 LazyVGrid(columns: adaptiveColumn, spacing: 5) {

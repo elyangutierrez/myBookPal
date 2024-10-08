@@ -9,18 +9,20 @@ import SwiftUI
 
 struct BackgroundBookCoverView: View {
     let bookImage: String
+    let width: CGFloat
+    let height: CGFloat
     
     var body: some View {
         AsyncImage(url: URL(string: bookImage)) { phase in
             if let image = phase.image {
                 image
                     .resizable()
-                    .frame(width: 450, height: 475)
+                    .frame(width: width, height: height)
             }
         }
     }
 }
 
 #Preview {
-    BackgroundBookCoverView(bookImage: "https://books.google.com/books/content?id=ydQiDQAAQBAJ&printsec=frontcover&img=1&zoom=1l&source=gbs_api")
+    BackgroundBookCoverView(bookImage: "https://books.google.com/books/content?id=ydQiDQAAQBAJ&printsec=frontcover&img=1&zoom=1l&source=gbs_api", width: 500, height: 1000)
 }

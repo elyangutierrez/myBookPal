@@ -20,69 +20,86 @@ struct SearchView: View {
         GridItem(.adaptive(minimum: 165), spacing: -15)
     ]
     
+    private let flexibleColumn = [
+        GridItem(.flexible(minimum: 165), spacing: -15),
+        GridItem(.flexible(minimum: 165), spacing: -15)
+    ]
+    
     var body: some View {
         NavigationStack {
-            ScrollView(.vertical, showsIndicators: false) {
-                Spacer()
-                    .frame(height: 30)
-                LazyVGrid(columns: adaptiveColumn, spacing: 10) {
-                    ForEach(fetchBookInfoViewModel.books, id: \.self) { book in
-                        
-                        // TODO: Instead of using navigationDestination, try navigationLink?
-                        
-                        NavigationLink {
-                            AddView(showingSheet: $isShowingSheet, bookItem: $addViewBook, book: book, books: collectionBooks)
-                                .accessibilityAddTraits(.isButton)
-                        } label: {
-                            Rectangle()
-                                .fill(.white)
-                                .frame(width: 165, height: 350)
-                                .overlay {
-                                    VStack {
-                                        AsyncImage(url: URL(string: book.imageLinks?.secureThumbnailURL ?? "")) { phase in
-                                            switch phase {
-                                            case .empty:
-                                                VStack {
-                                                    ProgressView()
+            GeometryReader { geometry in
+                ScrollView(showsIndicators: true) {
+                    Spacer()
+                        .frame(height: 30)
+                    LazyVGrid(columns: flexibleColumn, spacing: 10) {
+                        ForEach(fetchBookInfoViewModel.books, id: \.self) { book in
+                            
+                            // TODO: Instead of using navigationDestination, try navigationLink?
+                            
+                            NavigationLink {
+                                AddView(showingSheet: $isShowingSheet, bookItem: $addViewBook, book: book, books: collectionBooks)
+                                    .accessibilityAddTraits(.isButton)
+                            } label: {
+                                Rectangle()
+                                    .fill(.white)
+                                    .frame(width: geometry.size.width * 0.375, height: 350)
+//                                    .frame(width: 165, height: 350)
+                                    .overlay {
+                                        VStack {
+                                            AsyncImage(url: URL(string: book.imageLinks?.secureThumbnailURL ?? "")) { phase in
+                                                switch phase {
+                                                case .empty:
                                                     
-                                                    Spacer()
-                                                        .frame(height: 70)
+                                                    // TODO: Center progress view
+                                                    
+                                                    VStack {
+                                                        ProgressView()
+                                                        
+                                                        Spacer()
+                                                            .frame(height: 70)
+                                                    }
+                                                case .success(let image):
+                                                    
+                                                    image
+                                                        .SearchImageBookExtension(width: geometry.size.width * 0.375, height: 245)
+                                                        .accessibilityHint("Image of \(book.title)")
+                                                case .failure(let error):
+                                                    
+                                                    // TODO: Show book cover not found or image not found?
+                                                    
+                                                    Color.red
+                                                    let _ = print(error)
+                                                @unknown default:
+                                                    fatalError()
                                                 }
-                                            case .success(let image):
-                                                image
-                                                    .SearchImageBookExtension()
-                                                    .accessibilityHint("Image of \(book.title)")
-                                            case .failure(let error):
-                                                Color.red
-                                                let _ = print(error)
-                                            @unknown default:
-                                                fatalError()
                                             }
                                         }
-                                    }
-                                    
-                                    VStack(alignment: .leading) {
-                                        Spacer()
-                                            .frame(height: 210)
-                                        Text(book.title)
-                                            .font(.system(size: 13))
-                                            .fontWeight(.bold)
-                                            .lineLimit(2)
-                                            .accessibilityLabel("\(book.title)")
                                         
-                                        Spacer()
-                                            .frame(height: 5)
-                                        
-                                        Text(book.getAuthor)
-                                            .lineLimit(1)
-                                            .font(.system(size: 13))
+                                        VStack(alignment: .leading) {
+                                            Spacer()
+                                                .frame(height: 210)
+                                            Text(book.title)
+                                                .font(.system(size: 13))
+                                                .fontWeight(.bold)
+                                                .lineLimit(2)
+                                                .multilineTextAlignment(.leading)
+                                                .accessibilityLabel("\(book.title)")
+                                            
+                                            Spacer()
+                                                .frame(height: 5)
+                                            
+                                            Text(book.getAuthor)
+                                                .lineLimit(1)
+                                                .font(.system(size: 13))
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.horizontal, 5)
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.horizontal, 5)
-                                }
+                            }
                         }
                     }
                 }
+                .frame(height: geometry.size.height)
             }
             .navigationBarTitleDisplayMode(.inline)
             .searchPresentationToolbarBehavior(.avoidHidingContent)
