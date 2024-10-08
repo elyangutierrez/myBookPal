@@ -20,6 +20,7 @@ struct AddView: View {
     @State private var bookAddedCounter = 0
     @State private var bookIsInCollection = false
     @State private var hapticsManager = HapticsManager()
+    @State private var invalidInfoAlert: Bool = false
     
     @Binding var showingSheet: Bool
     @Binding var bookItem: VolumeInfo?
@@ -183,7 +184,7 @@ struct AddView: View {
         }
         
         .alert("Enter Pages and Genre", isPresented: $enterBothBool) {
-            Button("Submit", action: twoEmptyFieldsInsertion)
+            Button("Submit", action: pageAndGenreInsertion)
                 .accessibilityAddTraits(.isButton)
             Button("Cancel", role: .cancel) { }
                 .accessibilityAddTraits(.isButton)
@@ -196,7 +197,7 @@ struct AddView: View {
         }
         
         .alert("Enter Page Count", isPresented: $enterPageCountBool) {
-            Button("Submit", action: secondaryBookInsertion)
+            Button("Submit", action: pageBookInsertion)
                 .accessibilityAddTraits(.isButton)
             Button("Cancel", role: .cancel) { }
                 .accessibilityAddTraits(.isButton)
@@ -216,13 +217,19 @@ struct AddView: View {
         } message: {
             Text("Please enter the genre of \(book.title).")
         }
-        
         .alert("Already in Collection", isPresented: $bookIsInCollection) {
             Button("Ok", role: .cancel) { }
                 .accessibilityAddTraits(.isButton)
         } message: {
             Text("This book is already in the collection.")
                 .accessibilityLabel("This book is already in the collection.")
+        }
+        .alert("Invalid Infomation", isPresented: $invalidInfoAlert) {
+            Button("Ok", role: .cancel) { }
+                .accessibilityAddTraits(.isButton)
+        } message: {
+            Text("You have entered invalid information. Please try again.")
+                .accessibilityLabel("You have entered invalid information. Please try again.")
         }
         
     }
@@ -240,10 +247,12 @@ struct AddView: View {
         }
     }
     
-    func secondaryBookInsertion() {
+    func pageBookInsertion() {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: book.getCatagory, pages: manualBookCount)
         if books.contains(newBook) {
             bookIsInCollection.toggle()
+        } else if manualBookCount == "" || manualBookCount.isEmpty {
+            invalidInfoAlert.toggle()
         } else {
             modelContext.insert(newBook)
             try? modelContext.save()
@@ -256,6 +265,8 @@ struct AddView: View {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: enterGenre, pages: book.getPageCount)
         if books.contains(newBook) {
             bookIsInCollection.toggle()
+        } else if enterGenre == "" || enterGenre.isEmpty {
+            invalidInfoAlert.toggle()
         } else {
             modelContext.insert(newBook)
             try? modelContext.save()
@@ -264,10 +275,14 @@ struct AddView: View {
         }
     }
     
-    func twoEmptyFieldsInsertion() {
+    func pageAndGenreInsertion() {
         let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: enterGenre, pages: manualBookCount)
         if books.contains(newBook) {
             bookIsInCollection.toggle()
+        } else if manualBookCount == "" || manualBookCount.isEmpty {
+            invalidInfoAlert.toggle()
+        } else if enterGenre == "" || enterGenre.isEmpty {
+            invalidInfoAlert.toggle()
         } else {
             modelContext.insert(newBook)
             try? modelContext.save()

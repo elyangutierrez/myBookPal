@@ -61,7 +61,7 @@ struct ContentView: View {
                         VStack {
                             ContentUnavailableView("No Books Avaliable",
                                                    systemImage: "books.vertical",
-                                                   description: Text("Add one to get started!")
+                                                   description: Text("Click on the '+' to get started!")
                             )
                         }
                         .frame(height: geometry.size.height)
@@ -300,7 +300,7 @@ struct ContentView: View {
                                                             
                                                             ShareLink(item: URL(string: imageString)!,
                                                                       message: Text("I'm currently reading \(book.title) by \(book.author). You should check it out!"),
-                                                                      preview: SharePreview("Check this book out!", image: Image("appIcon")),
+                                                                      preview: SharePreview("Check this book out!", image: Image("appLogo")),
                                                                       label: {
                                                                 Label("Share", systemImage: "square.and.arrow.up")
                                                             })
@@ -504,12 +504,14 @@ struct ContentView: View {
             }
         }
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
-        .alert("Are you sure you want to delete this book?", isPresented: $activateBookDeletionAlert) {
+        .alert("Delete Book", isPresented: $activateBookDeletionAlert) {
             Button("Yes", role: .destructive, action: {
                 deleteBookFromCollection(selectedDeletionBook)
                 reset()
             })
             Button("Cancel", role: .cancel, action: reset)
+        } message: {
+            Text("Are you sure you want to delete this book?")
         }
     }
     
