@@ -51,7 +51,7 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                ScrollView {
+                ScrollView(showsIndicators: true) {
                     if !networkMonitor.isConnected {
                         VStack {
                             ContentUnavailableView("No WiFi Connection", systemImage: "wifi.slash", description: Text("Please check your WiFi connection."))

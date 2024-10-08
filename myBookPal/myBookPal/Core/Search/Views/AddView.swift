@@ -32,7 +32,7 @@ struct AddView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                ScrollView {
+                ScrollView(showsIndicators: true) {
                     ZStack {
                         BackgroundBookCoverView(bookImage: book.imageLinks?.secureThumbnailURL ?? "",
                                                 width: geometry.size.width,

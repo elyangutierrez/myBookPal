@@ -32,7 +32,7 @@ struct CurrentGoalsView: View {
             Spacer()
                 .frame(height: 10)
             GeometryReader { geometry in
-                ScrollView(.vertical, showsIndicators: false) {
+                ScrollView(showsIndicators: true) {
                     LazyVStack {
                         VStack {
                             // current month text

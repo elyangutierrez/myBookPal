@@ -26,7 +26,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                ScrollView(.vertical, showsIndicators: false) {
+                ScrollView(showsIndicators: true) {
                     VStack {
                         VStack {
                             Spacer()

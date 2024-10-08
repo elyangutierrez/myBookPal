@@ -14,7 +14,7 @@ struct NotificationsView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView(.vertical, showsIndicators: false) {
+            ScrollView(showsIndicators: true) {
                 ZStack {
 //                    Color.gray.opacity(0.10)
 //                        .frame(height: 500)

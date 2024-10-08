@@ -28,7 +28,7 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             GeometryReader { geometry in
-                ScrollView(.vertical, showsIndicators: false) {
+                ScrollView(showsIndicators: true) {
                     Spacer()
                         .frame(height: 30)
                     LazyVGrid(columns: flexibleColumn, spacing: 10) {

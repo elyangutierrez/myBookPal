@@ -44,7 +44,7 @@ struct LogView: View {
                                                systemImage: "book.pages",
                                                description: Text("Click the '+' to add a log!"))
                     } else {
-                        ScrollView(.vertical, showsIndicators: false) {
+                        ScrollView(showsIndicators: true) {
                             Spacer()
                                 .frame(height: 25)
                             VStack(alignment: .leading) {
