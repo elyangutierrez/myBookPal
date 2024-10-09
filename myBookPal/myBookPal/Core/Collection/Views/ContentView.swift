@@ -286,34 +286,64 @@ struct ContentView: View {
                                         VStack {
                                             if isEditing {
                                                 
+//                                                Spacer()
+//                                                    .frame(height: 10)
+                                                
                                                 let imageString = book.coverImage
                                 
-                                                Circle()
-                                                    .fill(.gray.opacity(0.2))
-                                                    .frame(width: 30)
-                                                    .overlay {
-                                                        Menu {
-                                                            Button("Delete Book", systemImage: "trash", role: .destructive, action: {
-                                                                selectedDeletionBook = book
-                                                                activateBookDeletionAlert.toggle()
-                                                            })
-                                                            
-                                                            ShareLink(item: URL(string: imageString)!,
-                                                                      message: Text("I'm currently reading \(book.title) by \(book.author). You should check it out!"),
-                                                                      preview: SharePreview("Check this book out!", image: Image("appLogo")),
-                                                                      label: {
-                                                                Label("Share", systemImage: "square.and.arrow.up")
-                                                            })
-                                                            
-                                                        } label: {
+//                                                Circle()
+//                                                    .fill(.gray.opacity(0.2))
+//                                                    .frame(width: 40)
+//                                                    .overlay {
+//                                                        Menu {
+//                                                            Button("Delete Book", systemImage: "trash", role: .destructive, action: {
+//                                                                selectedDeletionBook = book
+//                                                                activateBookDeletionAlert.toggle()
+//                                                            })
+//                                                            
+//                                                            ShareLink(item: URL(string: imageString)!,
+//                                                                      message: Text("I'm currently reading \(book.title) by \(book.author). You should check it out!"),
+//                                                                      preview: SharePreview("Check this book out!", image: Image("appLogo")),
+//                                                                      label: {
+//                                                                Label("Share", systemImage: "square.and.arrow.up")
+//                                                            })
+//                                                            
+//                                                        } label: {
+//                                                            Circle()
+//                                                                .fill(.clear)
+//                                                                .frame(width: 70)
+//                                                                .overlay {
+//                                                                    Image(systemName: "ellipsis")
+//                                                                }
+//                                                        }
+//                                                    }
+                                                
+                                                Menu {
+                                                    Button("Delete Book", systemImage: "trash", role: .destructive, action: {
+                                                        selectedDeletionBook = book
+                                                        activateBookDeletionAlert.toggle()
+                                                    })
+                                                    
+                                                    ShareLink(item: URL(string: imageString)!,
+                                                              message: Text("I'm currently reading \(book.title) by \(book.author). You should check it out!"),
+                                                              preview: SharePreview("Check this book out!", image: Image("appLogo")),
+                                                              label: {
+                                                        Label("Share", systemImage: "square.and.arrow.up")
+                                                    })
+                                                    
+                                                } label: {
+                                                    Circle()
+                                                        .fill(.clear)
+                                                        .frame(width: 60)
+                                                        .overlay {
                                                             Circle()
-                                                                .fill(.clear)
-                                                                .frame(width: 30)
+                                                                .fill(.gray.opacity(0.2))
+                                                                .frame(width: 40)
                                                                 .overlay {
                                                                     Image(systemName: "ellipsis")
                                                                 }
                                                         }
-                                                    }
+                                                }
                                                 
                                                 
                                                 Spacer()
