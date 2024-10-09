@@ -154,23 +154,25 @@ struct LogView: View {
                                                                         // TODO: Fix padding
                                                                         
                                                                         VStack {
-                                                                            Text("\(log.totalPagesRead) / \(book.pages)")
-                                                                                .font(.system(size: 13))
+                                                                            Text("\(String(log.totalPagesRead)) / \(book.pages)")
+                                                                                .font(.system(size: 12.5))
                                                                                 .fontWeight(.bold)
+                                                                                .fixedSize(horizontal: true, vertical: false)
                                                                         }
                                                                         .frame(maxWidth: geometry.size.width, alignment: .leading)
-                                                                        .offset(x: -30)
+//                                                                        .offset(x: -30)
                                                                     } else {
                                                                         
                                                                         // TODO: Fix padding
                                                                         
                                                                         VStack {
-                                                                            Text("\(log.totalPagesRead) / \(book.pages)")
-                                                                                .font(.system(size: 13))
+                                                                            Text("\(String(log.totalPagesRead)) / \(book.pages)")
+                                                                                .font(.system(size: 12.5))
                                                                                 .fontWeight(.bold)
+                                                                                .fixedSize(horizontal: true, vertical: false)
                                                                         }
                                                                         .frame(maxWidth: geometry.size.width, alignment: .leading)
-                                                                        .offset(x: -25)
+//                                                                        .offset(x: -25)
                                                                     }
                                                                     
                                                                     if log.quickNote?.noteText != nil {
@@ -191,7 +193,7 @@ struct LogView: View {
                                                                                 }
                                                                         }
                                                                         .frame(maxWidth: .infinity, alignment: .trailing)
-                                                                        .offset(x: -25)
+//                                                                        .offset(x: -25)
                                                                     }
                                                                     
                                                                     VStack {
@@ -250,23 +252,25 @@ struct LogView: View {
                                                                         // TODO: Fix padding
                                                                         
                                                                         VStack {
-                                                                            Text("\(log.totalPagesRead) / \(book.pages)")
-                                                                                .font(.system(size: 13))
+                                                                            Text("\(String(log.totalPagesRead)) / \(book.pages)")
+                                                                                .font(.system(size: 12.5))
                                                                                 .fontWeight(.bold)
+                                                                                .fixedSize(horizontal: true, vertical: false)
                                                                         }
                                                                         .frame(maxWidth: geometry.size.width, alignment: .leading)
-                                                                        .offset(x: -25)
+//                                                                        .offset(x: -25)
                                                                     } else {
                                                                         
                                                                         // TODO: Fix padding
                                                                         
                                                                         VStack {
-                                                                            Text("\(log.totalPagesRead) / \(book.pages)")
-                                                                                .font(.system(size: 13))
+                                                                            Text("\(String(log.totalPagesRead)) / \(book.pages)")
+                                                                                .font(.system(size: 12.5))
                                                                                 .fontWeight(.bold)
+                                                                                .fixedSize(horizontal: true, vertical: false)
                                                                         }
                                                                         .frame(maxWidth: geometry.size.width, alignment: .leading)
-                                                                        .offset(x: -25)
+//                                                                        .offset(x: -25)
                                                                     }
                                                                     
                                                                     if log.quickNote?.noteText != nil {
@@ -287,7 +291,7 @@ struct LogView: View {
                                                                                 }
                                                                         }
                                                                         .frame(maxWidth: .infinity, alignment: .trailing)
-                                                                        .padding(.horizontal, -23)
+//                                                                        .padding(.horizontal, -23)
                                                                     }
                                                                     
                                                                     VStack {
