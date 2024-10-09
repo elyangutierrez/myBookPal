@@ -115,11 +115,22 @@ struct SearchView: View {
             }
             .overlay {
                 if fetchBookInfoViewModel.searchText.isEmpty {
-                    ContentUnavailableView {
-                        Label("No Result Found", systemImage: "magnifyingglass")
-                    } description: {
-                        Text("Enter a book title to begin searching!")
-                            .accessibilityLabel("Enter a book title to begin searching!")
+                    VStack {
+                        ContentUnavailableView {
+                            Label("No Result Found", systemImage: "magnifyingglass")
+                        } description: {
+                            Text("Enter a book title to begin searching!")
+                                .accessibilityLabel("Enter a book title to begin searching!")
+                            
+                            
+                            HStack {
+                                Text("powered by")
+                                    .foregroundStyle(.black)
+                                
+                                Image("googleOnWhite")
+                                    .offset(x: -3)
+                            }
+                        }
                     }
                 }
             }

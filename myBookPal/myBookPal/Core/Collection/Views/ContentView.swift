@@ -379,22 +379,34 @@ struct ContentView: View {
                             Button(action: {
                                 isShowingOnlineSheet.toggle()
                             }) {
-                                Text("Search Online")
-                                    .accessibilityHint("Search book online")
+                                HStack {
+                                    Text("Search Online")
+                                        
+                                    Image(systemName: "magnifyingglass")
+                                }
+                                .accessibilityHint("Search book online")
                             }
                             
                             Button(action: {
                                 isShowingScanner.toggle()
                             }) {
-                                Text("Scan ISBN Number")
-                                    .accessibilityHint("Scan isbn number")
+                                HStack {
+                                    Text("Scan ISBN Number")
+                                    
+                                    Image(systemName: "barcode.viewfinder")
+                                }
+                                .accessibilityHint("Scan isbn number")
                             }
                             
                             Button(action: {
                                 showManualFormSheet.toggle()
                             }) {
-                                Text("Manually Add Book")
-                                    .accessibilityHint("Manually add book")
+                                HStack {
+                                    Text("Manually Add Book")
+                                    
+                                    Image(systemName: "document")
+                                }
+                                .accessibilityHint("Manually add book")
                             }
        
                         } label: {
@@ -487,8 +499,7 @@ struct ContentView: View {
             .onChange(of: isbnManager.books) {
                 if !isbnManager.books.isEmpty {
                     guard let firstBook = isbnManager.books.first else { return }
-//                    print("DEBUG: \(firstBook.title)")
-                    
+
                     addViewBook = firstBook
                     
                     if let unwrapped = addViewBook {
