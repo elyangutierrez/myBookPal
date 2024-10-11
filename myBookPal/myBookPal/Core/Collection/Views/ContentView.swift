@@ -10,6 +10,7 @@ import SDWebImageSwiftUI
 import SlidingTabView
 import SwiftData
 import SwiftUI
+import StoreKit
 
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
@@ -35,6 +36,7 @@ struct ContentView: View {
     @State private var hapticsManager = HapticsManager()
     @State private var isShowingOnlineSheet = false
     @State private var showBookAddingVO = false
+    @State private var activateTipSheet = false
     
     var books: [Book]
     
@@ -290,33 +292,6 @@ struct ContentView: View {
 //                                                    .frame(height: 10)
                                                 
                                                 let imageString = book.coverImage
-                                
-//                                                Circle()
-//                                                    .fill(.gray.opacity(0.2))
-//                                                    .frame(width: 40)
-//                                                    .overlay {
-//                                                        Menu {
-//                                                            Button("Delete Book", systemImage: "trash", role: .destructive, action: {
-//                                                                selectedDeletionBook = book
-//                                                                activateBookDeletionAlert.toggle()
-//                                                            })
-//                                                            
-//                                                            ShareLink(item: URL(string: imageString)!,
-//                                                                      message: Text("I'm currently reading \(book.title) by \(book.author). You should check it out!"),
-//                                                                      preview: SharePreview("Check this book out!", image: Image("appLogo")),
-//                                                                      label: {
-//                                                                Label("Share", systemImage: "square.and.arrow.up")
-//                                                            })
-//                                                            
-//                                                        } label: {
-//                                                            Circle()
-//                                                                .fill(.clear)
-//                                                                .frame(width: 70)
-//                                                                .overlay {
-//                                                                    Image(systemName: "ellipsis")
-//                                                                }
-//                                                        }
-//                                                    }
                                                 
                                                 Menu {
                                                     Button("Delete Book", systemImage: "trash", role: .destructive, action: {
@@ -469,6 +444,18 @@ struct ContentView: View {
                         .font(Font.custom("CrimsonText-SemiBold", size: 20))
                         .foregroundStyle(.accent)
                 }
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        activateTipSheet.toggle()
+                    }) {
+                        Image("tipJarImage")
+                            .resizable()
+                            .scaledToFit()
+                            .fontWeight(.heavy)
+                            .frame(width: 30, height: 33)
+                    }
+                }
             }
             .navigationDestination(item: $addViewBook) { book in
                 AddView(showingSheet: $isShowingOnlineSheet, bookItem: $addViewBook, book: book, books: books)
@@ -520,6 +507,87 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showManualFormSheet) {
                 ManualFormView(collectionBooks: books)
+            }
+            .sheet(isPresented: $activateTipSheet) {
+                ScrollView {
+                    
+                    Spacer()
+                        .frame(height: 150)
+                    
+                    VStack {
+                        Image(.appLogo)
+                            .resizable()
+                            .frame(width: 200, height: 200)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        
+                        Spacer()
+                            .frame(height: 20)
+                        
+                        Text("Tip the Developer")
+                            .font(.title)
+                            .fontWeight(.bold)
+                        
+                        Spacer()
+                            .frame(height: 20)
+                        
+                        VStack(alignment: .leading) {
+                            Text("Hello! Since this app this free to use, I would like to thank you for using it. If you enjoy it, please consider tipping me a small amount as it will go to keep this app running!")
+                        }
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.horizontal, 15)
+                        
+                        Spacer()
+                            .frame(height: 20)
+                        
+                        HStack {
+                            Button(action: {
+                                
+                            }) {
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .fill(.complement)
+                                    .frame(width: 80, height: 40)
+                                    .overlay {
+                                        Text("$1")
+                                            .foregroundStyle(.white)
+                                            .fontWeight(.bold)
+                                    }
+                            }
+    
+                            Spacer()
+                                .frame(width: 20)
+                            
+                            Button(action: {
+                                
+                            }) {
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .fill(.complement)
+                                    .frame(width: 80, height: 40)
+                                    .overlay {
+                                        Text("$3")
+                                            .foregroundStyle(.white)
+                                            .fontWeight(.bold)
+                                    }
+                            }
+                            
+                            Spacer()
+                                .frame(width: 20)
+                            
+                            Button(action: {
+                                
+                            }) {
+                                RoundedRectangle(cornerRadius: 10.0)
+                                    .fill(.complement)
+                                    .frame(width: 80, height: 40)
+                                    .overlay {
+                                        Text("$5")
+                                            .foregroundStyle(.white)
+                                            .fontWeight(.bold)
+                                    }
+                            }
+                        }
+                    }
+                }
+                .presentationDragIndicator(.visible)
             }
             .onChange(of: books) {
                 if books.isEmpty {
