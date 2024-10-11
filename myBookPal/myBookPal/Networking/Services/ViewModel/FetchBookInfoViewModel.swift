@@ -16,7 +16,7 @@ class FetchBookInfoViewModel: @unchecked Sendable {
     
     func fetchBookInfo() {
         let lowercasedText = searchText.lowercased()
-        guard let encodedQuery = lowercasedText.replacingOccurrences(of: " ", with: "+").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: "https://www.googleapis.com/books/v1/volumes?q=\(encodedQuery)&key=\(apiKey)") else {
+        guard let encodedQuery = lowercasedText.replacingOccurrences(of: " ", with: "+").addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: "https://www.googleapis.com/books/v1/volumes?q=\(encodedQuery)&maxResults=30&key=\(apiKey)") else {
             return
         } // the encodedQuery is what the user has searched for in which is then plugged into the url
         print("---------------------------------")
