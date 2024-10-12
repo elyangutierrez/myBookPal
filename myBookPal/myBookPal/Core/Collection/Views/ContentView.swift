@@ -6,6 +6,7 @@
 //
 
 import CodeScanner
+import ConfettiSwiftUI
 import SDWebImageSwiftUI
 import SlidingTabView
 import SwiftData
@@ -37,6 +38,9 @@ struct ContentView: View {
     @State private var isShowingOnlineSheet = false
     @State private var showBookAddingVO = false
     @State private var activateTipSheet = false
+    @State private var tipPurchased: Bool = false
+    @State private var showThankYouView = false
+    @State private var confettiCounter = 0
     
     var books: [Book]
     
@@ -378,6 +382,54 @@ struct ContentView: View {
                 }
             }
             .overlay {
+                
+                if showThankYouView {
+                    VStack {
+                        RoundedRectangle(cornerRadius: 15.0)
+                            .fill(.regularMaterial)
+                            .frame(width: 250, height: 170)
+                            .overlay {
+                                VStack {
+                                    Text("Thank you! 🎉")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                    
+                                    Spacer()
+                                        .frame(height: 15)
+                                    
+                                    Text("Thank you for tipping!")
+                                    
+                                    Spacer()
+                                        .frame(height: 15)
+                                    
+                                    HStack {
+                                        Text("-")
+                                        
+                                        Text("Elyan")
+                                            .fontWeight(.semibold)
+                                    }
+                                }
+                                .frame(maxWidth: .infinity, alignment: .center)
+                            }
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                    confettiCounter = 1
+                                }
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                                    withAnimation(.smooth(duration: 0.2)) {
+                                        showThankYouView.toggle()
+                                        tipPurchased.toggle()
+                                    }
+                                }
+                            }
+                    }
+                    .transition(.move(edge: .bottom))
+                    .confettiCannon(counter: $confettiCounter)
+                }
+
+                
+                
                 VStack {
                     VStack {
                         Menu {
@@ -509,85 +561,23 @@ struct ContentView: View {
                 ManualFormView(collectionBooks: books)
             }
             .sheet(isPresented: $activateTipSheet) {
-                ScrollView {
-                    
-                    Spacer()
-                        .frame(height: 150)
-                    
-                    VStack {
-                        Image(.appLogo)
-                            .resizable()
-                            .frame(width: 200, height: 200)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                        
-                        Spacer()
-                            .frame(height: 20)
-                        
-                        Text("Tip the Developer")
-                            .font(.title)
-                            .fontWeight(.bold)
-                        
-                        Spacer()
-                            .frame(height: 20)
-                        
-                        VStack(alignment: .leading) {
-                            Text("Hello! Since this app this free to use, I would like to thank you for using it. If you enjoy it, please consider tipping me a small amount as it will go to keep this app running!")
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 15)
-                        
-                        Spacer()
-                            .frame(height: 20)
-                        
-                        HStack {
-                            Button(action: {
-                                
-                            }) {
-                                RoundedRectangle(cornerRadius: 10.0)
-                                    .fill(.complement)
-                                    .frame(width: 80, height: 40)
-                                    .overlay {
-                                        Text("$1")
-                                            .foregroundStyle(.white)
-                                            .fontWeight(.bold)
-                                    }
-                            }
-    
-                            Spacer()
-                                .frame(width: 20)
-                            
-                            Button(action: {
-                                
-                            }) {
-                                RoundedRectangle(cornerRadius: 10.0)
-                                    .fill(.complement)
-                                    .frame(width: 80, height: 40)
-                                    .overlay {
-                                        Text("$3")
-                                            .foregroundStyle(.white)
-                                            .fontWeight(.bold)
-                                    }
-                            }
-                            
-                            Spacer()
-                                .frame(width: 20)
-                            
-                            Button(action: {
-                                
-                            }) {
-                                RoundedRectangle(cornerRadius: 10.0)
-                                    .fill(.complement)
-                                    .frame(width: 80, height: 40)
-                                    .overlay {
-                                        Text("$5")
-                                            .foregroundStyle(.white)
-                                            .fontWeight(.bold)
-                                    }
-                            }
-                        }
+                TipSheetView(isPresented: $activateTipSheet, tipPurchased: $tipPurchased)
+                    .presentationDragIndicator(.visible)
+            }
+            .onChange(of: confettiCounter) {
+                if confettiCounter > 0 {
+                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+                        confettiCounter = 0
+                        let _ = print("Setting confetti counter to 0")
                     }
                 }
-                .presentationDragIndicator(.visible)
+            }
+            .onChange(of: tipPurchased) {
+                if tipPurchased {
+                    withAnimation(.bouncy(duration: 0.6)) {
+                        showThankYouView.toggle()
+                    }
+                }
             }
             .onChange(of: books) {
                 if books.isEmpty {
