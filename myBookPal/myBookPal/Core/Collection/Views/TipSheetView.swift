@@ -15,11 +15,10 @@ struct TipSheetView: View {
     @Binding var tipPurchased: Bool
     
     var body: some View {
-        ScrollView {
-            
-            Spacer()
-                .frame(height: 150)
-            
+        GeometryReader { geometry in
+            //                Spacer()
+            //                    .frame(height: 150)
+            //
             VStack {
                 Image(.appLogo)
                     .resizable()
@@ -67,6 +66,7 @@ struct TipSheetView: View {
                     }
                 }
             }
+            .frame(maxHeight: geometry.size.height)
         }
         .onChange(of: store.action) {
             if store.action == .successful {

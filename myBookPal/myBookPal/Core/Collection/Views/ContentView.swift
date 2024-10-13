@@ -501,11 +501,11 @@ struct ContentView: View {
                     Button(action: {
                         activateTipSheet.toggle()
                     }) {
-                        Image("tipJarImage")
+                        Image("jarImage")
                             .resizable()
                             .scaledToFit()
                             .fontWeight(.heavy)
-                            .frame(width: 30, height: 33)
+                            .frame(width: 26, height: 30)
                     }
                 }
             }
@@ -574,7 +574,7 @@ struct ContentView: View {
             }
             .onChange(of: tipPurchased) {
                 if tipPurchased {
-                    withAnimation(.bouncy(duration: 0.6)) {
+                    withAnimation(.bouncy) {
                         showThankYouView.toggle()
                     }
                 }
