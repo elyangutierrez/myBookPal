@@ -6,10 +6,12 @@
 //
 
 import CodeScanner
+import ConfettiSwiftUI
 import SDWebImageSwiftUI
 import SlidingTabView
 import SwiftData
 import SwiftUI
+import StoreKit
 
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
@@ -35,6 +37,10 @@ struct ContentView: View {
     @State private var hapticsManager = HapticsManager()
     @State private var isShowingOnlineSheet = false
     @State private var showBookAddingVO = false
+    @State private var activateTipSheet = false
+    @State private var tipPurchased: Bool = false
+    @State private var showThankYouView = false
+    @State private var confettiCounter = 0
     
     var books: [Book]
     
@@ -290,33 +296,6 @@ struct ContentView: View {
 //                                                    .frame(height: 10)
                                                 
                                                 let imageString = book.coverImage
-                                
-//                                                Circle()
-//                                                    .fill(.gray.opacity(0.2))
-//                                                    .frame(width: 40)
-//                                                    .overlay {
-//                                                        Menu {
-//                                                            Button("Delete Book", systemImage: "trash", role: .destructive, action: {
-//                                                                selectedDeletionBook = book
-//                                                                activateBookDeletionAlert.toggle()
-//                                                            })
-//                                                            
-//                                                            ShareLink(item: URL(string: imageString)!,
-//                                                                      message: Text("I'm currently reading \(book.title) by \(book.author). You should check it out!"),
-//                                                                      preview: SharePreview("Check this book out!", image: Image("appLogo")),
-//                                                                      label: {
-//                                                                Label("Share", systemImage: "square.and.arrow.up")
-//                                                            })
-//                                                            
-//                                                        } label: {
-//                                                            Circle()
-//                                                                .fill(.clear)
-//                                                                .frame(width: 70)
-//                                                                .overlay {
-//                                                                    Image(systemName: "ellipsis")
-//                                                                }
-//                                                        }
-//                                                    }
                                                 
                                                 Menu {
                                                     Button("Delete Book", systemImage: "trash", role: .destructive, action: {
@@ -403,6 +382,54 @@ struct ContentView: View {
                 }
             }
             .overlay {
+                
+                if showThankYouView {
+                    VStack {
+                        RoundedRectangle(cornerRadius: 15.0)
+                            .fill(.regularMaterial)
+                            .frame(width: 250, height: 170)
+                            .overlay {
+                                VStack {
+                                    Text("Thank you! 🎉")
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                    
+                                    Spacer()
+                                        .frame(height: 15)
+                                    
+                                    Text("Thank you for tipping!")
+                                    
+                                    Spacer()
+                                        .frame(height: 15)
+                                    
+                                    HStack {
+                                        Text("-")
+                                        
+                                        Text("Elyan")
+                                            .fontWeight(.semibold)
+                                    }
+                                }
+                                .frame(maxWidth: .infinity, alignment: .center)
+                            }
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                    confettiCounter = 1
+                                }
+                                
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                                    withAnimation(.smooth(duration: 0.2)) {
+                                        showThankYouView.toggle()
+                                        tipPurchased.toggle()
+                                    }
+                                }
+                            }
+                    }
+                    .transition(.move(edge: .bottom))
+                    .confettiCannon(counter: $confettiCounter)
+                }
+
+                
+                
                 VStack {
                     VStack {
                         Menu {
@@ -469,6 +496,18 @@ struct ContentView: View {
                         .font(Font.custom("CrimsonText-SemiBold", size: 20))
                         .foregroundStyle(.accent)
                 }
+                
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        activateTipSheet.toggle()
+                    }) {
+                        Image("jarImage")
+                            .resizable()
+                            .scaledToFit()
+                            .fontWeight(.heavy)
+                            .frame(width: 26, height: 30)
+                    }
+                }
             }
             .navigationDestination(item: $addViewBook) { book in
                 AddView(showingSheet: $isShowingOnlineSheet, bookItem: $addViewBook, book: book, books: books)
@@ -520,6 +559,25 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showManualFormSheet) {
                 ManualFormView(collectionBooks: books)
+            }
+            .sheet(isPresented: $activateTipSheet) {
+                TipSheetView(isPresented: $activateTipSheet, tipPurchased: $tipPurchased)
+                    .presentationDragIndicator(.visible)
+            }
+            .onChange(of: confettiCounter) {
+                if confettiCounter > 0 {
+                    DispatchQueue.main.asyncAfter(deadline: .now()) {
+                        confettiCounter = 0
+                        let _ = print("Setting confetti counter to 0")
+                    }
+                }
+            }
+            .onChange(of: tipPurchased) {
+                if tipPurchased {
+                    withAnimation(.bouncy) {
+                        showThankYouView.toggle()
+                    }
+                }
             }
             .onChange(of: books) {
                 if books.isEmpty {
