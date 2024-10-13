@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "Tip Jar from myBookPal.png",
+      "filename" : "myBookPal Group 2 (1).png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "Group 2 from myBookPal.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "myBookPal Group 2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
