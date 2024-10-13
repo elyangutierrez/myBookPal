@@ -18,7 +18,6 @@ struct AddLogEntryView: View {
     @State private var pageLessThanLastPage = false
     @State private var invalidCharacters = false
     @State private var quickNoteText = ""
-    @State private var maxCharacterCount = 125
     @State private var hapticsManager = HapticsManager()
     
     var checkFields: Bool {
@@ -47,10 +46,8 @@ struct AddLogEntryView: View {
                 
                 Section("Quick Note (Optional)") {
                     TextField("", text: $quickNoteText, prompt: Text("Enter ideas, themes, or thoughts here..."), axis: .vertical)
-                        .lineLimit(2, reservesSpace: true)
-                        .onChange(of: quickNoteText) {
-                            quickNoteText = String(quickNoteText.prefix(maxCharacterCount))
-                        }
+//                        .lineLimit(1...5, reservesSpace: true)
+                        .lineLimit(1...5)
                         .accessibilityLabel("Add a optional quick note")
                 }
                 

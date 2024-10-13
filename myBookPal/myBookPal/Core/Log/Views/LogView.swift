@@ -269,8 +269,9 @@ struct LogView: View {
             .navigationBarTitleDisplayMode(.inline)
             .sheet(item: $currentNote) { note in
                 NoteTextView(note: note)
-                    .presentationDetents([.height(450)])
+                    .presentationDetents([.height(325)])
                     .presentationCornerRadius(25.0)
+                    .presentationBackground(.white)
             }
             .onChange(of: book.logs) {
                 if book.isFullyRead {
@@ -294,6 +295,9 @@ struct LogView: View {
                 if lastPageNumber == nil {
                     lastPageNumber = lastLog?.totalPagesRead
                 }
+            }
+            .overlay(alignment: .bottom) {
+                
             }
             .toolbar {
                 
