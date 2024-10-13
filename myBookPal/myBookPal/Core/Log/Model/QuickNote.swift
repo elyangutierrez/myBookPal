@@ -19,4 +19,11 @@ class QuickNote: Identifiable {
         self.noteText = noteText
         self.date = date
     }
+    
+    var shortenedDate: String {
+        let date = date
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM dd, yyyy"
+        return formatter.string(from: date)
+    }
 }

@@ -130,223 +130,102 @@ struct LogView: View {
                                         Spacer()
                                             .frame(width: 15)
                                         
-                                        if log.tags?.isEmpty == true {
-                                            // Show smaller rectangle
-                                            VStack {
-                                                RoundedRectangle(cornerRadius: 15.0)
-                                                    .fill(.gray.opacity(0.10))
-                                                    .frame(width: geometry.size.width * 0.55, height: 50)
-                                                    .overlay {
-                                                        VStack(alignment: .leading) {
-                                                            Spacer()
-                                                                .frame(height: 15)
-                                                            VStack {
-                                                                HStack {
+                                        VStack {
+                                            RoundedRectangle(cornerRadius: 15.0)
+                                                .fill(.gray.opacity(0.10))
+                                                .frame(width: geometry.size.width * 0.55, height: 60)
+                                                .overlay {
+                                                    VStack(alignment: .leading) {
+                                                        Spacer()
+                                                            .frame(height: 15)
+                                                        VStack {
+                                                            HStack {
+                                                                VStack {
+                                                                    Image(systemName: "book.circle")
+                                                                        .resizable()
+                                                                        .frame(width: 30, height: 30)
+                                                                }
+                                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                                
+                                                                if log.quickNote?.noteText != nil {
+                                                                    
+                                                                    // TODO: Fix padding
+                                                                    
                                                                     VStack {
-                                                                        Image(systemName: "book.circle")
-                                                                            .resizable()
-                                                                            .frame(width: 30, height: 30)
+                                                                        Text("\(String(log.totalPagesRead)) / \(book.pages)")
+                                                                            .font(.system(size: 12.5))
+                                                                            .fontWeight(.bold)
+                                                                            .fixedSize(horizontal: true, vertical: false)
                                                                     }
-                                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                                    .frame(maxWidth: geometry.size.width, alignment: .leading)
+                                                                    //                                                                        .offset(x: -25)
+                                                                } else {
                                                                     
-                                                                    if log.quickNote?.noteText != nil {
-                                                                        
-                                                                        // TODO: Fix padding
-                                                                        
-                                                                        VStack {
-                                                                            Text("\(String(log.totalPagesRead)) / \(book.pages)")
-                                                                                .font(.system(size: 12.5))
-                                                                                .fontWeight(.bold)
-                                                                                .fixedSize(horizontal: true, vertical: false)
-                                                                        }
-                                                                        .frame(maxWidth: geometry.size.width, alignment: .leading)
-//                                                                        .offset(x: -30)
-                                                                    } else {
-                                                                        
-                                                                        // TODO: Fix padding
-                                                                        
-                                                                        VStack {
-                                                                            Text("\(String(log.totalPagesRead)) / \(book.pages)")
-                                                                                .font(.system(size: 12.5))
-                                                                                .fontWeight(.bold)
-                                                                                .fixedSize(horizontal: true, vertical: false)
-                                                                        }
-                                                                        .frame(maxWidth: geometry.size.width, alignment: .leading)
-//                                                                        .offset(x: -25)
+                                                                    // TODO: Fix padding
+                                                                    
+                                                                    VStack {
+                                                                        Text("\(String(log.totalPagesRead)) / \(book.pages)")
+                                                                            .font(.system(size: 12.5))
+                                                                            .fontWeight(.bold)
+                                                                            .fixedSize(horizontal: true, vertical: false)
                                                                     }
-                                                                    
-                                                                    if log.quickNote?.noteText != nil {
-                                                                        VStack {
-                                                                            Image(systemName: "note.text")
-                                                                                .onTapGesture {
-                                                                                    guard let noteText = log.quickNote?.noteText else {
-                                                                                        print("Error printing note")
-                                                                                        return
-                                                                                    }
-                                                                                    print(noteText)
-                                                                                    
-                                                                                    let currentDate = Date.now
-                                                                                    
-                                                                                    currentNote = QuickNote(noteText: noteText, date: currentDate)
-                                                                                    
-                                                                                    currentLog = log
+                                                                    .frame(maxWidth: geometry.size.width, alignment: .leading)
+                                                                    //                                                                        .offset(x: -25)
+                                                                }
+                                                                
+                                                                if log.quickNote?.noteText != nil {
+                                                                    VStack {
+                                                                        Image(systemName: "note.text")
+                                                                            .onTapGesture {
+                                                                                guard let noteText = log.quickNote?.noteText else {
+                                                                                    print("Error printing note")
+                                                                                    return
                                                                                 }
-                                                                        }
-                                                                        .frame(maxWidth: .infinity, alignment: .trailing)
-//                                                                        .offset(x: -25)
-                                                                    }
-                                                                    
-                                                                    VStack {
-                                                                        Menu {
-                                                                            Button("Delete",
-                                                                                   role: .destructive,
-                                                                                   action: {
+                                                                                print(noteText)
+                                                                                
+                                                                                let currentDate = Date.now
+                                                                                
+                                                                                currentNote = QuickNote(noteText: noteText, date: currentDate)
+                                                                                
                                                                                 currentLog = log
-                                                                                showDeletionAlert.toggle()
                                                                             }
-                                                                            )
-                                                                            .tint(.red)
-                                                                        } label: {
-                                                                            Circle()
-                                                                                .fill(.clear)
-                                                                                .frame(width: 30, height: 30)
-                                                                                .overlay {
-                                                                                    Image(systemName: "ellipsis")
-                                                                                }
-                                                                        }
                                                                     }
                                                                     .frame(maxWidth: .infinity, alignment: .trailing)
+                                                                    //                                                                        .padding(.horizontal, -23)
                                                                 }
-                                                            }
-                                                            .frame(maxHeight: .infinity, alignment: .top)
-                                                            .padding(.vertical, -5)
-                                                        }
-                                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                                        .padding(.horizontal, 15)
-                                                    }
-                                                    .allowsHitTesting(true) // lets user tap through overlay
-                                            }
-                                            .frame(maxHeight: .infinity, alignment: .top)
-                                            .padding(.vertical, 18)
-                                        } else {
-                                            // default box
-                                            VStack {
-                                                RoundedRectangle(cornerRadius: 15.0)
-                                                    .fill(.gray.opacity(0.10))
-                                                    .frame(width: geometry.size.width * 0.55, height: 100)
-                                                    .overlay {
-                                                        VStack(alignment: .leading) {
-                                                            Spacer()
-                                                                .frame(height: 15)
-                                                            VStack {
-                                                                HStack {
-                                                                    VStack {
-                                                                        Image(systemName: "book.circle")
-                                                                            .resizable()
+                                                                
+                                                                VStack {
+                                                                    Menu {
+                                                                        Button("Delete",
+                                                                               role: .destructive,
+                                                                               action: {
+                                                                            currentLog = log
+                                                                            showDeletionAlert.toggle()
+                                                                        })
+                                                                        .tint(.red)
+                                                                        .accessibilityLabel("Delete log")
+                                                                    } label: {
+                                                                        Circle()
+                                                                            .fill(.clear)
                                                                             .frame(width: 30, height: 30)
-                                                                    }
-                                                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                                                    
-                                                                    if log.quickNote?.noteText != nil {
-                                                                        
-                                                                        // TODO: Fix padding
-                                                                        
-                                                                        VStack {
-                                                                            Text("\(String(log.totalPagesRead)) / \(book.pages)")
-                                                                                .font(.system(size: 12.5))
-                                                                                .fontWeight(.bold)
-                                                                                .fixedSize(horizontal: true, vertical: false)
-                                                                        }
-                                                                        .frame(maxWidth: geometry.size.width, alignment: .leading)
-//                                                                        .offset(x: -25)
-                                                                    } else {
-                                                                        
-                                                                        // TODO: Fix padding
-                                                                        
-                                                                        VStack {
-                                                                            Text("\(String(log.totalPagesRead)) / \(book.pages)")
-                                                                                .font(.system(size: 12.5))
-                                                                                .fontWeight(.bold)
-                                                                                .fixedSize(horizontal: true, vertical: false)
-                                                                        }
-                                                                        .frame(maxWidth: geometry.size.width, alignment: .leading)
-//                                                                        .offset(x: -25)
-                                                                    }
-                                                                    
-                                                                    if log.quickNote?.noteText != nil {
-                                                                        VStack {
-                                                                            Image(systemName: "note.text")
-                                                                                .onTapGesture {
-                                                                                    guard let noteText = log.quickNote?.noteText else {
-                                                                                        print("Error printing note")
-                                                                                        return
-                                                                                    }
-                                                                                    print(noteText)
-                                                                                    
-                                                                                    let currentDate = Date.now
-                                                                                    
-                                                                                    currentNote = QuickNote(noteText: noteText, date: currentDate)
-                                                                                    
-                                                                                    currentLog = log
-                                                                                }
-                                                                        }
-                                                                        .frame(maxWidth: .infinity, alignment: .trailing)
-//                                                                        .padding(.horizontal, -23)
-                                                                    }
-                                                                    
-                                                                    VStack {
-                                                                        Menu {
-                                                                            Button("Delete",
-                                                                                   role: .destructive,
-                                                                                   action: {
-                                                                                currentLog = log
-                                                                                showDeletionAlert.toggle()
-                                                                            })
-                                                                            .tint(.red)
-                                                                            .accessibilityLabel("Delete log")
-                                                                        } label: {
-                                                                            Circle()
-                                                                                .fill(.clear)
-                                                                                .frame(width: 30, height: 30)
-                                                                                .overlay {
-                                                                                    Image(systemName: "ellipsis")
-                                                                                }
-                                                                        }
-                                                                    }
-                                                                    .frame(maxWidth: .infinity, alignment: .trailing)
-                                                                    .accessibilityAddTraits(.isButton)
-                                                                }
-                                                            }
-                                                            .frame(maxHeight: .infinity, alignment: .top)
-                                                            
-                                                            
-                                                            VStack {
-                                                                ScrollView(.horizontal) {
-                                                                    HStack {
-                                                                        ForEach(log.tags ?? [Tag](), id: \.self) { tag in
-                                                                            Text(tag.text)
-                                                                                .tagTextViewModifier()
-                                                                                .background {
-                                                                                    let convertedColor = convertStringToColor(tag: tag)
-                                                                                    Capsule()
-                                                                                        .fill(convertedColor)
-                                                                                }
-                                                                        }
+                                                                            .overlay {
+                                                                                Image(systemName: "ellipsis")
+                                                                            }
                                                                     }
                                                                 }
-                                                                .scrollIndicators(.hidden)
+                                                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                                                .accessibilityAddTraits(.isButton)
                                                             }
-                                                            Spacer()
-                                                                .frame(height: 15)
                                                         }
-                                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                                        .padding(.horizontal, 15)
+                                                        .frame(maxHeight: .infinity, alignment: .top)
                                                     }
-                                                    .allowsHitTesting(true) // lets user tap through overlay
-                                            }
-                                            .frame(maxHeight: .infinity, alignment: .top)
-                                            .padding(.vertical, -6)
+                                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                                    .padding(.horizontal, 15)
+                                                }
+                                                .allowsHitTesting(true) // lets user tap through overlay
                                         }
+                                        .frame(maxHeight: .infinity, alignment: .top)
+                                        .padding(.vertical, 10)
                                     }
                                 }
                                 
@@ -390,8 +269,9 @@ struct LogView: View {
             .navigationBarTitleDisplayMode(.inline)
             .sheet(item: $currentNote) { note in
                 NoteTextView(note: note)
-                    .presentationDetents([.height(450)])
+                    .presentationDetents([.height(325)])
                     .presentationCornerRadius(25.0)
+                    .presentationBackground(.white)
             }
             .onChange(of: book.logs) {
                 if book.isFullyRead {
@@ -415,6 +295,9 @@ struct LogView: View {
                 if lastPageNumber == nil {
                     lastPageNumber = lastLog?.totalPagesRead
                 }
+            }
+            .overlay(alignment: .bottom) {
+                
             }
             .toolbar {
                 
@@ -475,17 +358,6 @@ struct LogView: View {
         book.starRatingSystem = starRating
     }
     
-    func convertStringToColor(tag: Tag) -> Color {
-        switch tag.color {
-        case ".complement":
-            return Color.complement
-        case ".accent":
-            return Color.accent
-        default:
-            return Color.black
-        }
-    }
-
     func deleteLog() {
         let logIndex = book.logs!.firstIndex(of: currentLog!) ?? 0
         

@@ -17,4 +17,8 @@ extension String {
         }
         return nil
     }
+    
+    var withZeroWidthSpaces: String {
+        map({ String($0) }).joined(separator: "\u{200B}")
+    }
 }

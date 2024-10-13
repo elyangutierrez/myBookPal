@@ -52,7 +52,6 @@
 		7248FF562C9CC35B00722F23 /* TransferableImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7248FF552C9CC35B00722F23 /* TransferableImage.swift */; };
 		7248FF5B2C9CE0CB00722F23 /* CustomArrowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7248FF5A2C9CE0CB00722F23 /* CustomArrowView.swift */; };
 		7249626C2C2E380600F6411B /* SettingsRectangleLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */; };
-		724BEAA22C96370B00B86198 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724BEAA12C96370B00B86198 /* Tag.swift */; };
 		7259CABF2BFE45BD0039D778 /* CatagoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7259CABE2BFE45BD0039D778 /* CatagoryView.swift */; };
 		725D05452BF4FCB8001557A4 /* EmptyBookCoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D05442BF4FCB8001557A4 /* EmptyBookCoverView.swift */; };
 		725D054B2BF971E1001557A4 /* CompletedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 725D054A2BF971E1001557A4 /* CompletedView.swift */; };
@@ -78,10 +77,6 @@
 		72AC47AC2CAC9392007E72DE /* Haptics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72AC47AB2CAC9392007E72DE /* Haptics.swift */; };
 		72BB668F2C93F15A001F17BA /* LightTagViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB668E2C93F15A001F17BA /* LightTagViewModifier.swift */; };
 		72BB66912C93F371001F17BA /* DarkerTagViewModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB66902C93F371001F17BA /* DarkerTagViewModifier.swift */; };
-		72BB66932C93F782001F17BA /* RowOneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB66922C93F782001F17BA /* RowOneView.swift */; };
-		72BB66952C93F7A2001F17BA /* RowTwoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB66942C93F7A2001F17BA /* RowTwoView.swift */; };
-		72BB66972C93F7AD001F17BA /* RowThreeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB66962C93F7AD001F17BA /* RowThreeView.swift */; };
-		72BB66992C93F7B4001F17BA /* RowFourView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BB66982C93F7B4001F17BA /* RowFourView.swift */; };
 		72BBD34C2BF29EB2006BC431 /* AddLogEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BBD34B2BF29EB2006BC431 /* AddLogEntryView.swift */; };
 		72BBD3502BF2A64C006BC431 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72BBD34F2BF2A64C006BC431 /* Log.swift */; };
 		72C4CD3C2C9A7EF800730327 /* DateTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72C4CD3B2C9A7EF800730327 /* DateTracker.swift */; };
@@ -157,7 +152,6 @@
 		7248FF552C9CC35B00722F23 /* TransferableImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferableImage.swift; sourceTree = "<group>"; };
 		7248FF5A2C9CE0CB00722F23 /* CustomArrowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomArrowView.swift; sourceTree = "<group>"; };
 		7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRectangleLineView.swift; sourceTree = "<group>"; };
-		724BEAA12C96370B00B86198 /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		7259CABE2BFE45BD0039D778 /* CatagoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatagoryView.swift; sourceTree = "<group>"; };
 		725D05442BF4FCB8001557A4 /* EmptyBookCoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyBookCoverView.swift; sourceTree = "<group>"; };
 		725D054A2BF971E1001557A4 /* CompletedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedView.swift; sourceTree = "<group>"; };
@@ -180,10 +174,6 @@
 		72AC47AB2CAC9392007E72DE /* Haptics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptics.swift; sourceTree = "<group>"; };
 		72BB668E2C93F15A001F17BA /* LightTagViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LightTagViewModifier.swift; sourceTree = "<group>"; };
 		72BB66902C93F371001F17BA /* DarkerTagViewModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkerTagViewModifier.swift; sourceTree = "<group>"; };
-		72BB66922C93F782001F17BA /* RowOneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowOneView.swift; sourceTree = "<group>"; };
-		72BB66942C93F7A2001F17BA /* RowTwoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowTwoView.swift; sourceTree = "<group>"; };
-		72BB66962C93F7AD001F17BA /* RowThreeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowThreeView.swift; sourceTree = "<group>"; };
-		72BB66982C93F7B4001F17BA /* RowFourView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RowFourView.swift; sourceTree = "<group>"; };
 		72BBD34B2BF29EB2006BC431 /* AddLogEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLogEntryView.swift; sourceTree = "<group>"; };
 		72BBD34F2BF2A64C006BC431 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		72C4CD3B2C9A7EF800730327 /* DateTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateTracker.swift; sourceTree = "<group>"; };
@@ -390,10 +380,6 @@
 				72D097F72BF160D40021819E /* LogView.swift */,
 				72BBD34B2BF29EB2006BC431 /* AddLogEntryView.swift */,
 				722662A52C8CAE030071162D /* StarRatingView.swift */,
-				72BB66922C93F782001F17BA /* RowOneView.swift */,
-				72BB66942C93F7A2001F17BA /* RowTwoView.swift */,
-				72BB66962C93F7AD001F17BA /* RowThreeView.swift */,
-				72BB66982C93F7B4001F17BA /* RowFourView.swift */,
 				720A001F2C9FB9FE00BD9A45 /* AddQuickNoteView.swift */,
 				720A00242CA0961B00BD9A45 /* NoteTextView.swift */,
 			);
@@ -520,7 +506,6 @@
 			children = (
 				722662A32C8CAB4A0071162D /* StarRating.swift */,
 				72BBD34F2BF2A64C006BC431 /* Log.swift */,
-				724BEAA12C96370B00B86198 /* Tag.swift */,
 				720A001D2C9FB21700BD9A45 /* QuickNote.swift */,
 			);
 			path = Model;
@@ -760,7 +745,6 @@
 				722662E62C92A11A0071162D /* Rectangle.swift in Sources */,
 				72D097F82BF160D40021819E /* LogView.swift in Sources */,
 				722662A02C8A9D790071162D /* SplashScreenView.swift in Sources */,
-				72BB66992C93F7B4001F17BA /* RowFourView.swift in Sources */,
 				72AC47A02CAB4CCD007E72DE /* ManualFormView.swift in Sources */,
 				72A889402C3F6FFE0032A56C /* NetworkMonitor.swift in Sources */,
 				720A001E2C9FB21700BD9A45 /* QuickNote.swift in Sources */,
@@ -786,7 +770,6 @@
 				7248FF532C9CBD5000722F23 /* PictureHandler.swift in Sources */,
 				7266C68A2BF45B6200022057 /* ContentView.swift in Sources */,
 				725D054B2BF971E1001557A4 /* CompletedView.swift in Sources */,
-				72BB66932C93F782001F17BA /* RowOneView.swift in Sources */,
 				720A00252CA0961B00BD9A45 /* NoteTextView.swift in Sources */,
 				72BBD3502BF2A64C006BC431 /* Log.swift in Sources */,
 				720A00302CA1017900BD9A45 /* AddGoalView.swift in Sources */,
@@ -803,7 +786,6 @@
 				725D054D2BF971E7001557A4 /* InProgressView.swift in Sources */,
 				72AC47A52CAB66C2007E72DE /* String.swift in Sources */,
 				720A00362CA2581000BD9A45 /* DateManager.swift in Sources */,
-				72BB66952C93F7A2001F17BA /* RowTwoView.swift in Sources */,
 				72D098092BF168D50021819E /* Book.swift in Sources */,
 				722662DD2C929CB70071162D /* PlaceholderModifier.swift in Sources */,
 				720A00232CA080D800BD9A45 /* NoteVisibility.swift in Sources */,
@@ -822,14 +804,12 @@
 				722662D12C92717A0071162D /* NotificationsModel.swift in Sources */,
 				72AC47A22CAB5347007E72DE /* ImageCapturingHandler.swift in Sources */,
 				7226629E2C8A9D680071162D /* ContainerView.swift in Sources */,
-				72BB66972C93F7AD001F17BA /* RowThreeView.swift in Sources */,
 				72D098132BF1692D0021819E /* BookResponse.swift in Sources */,
 				727B4F022CB9BE2200C34B02 /* TipSheetView.swift in Sources */,
 				7259CABF2BFE45BD0039D778 /* CatagoryView.swift in Sources */,
 				72AC47AA2CAC753E007E72DE /* HapticsManager.swift in Sources */,
 				72AC47922CA90EA1007E72DE /* FetchISBNBookInfoViewModel.swift in Sources */,
 				72D098152BF1692D0021819E /* ImageLinks.swift in Sources */,
-				724BEAA22C96370B00B86198 /* Tag.swift in Sources */,
 				720A002C2CA0FC8C00BD9A45 /* Goal.swift in Sources */,
 				72D0981A2BF174CB0021819E /* RectangleLineView.swift in Sources */,
 				720A002E2CA0FEE500BD9A45 /* GoalManager.swift in Sources */,

@@ -499,7 +499,9 @@ struct ContentView: View {
                 
                 ToolbarItem(placement: .topBarLeading) {
                     Button(action: {
-                        activateTipSheet.toggle()
+                        // TODO: incorporate later!
+//                        activateTipSheet.toggle()
+                        let _ = print("Tapped tip jar")
                     }) {
                         Image("jarImage")
                             .resizable()
