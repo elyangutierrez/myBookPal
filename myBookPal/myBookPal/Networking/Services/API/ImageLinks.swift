@@ -16,4 +16,9 @@ struct ImageLinks: Codable, Hashable, Sendable {
         let httpsThumbnail = getThumbnail.replacingOccurrences(of: "http://", with: "https://")
         return httpsThumbnail.replacingOccurrences(of: "&edge=curl", with: "")
     }
+    
+    var increaseQuality: String? {
+        let holder = secureThumbnailURL ?? ""
+        return holder.replacingOccurrences(of: holder, with: holder+"&fife=w800")
+    }
 }

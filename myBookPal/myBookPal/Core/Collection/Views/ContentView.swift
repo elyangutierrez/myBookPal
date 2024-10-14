@@ -37,10 +37,6 @@ struct ContentView: View {
     @State private var hapticsManager = HapticsManager()
     @State private var isShowingOnlineSheet = false
     @State private var showBookAddingVO = false
-    @State private var activateTipSheet = false
-    @State private var tipPurchased: Bool = false
-    @State private var showThankYouView = false
-    @State private var confettiCounter = 0
     
     var books: [Book]
     
@@ -292,8 +288,8 @@ struct ContentView: View {
                                         VStack {
                                             if isEditing {
                                                 
-//                                                Spacer()
-//                                                    .frame(height: 10)
+                                                //                                                Spacer()
+                                                //                                                    .frame(height: 10)
                                                 
                                                 let imageString = book.coverImage
                                                 
@@ -380,110 +376,63 @@ struct ContentView: View {
                         .padding(.horizontal, 20)
                     }
                 }
-            }
-            .overlay {
-                if showThankYouView {
+                .overlay {
                     VStack {
-                        RoundedRectangle(cornerRadius: 15.0)
-                            .fill(.regularMaterial)
-                            .frame(width: 250, height: 170)
-                            .overlay {
-                                VStack {
-                                    Text("Thank you! 🎉")
-                                        .font(.title2)
-                                        .fontWeight(.bold)
-                                    
-                                    Spacer()
-                                        .frame(height: 15)
-                                    
-                                    Text("Thank you for tipping!")
-                                    
-                                    Spacer()
-                                        .frame(height: 15)
-                                    
+                        VStack {
+                            Menu {
+                                Button(action: {
+                                    isShowingOnlineSheet.toggle()
+                                }) {
                                     HStack {
-                                        Text("-")
+                                        Text("Search Online")
                                         
-                                        Text("Elyan")
-                                            .fontWeight(.semibold)
+                                        Image(systemName: "magnifyingglass")
                                     }
-                                }
-                                .frame(maxWidth: .infinity, alignment: .center)
-                            }
-                            .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                                    confettiCounter = 1
+                                    .accessibilityHint("Search book online")
                                 }
                                 
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-                                    withAnimation(.smooth(duration: 0.2)) {
-                                        showThankYouView.toggle()
-                                        tipPurchased.toggle()
-                                    }
-                                }
-                            }
-                    }
-                    .transition(.move(edge: .bottom))
-                    .confettiCannon(counter: $confettiCounter)
-                }
-
-                
-                
-                VStack {
-                    VStack {
-                        Menu {
-                            Button(action: {
-                                isShowingOnlineSheet.toggle()
-                            }) {
-                                HStack {
-                                    Text("Search Online")
+                                Button(action: {
+                                    isShowingScanner.toggle()
+                                }) {
+                                    HStack {
+                                        Text("Scan ISBN Number")
                                         
-                                    Image(systemName: "magnifyingglass")
+                                        Image(systemName: "barcode.viewfinder")
+                                    }
+                                    .accessibilityHint("Scan isbn number")
                                 }
-                                .accessibilityHint("Search book online")
+                                
+                                Button(action: {
+                                    showManualFormSheet.toggle()
+                                }) {
+                                    HStack {
+                                        Text("Manually Add Book")
+                                        
+                                        Image(systemName: "document")
+                                    }
+                                    .accessibilityHint("Manually add book")
+                                }
+                                
+                            } label: {
+                                Circle()
+                                    .fill(.complement)
+                                    .frame(width: 60, height: 60)
+                                    .overlay {
+                                        Image(systemName: "plus")
+                                            .resizable()
+                                            .frame(width: 17, height: 17, alignment: .center)
+                                            .foregroundStyle(.white)
+                                    }
+                                    .accessibilityLabel("Ways to add a book")
                             }
-                            
-                            Button(action: {
-                                isShowingScanner.toggle()
-                            }) {
-                                HStack {
-                                    Text("Scan ISBN Number")
-                                    
-                                    Image(systemName: "barcode.viewfinder")
-                                }
-                                .accessibilityHint("Scan isbn number")
-                            }
-                            
-                            Button(action: {
-                                showManualFormSheet.toggle()
-                            }) {
-                                HStack {
-                                    Text("Manually Add Book")
-                                    
-                                    Image(systemName: "document")
-                                }
-                                .accessibilityHint("Manually add book")
-                            }
-       
-                        } label: {
-                            Circle()
-                                .fill(.complement)
-                                .frame(width: 60, height: 60)
-                                .overlay {
-                                    Image(systemName: "plus")
-                                        .resizable()
-                                        .frame(width: 17, height: 17, alignment: .center)
-                                        .foregroundStyle(.white)
-                                }
-                                .accessibilityLabel("Ways to add a book")
                         }
+                        .frame(maxHeight: .infinity, alignment: .bottomTrailing)
+                        .accessibilityAddTraits(.isButton)
                     }
-                    .frame(maxHeight: .infinity, alignment: .bottomTrailing)
-                    .accessibilityAddTraits(.isButton)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, -20)
                 }
-                .frame(maxWidth: .infinity, alignment: .trailing)
-                .padding(.horizontal, 10)
-                .padding(.vertical, -20)
             }
             .padding(.bottom, 30)
             .navigationBarTitleDisplayMode(.inline)
@@ -537,7 +486,7 @@ struct ContentView: View {
                                         .accessibilityLabel("Enable/disable flashlight")
                                 }
                             }
-                         }
+                        }
                         .ignoresSafeArea()
                 }
             }

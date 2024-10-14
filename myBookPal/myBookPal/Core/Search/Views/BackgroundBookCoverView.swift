@@ -24,5 +24,5 @@ struct BackgroundBookCoverView: View {
 }
 
 #Preview {
-    BackgroundBookCoverView(bookImage: "https://books.google.com/books/content?id=ydQiDQAAQBAJ&printsec=frontcover&img=1&zoom=1l&source=gbs_api", width: 500, height: 1000)
+    BackgroundBookCoverView(bookImage: "https://books.google.com/books/content?id=ydQiDQAAQBAJ&printsec=frontcover&img=1&zoom=1l&source=gbs_api", width: 300, height: 800)
 }

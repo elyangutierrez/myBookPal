@@ -46,7 +46,7 @@ struct SearchView: View {
 //                                    .frame(width: 165, height: 350)
                                     .overlay {
                                         VStack {
-                                            AsyncImage(url: URL(string: book.imageLinks?.secureThumbnailURL ?? "")) { phase in
+                                            AsyncImage(url: URL(string: book.imageLinks?.increaseQuality ?? "")) { phase in
                                                 switch phase {
                                                 case .empty:
                                                     
@@ -68,6 +68,7 @@ struct SearchView: View {
                                                     // TODO: Show book cover not found or image not found?
                                                     
                                                     Color.red
+                                                        .frame(width: geometry.size.width * 0.375, height: 245)
                                                     let _ = print(error)
                                                 @unknown default:
                                                     fatalError()
