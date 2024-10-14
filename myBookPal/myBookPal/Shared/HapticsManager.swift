@@ -42,4 +42,12 @@ class HapticsManager {
     @MainActor func playDonated() {
         haptics.play(.heavy)
     }
+    
+    @MainActor func playRemovedAllBooks() {
+        haptics.notify(.success)
+    }
+    
+    @MainActor func playFailedToDeleteAllBooks() {
+        haptics.notify(.error)
+    }
 }
