@@ -1,0 +1,125 @@
+{
+  "appPolicies" : {
+    "eula" : "",
+    "policies" : [
+      {
+        "locale" : "en_US",
+        "policyText" : "",
+        "policyURL" : ""
+      }
+    ]
+  },
+  "identifier" : "79D94229",
+  "nonRenewingSubscriptions" : [
+
+  ],
+  "products" : [
+    {
+      "displayPrice" : "0.99",
+      "familyShareable" : false,
+      "internalID" : "6736793090",
+      "localizations" : [
+        {
+          "description" : "Tip the developer $1.",
+          "displayName" : "Tip $1",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "KAUXUQ12OSU4",
+      "referenceName" : "Tip $1",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "2.99",
+      "familyShareable" : false,
+      "internalID" : "6736794471",
+      "localizations" : [
+        {
+          "description" : "Tip the developer $3.",
+          "displayName" : "Tip $3",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "AJJZOAUEUR01841",
+      "referenceName" : "Tip $3",
+      "type" : "Consumable"
+    },
+    {
+      "displayPrice" : "4.99",
+      "familyShareable" : false,
+      "internalID" : "6736794424",
+      "localizations" : [
+        {
+          "description" : "Tip the developer $5.",
+          "displayName" : "Tip $5",
+          "locale" : "en_US"
+        }
+      ],
+      "productID" : "OQUR2412JAXMSQ5",
+      "referenceName" : "Tip $5",
+      "type" : "Consumable"
+    }
+  ],
+  "settings" : {
+    "_applicationInternalID" : "6736662593",
+    "_developerTeamID" : "52Q4M7N2WD",
+    "_failTransactionsEnabled" : false,
+    "_lastSynchronizedDate" : 750566956.72489297,
+    "_locale" : "en_US",
+    "_storefront" : "USA",
+    "_storeKitErrors" : [
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Load Products"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Purchase"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Verification"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Store Sync"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Subscription Status"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "App Transaction"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Manage Subscriptions Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Refund Request Sheet"
+      },
+      {
+        "current" : null,
+        "enabled" : false,
+        "name" : "Offer Code Redeem Sheet"
+      }
+    ]
+  },
+  "subscriptionGroups" : [
+
+  ],
+  "version" : {
+    "major" : 4,
+    "minor" : 0
+  }
+}

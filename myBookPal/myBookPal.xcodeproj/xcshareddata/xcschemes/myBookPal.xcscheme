@@ -51,7 +51,7 @@
          </BuildableReference>
       </BuildableProductRunnable>
       <StoreKitConfigurationFileReference
-         identifier = "../../../../../myBookPal.storekit">
+         identifier = "../../myBookPal/Core/Settings/Store/myBookPal.storekit">
       </StoreKitConfigurationFileReference>
    </LaunchAction>
    <ProfileAction

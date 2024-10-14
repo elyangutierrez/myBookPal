@@ -19,6 +19,7 @@
 		720A00342CA1087B00BD9A45 /* ReminderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00332CA1087B00BD9A45 /* ReminderManager.swift */; };
 		720A00362CA2581000BD9A45 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00352CA2581000BD9A45 /* DateManager.swift */; };
 		720B446D2CA5D421004B02FC /* PageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B446C2CA5D421004B02FC /* PageManager.swift */; };
+		721A64D52CBCBE2900727C9E /* myBookPal.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 721A64D42CBCBE2900727C9E /* myBookPal.storekit */; };
 		722662962C8956EA0071162D /* CrimsonText-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */; };
 		722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662912C894ED70071162D /* CrimsonText-Regular.ttf */; };
 		722662992C8957C40071162D /* CrimsonText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662982C8957C40071162D /* CrimsonText-Bold.ttf */; };
@@ -38,7 +39,6 @@
 		722662E62C92A11A0071162D /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662E52C92A11A0071162D /* Rectangle.swift */; };
 		722662E92C9360660071162D /* FetchBookInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722662E82C9360660071162D /* FetchBookInfoViewModel.swift */; };
 		722F8F5D2CB8AF5300E4583E /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722F8F5C2CB8AF5200E4583E /* StoreKit.framework */; };
-		722F8F5F2CB9747A00E4583E /* myBookPal.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 722F8F5E2CB9747A00E4583E /* myBookPal.storekit */; };
 		722F8F612CB97F7A00E4583E /* StoreKitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 722F8F602CB97F7A00E4583E /* StoreKitManager.swift */; };
 		724070D82BEC6AAF00E1E07C /* myBookPalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */; };
 		724070DC2BEC6AAF00E1E07C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 724070DB2BEC6AAF00E1E07C /* Assets.xcassets */; };
@@ -118,6 +118,7 @@
 		720A00332CA1087B00BD9A45 /* ReminderManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReminderManager.swift; sourceTree = "<group>"; };
 		720A00352CA2581000BD9A45 /* DateManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateManager.swift; sourceTree = "<group>"; };
 		720B446C2CA5D421004B02FC /* PageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageManager.swift; sourceTree = "<group>"; };
+		721A64D42CBCBE2900727C9E /* myBookPal.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = myBookPal.storekit; sourceTree = "<group>"; };
 		722662912C894ED70071162D /* CrimsonText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Regular.ttf"; sourceTree = "<group>"; };
 		722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-SemiBold.ttf"; sourceTree = "<group>"; };
 		722662982C8957C40071162D /* CrimsonText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Bold.ttf"; sourceTree = "<group>"; };
@@ -136,7 +137,6 @@
 		722662E52C92A11A0071162D /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
 		722662E82C9360660071162D /* FetchBookInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchBookInfoViewModel.swift; sourceTree = "<group>"; };
 		722F8F5C2CB8AF5200E4583E /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
-		722F8F5E2CB9747A00E4583E /* myBookPal.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; name = myBookPal.storekit; path = /Users/elyangutierrez/Documents/Projects/myBookPal.storekit; sourceTree = "<absolute>"; };
 		722F8F602CB97F7A00E4583E /* StoreKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreKitManager.swift; sourceTree = "<group>"; };
 		724070D42BEC6AAF00E1E07C /* myBookPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = myBookPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		724070D72BEC6AAF00E1E07C /* myBookPalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = myBookPalApp.swift; sourceTree = "<group>"; };
@@ -530,9 +530,9 @@
 		727B4F032CB9BED200C34B02 /* Store */ = {
 			isa = PBXGroup;
 			children = (
-				722F8F5E2CB9747A00E4583E /* myBookPal.storekit */,
 				722F8F602CB97F7A00E4583E /* StoreKitManager.swift */,
 				727B4F042CB9BF6600C34B02 /* StoreConstants.swift */,
+				721A64D42CBCBE2900727C9E /* myBookPal.storekit */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -724,7 +724,7 @@
 			files = (
 				722662AA2C8E87370071162D /* DMSans_18pt-Regular.ttf in Resources */,
 				722662962C8956EA0071162D /* CrimsonText-SemiBold.ttf in Resources */,
-				722F8F5F2CB9747A00E4583E /* myBookPal.storekit in Resources */,
+				721A64D52CBCBE2900727C9E /* myBookPal.storekit in Resources */,
 				724070DF2BEC6AAF00E1E07C /* Preview Assets.xcassets in Resources */,
 				722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */,
 				724070DC2BEC6AAF00E1E07C /* Assets.xcassets in Resources */,
