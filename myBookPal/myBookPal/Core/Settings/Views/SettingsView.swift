@@ -19,6 +19,11 @@ struct SettingsView: View {
     @State private var activateNotificationsBool = false
     @State var notificationsModel = NotificationsModel()
     @State private var notificationsText = ""
+    @State private var booksSuccessfullyDeleted = false
+    @State private var booksDeletedTitle = ""
+    @State private var booksDeletedMessage = ""
+    @State private var emptyBooksAlert = false
+    @State private var hapticsManager = HapticsManager()
     
     var books: [Book]
 
@@ -71,6 +76,24 @@ struct SettingsView: View {
                       secondaryButton: .cancel())
                 
             }
+            .alert(booksDeletedTitle, isPresented: $booksSuccessfullyDeleted) {
+                Button("Ok", role: .cancel, action: {
+                    if booksDeletedTitle == "Books Successfully Deleted" {
+                        hapticsManager.playRemovedAllBooks()
+                    } else {
+                        hapticsManager.playFailedToDeleteAllBooks()
+                    }
+                })
+            } message: {
+                Text(booksDeletedMessage)
+            }
+            .alert("No Books Avaliable", isPresented: $emptyBooksAlert) {
+                Button("Ok", role: .cancel, action: {
+                    hapticsManager.playFailedToDeleteAllBooks()
+                })
+            } message: {
+                Text("There are no books to delete.")
+            }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("Settings")
@@ -86,10 +109,22 @@ struct SettingsView: View {
     }
     
     func deleteBooks(context: ModelContext) {
-        do {
-            try modelContext.delete(model: Book.self)
-        } catch {
-            print("Error: \(error.localizedDescription)")
+        
+        if books.isEmpty {
+            emptyBooksAlert.toggle()
+        } else {
+            
+            do {
+                try modelContext.delete(model: Book.self)
+                booksSuccessfullyDeleted.toggle()
+                booksDeletedTitle = "Books Successfully Deleted"
+                booksDeletedMessage = "Your books were successfully deleted."
+            } catch {
+                booksSuccessfullyDeleted.toggle()
+                booksDeletedTitle = "Books Failed to Delete"
+                booksDeletedMessage = "Your books failed to delete. Please try again."
+                print("Error: \(error.localizedDescription)")
+            }
         }
     }
     
