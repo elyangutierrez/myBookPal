@@ -35,7 +35,9 @@ struct AddView: View {
             GeometryReader { geometry in
                 ScrollView(showsIndicators: true) {
                     ZStack {
-                        BackgroundBookCoverView(bookImage: book.imageLinks?.secureThumbnailURL ?? "",
+//                        let placeholder = book.imageLinks?.secureThumbnailURL ?? ""
+//                        let properImageQualityCover = placeholder.replacingOccurrences(of: "zoom=1", with: "zoom=10")
+                        BackgroundBookCoverView(bookImage: book.imageLinks?.increaseQuality ?? "",
                                                 width: geometry.size.width,
                                                 height: 475)
                             .blur(radius: 20, opaque: true)
@@ -49,7 +51,7 @@ struct AddView: View {
                             .frame(width: 200, height: 255)
                             .padding(.vertical, 60)
                             .overlay {
-                                BookCoverView(bookImage: book.imageLinks?.secureThumbnailURL ?? "")
+                                BookCoverView(bookImage: book.imageLinks?.increaseQuality ?? "")
                             }
                     }
                     
@@ -80,11 +82,8 @@ struct AddView: View {
                                     .resizable()
                                     .frame(width: 20, height: 25)
                             } else {
-                                Text(book.getPageCount)
+                                Text(book.getPageCount + " pages")
                                     .font(.subheadline)
-                                Image(systemName: "book.pages")
-                                    .resizable()
-                                    .frame(width: 20, height: 20)
                             }
                         }
                         .padding(.horizontal)
@@ -235,7 +234,8 @@ struct AddView: View {
     }
     
     func addBookToCollection() {
-        let newBook = Book(coverImage: book.imageLinks?.secureThumbnailURL ?? "", title: book.title, author: book.getAuthor, catagory: book.getCatagory, pages: book.getPageCount)
+        print("Cover image: \(book.imageLinks?.secureThumbnailURL ?? "")")
+        let newBook = Book(coverImage: book.imageLinks?.increaseQuality ?? "", title: book.title, author: book.getAuthor, catagory: book.getCatagory, pages: book.getPageCount)
         
         if books.contains(newBook) {
             bookIsInCollection.toggle()

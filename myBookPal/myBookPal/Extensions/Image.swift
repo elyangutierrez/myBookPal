@@ -13,8 +13,8 @@ extension Image {
         self
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .clipShape(RoundedRectangle(cornerRadius: 10.0))
             .frame(width: 180, height: 210)
+            .clipShape(RoundedRectangle(cornerRadius: 10.0))
             .shadow(color: .black.opacity(0.30), radius: 5)
     }
     
@@ -36,7 +36,6 @@ extension Image {
     
     func BookCoverImage() -> some View {
         self
-            .interpolation(.none)
             .resizable()
             .frame(width: 200, height: 310)
             .clipShape(RoundedRectangle(cornerRadius: 20.0))

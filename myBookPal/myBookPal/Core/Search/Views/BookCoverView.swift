@@ -12,11 +12,10 @@ struct BookCoverView: View {
     let bookImage: String
     
     var body: some View {
-        AsyncImage(url: URL(string: bookImage), scale: scale) { phase in
+        AsyncImage(url: URL(string: bookImage)) { phase in
             switch phase {
             case .success(let image):
                 image
-                    .interpolation(.none)
                     .resizable()
                     .frame(width: 200, height: 310)
                     .clipShape(RoundedRectangle(cornerRadius: 20.0))
@@ -46,5 +45,7 @@ struct BookCoverView: View {
 }
 
 #Preview {
-    BookCoverView(bookImage: "https://books.google.com/books/content?id=UAhAEAAAQBAJ&printsec=frontcover&img=1&zoom=1l&source=gbs_api")
+    BookCoverView(bookImage: "https://books.google.com/books/content?id=UAhAEAAAQBAJ&printsec=frontcover&img=1&zoom=10&source=gbs_api")
+//
+//    BookCoverView(bookImage: "https://books.google.com/books/content?id=25BTEAAAQBAJ&printsec=frontcover&img=1&zoom=10&source=gbs_api")
 }
