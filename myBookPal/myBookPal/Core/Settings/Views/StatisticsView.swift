@@ -61,9 +61,11 @@ struct StatisticsView: View {
 //                            Spacer()
 //                                .frame(height: 120)
                             
-                            Text("No Statistics Avaliable...")
-                                .foregroundStyle(.gray)
-                                .font(.headline)
+                            ContentUnavailableView() {
+                                Label("No Statistics Avaliable", systemImage: "book.closed.fill")
+                            } description: {
+                                Text("Statistics are avaliable when one book is in progress.")
+                            }
                         }
                     } else {
                         

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		720A001A2C9E768D00BD9A45 /* HelpAndSupportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00192C9E768D00BD9A45 /* HelpAndSupportView.swift */; };
 		720A001C2C9F775700BD9A45 /* MailComposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A001B2C9F775700BD9A45 /* MailComposer.swift */; };
 		720A001E2C9FB21700BD9A45 /* QuickNote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A001D2C9FB21700BD9A45 /* QuickNote.swift */; };
 		720A00202C9FB9FE00BD9A45 /* AddQuickNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A001F2C9FB9FE00BD9A45 /* AddQuickNoteView.swift */; };
@@ -107,7 +106,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		720A00192C9E768D00BD9A45 /* HelpAndSupportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpAndSupportView.swift; sourceTree = "<group>"; };
 		720A001B2C9F775700BD9A45 /* MailComposer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MailComposer.swift; sourceTree = "<group>"; };
 		720A001D2C9FB21700BD9A45 /* QuickNote.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickNote.swift; sourceTree = "<group>"; };
 		720A001F2C9FB9FE00BD9A45 /* AddQuickNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddQuickNoteView.swift; sourceTree = "<group>"; };
@@ -368,7 +366,6 @@
 			children = (
 				7266C6892BF45B6200022057 /* ContentView.swift */,
 				72AC479F2CAB4CCD007E72DE /* ManualFormView.swift */,
-				727B4F012CB9BE2200C34B02 /* TipSheetView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -465,12 +462,12 @@
 		7248FF472C9C953D00722F23 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				727B4F012CB9BE2200C34B02 /* TipSheetView.swift */,
 				72DAA9402C9CEE15001DAD75 /* StatisticsView.swift */,
 				724070F32BED7A6000E1E07C /* SettingsView.swift */,
 				722662CD2C9250EC0071162D /* DonutChartView.swift */,
 				7249626B2C2E380600F6411B /* SettingsRectangleLineView.swift */,
 				72DAA9422C9CEE1B001DAD75 /* NotificationsView.swift */,
-				720A00192C9E768D00BD9A45 /* HelpAndSupportView.swift */,
 				727B4F0C2CBC769700C34B02 /* GeneralSettingsView.swift */,
 				727B4F0E2CBC7C2B00C34B02 /* FeatureRequestView.swift */,
 			);
@@ -776,7 +773,6 @@
 				72BBD3502BF2A64C006BC431 /* Log.swift in Sources */,
 				720A00302CA1017900BD9A45 /* AddGoalView.swift in Sources */,
 				72C4CD3C2C9A7EF800730327 /* DateTracker.swift in Sources */,
-				720A001A2C9E768D00BD9A45 /* HelpAndSupportView.swift in Sources */,
 				72A8893E2C3A23520032A56C /* BackgroundBookCoverView.swift in Sources */,
 				722662A42C8CAB4A0071162D /* StarRating.swift in Sources */,
 				72AC47A72CAB73F3007E72DE /* CameraPickerView.swift in Sources */,

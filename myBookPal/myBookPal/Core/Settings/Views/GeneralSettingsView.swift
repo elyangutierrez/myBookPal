@@ -25,13 +25,24 @@ struct GeneralSettingsView: View {
     @State private var confettiCounter = 0
     @State private var showThankYouView = false
     @State private var hapticManager = HapticsManager()
+    @State private var showMailComposer = false
     
     let items = [Item(imageName: "gearshape", color: ".gray", title: "General"),
-                 Item(imageName: "chart.bar.xaxis", color: ".green", title: "Statistics"),
-                 Item(imageName: "questionmark", color: ".red", title: "Help"),
-                 Item(imageName: "text.document", color: ".blue", title: "Request a Feature")]
+                 Item(imageName: "chart.bar.xaxis", color: ".blue", title: "Statistics")]
     
     var books: [Book]
+    
+    var getDate: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM dd, yyyy"
+        return dateFormatter.string(from: Date.now)
+    }
+    
+    var getTime: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .medium
+        return dateFormatter.string(from: Date.now)
+    }
     
     var body: some View {
         NavigationStack {
@@ -59,12 +70,37 @@ struct GeneralSettingsView: View {
                 }
                 
                 Section {
+                    
+                    Button(action: {
+                        if MailComposer.isAvaliable() {
+                            showMailComposer.toggle()
+                        }
+                    }) {
+                        HStack {
+                            RoundedRectangle(cornerRadius: 5.0)
+                                .fill(.red)
+                                .frame(width: 30, height: 30)
+                                .overlay {
+                                    Image(systemName: "questionmark")
+                                        .foregroundStyle(.white)
+                                }
+                            
+                            Spacer()
+                                .frame(width: 15)
+                            
+                            Text("Help")
+                                .foregroundStyle(.black)
+                        }
+                    }
+                    
+                    
+                    
                     Button(action: {
                         activateTipSheet.toggle()
                     }) {
                         HStack {
                             RoundedRectangle(cornerRadius: 5.0)
-                                .fill(.green.opacity(0.50))
+                                .fill(.green )
                                 .frame(width: 30, height: 30)
                                 .overlay {
                                     Image(systemName: "dollarsign")
@@ -91,13 +127,15 @@ struct GeneralSettingsView: View {
             }
             .onChange(of: tipPurchased) {
                 if tipPurchased {
-                    withAnimation(.bouncy) {
-                        showThankYouView.toggle()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        withAnimation(.spring) {
+                            showThankYouView.toggle()
+                        }
                     }
                 }
             }
             .overlay {
-                if showThankYouView {
+                if showThankYouView && !activateTipSheet {
                     VStack {
                         RoundedRectangle(cornerRadius: 15.0)
                             .stroke(.gray.opacity(0.20), lineWidth: 1.5)
@@ -128,12 +166,12 @@ struct GeneralSettingsView: View {
                                 .frame(maxWidth: .infinity, alignment: .center)
                             }
                             .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
                                     confettiCounter = 1
                                     hapticManager.playDonated()
                                 }
                                 
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 4.8) {
                                     withAnimation(.smooth(duration: 0.2)) {
                                         showThankYouView.toggle()
                                         tipPurchased.toggle()
@@ -149,6 +187,9 @@ struct GeneralSettingsView: View {
             .sheet(isPresented: $activateTipSheet) {
                 TipSheetView(isPresented: $activateTipSheet, tipPurchased: $tipPurchased)
                     .presentationDragIndicator(.visible)
+            }
+            .sheet(isPresented: $showMailComposer) {
+                MailComposer(dateCreated: getDate, timeCreated: getTime)
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {
@@ -184,9 +225,7 @@ struct GeneralSettingsView: View {
             case "Statistics":
                 StatisticsView(books: books) // Replace with your actual Statistics view, passing data if needed
             case "Help":
-                HelpAndSupportView() // Replace with your actual Support/Help view
-            case "Request a Feature":
-                FeatureRequestView() // Replace with your actual Feature Request view
+                MailComposer(dateCreated: getDate, timeCreated: getTime)
             default:
                 Text("Coming Soon") // Placeholder for unhandled cases
             }

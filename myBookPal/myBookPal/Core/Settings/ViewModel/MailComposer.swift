@@ -10,8 +10,7 @@ import SwiftUI
 import MessageUI
 
 struct MailComposer: UIViewControllerRepresentable {
-    var category: String
-    var description: String
+    let device = UIDevice.current
     var dateCreated: String
     var timeCreated: String
     
@@ -42,8 +41,8 @@ struct MailComposer: UIViewControllerRepresentable {
         let vc = MFMailComposeViewController()
         vc.mailComposeDelegate = context.coordinator
         vc.setToRecipients(["mybookpalhelp@gmail.com"])
-        vc.setSubject("Support Request: \(category)")
-        vc.setMessageBody("Ticket created at: \(dateCreated) \(timeCreated)\n\nCategory: \(category)\n\nDescription:\n\(description)", isHTML: false)
+        vc.setSubject("Support Ticket")
+        vc.setMessageBody("Ticket created at: \(dateCreated) \(timeCreated)\n\n\n\niPhone Model: \(device.localizedModel)\nSystem Version: \(device.systemVersion)", isHTML: false)
         return vc
     }
     
