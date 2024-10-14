@@ -36,7 +36,6 @@ struct AddGoalView: View {
     var body: some View {
         NavigationStack {
             Form {
-                
                 Section {
                     TextField("Enter description", text: $goalDescription)
                 } header: {
@@ -76,22 +75,14 @@ struct AddGoalView: View {
                     .accessibilityLabel("Select a priority such as High, Medium, or Low")
                 }
                 
-                RoundedRectangle(cornerRadius: 15.0)
-                    .fill(.white)
-                    .frame(width: 375, height: 30)
-                    .overlay {
-                        VStack {
-                            Text("Add Goal")
-                                .padding(.horizontal)
-                                .accessibilityLabel("Add your goal")
-                        }
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.horizontal, 20)
-                    }
-                    .onTapGesture {
-                        showAddGoalAlert.toggle()
-                    }
-                    .disabled(goalDescription == "" || dueDateSelection == Date.now)
+                Button(action: {
+                    showAddGoalAlert.toggle()
+                }) {
+                    Text("Add Goal")
+                        .accessibilityLabel("Add Goal")
+                }
+                .disabled(goalDescription == "" || dueDateSelection == Date.now)
+                .accessibilityAddTraits(.isButton)
             }
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
