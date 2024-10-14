@@ -35,28 +35,16 @@ struct TabsView: View {
                         print("TAB DEBUG: \(books)")
                     }
                 
-//                SearchView(collectionBooks: books)
-//                    .tabItem {
-//                        Image(systemName: "magnifyingglass")
-//                        Text("Search")
-//                    }
-//                    .onAppear {
-//                        print("TAB DEBUG: \(books)")
-//                    }
-                
                 CurrentGoalsView(modelContext: modelContext)
                     .tabItem {
                         Image(systemName: "target")
                         Text("Goals")
                     }
                 
-                ProfileView(books: books)
+                GeneralSettingsView(books: books)
                     .tabItem {
-                        Image(systemName: "person")
-                        Text("Profile")
-                    }
-                    .onAppear {
-                        print("TAB DEBUG: \(books)")
+                        Image(systemName: "gear")
+                        Text("Settings")
                     }
             }
             .toolbarBackground(.visible, for: .tabBar)

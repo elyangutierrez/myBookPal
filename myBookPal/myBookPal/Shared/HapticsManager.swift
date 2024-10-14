@@ -38,4 +38,8 @@ class HapticsManager {
     @MainActor func playDeleteBookLog() {
         haptics.play(.medium)
     }
+    
+    @MainActor func playDonated() {
+        haptics.play(.heavy)
+    }
 }

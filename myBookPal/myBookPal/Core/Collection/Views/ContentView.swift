@@ -382,7 +382,6 @@ struct ContentView: View {
                 }
             }
             .overlay {
-                
                 if showThankYouView {
                     VStack {
                         RoundedRectangle(cornerRadius: 15.0)
@@ -496,20 +495,6 @@ struct ContentView: View {
                         .font(Font.custom("CrimsonText-SemiBold", size: 20))
                         .foregroundStyle(.accent)
                 }
-                
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        // TODO: incorporate later!
-//                        activateTipSheet.toggle()
-                        let _ = print("Tapped tip jar")
-                    }) {
-                        Image("jarImage")
-                            .resizable()
-                            .scaledToFit()
-                            .fontWeight(.heavy)
-                            .frame(width: 26, height: 30)
-                    }
-                }
             }
             .navigationDestination(item: $addViewBook) { book in
                 AddView(showingSheet: $isShowingOnlineSheet, bookItem: $addViewBook, book: book, books: books)
@@ -561,25 +546,6 @@ struct ContentView: View {
             }
             .sheet(isPresented: $showManualFormSheet) {
                 ManualFormView(collectionBooks: books)
-            }
-            .sheet(isPresented: $activateTipSheet) {
-                TipSheetView(isPresented: $activateTipSheet, tipPurchased: $tipPurchased)
-                    .presentationDragIndicator(.visible)
-            }
-            .onChange(of: confettiCounter) {
-                if confettiCounter > 0 {
-                    DispatchQueue.main.asyncAfter(deadline: .now()) {
-                        confettiCounter = 0
-                        let _ = print("Setting confetti counter to 0")
-                    }
-                }
-            }
-            .onChange(of: tipPurchased) {
-                if tipPurchased {
-                    withAnimation(.bouncy) {
-                        showThankYouView.toggle()
-                    }
-                }
             }
             .onChange(of: books) {
                 if books.isEmpty {
