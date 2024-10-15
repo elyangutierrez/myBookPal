@@ -37,6 +37,9 @@ struct ContentView: View {
     @State private var hapticsManager = HapticsManager()
     @State private var isShowingOnlineSheet = false
     @State private var showBookAddingVO = false
+    @State private var isBookAdded = false
+    @State private var bookFailedToAdd = false
+    @State private var bookFeedback = ""
     
     var books: [Book]
     
@@ -287,10 +290,6 @@ struct ContentView: View {
                                     NavigationLink(destination: LogView(book: book)) {
                                         VStack {
                                             if isEditing {
-                                                
-                                                //                                                Spacer()
-                                                //                                                    .frame(height: 10)
-                                                
                                                 let imageString = book.coverImage
                                                 
                                                 Menu {
@@ -377,6 +376,90 @@ struct ContentView: View {
                     }
                 }
                 .overlay {
+                    if isBookAdded {
+                        VStack {
+                            RoundedRectangle(cornerRadius: 5.0)
+                                .stroke(.gray.opacity(0.30), lineWidth: 1)
+                                .fill(.regularMaterial)
+                                .frame(width: 170, height: 100)
+                                .shadow(radius: 5)
+                                .onAppear {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                        withAnimation(.easeOut(duration: 0.2)) {
+                                            isBookAdded = false
+                                        }
+                                    }
+                                }
+                                .overlay {
+                                    let library = Library(books: Array(books))
+                                    let mostRecent = library.getMostRecentBook
+                                    let imageString = mostRecent?.coverImage ?? "N/A"
+                                        
+                                    HStack {
+                                        if imageString.contains("https") {
+                                            AsyncImage(url: URL(string: imageString)) { image in
+                                                image
+                                                    .image?.resizable()
+                                                    .frame(width: 50, height: 70)
+                                            }
+                                        } else {
+                                            let image = imageString.toImage()
+                                            
+                                            image?
+                                                .resizable()
+                                                .frame(width: 50, height: 70)
+                                        }
+                                        
+                                        VStack {
+                                            Image(systemName: "book.closed.circle")
+                                                .resizable()
+                                                .frame(width: 25, height: 25)
+                                            
+                                            Text("Book Added")
+                                                .font(.subheadline)
+                                        }
+                                    }
+                                }
+                        }
+                        .frame(maxHeight: .infinity, alignment: .bottom)
+                        .offset(y: -45)
+                    }
+                    
+                    if bookFailedToAdd {
+                        VStack {
+                            RoundedRectangle(cornerRadius: 5.0)
+                                .stroke(.gray.opacity(0.30), lineWidth: 1)
+                                .fill(.regularMaterial)
+                                .frame(width: 175, height: 100)
+                                .shadow(radius: 5)
+                                .onAppear {
+                                    DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                                        withAnimation(.easeOut(duration: 0.2)) {
+                                            bookFailedToAdd = false
+                                        }
+                                    }
+                                }
+                                .overlay {
+                                    HStack {
+                                        Image(systemName: "book.closed")
+                                            .resizable()
+                                            .frame(width: 37, height: 60)
+                                        
+                                        VStack {
+                                            Image(systemName: "xmark")
+                                                .resizable()
+                                                .frame(width: 20, height: 20)
+                                            
+                                            Text("Book Failed To Add")
+                                                .font(.footnote)
+                                        }
+                                    }
+                                }
+                        }
+                        .frame(maxHeight: .infinity, alignment: .bottom)
+                        .offset(y: -45)
+                    }
+
                     VStack {
                         VStack {
                             Menu {
@@ -446,7 +529,7 @@ struct ContentView: View {
                 }
             }
             .navigationDestination(item: $addViewBook) { book in
-                AddView(showingSheet: $isShowingOnlineSheet, bookItem: $addViewBook, book: book, books: books)
+                AddView(showingSheet: $isShowingOnlineSheet, bookItem: $addViewBook, bookAdded: $isBookAdded, bookFailedToAdd: $bookFailedToAdd, book: book, books: books)
             }
             .fullScreenCover(isPresented: $isShowingScanner) {
                 NavigationStack {
@@ -491,7 +574,7 @@ struct ContentView: View {
                 }
             }
             .fullScreenCover(isPresented: $isShowingOnlineSheet) {
-                SearchView(isShowingSheet: $isShowingOnlineSheet, collectionBooks: books)
+                SearchView(isShowingSheet: $isShowingOnlineSheet, bookAdded: $isBookAdded, bookFailedToAdd: $bookFailedToAdd, collectionBooks: books)
             }
             .sheet(isPresented: $showManualFormSheet) {
                 ManualFormView(collectionBooks: books)
@@ -514,6 +597,24 @@ struct ContentView: View {
                     }
                 }
             }
+//            .onChange(of: isBookAdded) {
+//                if isBookAdded {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                        withAnimation(.easeOut(duration: 0.3)) {
+//                            isBookAdded = false
+//                        }
+//                    }
+//                }
+//            }
+//            .onChange(of: bookFailedToAdd) {
+//                if bookFailedToAdd {
+//                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+//                        withAnimation(.easeOut(duration: 0.3)) {
+//                            bookFailedToAdd = false
+//                        }
+//                    }
+//                }
+//            }
             .onAppear {
                 print("DEBUG: \(books)")
                 isEditing = false
