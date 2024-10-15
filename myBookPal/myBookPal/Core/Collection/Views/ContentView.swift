@@ -80,14 +80,13 @@ struct ContentView: View {
                                     WebImage(url: URL(string: imageString)) { image in
                                         image
                                             .image?.resizable()
-                                            .frame(width: 50, height: 80)
+                                            .frame(width: 47, height: 80)
                                             .clipShape(RoundedRectangle(cornerRadius: 2.0))
-//                                            .shadow(color: .black.opacity(0.30), radius: 5)
                                             .overlay {
                                                 RoundedRectangle(cornerRadius: 2.0)
                                                     .stroke(Color.black.opacity(0.20), lineWidth: 1)
                                                     .fill(.clear)
-                                                    .frame(width: 50, height: 80)
+                                                    .frame(width: 47, height: 80)
                                             }
                                     }
                                 } else {
@@ -95,14 +94,13 @@ struct ContentView: View {
                                     
                                     image?
                                         .resizable()
-                                        .frame(width: 50, height: 80)
+                                        .frame(width: 47, height: 80)
                                         .clipShape(RoundedRectangle(cornerRadius: 10.0))
-//                                        .shadow(color: .black.opacity(0.30), radius: 5)
                                         .overlay {
                                             RoundedRectangle(cornerRadius: 2.0)
                                                 .stroke(Color.black.opacity(0.20), lineWidth: 1)
                                                 .fill(.clear)
-                                                .frame(width: 50, height: 80)
+                                                .frame(width: 47, height: 80)
                                         }
                                 }
                                 
@@ -121,8 +119,27 @@ struct ContentView: View {
                                         .font(.caption)
                                     
                                     VStack {
-                                        StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
-                                            .font(.subheadline)
+                                        HStack {
+                                            VStack {
+                                                StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
+                                                    .font(.subheadline)
+                                            }
+                                            .frame(maxWidth: .infinity, alignment: .leading)
+                                            
+                                            VStack {
+                                                Text("\(mostRecent?.getLogCount ?? 0 > 0 ? "\(mostRecent?.getLogCount ?? 0)" : "0")")
+                                                    .font(.caption)
+                                                    .fontWeight(.bold)
+                                                    .foregroundStyle(.white)
+                                                    .background {
+                                                        RoundedRectangle(cornerRadius: 5.0)
+                                                            .fill(.complement)
+                                                            .padding(.horizontal, -10)
+                                                            .padding(.vertical, -3)
+                                                    }
+                                            }
+                                            .frame(maxWidth: .infinity, alignment: .trailing)
+                                        }
                                     }
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .offset(x: 2, y: 10)
@@ -137,7 +154,7 @@ struct ContentView: View {
                                 
                             }) {
                                 let formatted = String(format: "%.1f", (mostRecent?.completionStatus ?? 0) * 100)
-                                Text("\(formatted == "0.0" ? "0" : formatted)%")
+                                Label("\(formatted == "0.0" ? "0" : formatted)%", systemImage: mostRecent?.completionStatus ?? 0 == 1 ? "checkmark.circle" : "progress.indicator")
                             }
                             .tint(mostRecent?.completionStatus ?? 0 == 1 ? Color.green : Color.blue)
                         }
@@ -192,14 +209,13 @@ struct ContentView: View {
                                         WebImage(url: URL(string: imageString)) { image in
                                             image
                                                 .image?.resizable()
-                                                .frame(width: 50, height: 80)
+                                                .frame(width: 47, height: 80)
                                                 .clipShape(RoundedRectangle(cornerRadius: 2.0))
-//                                                .shadow(color: .black.opacity(0.30), radius: 5)
                                                 .overlay {
                                                     RoundedRectangle(cornerRadius: 2.0)
                                                         .stroke(Color.black.opacity(0.20), lineWidth: 1)
                                                         .fill(.clear)
-                                                        .frame(width: 50, height: 80)
+                                                        .frame(width: 45, height: 80)
                                                 }
                                         }
                                     } else {
@@ -207,14 +223,13 @@ struct ContentView: View {
                                         
                                         image?
                                             .resizable()
-                                            .frame(width: 140, height: 210)
+                                            .frame(width: 47, height: 80)
                                             .clipShape(RoundedRectangle(cornerRadius: 10.0))
-//                                            .shadow(color: .black.opacity(0.30), radius: 5)
                                             .overlay {
                                                 RoundedRectangle(cornerRadius: 2.0)
                                                     .stroke(Color.black.opacity(0.20), lineWidth: 1)
                                                     .fill(.clear)
-                                                    .frame(width: 50, height: 80)
+                                                    .frame(width: 47, height: 80)
                                             }
                                     }
                                     
@@ -235,8 +250,27 @@ struct ContentView: View {
                                             .font(.caption)
                                         
                                         VStack {
-                                            StarRatingView(rating: book.starRatingSystem?.rating ?? 0.0)
-                                                .font(.subheadline)
+                                            HStack {
+                                                VStack {
+                                                    StarRatingView(rating: book.starRatingSystem?.rating ?? 0.0)
+                                                        .font(.subheadline)
+                                                }
+                                                .frame(maxWidth: .infinity, alignment: .leading)
+                                                
+                                                VStack {
+                                                    Text("\(book.getLogCount ?? 0 > 0 ? "\(book.getLogCount ?? 0)" : "0")")
+                                                        .font(.caption)
+                                                        .fontWeight(.bold)
+                                                        .foregroundStyle(.white)
+                                                        .background {
+                                                            RoundedRectangle(cornerRadius: 5.0)
+                                                                .fill(.complement)
+                                                                .padding(.horizontal, -10)
+                                                                .padding(.vertical, -3)
+                                                        }
+                                                }
+                                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                            }
                                         }
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .offset(x: 2, y: 10)
@@ -245,13 +279,12 @@ struct ContentView: View {
                                     .offset(y: 3)
                                 }
                             }
-                            .listRowSeparator(.hidden)
                             .swipeActions(edge: .leading) {
                                 Button(action: {
                                     
                                 }) {
-                                    let formatted = String(format: "%.1f", (book.completionStatus) * 100)
-                                    Text("\(formatted == "0.0" ? "0" : formatted)%")
+                                    let formatted = String(format: "%.0f", (book.completionStatus) * 100)
+                                    Label("\(formatted == "0.0" ? "0" : formatted)%", systemImage: book.completionStatus == 1 ? "checkmark.circle" : "progress.indicator")
                                 }
                                 .tint(book.completionStatus == 1 ? Color.green : Color.blue)
                             }
