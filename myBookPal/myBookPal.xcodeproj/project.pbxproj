@@ -20,6 +20,7 @@
 		720A00362CA2581000BD9A45 /* DateManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720A00352CA2581000BD9A45 /* DateManager.swift */; };
 		720B446D2CA5D421004B02FC /* PageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 720B446C2CA5D421004B02FC /* PageManager.swift */; };
 		721A64D52CBCBE2900727C9E /* myBookPal.storekit in Resources */ = {isa = PBXBuildFile; fileRef = 721A64D42CBCBE2900727C9E /* myBookPal.storekit */; };
+		721A64D82CBE175700727C9E /* SwipeActions in Frameworks */ = {isa = PBXBuildFile; productRef = 721A64D72CBE175700727C9E /* SwipeActions */; };
 		722662962C8956EA0071162D /* CrimsonText-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */; };
 		722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662912C894ED70071162D /* CrimsonText-Regular.ttf */; };
 		722662992C8957C40071162D /* CrimsonText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662982C8957C40071162D /* CrimsonText-Bold.ttf */; };
@@ -194,6 +195,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				727B4F082CBA235600C34B02 /* ConfettiSwiftUI in Frameworks */,
+				721A64D82CBE175700727C9E /* SwipeActions in Frameworks */,
 				7226629C2C895AF50071162D /* SDWebImageSwiftUI in Frameworks */,
 				725D05612BFBA841001557A4 /* SlidingTabView in Frameworks */,
 				72AC47902CA8ECCB007E72DE /* CodeScanner in Frameworks */,
@@ -673,6 +675,7 @@
 				7226629B2C895AF50071162D /* SDWebImageSwiftUI */,
 				72AC478F2CA8ECCB007E72DE /* CodeScanner */,
 				727B4F072CBA235600C34B02 /* ConfettiSwiftUI */,
+				721A64D72CBE175700727C9E /* SwipeActions */,
 			);
 			productName = myBookPal;
 			productReference = 724070D42BEC6AAF00E1E07C /* myBookPal.app */;
@@ -707,6 +710,7 @@
 				7226629A2C895AF50071162D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 				72AC478E2CA8ECCB007E72DE /* XCRemoteSwiftPackageReference "CodeScanner" */,
 				727B4F062CBA235600C34B02 /* XCRemoteSwiftPackageReference "ConfettiSwiftUI" */,
+				721A64D62CBE175700727C9E /* XCRemoteSwiftPackageReference "SwipeActions" */,
 			);
 			productRefGroup = 724070D52BEC6AAF00E1E07C /* Products */;
 			projectDirPath = "";
@@ -1031,6 +1035,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		721A64D62CBE175700727C9E /* XCRemoteSwiftPackageReference "SwipeActions" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/c-villain/SwipeActions.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
 		7226629A2C895AF50071162D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
@@ -1066,6 +1078,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		721A64D72CBE175700727C9E /* SwipeActions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 721A64D62CBE175700727C9E /* XCRemoteSwiftPackageReference "SwipeActions" */;
+			productName = SwipeActions;
+		};
 		7226629B2C895AF50071162D /* SDWebImageSwiftUI */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7226629A2C895AF50071162D /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
