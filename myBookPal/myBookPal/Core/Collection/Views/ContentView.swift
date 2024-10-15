@@ -17,6 +17,7 @@ import StoreKit
 struct ContentView: View {
     @Environment(\.modelContext) var modelContext
     @Environment(NetworkMonitor.self) private var networkMonitor
+    @Environment(\.defaultMinListRowHeight) var minRowHeight
     
     @State private var searchText = ""
     @State private var selectedView = 0
@@ -41,6 +42,7 @@ struct ContentView: View {
     @State private var isBookAdded = false
     @State private var bookFailedToAdd = false
     @State private var bookFeedback = ""
+    @State private var showCollectionInfo = false
     
     var books: [Book]
     
@@ -56,94 +58,239 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                
-                // Recently Added Section here...
-                
-                ForEach(1..<6) { index in
-                    Text("\(index)")
-                }
-                
-                VStack {
-                    Text("Collection")
-                        .font(.title2.bold())
-                        .fontDesign(.serif)
-                    
-                }
-                .listRowSeparator(.hidden, edges: .all)
-                
-//                Rectangle()
-//                    .fill(.gray.opacity(0.2))
-//                    .frame(maxWidth: .infinity, maxHeight: 1, alignment: .center)
-//                    .listRowSeparator(.hidden, edges: .all)
-                
-                ForEach(searchResults) { book in
-                    VStack(alignment: .leading) {
-                        HStack {
-                            let imageString = book.coverImage
-                            
-                            if imageString.contains("https") {
-                                WebImage(url: URL(string: imageString)) { image in
-                                    image
-                                        .image?.resizable()
+            GeometryReader { geometry in
+                List {
+                    if !books.isEmpty {
+                        let library = Library(books: Array(books))
+                        let mostRecent = library.getMostRecentBook
+                        
+                        VStack {
+                            Text("Recently Added")
+                                .font(.title2.bold())
+                                .fontDesign(.serif)
+                        }
+                        .listRowSeparator(.hidden, edges: .all)
+                        
+                        VStack(alignment: .leading) {
+                            HStack {
+                                let imageString = mostRecent?.coverImage ?? "N/A"
+                                
+                                if imageString.contains("https") {
+                                    
+                                    WebImage(url: URL(string: imageString)) { image in
+                                        image
+                                            .image?.resizable()
+                                            .frame(width: 50, height: 80)
+                                            .clipShape(RoundedRectangle(cornerRadius: 2.0))
+//                                            .shadow(color: .black.opacity(0.30), radius: 5)
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 2.0)
+                                                    .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                    .fill(.clear)
+                                                    .frame(width: 50, height: 80)
+                                            }
+                                    }
+                                } else {
+                                    let image = imageString.toImage()
+                                    
+                                    image?
+                                        .resizable()
                                         .frame(width: 50, height: 80)
-                                        .clipShape(RoundedRectangle(cornerRadius: 2.0))
-                                        .shadow(color: .black.opacity(0.30), radius: 5)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
+//                                        .shadow(color: .black.opacity(0.30), radius: 5)
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 2.0)
+                                                .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                .fill(.clear)
+                                                .frame(width: 50, height: 80)
+                                        }
                                 }
-                            } else {
-                                let image = imageString.toImage()
                                 
-                                image?
-                                    .resizable()
-                                    .frame(width: 140, height: 210)
-                                    .clipShape(RoundedRectangle(cornerRadius: 10.0))
-                                    .shadow(color: .black.opacity(0.30), radius: 5)
-                            }
-                            
-                            Spacer()
-                            
-                            VStack(alignment: .leading) {
-                                
-                                Text(book.title)
-                                    .font(.subheadline)
-                                    .fontWeight(.bold)
-                                    .lineLimit(1)
-                                
-                                Text(book.author)
-                                    .font(.footnote)
-                                    .lineLimit(1)
-                                
-                                Text("\(book.pages) pages")
-                                    .font(.footnote)
-                                
-                                VStack {
-                                    StarRatingView(rating: book.starRatingSystem?.rating ?? 0.0)
+                                VStack(alignment: .leading) {
+                                    
+                                    Text(mostRecent?.title ?? "N/A")
                                         .font(.subheadline)
+                                        .fontWeight(.bold)
+                                        .lineLimit(1)
+                                    
+                                    Text(mostRecent?.author ?? "N/A")
+                                        .font(.caption)
+                                        .lineLimit(1)
+                                    
+                                    Text("\(mostRecent?.pages ?? "N/A") pages")
+                                        .font(.caption)
+                                    
+                                    VStack {
+                                        StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
+                                            .font(.subheadline)
+                                    }
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .offset(x: 2, y: 10)
                                 }
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .offset(y: 10)
+                                .frame(maxHeight: .infinity, alignment: .top)
+                                .offset(y: 3)
                             }
-                            .frame(maxHeight: .infinity, alignment: .top)
-                            .offset(y: 3)
                         }
-                    }
-                    .swipeActions(edge: .trailing) {
-                        Button(action: {
-                            deleteBookFromCollection(book)
-                        }) {
-                            Image(systemName: "trash")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .swipeActions(edge: .leading) {
+                            Button(action: {
+                                
+                            }) {
+                                let formatted = String(format: "%.1f", (mostRecent?.completionStatus ?? 0) * 100)
+                                Text("\(formatted == "0.0" ? "0" : formatted)%")
+                            }
+                            .tint(mostRecent?.completionStatus ?? 0 == 1 ? Color.green : Color.blue)
                         }
-                        .tint(.red)
-                    }
-                    .background {
-                        NavigationLink("", destination: LogView(book: book))
-                            .opacity(0)
+                        .swipeActions(edge: .trailing) {
+                            Button(action: {
+                                guard let recent = mostRecent else { return }
+                                deleteBookFromCollection(recent)
+                            }) {
+                                Label("Delete", systemImage: "trash")
+                            }
+                            .tint(.red)
+                            
+                            NavigationLink(destination: LogView(book: mostRecent!)) {
+                                Label("Log", systemImage: "list.dash.header.rectangle")
+                            }
+                            .tint(.complement)
+                        }
+                        .background {
+                            NavigationLink("", destination: LogView(book: mostRecent!))
+                                .opacity(0)
+                        }
+                        
+                        VStack {
+                            HStack {
+                                Text("Collection")
+                                    .font(.title2.bold())
+                                    .fontDesign(.serif)
+                                
+                                Spacer()
+                                    .frame(width: 20)
+                                
+                                Text("\(books.count)")
+                                    .font(.caption)
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.white)
+                                    .background {
+                                        RoundedRectangle(cornerRadius: 5.0)
+                                            .fill(.complement)
+                                            .padding(.horizontal, -10)
+                                            .padding(.vertical, -3)
+                                    }
+                            }
+                        }
+                        .listRowSeparator(.hidden, edges: .all)
+                         
+                        ForEach(searchResults) { book in
+                            VStack(alignment: .leading) {
+                                HStack {
+                                    let imageString = book.coverImage
+                                    
+                                    if imageString.contains("https") {
+                                        WebImage(url: URL(string: imageString)) { image in
+                                            image
+                                                .image?.resizable()
+                                                .frame(width: 50, height: 80)
+                                                .clipShape(RoundedRectangle(cornerRadius: 2.0))
+//                                                .shadow(color: .black.opacity(0.30), radius: 5)
+                                                .overlay {
+                                                    RoundedRectangle(cornerRadius: 2.0)
+                                                        .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                        .fill(.clear)
+                                                        .frame(width: 50, height: 80)
+                                                }
+                                        }
+                                    } else {
+                                        let image = imageString.toImage()
+                                        
+                                        image?
+                                            .resizable()
+                                            .frame(width: 140, height: 210)
+                                            .clipShape(RoundedRectangle(cornerRadius: 10.0))
+//                                            .shadow(color: .black.opacity(0.30), radius: 5)
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 2.0)
+                                                    .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                    .fill(.clear)
+                                                    .frame(width: 50, height: 80)
+                                            }
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    VStack(alignment: .leading) {
+                                        
+                                        Text(book.title)
+                                            .font(.subheadline)
+                                            .fontWeight(.bold)
+                                            .lineLimit(1)
+                                        
+                                        Text(book.author)
+                                            .font(.caption)
+                                            .lineLimit(1)
+                                        
+                                        Text("\(book.pages) pages")
+                                            .font(.caption)
+                                        
+                                        VStack {
+                                            StarRatingView(rating: book.starRatingSystem?.rating ?? 0.0)
+                                                .font(.subheadline)
+                                        }
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .offset(x: 2, y: 10)
+                                    }
+                                    .frame(maxHeight: .infinity, alignment: .top)
+                                    .offset(y: 3)
+                                }
+                            }
+                            .listRowSeparator(.hidden)
+                            .swipeActions(edge: .leading) {
+                                Button(action: {
+                                    
+                                }) {
+                                    let formatted = String(format: "%.1f", (book.completionStatus) * 100)
+                                    Text("\(formatted == "0.0" ? "0" : formatted)%")
+                                }
+                                .tint(book.completionStatus == 1 ? Color.green : Color.blue)
+                            }
+                            .swipeActions(edge: .trailing) {
+                                Button(action: {
+                                    deleteBookFromCollection(book)
+                                }) {
+                                    Label("Delete", systemImage: "trash")
+                                }
+                                .tint(.red)
+                                
+                                NavigationLink(destination: LogView(book: book)) {
+                                    Label("Log", systemImage: "list.dash.header.rectangle")
+                                }
+                                .tint(.complement)
+                            }
+                            .background {
+                                NavigationLink("", destination: LogView(book: book))
+                                    .opacity(0)
+                            }
+                        }
                     }
                 }
             }
+            .scrollContentBackground(.hidden)
             .listStyle(.grouped)
             .navigationBarTitleDisplayMode(.inline)
             .overlay {
+                if books.isEmpty {
+                    VStack {
+                        ContentUnavailableView {
+                            Label("No Books Found", systemImage: "books.vertical.fill")
+                                .tint(.black)
+                        } description: {
+                            Text("Click the '+' to get started!")
+                        }
+                    }
+                }
+                
                 if isBookAdded {
                     VStack {
                         RoundedRectangle(cornerRadius: 5.0)
@@ -190,7 +337,7 @@ struct ContentView: View {
                             }
                     }
                     .frame(maxHeight: .infinity, alignment: .bottom)
-                    .offset(y: -45)
+                    .offset(y: -65)
                 }
                 
                 if bookFailedToAdd {
@@ -225,7 +372,7 @@ struct ContentView: View {
                             }
                     }
                     .frame(maxHeight: .infinity, alignment: .bottom)
-                    .offset(y: -45)
+                    .offset(y: -65)
                 }
                 
                 VStack {
@@ -284,7 +431,6 @@ struct ContentView: View {
                 .padding(.horizontal, 10)
                 .padding(.vertical, 10)
             }
-            .scrollContentBackground(.hidden)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text("myBookPal")
@@ -343,6 +489,7 @@ struct ContentView: View {
             .sheet(isPresented: $showManualFormSheet) {
                 ManualFormView(collectionBooks: books)
             }
+            .searchable(text: $searchText)
             .onChange(of: books) {
                 if books.isEmpty {
                     recentlyViewedBook = nil
@@ -366,7 +513,6 @@ struct ContentView: View {
                 isEditing = false
             }
         }
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         .alert("Delete Book", isPresented: $activateBookDeletionAlert) {
             Button("Yes", role: .destructive, action: {
                 deleteBookFromCollection(selectedDeletionBook)
