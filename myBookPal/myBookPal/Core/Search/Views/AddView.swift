@@ -24,6 +24,8 @@ struct AddView: View {
     
     @Binding var showingSheet: Bool
     @Binding var bookItem: VolumeInfo?
+    @Binding var bookAdded: Bool
+    @Binding var bookFailedToAdd: Bool
     
     var book: VolumeInfo
     var books: [Book]
@@ -241,9 +243,16 @@ struct AddView: View {
             bookIsInCollection.toggle()
         } else {
             modelContext.insert(newBook)
-            try? modelContext.save()
-            bookAddedCounter += 1
-            showAlert = true
+            
+            do {
+                try modelContext.save()
+                bookAddedCounter += 1
+                showAlert = true
+                bookAdded = true
+            } catch {
+                bookFailedToAdd = true
+                print("Failed to save book: \(error)")
+            }
         }
     }
     
@@ -255,9 +264,16 @@ struct AddView: View {
             invalidInfoAlert.toggle()
         } else {
             modelContext.insert(newBook)
-            try? modelContext.save()
-            bookAddedCounter += 1
-            showAlert = true
+            
+            do {
+                try modelContext.save()
+                bookAddedCounter += 1
+                showAlert = true
+                bookAdded.toggle()
+            } catch {
+                bookFailedToAdd.toggle()
+                print("Failed to save book: \(error)")
+            }
         }
     }
     
@@ -269,9 +285,16 @@ struct AddView: View {
             invalidInfoAlert.toggle()
         } else {
             modelContext.insert(newBook)
-            try? modelContext.save()
-            bookAddedCounter += 1
-            showAlert = true
+            
+            do {
+                try modelContext.save()
+                bookAddedCounter += 1
+                showAlert = true
+                bookAdded.toggle()
+            } catch {
+                bookFailedToAdd.toggle()
+                print("Failed to save book: \(error)")
+            }
         }
     }
     
@@ -285,9 +308,16 @@ struct AddView: View {
             invalidInfoAlert.toggle()
         } else {
             modelContext.insert(newBook)
-            try? modelContext.save()
-            bookAddedCounter += 1
-            showAlert = true
+            
+            do {
+                try modelContext.save()
+                bookAddedCounter += 1
+                showAlert = true
+                bookAdded.toggle()
+            } catch {
+                bookFailedToAdd.toggle()
+                print("Failed to save book: \(error)")
+            }
         }
     }
 }
@@ -295,5 +325,5 @@ struct AddView: View {
 #Preview {
     let example = VolumeInfo(title: "Dune", authors: ["Frank Herbert"], pageCount: 0, categories: ["N/A"])
     
-    return AddView(showingSheet: .constant(false), bookItem: .constant(VolumeInfo(title: "", authors: [""], pageCount: 5, categories: [""])), book: example, books: [Book]())
+    return AddView(showingSheet: .constant(false), bookItem: .constant(VolumeInfo(title: "", authors: [""], pageCount: 5, categories: [""])), bookAdded: .constant(false), bookFailedToAdd: .constant(false), book: example, books: [Book]())
 }

@@ -13,6 +13,8 @@ struct SearchView: View {
     @State private var addViewBook: VolumeInfo? = nil
     
     @Binding var isShowingSheet: Bool
+    @Binding var bookAdded: Bool
+    @Binding var bookFailedToAdd: Bool
     
     var collectionBooks: [Book]
     
@@ -37,7 +39,7 @@ struct SearchView: View {
                             // TODO: Instead of using navigationDestination, try navigationLink?
                             
                             NavigationLink {
-                                AddView(showingSheet: $isShowingSheet, bookItem: $addViewBook, book: book, books: collectionBooks)
+                                AddView(showingSheet: $isShowingSheet, bookItem: $addViewBook, bookAdded: $bookAdded, bookFailedToAdd: $bookFailedToAdd, book: book, books: collectionBooks)
                                     .accessibilityAddTraits(.isButton)
                             } label: {
                                 Rectangle()
@@ -153,5 +155,5 @@ struct SearchView: View {
 }
 
 #Preview {
-    SearchView(isShowingSheet: .constant(false), collectionBooks: [Book]())
+    SearchView(isShowingSheet: .constant(false), bookAdded: .constant(false), bookFailedToAdd: .constant(false), collectionBooks: [Book]())
 }
