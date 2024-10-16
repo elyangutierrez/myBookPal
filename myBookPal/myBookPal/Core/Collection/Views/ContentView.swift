@@ -120,30 +120,25 @@ struct ContentView: View {
                                     Text("\(mostRecent?.pages ?? "N/A") pages")
                                         .font(.caption)
                                     
-                                    VStack {
-                                        Spacer()
-                                            .frame(height: 30)
-                                        
-                                        VStack(alignment: .leading) {
-                                            StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
-                                                .font(.subheadline)
-                                        }
-                                        .offset(y: -15)
-                                        
-                                        VStack(alignment: .leading) {
-                                            Text("\(mostRecent?.getLogCount ?? 0 > 0 ? "\(mostRecent?.getLogCount ?? 0)" : "0")")
-                                                .font(.caption)
-                                                .fontWeight(.bold)
-                                                .foregroundStyle(.white)
-                                                .background {
-                                                    RoundedRectangle(cornerRadius: 5.0)
-                                                        .fill(.complement.opacity(0.70))
-                                                        .padding(.horizontal, -10)
-                                                        .padding(.vertical, -3)
-                                                }
-                                        }
-                                        .offset(x: -40)
+                                    VStack(alignment: .leading) {
+                                        StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
+                                            .font(.subheadline)
                                     }
+                                    .offset(y: 3)
+                                    
+                                    VStack(alignment: .leading) {
+                                        Text("\(mostRecent?.getLogCount ?? 0 > 0 ? "\(mostRecent?.getLogCount ?? 0)" : "0")")
+                                            .font(.caption)
+                                            .fontWeight(.bold)
+                                            .foregroundStyle(.white)
+                                            .background {
+                                                RoundedRectangle(cornerRadius: 5.0)
+                                                    .fill(.complement.opacity(0.70))
+                                                    .padding(.horizontal, -5)
+                                                    .padding(.vertical, -3)
+                                            }
+                                    }
+                                    .offset(x: 3, y: 28)
                                 }
                                 .frame(maxHeight: .infinity, alignment: .top)
                                 .frame(maxHeight: .infinity, alignment: .leading)
@@ -196,9 +191,10 @@ struct ContentView: View {
                                     .background {
                                         RoundedRectangle(cornerRadius: 5.0)
                                             .fill(.complement)
-                                            .padding(.horizontal, -10)
+                                            .padding(.horizontal, -5)
                                             .padding(.vertical, -3)
                                     }
+                                    .offset(x: -7)
                             }
                         }
                         .listRowSeparator(.hidden, edges: .all)
@@ -252,30 +248,51 @@ struct ContentView: View {
                                         Text("\(book.pages) pages")
                                             .font(.caption)
                                         
-                                        VStack {
-                                            Spacer()
-                                                .frame(height: 30)
-                                            
-                                            VStack(alignment: .leading) {
-                                                StarRatingView(rating: book.starRatingSystem?.rating ?? 0.0)
-                                                    .font(.subheadline)
-                                            }
-                                            .offset(y: -25)
-                                            
-                                            VStack(alignment: .leading) {
-                                                Text("\(book.getLogCount ?? 0 > 0 ? "\(book.getLogCount ?? 0)" : "0")")
-                                                    .font(.caption)
-                                                    .fontWeight(.bold)
-                                                    .foregroundStyle(.white)
-                                                    .background {
-                                                        RoundedRectangle(cornerRadius: 5.0)
-                                                            .fill(.complement.opacity(0.70))
-                                                            .padding(.horizontal, -10)
-                                                            .padding(.vertical, -3)
-                                                    }
-                                            }
-                                            .offset(x: -40)
+                                        VStack(alignment: .leading) {
+                                            StarRatingView(rating: book.starRatingSystem?.rating ?? 0.0)
+                                                .font(.subheadline)
                                         }
+                                        .offset(y: 3)
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text("\(book.getLogCount ?? 0 > 0 ? "\(book.getLogCount ?? 0)" : "0")")
+                                                .font(.caption)
+                                                .fontWeight(.bold)
+                                                .foregroundStyle(.white)
+                                                .background {
+                                                    RoundedRectangle(cornerRadius: 5.0)
+                                                        .fill(.complement.opacity(0.70))
+                                                        .padding(.horizontal, -5)
+                                                        .padding(.vertical, -3)
+                                                }
+                                        }
+                                        .offset(x: 3, y: 28)
+                                        
+//                                        VStack {
+//                                            Spacer()
+//                                                .frame(height: 30)
+//                                            
+//                                            VStack(alignment: .leading) {
+//                                                StarRatingView(rating: book.starRatingSystem?.rating ?? 0.0)
+//                                                    .font(.subheadline)
+//                                            }
+//                                            .offset(y: -25)
+//                                            
+//                                            VStack(alignment: .leading) {
+////                                                Text("\(book.getLogCount ?? 0 > 0 ? "\(book.getLogCount ?? 0)" : "0")")
+//                                                Text("344")
+//                                                    .font(.caption)
+//                                                    .fontWeight(.bold)
+//                                                    .foregroundStyle(.white)
+//                                                    .background {
+//                                                        RoundedRectangle(cornerRadius: 5.0)
+//                                                            .fill(.complement.opacity(0.70))
+//                                                            .padding(.horizontal, -10)
+//                                                            .padding(.vertical, -3)
+//                                                    }
+//                                                    .offset(x: -40)
+//                                            }
+//                                        }
                                     }
                                     .frame(maxHeight: .infinity, alignment: .top)
                                     .frame(maxWidth: .infinity, alignment: .leading)
