@@ -30,7 +30,7 @@ extension Image {
         self
             .resizable()
             .frame(width: width, height: height)
-            .clipShape(RoundedRectangle(cornerRadius: 15.0))
+            .clipShape(RoundedRectangle(cornerRadius: 5.0))
             .offset(y: -50)
     }
     

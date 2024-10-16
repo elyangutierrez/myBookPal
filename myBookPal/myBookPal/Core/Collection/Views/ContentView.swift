@@ -159,7 +159,8 @@ struct ContentView: View {
                         .swipeActions(edge: .trailing) {
                             Button(action: {
                                 guard let recent = mostRecent else { return }
-                                deleteBookFromCollection(recent)
+                                selectedDeletionBook = recent
+                                activateBookDeletionAlert.toggle()
                             }) {
                                 Label("Delete", systemImage: "trash")
                             }
@@ -370,7 +371,7 @@ struct ContentView: View {
                                         AsyncImage(url: URL(string: imageString)) { image in
                                             image
                                                 .image?.resizable()
-                                                .frame(width: 50, height: 80)
+                                                .frame(width: 50, height: 90)
                                         }
                                     } else {
                                         let image = imageString.toImage()
