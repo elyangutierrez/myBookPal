@@ -43,6 +43,8 @@ struct ContentView: View {
     @State private var bookFailedToAdd = false
     @State private var bookFeedback = ""
     @State private var showCollectionInfo = false
+    @State private var imageToBeShared: String?
+    @State private var bookDeleted = false
     
     var books: [Book]
     
@@ -80,13 +82,13 @@ struct ContentView: View {
                                     WebImage(url: URL(string: imageString)) { image in
                                         image
                                             .image?.resizable()
-                                            .frame(width: 47, height: 80)
+                                            .frame(width: 60, height: 110)
                                             .clipShape(RoundedRectangle(cornerRadius: 2.0))
                                             .overlay {
                                                 RoundedRectangle(cornerRadius: 2.0)
                                                     .stroke(Color.black.opacity(0.20), lineWidth: 1)
                                                     .fill(.clear)
-                                                    .frame(width: 47, height: 80)
+                                                    .frame(width: 60, height: 110)
                                             }
                                     }
                                 } else {
@@ -94,13 +96,13 @@ struct ContentView: View {
                                     
                                     image?
                                         .resizable()
-                                        .frame(width: 47, height: 80)
-                                        .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                        .frame(width: 60, height: 110)
+                                        .clipShape(RoundedRectangle(cornerRadius: 2.0))
                                         .overlay {
                                             RoundedRectangle(cornerRadius: 2.0)
                                                 .stroke(Color.black.opacity(0.20), lineWidth: 1)
                                                 .fill(.clear)
-                                                .frame(width: 47, height: 80)
+                                                .frame(width: 60, height: 110)
                                         }
                                 }
                                 
@@ -119,37 +121,38 @@ struct ContentView: View {
                                         .font(.caption)
                                     
                                     VStack {
-                                        HStack {
-                                            VStack {
-                                                StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
-                                                    .font(.subheadline)
-                                            }
-                                            .frame(maxWidth: .infinity, alignment: .leading)
-                                            
-                                            VStack {
-                                                Text("\(mostRecent?.getLogCount ?? 0 > 0 ? "\(mostRecent?.getLogCount ?? 0)" : "0")")
-                                                    .font(.caption)
-                                                    .fontWeight(.bold)
-                                                    .foregroundStyle(.white)
-                                                    .background {
-                                                        RoundedRectangle(cornerRadius: 5.0)
-                                                            .fill(.complement)
-                                                            .padding(.horizontal, -10)
-                                                            .padding(.vertical, -3)
-                                                    }
-                                            }
-                                            .frame(maxWidth: .infinity, alignment: .trailing)
+                                        Spacer()
+                                            .frame(height: 30)
+                                        
+                                        VStack(alignment: .leading) {
+                                            StarRatingView(rating: mostRecent?.starRatingSystem?.rating ?? 0.0)
+                                                .font(.subheadline)
                                         }
+                                        .offset(y: -15)
+                                        
+                                        VStack(alignment: .leading) {
+                                            Text("\(mostRecent?.getLogCount ?? 0 > 0 ? "\(mostRecent?.getLogCount ?? 0)" : "0")")
+                                                .font(.caption)
+                                                .fontWeight(.bold)
+                                                .foregroundStyle(.white)
+                                                .background {
+                                                    RoundedRectangle(cornerRadius: 5.0)
+                                                        .fill(.complement.opacity(0.70))
+                                                        .padding(.horizontal, -10)
+                                                        .padding(.vertical, -3)
+                                                }
+                                        }
+                                        .offset(x: -40)
                                     }
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .offset(x: 2, y: 10)
                                 }
                                 .frame(maxHeight: .infinity, alignment: .top)
+                                .frame(maxHeight: .infinity, alignment: .leading)
                                 .offset(y: 3)
                             }
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .swipeActions(edge: .leading) {
+                        
                             Button(action: {
                                 
                             }) {
@@ -209,13 +212,13 @@ struct ContentView: View {
                                         WebImage(url: URL(string: imageString)) { image in
                                             image
                                                 .image?.resizable()
-                                                .frame(width: 47, height: 80)
+                                                .frame(width: 60, height: 110)
                                                 .clipShape(RoundedRectangle(cornerRadius: 2.0))
                                                 .overlay {
                                                     RoundedRectangle(cornerRadius: 2.0)
                                                         .stroke(Color.black.opacity(0.20), lineWidth: 1)
                                                         .fill(.clear)
-                                                        .frame(width: 45, height: 80)
+                                                        .frame(width: 60, height: 110)
                                                 }
                                         }
                                     } else {
@@ -223,20 +226,20 @@ struct ContentView: View {
                                         
                                         image?
                                             .resizable()
-                                            .frame(width: 47, height: 80)
-                                            .clipShape(RoundedRectangle(cornerRadius: 10.0))
+                                            .frame(width: 60, height: 110)
+                                            .clipShape(RoundedRectangle(cornerRadius: 2.0))
                                             .overlay {
                                                 RoundedRectangle(cornerRadius: 2.0)
                                                     .stroke(Color.black.opacity(0.20), lineWidth: 1)
                                                     .fill(.clear)
-                                                    .frame(width: 47, height: 80)
+                                                    .frame(width: 60, height: 110)
                                             }
                                     }
                                     
                                     Spacer()
                                     
                                     VStack(alignment: .leading) {
-                                        
+
                                         Text(book.title)
                                             .font(.subheadline)
                                             .fontWeight(.bold)
@@ -250,36 +253,37 @@ struct ContentView: View {
                                             .font(.caption)
                                         
                                         VStack {
-                                            HStack {
-                                                VStack {
-                                                    StarRatingView(rating: book.starRatingSystem?.rating ?? 0.0)
-                                                        .font(.subheadline)
-                                                }
-                                                .frame(maxWidth: .infinity, alignment: .leading)
-                                                
-                                                VStack {
-                                                    Text("\(book.getLogCount ?? 0 > 0 ? "\(book.getLogCount ?? 0)" : "0")")
-                                                        .font(.caption)
-                                                        .fontWeight(.bold)
-                                                        .foregroundStyle(.white)
-                                                        .background {
-                                                            RoundedRectangle(cornerRadius: 5.0)
-                                                                .fill(.complement)
-                                                                .padding(.horizontal, -10)
-                                                                .padding(.vertical, -3)
-                                                        }
-                                                }
-                                                .frame(maxWidth: .infinity, alignment: .trailing)
+                                            Spacer()
+                                                .frame(height: 30)
+                                            
+                                            VStack(alignment: .leading) {
+                                                StarRatingView(rating: book.starRatingSystem?.rating ?? 0.0)
+                                                    .font(.subheadline)
                                             }
+                                            .offset(y: -25)
+                                            
+                                            VStack(alignment: .leading) {
+                                                Text("\(book.getLogCount ?? 0 > 0 ? "\(book.getLogCount ?? 0)" : "0")")
+                                                    .font(.caption)
+                                                    .fontWeight(.bold)
+                                                    .foregroundStyle(.white)
+                                                    .background {
+                                                        RoundedRectangle(cornerRadius: 5.0)
+                                                            .fill(.complement.opacity(0.70))
+                                                            .padding(.horizontal, -10)
+                                                            .padding(.vertical, -3)
+                                                    }
+                                            }
+                                            .offset(x: -40)
                                         }
-                                        .frame(maxWidth: .infinity, alignment: .leading)
-                                        .offset(x: 2, y: 10)
                                     }
                                     .frame(maxHeight: .infinity, alignment: .top)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
                                     .offset(y: 3)
                                 }
                             }
                             .swipeActions(edge: .leading) {
+                                
                                 Button(action: {
                                     
                                 }) {
@@ -290,7 +294,8 @@ struct ContentView: View {
                             }
                             .swipeActions(edge: .trailing) {
                                 Button(action: {
-                                    deleteBookFromCollection(book)
+                                    selectedDeletionBook = book
+                                    activateBookDeletionAlert.toggle()
                                 }) {
                                     Label("Delete", systemImage: "trash")
                                 }
@@ -348,14 +353,14 @@ struct ContentView: View {
                                         AsyncImage(url: URL(string: imageString)) { image in
                                             image
                                                 .image?.resizable()
-                                                .frame(width: 50, height: 70)
+                                                .frame(width: 50, height: 80)
                                         }
                                     } else {
                                         let image = imageString.toImage()
                                         
                                         image?
                                             .resizable()
-                                            .frame(width: 50, height: 70)
+                                            .frame(width: 50, height: 80)
                                     }
                                     
                                     VStack {
