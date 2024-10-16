@@ -225,7 +225,7 @@ struct LogView: View {
                                                 .allowsHitTesting(true) // lets user tap through overlay
                                         }
                                         .frame(maxHeight: .infinity, alignment: .top)
-                                        .padding(.vertical, 10)
+                                        .padding(.vertical, 12)
                                     }
                                 }
                                 
