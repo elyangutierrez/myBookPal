@@ -26,15 +26,6 @@ struct TabsView: View {
                         print("TAB DEBUG: \(books)")
                     }
                 
-                CatagoryView(books: books)
-                    .tabItem {
-                        Image(systemName: "checklist")
-                        Text("Catagories")
-                    }
-                    .onAppear {
-                        print("TAB DEBUG: \(books)")
-                    }
-                
                 CurrentGoalsView(modelContext: modelContext)
                     .tabItem {
                         Image(systemName: "target")
