@@ -43,7 +43,6 @@ struct ContentView: View {
     @State private var bookFailedToAdd = false
     @State private var bookFeedback = ""
     @State private var showCollectionInfo = false
-    @State private var imageToBeShared: String?
     @State private var bookDeleted = false
     @State private var scanningFailed = false
     
@@ -91,6 +90,12 @@ struct ContentView: View {
                                                     .fill(.clear)
                                                     .frame(width: 60, height: 110)
                                             }
+                                    }
+                                    .onSuccess { image, data, cacheType in
+                                        if let someDataTwo = image.pngData() {
+                                            mostRecent?.sharedImageData = someDataTwo
+                                        }
+                                        
                                     }
                                 } else {
                                     let image = imageString.toImage()
@@ -148,6 +153,15 @@ struct ContentView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .swipeActions(edge: .leading) {
+                            
+                            if let dataToBeShared = mostRecent?.sharedImageData, let uiImage = UIImage(data: dataToBeShared) {
+                                let swiftImage = Image(uiImage: uiImage)
+                                ShareLink(item: swiftImage, message: Text("I'm currently reading this book. You should check it out!"), preview: SharePreview(mostRecent?.title ?? "N/A", image: swiftImage), label: {
+                                    Label("Share", systemImage: "square.and.arrow.up")
+                                    
+                                })
+                                .tint(.gray)
+                            }
                         
                             Button(action: {
                                 
@@ -218,6 +232,12 @@ struct ContentView: View {
                                                         .frame(width: 60, height: 110)
                                                 }
                                         }
+                                        .onSuccess { image, data, cacheType in
+                                            if let someDataTwo = image.pngData() {
+                                                book.sharedImageData = someDataTwo
+                                            }
+                                            
+                                        }
                                     } else {
                                         let image = imageString.toImage()
                                         
@@ -275,6 +295,15 @@ struct ContentView: View {
                                 }
                             }
                             .swipeActions(edge: .leading) {
+                                
+                                if let dataToBeShared = book.sharedImageData, let uiImage = UIImage(data: dataToBeShared) {
+                                    let swiftImage = Image(uiImage: uiImage)
+                                    ShareLink(item: swiftImage, message: Text("I'm currently reading this book. You should check it out!"), preview: SharePreview(book.title, image: swiftImage), label: {
+                                        Label("Share", systemImage: "square.and.arrow.up")
+                                        
+                                    })
+                                    .tint(.gray)
+                                }
                                 
                                 Button(action: {
                                     
