@@ -31,7 +31,7 @@ struct ContentView: View {
     @State private var selectedDeletionBook: Book?
     @State private var isShowingScanner = false
     @State private var isShowingTorch = false
-    @State var isbnManager = FetchISBNBookInfoViewModel()
+    @State private var isbnManager = FetchISBNBookInfoViewModel()
     @State private var showAddViewSheet = false
     @State private var addViewBook: VolumeInfo? = nil
     @State private var showManualFormSheet = false
@@ -43,11 +43,8 @@ struct ContentView: View {
     @State private var bookFailedToAdd = false
     @State private var bookFeedback = ""
     @State private var showCollectionInfo = false
-    @State private var imageToBeShared: Image?
     @State private var bookDeleted = false
-    @State private var imageData: Data?
-    @State private var showShareSheet = false
-    @State private var selectedSharedBook: Book?
+    @State private var scanningFailed = false
     
     var books: [Book]
     
@@ -93,6 +90,12 @@ struct ContentView: View {
                                                     .fill(.clear)
                                                     .frame(width: 60, height: 110)
                                             }
+                                    }
+                                    .onSuccess { image, data, cacheType in
+                                        if let someDataTwo = image.pngData() {
+                                            mostRecent?.sharedImageData = someDataTwo
+                                        }
+                                        
                                     }
                                 } else {
                                     let image = imageString.toImage()
@@ -150,6 +153,15 @@ struct ContentView: View {
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .swipeActions(edge: .leading) {
+                            
+                            if let dataToBeShared = mostRecent?.sharedImageData, let uiImage = UIImage(data: dataToBeShared) {
+                                let swiftImage = Image(uiImage: uiImage)
+                                ShareLink(item: swiftImage, message: Text("I'm currently reading this book. You should check it out!"), preview: SharePreview(mostRecent?.title ?? "N/A", image: swiftImage), label: {
+                                    Label("Share", systemImage: "square.and.arrow.up")
+                                    
+                                })
+                                .tint(.gray)
+                            }
                         
                             Button(action: {
                                 
@@ -286,12 +298,12 @@ struct ContentView: View {
                             .swipeActions(edge: .leading) {
                                 
                                 if let dataToBeShared = book.sharedImageData, let uiImage = UIImage(data: dataToBeShared) {
-                                        let swiftImage = Image(uiImage: uiImage)
+                                    let swiftImage = Image(uiImage: uiImage)
                                     ShareLink(item: swiftImage, message: Text("I'm currently reading this book. You should check it out!"), preview: SharePreview(book.title, image: swiftImage), label: {
-                                            Label("Share", systemImage: "square.and.arrow.up")
-                                            
-                                        })
-                                        .tint(.gray)
+                                        Label("Share", systemImage: "square.and.arrow.up")
+                                        
+                                    })
+                                    .tint(.gray)
                                 }
                                 
                                 Button(action: {
@@ -363,7 +375,13 @@ struct ContentView: View {
                                         AsyncImage(url: URL(string: imageString)) { image in
                                             image
                                                 .image?.resizable()
-                                                .frame(width: 50, height: 90)
+                                                .frame(width: 50, height: 80)
+                                                .overlay {
+                                                    Rectangle()
+                                                        .stroke(.gray.opacity(0.30), lineWidth: 1)
+                                                        .fill(.clear)
+                                                        .frame(width: 50, height: 80)
+                                                }
                                         }
                                     } else {
                                         let image = imageString.toImage()
@@ -371,6 +389,12 @@ struct ContentView: View {
                                         image?
                                             .resizable()
                                             .frame(width: 50, height: 80)
+                                            .overlay {
+                                                Rectangle()
+                                                    .stroke(.gray.opacity(0.30), lineWidth: 1)
+                                                    .fill(.clear)
+                                                    .frame(width: 50, height: 80)
+                                            }
                                     }
                                     
                                     VStack {
@@ -384,8 +408,6 @@ struct ContentView: View {
                                 }
                             }
                     }
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                    .offset(y: -65)
                 }
                 
                 if bookFailedToAdd {
@@ -396,31 +418,51 @@ struct ContentView: View {
                             .frame(width: 175, height: 100)
                             .shadow(radius: 5)
                             .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-                                    withAnimation(.easeOut(duration: 0.2)) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    withAnimation(.easeOut(duration: 0.3)) {
                                         bookFailedToAdd = false
                                     }
                                 }
                             }
                             .overlay {
-                                HStack {
-                                    Image(systemName: "book.closed")
+                                VStack {
+                                    Image(systemName: "xmark")
                                         .resizable()
-                                        .frame(width: 37, height: 60)
+                                        .frame(width: 20, height: 20)
                                     
-                                    VStack {
-                                        Image(systemName: "xmark")
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                                        
-                                        Text("Book Failed To Add")
-                                            .font(.footnote)
-                                    }
+                                    Text("Failed To Add Book")
+//                                        .font(.footnote)
                                 }
                             }
                     }
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                    .offset(y: -65)
+                }
+                
+                if scanningFailed {
+                    VStack {
+                        RoundedRectangle(cornerRadius: 5.0)
+                            .stroke(.gray.opacity(0.30), lineWidth: 1)
+                            .fill(.regularMaterial)
+                            .frame(width: 175, height: 100)
+                            .shadow(radius: 5)
+                            .onAppear {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                    withAnimation(.easeOut(duration: 0.3)) {
+                                        scanningFailed = false
+                                        isbnManager.noFailedOccured = true
+                                    }
+                                }
+                            }
+                            .overlay {
+                                VStack {
+                                    Image(systemName: "xmark")
+                                        .resizable()
+                                        .frame(width: 20, height: 20)
+                                    
+                                    Text("Failed To Add Book")
+//                                        .font(.footnote)
+                                }
+                            }
+                    }
                 }
                 
                 VStack {
@@ -487,14 +529,14 @@ struct ContentView: View {
                 }
             }
             .navigationDestination(item: $addViewBook) { book in
-                AddView(showingSheet: $isShowingOnlineSheet, bookItem: $addViewBook, bookAdded: $isBookAdded, bookFailedToAdd: $bookFailedToAdd, book: book, books: books)
+                AddView(showingSheet: $showAddViewSheet, bookItem: $addViewBook, bookAdded: $isBookAdded, bookFailedToAdd: $bookFailedToAdd, book: book, books: books)
             }
             .fullScreenCover(isPresented: $isShowingScanner) {
                 NavigationStack {
                     CodeScannerView(codeTypes: [.ean13], showViewfinder: true, isTorchOn: isShowingTorch, completion: handleScan)
                         .overlay {
                             VStack {
-                                Text("Place ISBN code inside box.")
+                                Text("Scanner only supports ISBN-13.")
                                     .foregroundStyle(.white)
                                     .background {
                                         Rectangle()
@@ -502,7 +544,7 @@ struct ContentView: View {
                                             .padding(.vertical, -5)
                                             .padding(.horizontal, -5)
                                     }
-                                    .accessibilityLabel("Place ISBN code in the middle of the screen")
+                                    .accessibilityLabel("Scanner only supports ISBN-13.")
                             }
                             .frame(maxHeight: .infinity, alignment: .top)
                             .padding(.vertical, 125)
@@ -543,7 +585,7 @@ struct ContentView: View {
                     recentlyViewedBook = nil
                 }
             }
-            .onChange(of: isbnManager.books) {
+            .onChange(of: isbnManager.foundBook) {
                 if !isbnManager.books.isEmpty {
                     guard let firstBook = isbnManager.books.first else { return }
 
@@ -553,7 +595,14 @@ struct ContentView: View {
                         print(unwrapped.title)
                         
                         showAddViewSheet.toggle()
+                        print("Value of showAddViewSheet: \(showAddViewSheet)")
+                        isbnManager.foundBook = false
                     }
+                }
+            }
+            .onChange(of: isbnManager.noFailedOccured) {
+                if !isbnManager.noFailedOccured {
+                    scanningFailed.toggle()
                 }
             }
             .onAppear {
@@ -594,11 +643,17 @@ struct ContentView: View {
             hapticsManager.playFoundISBNHaptic()
             
             let isbnString = result.string
+            print(isbnString)
             
             isbnManager.isbnNumber = isbnString
+            print("Value of isbnNumber: \(isbnManager.isbnNumber)")
             isbnManager.fetchBookInfo()
         case .failure(let error):
             print("Scanning failed: \(error)")
+            
+            scanningFailed.toggle()
+            
+            // Show a overlay if scanning failed..
         }
     }
     
