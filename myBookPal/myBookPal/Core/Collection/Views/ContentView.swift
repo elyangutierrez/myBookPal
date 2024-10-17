@@ -335,6 +335,7 @@ struct ContentView: View {
                         }
                     }
                 }
+                .scrollIndicators(.hidden)
             }
             .scrollContentBackground(.hidden)
             .listStyle(.grouped)
