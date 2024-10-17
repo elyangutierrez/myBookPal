@@ -11,7 +11,7 @@ import Observation
 @Observable
 class FetchBookInfoViewModel: @unchecked Sendable {
     var books: [VolumeInfo] = []
-    var apiKey = "AIzaSyB1SgNWofLYMEb_QSxdjBY22TImWqROPk0"
+    var apiKey = "AIzaSyBCLpDRiiYaqf_MECpSf3BEhYP8GWhwxcg"
     var searchText = ""
     var failedToLoad = false
     var searchSubmitted: Bool = false
