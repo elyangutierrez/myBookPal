@@ -31,7 +31,7 @@ struct ContentView: View {
     @State private var selectedDeletionBook: Book?
     @State private var isShowingScanner = false
     @State private var isShowingTorch = false
-    @State var isbnManager = FetchISBNBookInfoViewModel()
+    @State private var isbnManager = FetchISBNBookInfoViewModel()
     @State private var showAddViewSheet = false
     @State private var addViewBook: VolumeInfo? = nil
     @State private var showManualFormSheet = false
@@ -45,6 +45,7 @@ struct ContentView: View {
     @State private var showCollectionInfo = false
     @State private var imageToBeShared: String?
     @State private var bookDeleted = false
+    @State private var scanningFailed = false
     
     var books: [Book]
     
@@ -267,32 +268,6 @@ struct ContentView: View {
                                                 }
                                         }
                                         .offset(x: 3, y: 28)
-                                        
-//                                        VStack {
-//                                            Spacer()
-//                                                .frame(height: 30)
-//                                            
-//                                            VStack(alignment: .leading) {
-//                                                StarRatingView(rating: book.starRatingSystem?.rating ?? 0.0)
-//                                                    .font(.subheadline)
-//                                            }
-//                                            .offset(y: -25)
-//                                            
-//                                            VStack(alignment: .leading) {
-////                                                Text("\(book.getLogCount ?? 0 > 0 ? "\(book.getLogCount ?? 0)" : "0")")
-//                                                Text("344")
-//                                                    .font(.caption)
-//                                                    .fontWeight(.bold)
-//                                                    .foregroundStyle(.white)
-//                                                    .background {
-//                                                        RoundedRectangle(cornerRadius: 5.0)
-//                                                            .fill(.complement.opacity(0.70))
-//                                                            .padding(.horizontal, -10)
-//                                                            .padding(.vertical, -3)
-//                                                    }
-//                                                    .offset(x: -40)
-//                                            }
-//                                        }
                                     }
                                     .frame(maxHeight: .infinity, alignment: .top)
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -371,6 +346,12 @@ struct ContentView: View {
                                             image
                                                 .image?.resizable()
                                                 .frame(width: 50, height: 80)
+                                                .overlay {
+                                                    Rectangle()
+                                                        .stroke(.gray.opacity(0.30), lineWidth: 1)
+                                                        .fill(.clear)
+                                                        .frame(width: 50, height: 80)
+                                                }
                                         }
                                     } else {
                                         let image = imageString.toImage()
@@ -378,6 +359,12 @@ struct ContentView: View {
                                         image?
                                             .resizable()
                                             .frame(width: 50, height: 80)
+                                            .overlay {
+                                                Rectangle()
+                                                    .stroke(.gray.opacity(0.30), lineWidth: 1)
+                                                    .fill(.clear)
+                                                    .frame(width: 50, height: 80)
+                                            }
                                     }
                                     
                                     VStack {
@@ -391,8 +378,6 @@ struct ContentView: View {
                                 }
                             }
                     }
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                    .offset(y: -65)
                 }
                 
                 if bookFailedToAdd {
@@ -426,8 +411,27 @@ struct ContentView: View {
                                 }
                             }
                     }
-                    .frame(maxHeight: .infinity, alignment: .bottom)
-                    .offset(y: -65)
+                }
+                
+                if scanningFailed {
+                    VStack {
+                        RoundedRectangle(cornerRadius: 5.0)
+                            .stroke(.gray.opacity(0.30), lineWidth: 1)
+                            .fill(.regularMaterial)
+                            .frame(width: 170, height: 100)
+                            .shadow(radius: 5)
+                            .overlay {
+                                Text("Failed to Find Book")
+                                    .onAppear {
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                                            withAnimation(.easeOut(duration: 0.2)) {
+                                                scanningFailed = false
+                                                isbnManager.noFailedOccured = true
+                                            }
+                                        }
+                                    }
+                            }
+                    }
                 }
                 
                 VStack {
@@ -494,14 +498,14 @@ struct ContentView: View {
                 }
             }
             .navigationDestination(item: $addViewBook) { book in
-                AddView(showingSheet: $isShowingOnlineSheet, bookItem: $addViewBook, bookAdded: $isBookAdded, bookFailedToAdd: $bookFailedToAdd, book: book, books: books)
+                AddView(showingSheet: $showAddViewSheet, bookItem: $addViewBook, bookAdded: $isBookAdded, bookFailedToAdd: $bookFailedToAdd, book: book, books: books)
             }
             .fullScreenCover(isPresented: $isShowingScanner) {
                 NavigationStack {
                     CodeScannerView(codeTypes: [.ean13], showViewfinder: true, isTorchOn: isShowingTorch, completion: handleScan)
                         .overlay {
                             VStack {
-                                Text("Place ISBN code inside box.")
+                                Text("Scanner only supports ISBN-13.")
                                     .foregroundStyle(.white)
                                     .background {
                                         Rectangle()
@@ -509,7 +513,7 @@ struct ContentView: View {
                                             .padding(.vertical, -5)
                                             .padding(.horizontal, -5)
                                     }
-                                    .accessibilityLabel("Place ISBN code in the middle of the screen")
+                                    .accessibilityLabel("Scanner only supports ISBN-13.")
                             }
                             .frame(maxHeight: .infinity, alignment: .top)
                             .padding(.vertical, 125)
@@ -550,7 +554,7 @@ struct ContentView: View {
                     recentlyViewedBook = nil
                 }
             }
-            .onChange(of: isbnManager.books) {
+            .onChange(of: isbnManager.foundBook) {
                 if !isbnManager.books.isEmpty {
                     guard let firstBook = isbnManager.books.first else { return }
 
@@ -560,7 +564,14 @@ struct ContentView: View {
                         print(unwrapped.title)
                         
                         showAddViewSheet.toggle()
+                        print("Value of showAddViewSheet: \(showAddViewSheet)")
+                        isbnManager.foundBook = false
                     }
+                }
+            }
+            .onChange(of: isbnManager.noFailedOccured) {
+                if !isbnManager.noFailedOccured {
+                    scanningFailed.toggle()
                 }
             }
             .onAppear {
@@ -601,11 +612,17 @@ struct ContentView: View {
             hapticsManager.playFoundISBNHaptic()
             
             let isbnString = result.string
+            print(isbnString)
             
             isbnManager.isbnNumber = isbnString
+            print("Value of isbnNumber: \(isbnManager.isbnNumber)")
             isbnManager.fetchBookInfo()
         case .failure(let error):
             print("Scanning failed: \(error)")
+            
+            scanningFailed.toggle()
+            
+            // Show a overlay if scanning failed..
         }
     }
     
