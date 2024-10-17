@@ -174,7 +174,8 @@ struct ContentView: View {
                         .swipeActions(edge: .trailing) {
                             Button(action: {
                                 guard let recent = mostRecent else { return }
-                                deleteBookFromCollection(recent)
+                                selectedDeletionBook = recent
+                                activateBookDeletionAlert.toggle()
                             }) {
                                 Label("Delete", systemImage: "trash")
                             }
