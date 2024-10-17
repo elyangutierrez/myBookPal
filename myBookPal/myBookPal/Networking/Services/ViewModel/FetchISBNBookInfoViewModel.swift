@@ -11,7 +11,7 @@ import Foundation
 class FetchISBNBookInfoViewModel: @unchecked Sendable {
     var books: [VolumeInfo] = []
     var performAction: Bool = false
-    var apiKey = "AIzaSyB1SgNWofLYMEb_QSxdjBY22TImWqROPk0"
+    var apiKey = "AIzaSyD4rz7mA1-HIYlLgtop3ER-0T-ks8hR9-E"
     var isbnNumber = ""
     var foundBook = false
     var noFailedOccured = true
