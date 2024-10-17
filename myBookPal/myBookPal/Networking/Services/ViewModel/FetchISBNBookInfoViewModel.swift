@@ -13,6 +13,8 @@ class FetchISBNBookInfoViewModel: @unchecked Sendable {
     var performAction: Bool = false
     var apiKey = "AIzaSyB1SgNWofLYMEb_QSxdjBY22TImWqROPk0"
     var isbnNumber = ""
+    var foundBook = false
+    var noFailedOccured = true
     
     func fetchBookInfo() {
         let lowercasedText = isbnNumber.lowercased()
@@ -35,12 +37,15 @@ class FetchISBNBookInfoViewModel: @unchecked Sendable {
                     DispatchQueue.main.async { // allows this process to be done in the background without causing lag
                         print("In dispatchqueue")
                         self.books = response.items.compactMap { $0.volumeInfo } // sets book to the infomation inside of the current volumeInfo object
+                        self.foundBook = true
                     }
                 } catch {
                     print("The do block failed: \(error.localizedDescription)")
+                    self.noFailedOccured = false
                 }
             } else {
                 print("The data couldn't be recieved")
+                self.noFailedOccured = false
             }
         }.resume() // is what runs the URLSession
     }
