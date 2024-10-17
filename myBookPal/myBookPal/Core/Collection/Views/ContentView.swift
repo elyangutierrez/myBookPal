@@ -43,8 +43,11 @@ struct ContentView: View {
     @State private var bookFailedToAdd = false
     @State private var bookFeedback = ""
     @State private var showCollectionInfo = false
-    @State private var imageToBeShared: String?
+    @State private var imageToBeShared: Image?
     @State private var bookDeleted = false
+    @State private var imageData: Data?
+    @State private var showShareSheet = false
+    @State private var selectedSharedBook: Book?
     
     var books: [Book]
     
@@ -159,7 +162,8 @@ struct ContentView: View {
                         .swipeActions(edge: .trailing) {
                             Button(action: {
                                 guard let recent = mostRecent else { return }
-                                deleteBookFromCollection(recent)
+                                selectedDeletionBook = recent
+                                activateBookDeletionAlert.toggle()
                             }) {
                                 Label("Delete", systemImage: "trash")
                             }
@@ -217,6 +221,12 @@ struct ContentView: View {
                                                         .frame(width: 60, height: 110)
                                                 }
                                         }
+                                        .onSuccess { image, data, cacheType in
+                                            if let someDataTwo = image.pngData() {
+                                                book.sharedImageData = someDataTwo
+                                            }
+                                            
+                                        }
                                     } else {
                                         let image = imageString.toImage()
                                         
@@ -267,32 +277,6 @@ struct ContentView: View {
                                                 }
                                         }
                                         .offset(x: 3, y: 28)
-                                        
-//                                        VStack {
-//                                            Spacer()
-//                                                .frame(height: 30)
-//                                            
-//                                            VStack(alignment: .leading) {
-//                                                StarRatingView(rating: book.starRatingSystem?.rating ?? 0.0)
-//                                                    .font(.subheadline)
-//                                            }
-//                                            .offset(y: -25)
-//                                            
-//                                            VStack(alignment: .leading) {
-////                                                Text("\(book.getLogCount ?? 0 > 0 ? "\(book.getLogCount ?? 0)" : "0")")
-//                                                Text("344")
-//                                                    .font(.caption)
-//                                                    .fontWeight(.bold)
-//                                                    .foregroundStyle(.white)
-//                                                    .background {
-//                                                        RoundedRectangle(cornerRadius: 5.0)
-//                                                            .fill(.complement.opacity(0.70))
-//                                                            .padding(.horizontal, -10)
-//                                                            .padding(.vertical, -3)
-//                                                    }
-//                                                    .offset(x: -40)
-//                                            }
-//                                        }
                                     }
                                     .frame(maxHeight: .infinity, alignment: .top)
                                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -300,6 +284,15 @@ struct ContentView: View {
                                 }
                             }
                             .swipeActions(edge: .leading) {
+                                
+                                if let dataToBeShared = book.sharedImageData, let uiImage = UIImage(data: dataToBeShared) {
+                                        let swiftImage = Image(uiImage: uiImage)
+                                    ShareLink(item: swiftImage, message: Text("I'm currently reading this book. You should check it out!"), preview: SharePreview(book.title, image: swiftImage), label: {
+                                            Label("Share", systemImage: "square.and.arrow.up")
+                                            
+                                        })
+                                        .tint(.gray)
+                                }
                                 
                                 Button(action: {
                                     
@@ -370,7 +363,7 @@ struct ContentView: View {
                                         AsyncImage(url: URL(string: imageString)) { image in
                                             image
                                                 .image?.resizable()
-                                                .frame(width: 50, height: 80)
+                                                .frame(width: 50, height: 90)
                                         }
                                     } else {
                                         let image = imageString.toImage()

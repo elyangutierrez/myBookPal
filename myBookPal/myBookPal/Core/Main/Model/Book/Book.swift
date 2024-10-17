@@ -20,6 +20,7 @@ class Book: Identifiable, Equatable {
     var logs: [Log]?
     var starRatingSystem: StarRating?
     var isMostRecentlyViewed: Bool?
+    var sharedImageData: Data?
     
     var totalPagesRead: Int {
         guard let logs = logs else {
@@ -83,5 +84,6 @@ class Book: Identifiable, Equatable {
         self.logs = nil
         self.starRatingSystem = nil
         self.isMostRecentlyViewed = nil
+        self.sharedImageData = nil
     }
 }

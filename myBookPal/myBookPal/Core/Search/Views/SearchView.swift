@@ -5,6 +5,7 @@
 //  Created by Elyan Gutierrez on 5/12/24.
 //
 
+import SDWebImageSwiftUI
 import SwiftUI
 
 struct SearchView: View {
@@ -48,33 +49,53 @@ struct SearchView: View {
 //                                    .frame(width: 165, height: 350)
                                     .overlay {
                                         VStack {
-                                            AsyncImage(url: URL(string: book.imageLinks?.increaseQuality ?? "")) { phase in
-                                                switch phase {
-                                                case .empty:
-                                                    
-                                                    // TODO: Center progress view
-                                                    
-                                                    VStack {
-                                                        ProgressView()
-                                                        
-                                                        Spacer()
-                                                            .frame(height: 70)
+//                                            AsyncImage(url: URL(string: book.imageLinks?.increaseQuality ?? "")) { phase in
+//                                                switch phase {
+//                                                case .empty:
+//                                                    
+//                                                    // TODO: Center progress view
+//                                                    
+//                                                    VStack {
+//                                                        ProgressView()
+//                                                        
+//                                                        Spacer()
+//                                                            .frame(height: 70)
+//                                                    }
+//                                                case .success(let image):
+//                                                    
+//                                                    image
+//                                                        .SearchImageBookExtension(width: geometry.size.width * 0.375, height: 245)
+//                                                        .overlay {
+//                                                            RoundedRectangle(cornerRadius: 5.0)
+//                                                                .stroke(.gray.opacity(0.30), lineWidth: 1)
+//                                                                .fill(.clear)
+//                                                                .frame(width: geometry.size.width * 0.375, height: 245)
+//                                                                .offset(y: -50)
+//                                                        }
+//                                                        .accessibilityHint("Image of \(book.title)")
+//                                                case .failure(let error):
+//                                                    
+//                                                    // TODO: Show book cover not found or image not found?
+//                                                    
+//                                                    Color.red
+//                                                        .frame(width: geometry.size.width * 0.375, height: 215)
+//                                                    let _ = print(error)
+//                                                @unknown default:
+//                                                    fatalError()
+//                                                }
+//                                            }
+                                            
+                                            WebImage(url: URL(string: book.imageLinks?.increaseQuality ?? "")) { image in
+                                                image
+                                                    .image?.SearchImageBookExtension(width: geometry.size.width * 0.375, height: 245)
+                                                    .overlay {
+                                                        RoundedRectangle(cornerRadius: 5.0)
+                                                            .stroke(.gray.opacity(0.30), lineWidth: 1)
+                                                            .fill(.clear)
+                                                            .frame(width: geometry.size.width * 0.375, height: 245)
+                                                            .offset(y: -50)
                                                     }
-                                                case .success(let image):
-                                                    
-                                                    image
-                                                        .SearchImageBookExtension(width: geometry.size.width * 0.375, height: 245)
-                                                        .accessibilityHint("Image of \(book.title)")
-                                                case .failure(let error):
-                                                    
-                                                    // TODO: Show book cover not found or image not found?
-                                                    
-                                                    Color.red
-                                                        .frame(width: geometry.size.width * 0.375, height: 245)
-                                                    let _ = print(error)
-                                                @unknown default:
-                                                    fatalError()
-                                                }
+                                                    .accessibilityHint("Image of \(book.title)")
                                             }
                                         }
                                         
@@ -106,23 +127,52 @@ struct SearchView: View {
             }
             .navigationBarTitleDisplayMode(.inline)
             .searchPresentationToolbarBehavior(.avoidHidingContent)
-            .searchable(text: $fetchBookInfoViewModel.searchText, placement: .navigationBarDrawer(displayMode: .always), prompt: "Enter Book Title")
+            .searchable(text: $fetchBookInfoViewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
             .accessibilityAddTraits(.isSearchField)
             .onChange(of: fetchBookInfoViewModel.searchText) {
                 if fetchBookInfoViewModel.searchText.isEmpty {
                     fetchBookInfoViewModel.books.removeAll()
+                    fetchBookInfoViewModel.failedToLoad = false
+                    fetchBookInfoViewModel.searchSubmitted = false
                 }
             }
             .onSubmit(of: .search) {
                 fetchBookInfoViewModel.fetchBookInfo()
+                fetchBookInfoViewModel.searchSubmitted = true
             }
             .overlay {
+                if !fetchBookInfoViewModel.failedToLoad && fetchBookInfoViewModel.searchSubmitted {
+                    VStack {
+                        RoundedRectangle(cornerRadius: 5.0)
+                            .stroke(.gray.opacity(0.30), lineWidth: 1)
+                            .fill(.regularMaterial)
+                            .frame(width: 150, height: 100)
+                            .shadow(radius: 5)
+                            .overlay {
+                                VStack {
+                                    ProgressView()
+                                        .progressViewStyle(CircularProgressViewStyle())
+                                        .frame(width: 50, height: 50)
+                                    
+                                    Text("Loading...")
+                                        .offset(y: -10)
+                                }
+                            }
+                    }
+                    .onChange(of: fetchBookInfoViewModel.books) {
+                        if !fetchBookInfoViewModel.books.isEmpty {
+                            fetchBookInfoViewModel.searchSubmitted = false
+                        }
+                    }
+                }
+                
                 if fetchBookInfoViewModel.searchText.isEmpty {
                     VStack {
                         ContentUnavailableView {
-                            Label("No Result Found", systemImage: "magnifyingglass")
+                            Label("Search Online", systemImage: "magnifyingglass")
                         } description: {
-                            Text("Enter a book title to begin searching!")
+                            Text("Enter a book title, genre, author, or ISBN to begin searching!")
+                                .frame(width: 250)
                                 .accessibilityLabel("Enter a book title to begin searching!")
                             
                             
@@ -133,6 +183,18 @@ struct SearchView: View {
                                 Image("googleOnWhite")
                                     .offset(x: -3)
                             }
+                        }
+                    }
+                }
+                
+                if fetchBookInfoViewModel.books.isEmpty && fetchBookInfoViewModel.failedToLoad {
+                    VStack {
+                        ContentUnavailableView {
+                            Label("No Result Found", systemImage: "magnifyingglass")
+                        } description: {
+                            Text("Sorry, we couldn't find any results for your search. Please try again or the other book adding options.")
+                                .frame(width: 250)
+                                .accessibilityLabel("No Result Found")
                         }
                     }
                 }
