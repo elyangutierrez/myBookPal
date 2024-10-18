@@ -21,6 +21,8 @@ struct LogView: View {
     @State private var noteVisibility = NoteVisibility()
     @State private var currentNote: QuickNote?
     @State private var hapticsManager = HapticsManager()
+    @State private var invalidRating = false
+    @State private var validRating = false
     
     var book: Book
     
@@ -274,7 +276,7 @@ struct LogView: View {
                     .presentationBackground(.white)
             }
             .onChange(of: book.logs) {
-                if book.isFullyRead {
+                if Int(book.pages) == book.currentPage {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
                         isStarRatingAlertOn = true
                     }
@@ -330,6 +332,9 @@ struct LogView: View {
             .alert("Rate Book", isPresented: $isStarRatingAlertOn) {
                 TextField("Enter Rating", value: $inputRating, format: .number)
                     .accessibilityLabel("Enter Rating")
+                
+//                guard let rating = inputRating else { return }
+                
                 Button("Add", role: .cancel, action: addRatingToBook)
                     .accessibilityAddTraits(.isButton)
                 Button("Cancel") { }
@@ -348,14 +353,37 @@ struct LogView: View {
             } message: {
                 Text("Are you sure you want to delete this log entry?")
             }
+            .alert("Invalid Rating", isPresented: $invalidRating) {
+                Button("OK", action: {
+                    invalidRating.toggle()
+                    inputRating = nil
+                })
+            } message: {
+                Text("You enter an invalid rating. Try again.")
+            }
+            .alert("Book Rated", isPresented: $validRating) {
+                Button("OK", action: {
+                    validRating.toggle()
+                    inputRating = nil
+                })
+            } message: {
+                Text("You've successfully rated this book!")
+            }
         }
     }
     
     func addRatingToBook() {
-        isStarRatingAlertOn = false
+        guard let inputRating else { return }
         
-        let starRating = StarRating(rating: inputRating ?? 0.0)
-        book.starRatingSystem = starRating
+        if inputRating < 0 || inputRating > 5 {
+            isStarRatingAlertOn = false
+            invalidRating.toggle()
+        } else {
+            let starRating = StarRating(rating: inputRating)
+            isStarRatingAlertOn = false
+            book.starRatingSystem = starRating
+            validRating.toggle()
+        }
     }
     
     func deleteLog() {
