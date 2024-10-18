@@ -37,13 +37,20 @@ struct AddView: View {
             GeometryReader { geometry in
                 ScrollView(showsIndicators: true) {
                     ZStack {
-//                        let placeholder = book.imageLinks?.secureThumbnailURL ?? ""
-//                        let properImageQualityCover = placeholder.replacingOccurrences(of: "zoom=1", with: "zoom=10")
-                        BackgroundBookCoverView(bookImage: book.imageLinks?.increaseQuality ?? "",
-                                                width: geometry.size.width,
-                                                height: 475)
+                        let image = book.imageLinks?.increaseQuality ?? ""
+                        
+                        if image == "" {
+                            Color.white
+                                .frame(width: geometry.size.width, height: 475)
+                                .blur(radius: 20, opaque: true)
+                                .padding(.vertical, -270)
+                        } else {
+                            BackgroundBookCoverView(bookImage: book.imageLinks?.increaseQuality ?? "",
+                                                    width: geometry.size.width,
+                                                    height: 475)
                             .blur(radius: 20, opaque: true)
                             .padding(.vertical, -270)
+                        }
                     }
                     .ignoresSafeArea()
                     
@@ -72,17 +79,19 @@ struct AddView: View {
                             
                             RectangleLineView()
                             
-                            Text(book.getCatagory)
-                                .font(.subheadline)
+                            if book.getCatagory == "N/A" {
+                                Text("N/A genre")
+                                    .font(.subheadline)
+                            } else {
+                                Text(book.getCatagory)
+                                    .font(.subheadline)
+                            }
                             
                             RectangleLineView()
                             
                             if book.getPageCount == "0" {
-                                Text("N/A")
+                                Text("N/A pages")
                                     .font(.subheadline)
-                                Image(systemName: "book.pages")
-                                    .resizable()
-                                    .frame(width: 20, height: 25)
                             } else {
                                 Text(book.getPageCount + " pages")
                                     .font(.subheadline)
