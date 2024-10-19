@@ -256,8 +256,8 @@ struct AddView: View {
             do {
                 try modelContext.save()
                 bookAddedCounter += 1
-                showAlert = true
                 bookAdded = true
+                showAlert = true
             } catch {
                 bookFailedToAdd = true
                 print("Failed to save book: \(error)")
@@ -277,8 +277,8 @@ struct AddView: View {
             do {
                 try modelContext.save()
                 bookAddedCounter += 1
+                bookAdded = true
                 showAlert = true
-                bookAdded.toggle()
             } catch {
                 bookFailedToAdd.toggle()
                 print("Failed to save book: \(error)")
@@ -298,8 +298,8 @@ struct AddView: View {
             do {
                 try modelContext.save()
                 bookAddedCounter += 1
+                bookAdded = true
                 showAlert = true
-                bookAdded.toggle()
             } catch {
                 bookFailedToAdd.toggle()
                 print("Failed to save book: \(error)")
@@ -321,8 +321,8 @@ struct AddView: View {
             do {
                 try modelContext.save()
                 bookAddedCounter += 1
+                bookAdded = true
                 showAlert = true
-                bookAdded.toggle()
             } catch {
                 bookFailedToAdd.toggle()
                 print("Failed to save book: \(error)")
