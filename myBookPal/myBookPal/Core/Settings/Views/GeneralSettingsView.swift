@@ -129,7 +129,24 @@ struct GeneralSettingsView: View {
                 if tipPurchased {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         withAnimation(.spring) {
+                            print("Toggled showThankYou!")
+                            showThankYouView = true
+                        }
+                    }
+                }
+            }
+            .onChange(of: showThankYouView) {
+                print("onChange ran")
+                if showThankYouView && !activateTipSheet {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
+                        confettiCounter = 1
+                        hapticManager.playDonated()
+                    }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 4.8) {
+                        withAnimation(.smooth(duration: 0.2)) {
                             showThankYouView.toggle()
+                            tipPurchased.toggle()
                         }
                     }
                 }
@@ -164,19 +181,6 @@ struct GeneralSettingsView: View {
                                     }
                                 }
                                 .frame(maxWidth: .infinity, alignment: .center)
-                            }
-                            .onAppear {
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
-                                    confettiCounter = 1
-                                    hapticManager.playDonated()
-                                }
-                                
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 4.8) {
-                                    withAnimation(.smooth(duration: 0.2)) {
-                                        showThankYouView.toggle()
-                                        tipPurchased.toggle()
-                                    }
-                                }
                             }
                     }
                     .transition(.move(edge: .bottom))
