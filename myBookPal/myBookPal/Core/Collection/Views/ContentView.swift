@@ -147,9 +147,9 @@ struct ContentView: View {
                                     .offset(x: 3, y: 28)
                                 }
                                 .frame(maxHeight: .infinity, alignment: .top)
-                                .frame(maxHeight: .infinity, alignment: .leading)
-                                .offset(y: 3)
+                                .padding(.vertical, -3)
                             }
+                            .frame(height: 110)
                         }
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .swipeActions(edge: .leading) {
@@ -254,8 +254,6 @@ struct ContentView: View {
                                             }
                                     }
                                     
-                                    Spacer()
-                                    
                                     VStack(alignment: .leading) {
 
                                         Text(book.title)
@@ -291,9 +289,9 @@ struct ContentView: View {
                                         .offset(x: 3, y: 28)
                                     }
                                     .frame(maxHeight: .infinity, alignment: .top)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .offset(y: 3)
+                                    .padding(.vertical, -3)
                                 }
+                                .frame(height: 110)
                             }
                             .swipeActions(edge: .leading) {
                                 
