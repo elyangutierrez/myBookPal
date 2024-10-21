@@ -22,6 +22,6 @@ struct myBookPalApp: App {
             ContainerView()
                 .environment(networkMonitor)
         }
-        .modelContainer(for: [Book.self, QuickNote.self, Log.self, Goal.self])
+        .modelContainer(for: [Book.self, QuickNote.self, Goal.self, Log.self, Group.self])
     }
 }

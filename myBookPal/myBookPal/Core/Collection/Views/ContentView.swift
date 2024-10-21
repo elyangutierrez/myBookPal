@@ -157,7 +157,7 @@ struct ContentView: View {
                             if let dataToBeShared = mostRecent?.sharedImageData, let uiImage = UIImage(data: dataToBeShared) {
                                 let swiftImage = Image(uiImage: uiImage)
                                 ShareLink(item: swiftImage, message: Text("I'm currently reading this book. You should check it out!"), preview: SharePreview(mostRecent?.title ?? "N/A", image: swiftImage), label: {
-                                    Label("Share", systemImage: "square.and.arrow.up")
+                                    Label("", systemImage: "square.and.arrow.up")
                                     
                                 })
                                 .tint(.gray)
@@ -177,12 +177,12 @@ struct ContentView: View {
                                 selectedDeletionBook = recent
                                 activateBookDeletionAlert.toggle()
                             }) {
-                                Label("Delete", systemImage: "trash")
+                                Label("", systemImage: "trash")
                             }
                             .tint(.red)
                             
                             NavigationLink(destination: LogView(book: mostRecent!)) {
-                                Label("Log", systemImage: "list.dash.header.rectangle")
+                                Label("", systemImage: "list.dash.header.rectangle")
                             }
                             .tint(.complement)
                         }
@@ -298,7 +298,7 @@ struct ContentView: View {
                                 if let dataToBeShared = book.sharedImageData, let uiImage = UIImage(data: dataToBeShared) {
                                     let swiftImage = Image(uiImage: uiImage)
                                     ShareLink(item: swiftImage, message: Text("I'm currently reading this book. You should check it out!"), preview: SharePreview(book.title, image: swiftImage), label: {
-                                        Label("Share", systemImage: "square.and.arrow.up")
+                                        Label("", systemImage: "square.and.arrow.up")
                                         
                                     })
                                     .tint(.gray)
@@ -317,12 +317,12 @@ struct ContentView: View {
                                     selectedDeletionBook = book
                                     activateBookDeletionAlert.toggle()
                                 }) {
-                                    Label("Delete", systemImage: "trash")
+                                    Label("", systemImage: "trash")
                                 }
                                 .tint(.red)
                                 
                                 NavigationLink(destination: LogView(book: book)) {
-                                    Label("Log", systemImage: "list.dash.header.rectangle")
+                                    Label("", systemImage: "list.dash.header.rectangle")
                                 }
                                 .tint(.complement)
                             }

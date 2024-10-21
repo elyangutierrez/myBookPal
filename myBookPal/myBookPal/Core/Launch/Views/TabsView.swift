@@ -15,30 +15,29 @@ struct TabsView: View {
     
     var body: some View {
         TabView {
-            Group {
-                ContentView(books: books)
-//                ContentView(books: Set(books))
-                    .tabItem {
-                        Image(systemName: "books.vertical")
-                        Text("Collection")
-                    }
-                    .onAppear {
-                        print("TAB DEBUG: \(books)")
-                    }
-                
-                CurrentGoalsView(modelContext: modelContext)
-                    .tabItem {
-                        Image(systemName: "target")
-                        Text("Goals")
-                    }
-                
-                GeneralSettingsView(books: books)
-                    .tabItem {
-                        Image(systemName: "gear")
-                        Text("Settings")
-                    }
-            }
-            .toolbarBackground(.visible, for: .tabBar)
+            ContentView(books: books)
+                .tabItem {
+                    Image(systemName: "books.vertical")
+                    Text("Collection")
+                }
+            
+            GroupsView(modelContext: modelContext)
+                .tabItem {
+                    Image(systemName: "rectangle.3.group.fill")
+                    Text("Groups")
+                }
+            
+            CurrentGoalsView(modelContext: modelContext)
+                .tabItem {
+                    Image(systemName: "target")
+                    Text("Goals")
+                }
+            
+            GeneralSettingsView(books: books)
+                .tabItem {
+                    Image(systemName: "gear")
+                    Text("Settings")
+                }
         }
         .tint(Color.accent)
         .preferredColorScheme(.light)
