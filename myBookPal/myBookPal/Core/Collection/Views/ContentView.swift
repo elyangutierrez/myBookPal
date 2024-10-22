@@ -604,10 +604,10 @@ struct ContentView: View {
                     scanningFailed.toggle()
                 }
             }
-            .onAppear {
-                print("DEBUG: \(books)")
-                isEditing = false
-            }
+//            .onAppear {
+//                print("DEBUG: \(books)")
+//                isEditing = false
+//            }
         }
         .alert("Delete Book", isPresented: $activateBookDeletionAlert) {
             Button("Yes", role: .destructive, action: {

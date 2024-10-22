@@ -92,17 +92,9 @@ struct GroupsView: View {
                             Label("Delete", systemImage: "trash")
                         }
                         .tint(.red)
-                        
-                        Button(action: {
-                            selectedGroup = group
-                            addBookSheet.toggle()
-                        }) {
-                            Image(systemName: "plus")
-                        }
-                        .tint(.complement)
                     }
                     .background {
-                        NavigationLink("", destination: IndividualGroupView(group: group))
+                        NavigationLink("", destination: IndividualGroupView(group: group, groupManager: groupManager, books: books))
                             .opacity(0)
                     }
                 }
@@ -142,126 +134,6 @@ struct GroupsView: View {
             }
             .searchable(text: $searchText)
             .scrollContentBackground(.hidden)
-            .sheet(isPresented: $addBookSheet) {
-                NavigationStack {
-                    // list over books
-                    List {
-                        ForEach(books, id: \.self) { book in
-                            VStack {
-                                HStack {
-                                    let imageString = book.coverImage
-                                    
-                                    if imageString.contains("https") {
-                                        WebImage(url: URL(string: imageString)) { image in
-                                            image
-                                                .image?.resizable()
-                                                .frame(width: 60, height: 110)
-                                                .clipShape(RoundedRectangle(cornerRadius: 2.0))
-                                                .overlay {
-                                                    RoundedRectangle(cornerRadius: 2.0)
-                                                        .stroke(Color.black.opacity(0.20), lineWidth: 1)
-                                                        .fill(.clear)
-                                                        .frame(width: 60, height: 110)
-                                                }
-                                        }
-                                        .onSuccess { image, data, cacheType in
-                                            if let someDataTwo = image.pngData() {
-                                                book.sharedImageData = someDataTwo
-                                            }
-                                            
-                                        }
-                                        
-                                    } else {
-                                        let image = imageString.toImage()
-                                        
-                                        image?
-                                            .resizable()
-                                            .frame(width: 60, height: 110)
-                                            .clipShape(RoundedRectangle(cornerRadius: 2.0))
-                                            .overlay {
-                                                RoundedRectangle(cornerRadius: 2.0)
-                                                    .stroke(Color.black.opacity(0.20), lineWidth: 1)
-                                                    .fill(.clear)
-                                                    .frame(width: 60, height: 110)
-                                            }
-                                    }
-                                    
-                                    VStack {
-                                        Text(book.title)
-                                    }
-                                }
-                                .frame(height: 110)
-                            }
-                            .simultaneousGesture(
-                                TapGesture()
-                                    .onEnded {
-                                        groupManager.addBookToGroup(selectedGroup!, book)
-                                        
-                                        if groupManager.bookSuccessfullyAdded {
-                                            bookAddedToGroup.toggle()
-                                        }
-                                    }
-                            )
-                        }
-                    }
-                    .navigationBarTitleDisplayMode(.inline)
-                    .listStyle(.grouped)
-                    .scrollContentBackground(.hidden)
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            Text("Books in Collection")
-                                .fontWeight(.semibold)
-                        }
-                        
-                        ToolbarItem(placement: .topBarLeading) {
-                            Button(action: {
-                                addBookSheet = false
-                            }) {
-                                Text("Cancel")
-                            }
-                        }
-                    }
-                    .overlay {
-                        if groupManager.bookAlreadyInGroup {
-                            RoundedRectangle(cornerRadius: 5.0)
-                                .fill(.regularMaterial)
-                                .frame(width: 200, height: 100)
-                                .overlay {
-                                    VStack {
-                                        Image(systemName: "xmark")
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                                        
-                                        Spacer()
-                                            .frame(height: 10)
-                                        
-                                        Text("Book Already In Group")
-                                            .font(.subheadline)
-                                    }
-                                }
-                        }
-                        
-                        if bookAddedToGroup {
-                            RoundedRectangle(cornerRadius: 5.0)
-                                .fill(.regularMaterial)
-                                .frame(width: 180, height: 100)
-                                .overlay {
-                                    VStack {
-                                        Image(systemName: "checkmark.circle.fill")
-                                            .resizable()
-                                            .frame(width: 20, height: 20)
-                                        
-                                        Spacer()
-                                            .frame(height: 10)
-                                        
-                                        Text("Book Added To Group!")
-                                            .font(.subheadline)
-                                    }
-                                }
-                        }
-                    }
-                }
-            }
             .sheet(isPresented: $showAddSheet) {
                 // Sheet here...
                 AddGroupView(groupManager: groupManager)
@@ -273,26 +145,6 @@ struct GroupsView: View {
                             Label("No Groups Available", systemImage: "rectangle.3.group.fill")
                         } description: {
                             Text("Add a group to get started!")
-                        }
-                    }
-                }
-            }
-            .onChange(of: bookAddedToGroup) {
-                if bookAddedToGroup {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        withAnimation(.easeOut(duration: 0.3)) {
-                            bookAddedToGroup = false
-                            groupManager.bookSuccessfullyAdded = false
-                            addBookSheet = false
-                        }
-                    }
-                }
-            }
-            .onChange(of: groupManager.bookAlreadyInGroup) {
-                if groupManager.bookAlreadyInGroup {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                        withAnimation(.easeOut(duration: 0.3)) {
-                            groupManager.bookAlreadyInGroup = false
                         }
                     }
                 }

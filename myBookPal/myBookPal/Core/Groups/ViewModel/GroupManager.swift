@@ -14,6 +14,8 @@ class GroupManager {
     var hapticsManager = HapticsManager()
     var bookAlreadyInGroup = false
     var bookSuccessfullyAdded = false
+    var bookDeletedFromGroup = false
+    var bookAddedToGroup = false
     var modelContext: ModelContext
     
     init(modelContext: ModelContext) {
@@ -61,6 +63,15 @@ class GroupManager {
             hapticsManager.playAddedGoal()
             bookSuccessfullyAdded.toggle()
         }
+    }
+    
+    @MainActor func removeBookFromGroup(_ group: Group, _ book: Book) {
+        print("Running 'removeBookFromGroup' method")
+        let index = group.books?.firstIndex(of: book)
+        guard let index else { return }
+        group.books?.remove(at: index)
+        bookDeletedFromGroup.toggle()
+        hapticsManager.playRemovedBookHaptic()
     }
     
     // TODO: figure a way to add the books..
