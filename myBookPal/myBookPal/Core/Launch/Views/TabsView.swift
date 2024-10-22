@@ -21,7 +21,7 @@ struct TabsView: View {
                     Text("Collection")
                 }
             
-            GroupsView(modelContext: modelContext)
+            GroupsView(modelContext: modelContext, books: books)
                 .tabItem {
                     Image(systemName: "rectangle.3.group.fill")
                     Text("Groups")

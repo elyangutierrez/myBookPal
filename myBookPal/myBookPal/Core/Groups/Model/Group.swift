@@ -16,9 +16,9 @@ class Group {
     var imageData: Data?
     
     var formattedDate: String {
-        let date = Date()
+        let date = creationDate
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "MMM/d/yyyy"
+        dateFormatter.dateFormat = "MMM d, yyyy"
         return dateFormatter.string(from: date)
         
     }

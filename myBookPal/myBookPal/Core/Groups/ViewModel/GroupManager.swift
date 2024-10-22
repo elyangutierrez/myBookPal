@@ -12,6 +12,8 @@ import SwiftData
 class GroupManager {
     var groups = [Group]()
     var hapticsManager = HapticsManager()
+    var bookAlreadyInGroup = false
+    var bookSuccessfullyAdded = false
     var modelContext: ModelContext
     
     init(modelContext: ModelContext) {
@@ -47,6 +49,18 @@ class GroupManager {
         groups.remove(at: index)
         hapticsManager.playRemovedBookHaptic()
         fetchData()
+    }
+    
+    @MainActor func addBookToGroup(_ group: Group, _ book: Book) {
+        guard let books = group.books else { return }
+        if books.contains(book) {
+            bookAlreadyInGroup.toggle()
+            hapticsManager.playFailedToDeleteAllBooks()
+        } else {
+            group.books?.append(book)
+            hapticsManager.playAddedGoal()
+            bookSuccessfullyAdded.toggle()
+        }
     }
     
     // TODO: figure a way to add the books..
