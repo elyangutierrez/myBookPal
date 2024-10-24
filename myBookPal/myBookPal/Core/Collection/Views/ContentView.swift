@@ -77,6 +77,8 @@ struct ContentView: View {
                             HStack {
                                 let imageString = mostRecent?.coverImage ?? "N/A"
                                 
+                                let _ = print(imageString)
+                                
                                 if imageString.contains("https") {
                                     
                                     WebImage(url: URL(string: imageString)) { image in
@@ -97,6 +99,40 @@ struct ContentView: View {
                                         }
                                         
                                     }
+                                } else if imageString == "N/A" {
+                                    RoundedRectangle(cornerRadius: 2.0)
+                                        .fill(.starGrey)
+                                        .frame(width: 60, height: 110)
+                                        .clipShape(RoundedRectangle(cornerRadius: 2.0))
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 2.0)
+                                                .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                .fill(.clear)
+                                                .frame(width: 60, height: 110)
+                                                .overlay {
+                                                    VStack {
+                                                        Text("N/A")
+                                                            .foregroundStyle(.gray)
+                                                    }
+                                                }
+                                        }
+                                } else if imageString == "" {
+                                    RoundedRectangle(cornerRadius: 2.0)
+                                        .fill(.starGrey)
+                                        .frame(width: 60, height: 110)
+                                        .clipShape(RoundedRectangle(cornerRadius: 2.0))
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 2.0)
+                                                .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                .fill(.clear)
+                                                .frame(width: 60, height: 110)
+                                                .overlay {
+                                                    VStack {
+                                                        Text("N/A")
+                                                            .foregroundStyle(.gray)
+                                                    }
+                                                }
+                                        }
                                 } else {
                                     let image = imageString.toImage()
                                     
@@ -157,7 +193,7 @@ struct ContentView: View {
                             if let dataToBeShared = mostRecent?.sharedImageData, let uiImage = UIImage(data: dataToBeShared) {
                                 let swiftImage = Image(uiImage: uiImage)
                                 ShareLink(item: swiftImage, message: Text("I'm currently reading this book. You should check it out!"), preview: SharePreview(mostRecent?.title ?? "N/A", image: swiftImage), label: {
-                                    Label("Share", systemImage: "square.and.arrow.up")
+                                    Label("", systemImage: "square.and.arrow.up")
                                     
                                 })
                                 .tint(.gray)
@@ -177,12 +213,12 @@ struct ContentView: View {
                                 selectedDeletionBook = recent
                                 activateBookDeletionAlert.toggle()
                             }) {
-                                Label("Delete", systemImage: "trash")
+                                Label("", systemImage: "trash")
                             }
                             .tint(.red)
                             
                             NavigationLink(destination: LogView(book: mostRecent!)) {
-                                Label("Log", systemImage: "list.dash.header.rectangle")
+                                Label("", systemImage: "list.dash.header.rectangle")
                             }
                             .tint(.complement)
                         }
@@ -220,6 +256,8 @@ struct ContentView: View {
                                 HStack {
                                     let imageString = book.coverImage
                                     
+                                    let _ = print(imageString)
+                                    
                                     if imageString.contains("https") {
                                         WebImage(url: URL(string: imageString)) { image in
                                             image
@@ -239,6 +277,40 @@ struct ContentView: View {
                                             }
                                             
                                         }
+                                    } else if imageString == "N/A" {
+                                        RoundedRectangle(cornerRadius: 2.0)
+                                            .fill(.starGrey)
+                                            .frame(width: 60, height: 110)
+                                            .clipShape(RoundedRectangle(cornerRadius: 2.0))
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 2.0)
+                                                    .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                    .fill(.clear)
+                                                    .frame(width: 60, height: 110)
+                                                    .overlay {
+                                                        VStack {
+                                                            Text("N/A")
+                                                                .foregroundStyle(.gray)
+                                                        }
+                                                    }
+                                            }
+                                    } else if imageString == "" {
+                                        RoundedRectangle(cornerRadius: 2.0)
+                                            .fill(.starGrey)
+                                            .frame(width: 60, height: 110)
+                                            .clipShape(RoundedRectangle(cornerRadius: 2.0))
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 2.0)
+                                                    .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                    .fill(.clear)
+                                                    .frame(width: 60, height: 110)
+                                                    .overlay {
+                                                        VStack {
+                                                            Text("N/A")
+                                                                .foregroundStyle(.gray)
+                                                        }
+                                                    }
+                                            }
                                     } else {
                                         let image = imageString.toImage()
                                         
@@ -298,7 +370,7 @@ struct ContentView: View {
                                 if let dataToBeShared = book.sharedImageData, let uiImage = UIImage(data: dataToBeShared) {
                                     let swiftImage = Image(uiImage: uiImage)
                                     ShareLink(item: swiftImage, message: Text("I'm currently reading this book. You should check it out!"), preview: SharePreview(book.title, image: swiftImage), label: {
-                                        Label("Share", systemImage: "square.and.arrow.up")
+                                        Label("", systemImage: "square.and.arrow.up")
                                         
                                     })
                                     .tint(.gray)
@@ -317,12 +389,12 @@ struct ContentView: View {
                                     selectedDeletionBook = book
                                     activateBookDeletionAlert.toggle()
                                 }) {
-                                    Label("Delete", systemImage: "trash")
+                                    Label("", systemImage: "trash")
                                 }
                                 .tint(.red)
                                 
                                 NavigationLink(destination: LogView(book: book)) {
-                                    Label("Log", systemImage: "list.dash.header.rectangle")
+                                    Label("", systemImage: "list.dash.header.rectangle")
                                 }
                                 .tint(.complement)
                             }
@@ -604,10 +676,10 @@ struct ContentView: View {
                     scanningFailed.toggle()
                 }
             }
-            .onAppear {
-                print("DEBUG: \(books)")
-                isEditing = false
-            }
+//            .onAppear {
+//                print("DEBUG: \(books)")
+//                isEditing = false
+//            }
         }
         .alert("Delete Book", isPresented: $activateBookDeletionAlert) {
             Button("Yes", role: .destructive, action: {

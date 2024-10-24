@@ -129,14 +129,12 @@ struct GeneralSettingsView: View {
                 if tipPurchased {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         withAnimation(.spring) {
-                            print("Toggled showThankYou!")
                             showThankYouView = true
                         }
                     }
                 }
             }
             .onChange(of: showThankYouView) {
-                print("onChange ran")
                 if showThankYouView && !activateTipSheet {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.33) {
                         confettiCounter = 1

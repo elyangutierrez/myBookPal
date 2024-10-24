@@ -80,11 +80,6 @@ struct ManualFormView: View {
                     }
                     .accessibilityAddTraits(.isButton)
                     .disabled(pictureHandler.displayedImage == nil || title.isEmpty || genre.isEmpty || author.isEmpty || pages.isEmpty)
-                } header: {
-                    Text("")
-                } footer: {
-                    Text("Warning: Manually adding books to your collection may cause lag or performance issues as it was not intended to be manually added but rather with isbn or online.")
-                        .accessibilityLabel("Warning: manually adding books may cause performance issues")
                 }
             }
             .navigationBarTitleDisplayMode(.inline)
