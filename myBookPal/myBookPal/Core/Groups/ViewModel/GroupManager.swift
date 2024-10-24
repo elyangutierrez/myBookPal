@@ -16,7 +16,12 @@ class GroupManager {
     var bookSuccessfullyAdded = false
     var bookDeletedFromGroup = false
     var bookAddedToGroup = false
+    var bookFailedToAdd = false
     var modelContext: ModelContext
+    var addGroupAlert = false
+    var deleteGroupAlert = false
+    var groupAddedAlert = false
+    var groupTitle = ""
     
     init(modelContext: ModelContext) {
         self.modelContext = modelContext
@@ -33,7 +38,7 @@ class GroupManager {
     }
     
     @MainActor func addSampleGroup() {
-        let group = Group(name: "Dune Collection", creationDate: Date.now, imageData: nil)
+        let group = Group(name: "Dune Collection", creationDate: Date.now)
         modelContext.insert(group)
         hapticsManager.playAddedGoal()
         fetchData()

@@ -15,10 +15,7 @@ struct GroupsView: View {
     @State private var searchText = ""
     @State private var showAddSheet = false
     @State private var selectedSortingOptions = "Title"
-    @State private var addBookSheet = false
     @State private var selectedGroup: Group?
-    @State private var bookAddedToGroup = false
-    @State private var bookNotAddedToGroup = false
     
     let sortingOptions = ["Title", "Date Added"]
     
@@ -53,41 +50,42 @@ struct GroupsView: View {
             List {
                 ForEach(searchResults, id: \.self) { group in
                     VStack(alignment: .leading) {
-                        HStack {
-                            if group.imageData == nil {
-//                                let _ = print("imageData is nil")
-                                RoundedRectangle(cornerRadius: 5.0)
-                                    .fill(.gray)
-                                    .frame(width: 60, height: 60)
-                                    .overlay {
-                                        Image(systemName: "book")
-                                            .foregroundStyle(.starGrey)
-                                    }
-                            } else {
-//                                let _ = print("imageData is not nil")
-                                if let data = group.imageData, let uiImage = UIImage(data: data) {
-                                    let image = Image(uiImage: uiImage)
-                                    
-                                    image
-                                        .resizable()
-                                        .clipShape(RoundedRectangle(cornerRadius: 5.0))
-                                        .frame(width: 60, height: 60)
-//                                        .aspectRatio(contentMode: .fit)
-                                        .scaledToFit()
-                                }
-                            }
-                            
+                        VStack {
                             VStack(alignment: .leading) {
                                 Text(group.name)
+                                    .font(.headline)
+                                    .foregroundStyle(.accent)
                                     .lineLimit(1)
+                                
+                                Spacer()
+                                    .frame(height: 7)
+                                
+                                HStack {
+                                    Text("\(group.books?.count ?? 0)")
+                                        .font(.caption)
+                                        .fontWeight(.bold)
+                                        .foregroundStyle(.white)
+                                        .background {
+                                            RoundedRectangle(cornerRadius: 5.0)
+                                                .fill(.complement.opacity(0.70))
+                                                .padding(.horizontal, -5)
+                                                .padding(.vertical, -3)
+                                        }
+                                        .offset(x: 3)
+                                    
+                                    Text(group.books?.count ?? 0 == 1 ? "Book" : "Books")
+                                        .font(.caption)
+                                        .offset(x: 3)
+                                }
                             }
                             .frame(maxWidth: .infinity, alignment: .leading)
                         }
-                        .frame(height: 60)
+                        .frame(height: 50)
                     }
                     .swipeActions(edge: .trailing) {
                         Button(action: {
-                            groupManager.removeGroup(group)
+                            selectedGroup = group
+                            groupManager.deleteGroupAlert.toggle()
                         }) {
                             Label("Delete", systemImage: "trash")
                         }
@@ -109,21 +107,23 @@ struct GroupsView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button(action: {
-                        showAddSheet.toggle()
+                        groupManager.addGroupAlert.toggle()
                     }) {
                         Image(systemName: "plus")
                     }
                 }
                 
-                ToolbarItem(placement: .topBarTrailing) {
-                    Menu {
-                        Picker("Sort", selection: $selectedSortingOptions) {
-                            ForEach(sortingOptions, id: \.self) { sort in
-                                Text(sort)
+                if groupManager.groups.count > 0 {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Menu {
+                            Picker("Sort", selection: $selectedSortingOptions) {
+                                ForEach(sortingOptions, id: \.self) { sort in
+                                    Text(sort)
+                                }
                             }
+                        } label: {
+                            Image(systemName: "ellipsis")
                         }
-                    } label: {
-                        Image(systemName: "ellipsis")
                     }
                 }
                 
@@ -134,10 +134,6 @@ struct GroupsView: View {
             }
             .searchable(text: $searchText)
             .scrollContentBackground(.hidden)
-            .sheet(isPresented: $showAddSheet) {
-                // Sheet here...
-                AddGroupView(groupManager: groupManager)
-            }
             .overlay {
                 if groupManager.groups.isEmpty {
                     VStack {
@@ -148,6 +144,35 @@ struct GroupsView: View {
                         }
                     }
                 }
+            }
+            .alert("Delete Group", isPresented: $groupManager.deleteGroupAlert) {
+                Button("Cancel", role: .cancel, action: {
+                    groupManager.deleteGroupAlert = false
+                })
+                Button("Yes", role: .destructive, action: {
+                    guard let selectedGroup else { return }
+                    groupManager.removeGroup(selectedGroup)
+                    groupManager.deleteGroupAlert = false
+                })
+            } message: {
+                Text("Are you sure you want to delete this group?")
+            }
+            .alert("Add Group", isPresented: $groupManager.addGroupAlert) {
+                TextField("Group Name", text: $groupManager.groupTitle)
+                
+                Button("Add", action: {
+                    let group = Group(name: groupManager.groupTitle, creationDate: Date.now)
+                    groupManager.addGroup(group)
+                    groupManager.addGroupAlert = false
+                    groupManager.groupTitle = ""
+                }).disabled(groupManager.groupTitle == "")
+                
+                Button("Cancel", role: .cancel, action: {
+                    groupManager.addGroupAlert = false
+                    groupManager.groupTitle = ""
+                })
+            } message: {
+                Text("Enter a group name in the text field to add a group.")
             }
         }
     }

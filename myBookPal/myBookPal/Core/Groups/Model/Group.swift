@@ -10,10 +10,10 @@ import SwiftData
 
 @Model
 class Group {
+    var id = UUID()
     var name: String
     var books: [Book]?
     var creationDate: Date
-    var imageData: Data?
     
     var formattedDate: String {
         let date = creationDate
@@ -23,10 +23,9 @@ class Group {
         
     }
     
-    init(name: String, creationDate: Date, imageData: Data? = nil) {
+    init(name: String, creationDate: Date) {
         self.name = name
         self.books = nil
         self.creationDate = creationDate
-        self.imageData = imageData
     }
 }

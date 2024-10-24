@@ -25,7 +25,6 @@
 		721A64E02CC4B0D300727C9E /* GroupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721A64DF2CC4B0D300727C9E /* GroupManager.swift */; };
 		721A64E22CC4B58D00727C9E /* GroupsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721A64E12CC4B58D00727C9E /* GroupsView.swift */; };
 		721D057B2CC4C17100277378 /* IndividualGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721D057A2CC4C17100277378 /* IndividualGroupView.swift */; };
-		721D057D2CC4C67B00277378 /* AddGroupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 721D057C2CC4C67B00277378 /* AddGroupView.swift */; };
 		722662962C8956EA0071162D /* CrimsonText-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */; };
 		722662972C8956ED0071162D /* CrimsonText-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662912C894ED70071162D /* CrimsonText-Regular.ttf */; };
 		722662992C8957C40071162D /* CrimsonText-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 722662982C8957C40071162D /* CrimsonText-Bold.ttf */; };
@@ -126,7 +125,6 @@
 		721A64DF2CC4B0D300727C9E /* GroupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupManager.swift; sourceTree = "<group>"; };
 		721A64E12CC4B58D00727C9E /* GroupsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsView.swift; sourceTree = "<group>"; };
 		721D057A2CC4C17100277378 /* IndividualGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndividualGroupView.swift; sourceTree = "<group>"; };
-		721D057C2CC4C67B00277378 /* AddGroupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGroupView.swift; sourceTree = "<group>"; };
 		722662912C894ED70071162D /* CrimsonText-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Regular.ttf"; sourceTree = "<group>"; };
 		722662942C894FFC0071162D /* CrimsonText-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-SemiBold.ttf"; sourceTree = "<group>"; };
 		722662982C8957C40071162D /* CrimsonText-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "CrimsonText-Bold.ttf"; sourceTree = "<group>"; };
@@ -282,7 +280,6 @@
 			children = (
 				721A64E12CC4B58D00727C9E /* GroupsView.swift */,
 				721D057A2CC4C17100277378 /* IndividualGroupView.swift */,
-				721D057C2CC4C67B00277378 /* AddGroupView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -797,7 +794,6 @@
 				7248FF532C9CBD5000722F23 /* PictureHandler.swift in Sources */,
 				7266C68A2BF45B6200022057 /* ContentView.swift in Sources */,
 				720A00252CA0961B00BD9A45 /* NoteTextView.swift in Sources */,
-				721D057D2CC4C67B00277378 /* AddGroupView.swift in Sources */,
 				72BBD3502BF2A64C006BC431 /* Log.swift in Sources */,
 				720A00302CA1017900BD9A45 /* AddGoalView.swift in Sources */,
 				72C4CD3C2C9A7EF800730327 /* DateTracker.swift in Sources */,
