@@ -100,6 +100,40 @@ struct IndividualGroupView: View {
                                             }
                                             
                                         }
+                                    } else if imageString == "N/A" {
+                                        RoundedRectangle(cornerRadius: 2.0)
+                                            .fill(.starGrey)
+                                            .frame(width: 60, height: 110)
+                                            .clipShape(RoundedRectangle(cornerRadius: 2.0))
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 2.0)
+                                                    .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                    .fill(.clear)
+                                                    .frame(width: 60, height: 110)
+                                                    .overlay {
+                                                        VStack {
+                                                            Text("N/A")
+                                                                .foregroundStyle(.gray)
+                                                        }
+                                                    }
+                                            }
+                                    } else if imageString == "" {
+                                        RoundedRectangle(cornerRadius: 2.0)
+                                            .fill(.starGrey)
+                                            .frame(width: 60, height: 110)
+                                            .clipShape(RoundedRectangle(cornerRadius: 2.0))
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 2.0)
+                                                    .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                    .fill(.clear)
+                                                    .frame(width: 60, height: 110)
+                                                    .overlay {
+                                                        VStack {
+                                                            Text("N/A")
+                                                                .foregroundStyle(.gray)
+                                                        }
+                                                    }
+                                            }
                                     } else {
                                         let image = imageString.toImage()
                                         
@@ -279,7 +313,40 @@ struct IndividualGroupView: View {
                                             }
                                             
                                         }
-                                        
+                                    } else if imageString == "N/A" {
+                                            RoundedRectangle(cornerRadius: 2.0)
+                                                .fill(.starGrey)
+                                                .frame(width: 60, height: 110)
+                                                .clipShape(RoundedRectangle(cornerRadius: 2.0))
+                                                .overlay {
+                                                    RoundedRectangle(cornerRadius: 2.0)
+                                                        .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                        .fill(.clear)
+                                                        .frame(width: 60, height: 110)
+                                                        .overlay {
+                                                            VStack {
+                                                                Text("N/A")
+                                                                    .foregroundStyle(.gray)
+                                                            }
+                                                        }
+                                                }
+                                    } else if imageString == "" {
+                                        RoundedRectangle(cornerRadius: 2.0)
+                                            .fill(.starGrey)
+                                            .frame(width: 60, height: 110)
+                                            .clipShape(RoundedRectangle(cornerRadius: 2.0))
+                                            .overlay {
+                                                RoundedRectangle(cornerRadius: 2.0)
+                                                    .stroke(Color.black.opacity(0.20), lineWidth: 1)
+                                                    .fill(.clear)
+                                                    .frame(width: 60, height: 110)
+                                                    .overlay {
+                                                        VStack {
+                                                            Text("N/A")
+                                                                .foregroundStyle(.gray)
+                                                        }
+                                                    }
+                                            }
                                     } else {
                                         let image = imageString.toImage()
                                         
