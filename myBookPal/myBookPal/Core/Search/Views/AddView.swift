@@ -100,7 +100,7 @@ struct AddView: View {
                         .padding(.horizontal)
                         .padding(.vertical)
                         
-                        if book.getPageCount == "0" && book.getCatagory == "N/A" {
+                        if (book.getPageCount == "0" || book.getPageCount == "N/A") && book.getCatagory == "N/A" {
                             Button(action: {
                                 enterBothBool.toggle()
                             }) {
@@ -118,7 +118,7 @@ struct AddView: View {
                             }
                             .padding()
                             .accessibilityAddTraits(.isButton)
-                        } else if book.getPageCount == "0" {
+                        } else if book.getPageCount == "N/A" || book.getPageCount == "0" {
                             Button(action: {
                                 enterPageCountBool.toggle()
                             }) {
@@ -186,6 +186,7 @@ struct AddView: View {
                 hapticsManager.playAddedBookToCollectionHaptic()
                 showingSheet = false
                 bookItem = nil
+                print("Ran book adding alert..")
             })
             .accessibilityAddTraits(.isButton)
         } message: {

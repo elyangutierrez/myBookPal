@@ -195,6 +195,10 @@ struct IndividualGroupView: View {
                         }
                     }
                 }
+                .refreshable(action: {
+                    print("Refresh active..")
+                    groupManager.fetchUpdatedCollection(group, books)
+                })
                 .frame(maxHeight: g.size.height, alignment: .top)
             }
             .alert("Delete Book", isPresented: $showDeleteAlert) {
@@ -302,8 +306,11 @@ struct IndividualGroupView: View {
                             .simultaneousGesture(
                                 TapGesture()
                                     .onEnded {
+                                        print("Tapped list item")
                                         selectedBookToDelete = book
-                                        groupManager.addBookToGroup(group, selectedBookToDelete!)
+//                                        print("Value of selected book: \(selectedBookToDelete)")
+                                        guard let selectedBookToDelete else { return }
+                                        groupManager.addBookToGroup(group, selectedBookToDelete)
                                         if groupManager.bookSuccessfullyAdded {
                                             groupManager.bookAddedToGroup = true
                                         }

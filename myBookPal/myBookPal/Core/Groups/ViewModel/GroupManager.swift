@@ -59,7 +59,7 @@ class GroupManager {
     }
     
     @MainActor func addBookToGroup(_ group: Group, _ book: Book) {
-        guard let books = group.books else { return }
+        let books = group.books ?? []
         if books.contains(book) {
             bookAlreadyInGroup.toggle()
             hapticsManager.playFailedToDeleteAllBooks()
@@ -79,5 +79,33 @@ class GroupManager {
         hapticsManager.playRemovedBookHaptic()
     }
     
-    // TODO: figure a way to add the books..
+    func fetchUpdatedCollection(_ group: Group, _ collectionBooks: [Book]) {
+        do {
+            let descriptor = FetchDescriptor<Book>(sortBy: [SortDescriptor(\.title)])
+            let books = try modelContext.fetch(descriptor)
+            
+            for book in collectionBooks {
+                print(book.title)
+                if books.contains(book) {
+                    print("\(book.title) is in modelContext.")
+                } else {
+                    print("\(book.title) is not in modelContext.")
+                    
+                    let bookCount = group.books?.count ?? 0
+                    
+                    if bookCount == 1 {
+                        let index = 0
+                        group.books?.remove(at: index)
+                    } else {
+                        let index = collectionBooks.firstIndex(of: book)
+                        guard let index else { return }
+                        group.books?.remove(at: index)
+                    }
+                }
+            }
+        } catch {
+            print("Error fetching updated collection: \(error.localizedDescription)")
+        }
+        
+    }
 }
