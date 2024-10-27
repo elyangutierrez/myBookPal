@@ -280,7 +280,7 @@ struct IndividualGroupView: View {
                             }
                         }
                     } label: {
-                        Image(systemName: "ellipsis")
+                        Image(systemName: "arrow.up.arrow.down")
                             .foregroundStyle(.accent)
                     }
                 }
