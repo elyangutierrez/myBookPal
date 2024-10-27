@@ -50,4 +50,17 @@ class Goal {
         formatter.dateFormat = "MMM d, yyyy"
         return formatter.string(from: date)
     }
+    
+    var priorityNumber: Int {
+        switch priority {
+        case "Low":
+            return 1
+        case "Medium":
+            return 2
+        case "High":
+            return 3
+        default:
+            return 0
+        }
+    }
 }

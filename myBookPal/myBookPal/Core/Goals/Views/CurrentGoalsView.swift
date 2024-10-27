@@ -17,6 +17,9 @@ struct CurrentGoalsView: View {
     @State private var goalAdded: Bool = false
     @State private var today = Date.now
     @State private var hapticManager = HapticsManager()
+    @AppStorage("selectedSortOption") var selectedSortOption = "Date Added"
+    
+    let sortingOptions = ["Date Added", "Priority", "Deadline"].sorted()
     
     private func callManagerMethods() {
         dateManager.getWeekDayNames()
@@ -24,6 +27,19 @@ struct CurrentGoalsView: View {
         dateManager.getCurrentDay()
         dateManager.getCurrentMonth()
         dateManager.setSelectedDay()
+    }
+    
+    var sortResults: [Goal] {
+        switch selectedSortOption {
+        case "Date Added":
+            return goalManager.goals.sorted(by: { $0.createdOn > $1.createdOn })
+        case "Priority":
+            return goalManager.goals.sorted(by: { $0.priorityNumber > $1.priorityNumber })
+        case "Deadline":
+            return goalManager.goals.sorted(by: { $0.deadline > $1.deadline})
+        default:
+            return []
+        }
     }
     
     var body: some View {
@@ -311,7 +327,7 @@ struct CurrentGoalsView: View {
                             
                             
                             VStack {
-                                ForEach(goalManager.goals, id: \.self) { goal in
+                                ForEach(sortResults, id: \.self) { goal in
                                     VStack {
                                         
                                         // date goal was created on
@@ -462,14 +478,17 @@ struct CurrentGoalsView: View {
                         .fontWeight(.semibold)
                 }
  
-                // DEBUG:
-//                ToolbarItem(placement: .topBarTrailing) {
-//                    Button(action: {
-//                        goalManager.addGoal()
-//                    }) {
-//                        Image(systemName: "plus")
-//                    }
-//                }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Menu {
+                        Picker("", selection: $selectedSortOption) {
+                            ForEach(sortingOptions, id: \.self) { option in
+                                Text(option)
+                            }
+                        }
+                    } label: {
+                        Image(systemName: "arrow.up.arrow.down")
+                    }
+                }
             }
             .onAppear {
                 callManagerMethods()
